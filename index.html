@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8" /> 
+	<title>Babelium Project</title>
+
+	<!-- CSS -->
+	<link rel="stylesheet" type="text/css" media="screen" href="themes/babelium/main.css" />
+	
+	<!-- JS -->
+	<script type="text/javascript" src="js/jquery1.5.1.js"></script>
+	<script type="text/javascript" src="js/jquery-ui-1.8.11.custom.min.js"></script>
+	<script type="text/javascript" src="js/localebox.js"></script>
+	<script type="text/javascript" src="js/navigationlinks.js"></script>
+	<script type="text/javascript" src="js/init.js"></script>
+</head>
+<body>
+	<header id="tophead">
+		<nav id="topnav">
+			<ul class="fleft">
+				<li>Language:</li>
+				<li>
+					<select id="localebox">
+						<option value="EU" data-icon="themes/babelium/images/flags/flag_basque_country.png">Basque</option>
+						<option value="US" data-icon="themes/babelium/images/flags/flag_united_states.png">English (United States)</option>
+						<option value="ES" data-icon="themes/babelium/images/flags/flag_spain.png">Spanish (Spain)</option>
+					</select>
+				</li>
+			</ul>
+			<ul class="fright">
+				<li><a href="#" class="img"><img src="themes/babelium/images/help_icon.png" alt="Help" width="17" height="17" /></a></li>
+				<li><a href="#" class="blue">Help</a></li>
+				<li><a href="#" class="blue">Blog</a></li>
+				<li><a href="#" class="yellow">Login</a></li>
+				<li><a href="#" class="yellow">Register</a></li>
+			</ul>
+		</nav>
+		
+		<div id="logo"><img src="themes/babelium/images/flan_dullv2.png" alt="Bablium Project" width="174" height="156" /></div>
+		
+		<nav id="mainnav">
+			<ul>
+				<li><a href="#" class="home">Inicio</a></li>
+				<li><a href="#" class="pract">Practicar</a></li>
+				<li><a href="#" class="eval">Evaluar</a></li>
+				<li><a href="#" class="subt">Subtitular</a></li>
+				<li><a href="#" class="config">Configuración</a></li>
+				<li><a href="#" class="about">Acerca de Babelium</a></li>
+			</ul>
+		</nav>		
+		
+		<div id="searchnav">
+				<button id="btnUpload" class="left upload">Upload</button>
+				<input id="txtSearch" type="text" placeholder="Enter your search terms..." class="middle search" />
+				<button id="btnSearch"class="right">Search</button>
+		</div>
+	</header>
+</body>
+</html>

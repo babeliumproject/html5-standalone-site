@@ -1,0 +1,120 @@
+/*
+ * HEADER
+ */
+
+/* TOP NAVIGATION */
+
+nav#topnav
+{
+	width: 100%;
+	height: 35px;
+}
+
+nav#topnav > ul > li
+{
+	line-height: 17px;	
+}
+
+nav#topnav > ul > li
+{
+	margin-left: 8px;
+	margin-right: 8px;
+	float: left;
+}
+
+nav#topnav > ul > li
+{
+	top: 50%;
+	margin-top: 8px;	
+}
+
+nav#topnav > ul > li:first-child {margin-left: 16px;}
+nav#topnav > ul > li:last-child {margin-right: 16px;}
+
+.fright
+{
+	float: right;
+}
+
+.fleft
+{
+	float: left;
+}
+
+/* LOGO */
+
+div#logo
+{
+	position: absolute;
+	left: 15px;
+	top: 35px;
+	z-index: 1;
+}
+
+/* MAIN NAVIGATION */
+
+nav#mainnav
+{
+	width: 100%;
+	height: 118px;
+}
+
+nav#mainnav > ul
+{
+	padding-left: 174px;
+	min-width: 720px;
+	height: 100%;
+	line-height: 118px;
+	text-align: center;
+}
+
+nav#mainnav > ul > li
+{
+	padding-left: 13px;
+	padding-right: 13px;
+	display: inline-block;
+	min-height: 50px;
+	min-width: 59px;
+}
+
+
+/* SEARCH BAR */
+
+div#searchnav
+{
+	height: 35px;
+	position: relative;
+	
+	/* logo width + upload button width  */
+	padding-left: 315px;
+	padding-right: 120px;
+}
+
+div#searchnav > input, div#searchnav > button
+{
+	position: relative;
+	float: left;
+}
+		
+div#searchnav > .middle
+{
+	top: 3px;
+	width: 100%;
+}
+		
+div#searchnav > .left
+{
+	top: 4px;
+	width: 90px;
+	margin-left: -110px;
+}
+		
+div#searchnav > .right 
+{
+	top: 4px;
+	width: 90px;
+	margin-right: -100%;
+	margin-left: 10px;
+}
+
+/* END OF HEADER */
