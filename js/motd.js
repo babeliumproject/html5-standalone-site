@@ -1,5 +1,6 @@
 var motdIndex = 1;
 var motdVisible = true;
+var animatingMotd = false;
 
 function initMotd()
 {
@@ -50,6 +51,8 @@ function initMotd()
 /** Update motd **/
 function updateMotd(num)
 {
+	if ( animatingMotd ) return;
+	animatingMotd = true;
 	var lastMotdIndex = motdIndex;
 	motdIndex = motdIndex+num;
 	if ( motdIndex > 4 ) motdIndex = 1;
@@ -59,5 +62,6 @@ function updateMotd(num)
 		$(this).css("display","none");
 		$("ul#motdmessages > li:nth-child("+motdIndex+")").css("display","inline-block");
 		$("ul#motdmessages > li:nth-child("+motdIndex+")").animate({'opacity' : 1});
+		animatingMotd = false;
 	});
 }
