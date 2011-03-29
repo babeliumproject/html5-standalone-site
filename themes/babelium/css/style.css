@@ -1,0 +1,178 @@
+/** Starts style definition **/
+
+body
+{
+	font-family: Arial, Verdana;
+	font-size: 12px;
+	min-width: 580px;
+}
+
+a, a:active, a:visited
+{
+	text-decoration: none;
+	color:#2d89a4;
+}
+
+a:hover 
+{
+	text-decoration: underline;
+	color: #666;
+}
+
+/*
+ * TOP NAVIGATION
+ */
+
+nav#topnav
+{
+	font-family: Arial;
+	font-size: 11px;
+	font-weight: bold;
+	border-bottom: 1px solid #38babc;
+	
+	/** Default background **/
+	background-color: #FEFEFE;
+	background-image: url(../images/rainbow_bgr.png);
+	
+	/** Gradient for mozilla and webkit powered **/
+	background: -webkit-gradient(linear, 0 0, 0 100%, from(white), to(#E2EFF3));
+	background: -moz-linear-gradient(top, white, #E2EFF3);	
+}
+
+a.yellow, a.yellow:active, a.yellow:visited
+{
+	color: #cc9900;
+}
+
+a.orange, a.orange:active, a.orange:visited
+{
+	color: #df5c02;
+}
+
+/*
+ * MAIN NAVIGATION
+ */
+
+nav#mainnav
+{
+	/** Default background **/
+	background-color: #FEFEFE;
+	background-image: url(../images/rainbow_bgr.png);
+
+	font-size: 18px;
+}
+
+nav#mainnav > ul > li
+{
+	background: url(../images/separator.png) no-repeat center right;	
+}
+
+nav#mainnav > ul > li:last-child
+{
+	background-image: none;	
+}
+
+nav#mainnav > ul > li > a.home
+{
+	color: #258daa;
+}
+
+nav#mainnav > ul > li > a.pract
+{
+	color: #38bcbe;
+}
+
+nav#mainnav > ul > li > a.eval
+{
+	color: #7b980a;
+}
+
+nav#mainnav > ul > li > a.subt
+{
+	color: #962b07;
+}
+
+nav#mainnav > ul > li > a.config
+{
+	color: #de5c04;
+}
+
+nav#mainnav > ul > li > a.about
+{
+	color: #e6ce56;
+}
+
+nav#mainnav > ul > li > a:hover
+{
+	text-decoration: none;
+	text-shadow: 1px 1px 1px rgba(0,0,0,.2);	
+}
+
+/*
+ * SEARCH BAR
+ */
+
+div#searchnav
+{
+	/** Default background **/
+	background-color: #FEFEFE;
+	
+	/** Gradient for mozilla and webkit powered **/
+	background: -webkit-gradient(linear, 0 0, 100% 0, from(white), to(#86BCCE));
+	background: -moz-linear-gradient(left, white, #86BCCE);
+	
+	/** rounded border **/
+	-moz-border-top-right-radius: 6px; 
+	-webkit-border-top-right-radius: 6px; 
+	border-top-right-radius:6px;
+	-moz-border-bottom-right-radius: 6px; 
+	-webkit-border-bottom-right-radius: 6px; 
+	border-bottom-right-radius:6px;
+	
+	/** border **/
+	border-bottom: 1px solid #38babc;
+	border-top: 1px solid #38babc;
+	
+	/** box shadow **/ 
+	-moz-box-shadow: -4px 4px 4px #999;
+	-webkit-box-shadow: -4px 4px 4px #999;
+	box-shadow: -4px 4px 4px #999;	
+}
+
+
+/*
+ * MOTD
+ */
+aside#motd
+{
+	resize: vertical;
+}
+
+aside#motd > section#motdmessages
+{
+	background: url(../images/pattern.jpg);
+	opacity: 0.25;
+}
+
+aside#motd > section#motdmessages > article
+{
+	opacity: 0;
+}
+
+aside#motd > div#motdhelper
+{
+	cursor: move;
+	background-color: #E2EFF3;
+	border: 1px solid #38babc;
+}
+
+/*
+ * MAIN SECTION
+ */
+ 
+section#main
+{
+	width: 100%;
+	height: 200px;
+	background-color: #DDD;
+}
