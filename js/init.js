@@ -2,6 +2,7 @@ $(document).ready(function()
 {
 	initNavigationLinks();
 	initLocalebox();
+	initMotd();
 });
 
 $(function() {

@@ -12,6 +12,7 @@
 	<script type="text/javascript" src="js/jquery-ui-1.8.11.custom.min.js"></script>
 	<script type="text/javascript" src="js/localebox.js"></script>
 	<script type="text/javascript" src="js/navigationlinks.js"></script>
+	<script type="text/javascript" src="js/motd.js"></script>
 	<script type="text/javascript" src="js/init.js"></script>
 </head>
 <body>
@@ -22,7 +23,7 @@
 				<li>
 					<select id="localebox">
 						<option value="EU" data-icon="themes/babelium/images/flags/flag_basque_country.png">Basque</option>
-						<option value="US" data-icon="themes/babelium/images/flags/flag_united_states.png">English (United States)</option>
+						<option value="US" data-icon="themes/babelium/images/flags/flag_united_states.png" selected="true">English (United States)</option>
 						<option value="ES" data-icon="themes/babelium/images/flags/flag_spain.png">Spanish (Spain)</option>
 					</select>
 				</li>
@@ -40,12 +41,12 @@
 		
 		<nav id="mainnav">
 			<ul>
-				<li><a href="#" class="home">Inicio</a></li>
-				<li><a href="#" class="pract">Practicar</a></li>
-				<li><a href="#" class="eval">Evaluar</a></li>
-				<li><a href="#" class="subt">Subtitular</a></li>
-				<li><a href="#" class="config">Configuración</a></li>
-				<li><a href="#" class="about">Acerca de Babelium</a></li>
+				<li><a href="#" class="home">Home</a></li>
+				<li><a href="#" class="pract">Practice</a></li>
+				<li><a href="#" class="eval">Evaluate</a></li>
+				<li><a href="#" class="subt">Subtitle</a></li>
+				<li><a href="#" class="config">Configure</a></li>
+				<li><a href="#" class="about">About Babelium</a></li>
 			</ul>
 		</nav>		
 		
@@ -55,5 +56,20 @@
 				<button id="btnSearch"class="right">Search</button>
 		</div>
 	</header>
+	<aside id="motd" class="unsignedMotdBox">
+		<section id="motdmessages">
+			<article style="background:red">Test1</article>
+			<article style="background:blue">Test2</article>
+			<article style="background:green">Test3</article>
+			<article style="background:yellow">Test4</article>
+		</section>
+		<div id="motdhelper"></div>
+	</aside>
+	<div class="ui-widget">
+		<div class="ui-state-highlight ui-corner-all" style="margin: 20px; padding: 5px;"> 
+			<p><span class="ui-icon ui-icon-info" style="float: left; margin-right: .3em;"></span>
+			<strong>Hey!</strong> You should try to press keyboard arrows!</p>
+		</div>
+	</div>
 </body>
 </html>

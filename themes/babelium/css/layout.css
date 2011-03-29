@@ -70,8 +70,8 @@ nav#mainnav > ul
 
 nav#mainnav > ul > li
 {
-	padding-left: 13px;
-	padding-right: 13px;
+	padding-left: 12px;
+	padding-right: 18px;
 	display: inline-block;
 	min-height: 50px;
 	min-width: 59px;
@@ -118,3 +118,31 @@ div#searchnav > .right
 }
 
 /* END OF HEADER */
+
+/* START OF MOTD */
+
+aside#motd
+{
+	width: 100%;
+}
+
+aside#motd > section#motdmessages
+{
+	height: 150px;
+	text-align: center;
+	margin: 0 auto;
+}
+
+aside#motd > section#motdmessages > article
+{
+	width: 500px;
+	height: 100%;
+	display: none;
+}
+
+aside#motd > div#motdhelper
+{
+	height: 3px;
+}
+
+/* END OF MOTD */
