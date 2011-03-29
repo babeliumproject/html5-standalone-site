@@ -140,6 +140,14 @@ aside#motd > section#motdmessages > article
 	display: none;
 }
 
+aside#motd > div#motdbg
+{
+	position: absolute;
+	top: 198px;
+	height: 150px;
+	width: 100%;
+}
+
 aside#motd > div#motdhelper
 {
 	height: 3px;

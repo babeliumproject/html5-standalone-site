@@ -26,25 +26,17 @@ function initMotd()
 	{
 		switch(ev.keyCode)
 		{
-		case 37:
+		case 37: // Left Arrow
 			updateMotd(-1);
 			break;
-		case 39:
+		case 39: // Right Arrow
 			updateMotd(1);
 			break;
-		case 38:
-			if ( $("#motd").is(":visible") && motdVisible)
-			{
-				motdVisible = false;
-				$("#motd").hide( "blind", {}, 500);
-			}
+		case 38: // Up Arrow
+			$("#motd, #motd > div").slideUp(500);
 			break;
-		case 40:
-			if ( !$("#motd").is(":visible") && !motdVisible)
-			{
-				motdVisible = true;
-				$("#motd").show( "blind", {}, 500);
-			}
+		case 40: // Down Arrow
+			$("#motd, #motd > div").slideDown(500);
 			break;
 		default:
 		}

@@ -148,15 +148,15 @@ aside#motd
 	resize: vertical;
 }
 
-aside#motd > section#motdmessages
-{
-	background: url(../images/pattern.jpg);
-	opacity: 0.25;
-}
-
 aside#motd > section#motdmessages > article
 {
 	opacity: 0;
+}
+
+aside#motd > div#motdbg
+{
+	background: url(../images/pattern.jpg);
+	opacity: 0.25;
 }
 
 aside#motd > div#motdhelper
