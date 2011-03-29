@@ -43,8 +43,8 @@ function initMotd()
 	});
 
 	/** Load first motd **/
-	$("section#motdmessages > article:nth-child("+motdIndex+")").css("display","inline-block");
-	$("section#motdmessages > article:nth-child("+motdIndex+")").animate({'opacity' : 1});
+	$("ul#motdmessages > li:nth-child("+motdIndex+")").css("display","inline-block");
+	$("ul#motdmessages > li:nth-child("+motdIndex+")").animate({'opacity' : 1});
 }
 
 /** Update motd **/
@@ -54,10 +54,10 @@ function updateMotd(num)
 	motdIndex = motdIndex+num;
 	if ( motdIndex > 4 ) motdIndex = 1;
 	else if ( motdIndex < 1 ) motdIndex = 4;
-	$("section#motdmessages > article:nth-child("+lastMotdIndex+")").animate({'opacity' : 0}, function()
+	$("ul#motdmessages > li:nth-child("+lastMotdIndex+")").animate({'opacity' : 0}, function()
 	{
 		$(this).css("display","none");
-		$("section#motdmessages > article:nth-child("+motdIndex+")").css("display","inline-block");
-		$("section#motdmessages > article:nth-child("+motdIndex+")").animate({'opacity' : 1});
+		$("ul#motdmessages > li:nth-child("+motdIndex+")").css("display","inline-block");
+		$("ul#motdmessages > li:nth-child("+motdIndex+")").animate({'opacity' : 1});
 	});
 }

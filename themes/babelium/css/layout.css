@@ -10,26 +10,18 @@ nav#topnav
 	height: 35px;
 }
 
-nav#topnav > ul > li
-{
-	line-height: 17px;	
-}
+	nav#topnav > ul > li
+	{
+		line-height: 17px;	
+		margin-left: 8px;
+		margin-right: 8px;
+		float: left;
+		top: 50%;
+		margin-top: 8px;	
+	}
 
-nav#topnav > ul > li
-{
-	margin-left: 8px;
-	margin-right: 8px;
-	float: left;
-}
-
-nav#topnav > ul > li
-{
-	top: 50%;
-	margin-top: 8px;	
-}
-
-nav#topnav > ul > li:first-child {margin-left: 16px;}
-nav#topnav > ul > li:last-child {margin-right: 16px;}
+		nav#topnav > ul > li:first-child {margin-left: 16px;}
+		nav#topnav > ul > li:last-child {margin-right: 16px;}
 
 .fright
 {
@@ -59,23 +51,23 @@ nav#mainnav
 	height: 118px;
 }
 
-nav#mainnav > ul
-{
-	padding-left: 174px;
-	min-width: 720px;
-	height: 100%;
-	line-height: 118px;
-	text-align: center;
-}
+	nav#mainnav > ul
+	{
+		padding-left: 174px;
+		min-width: 720px;
+		height: 100%;
+		line-height: 118px;
+		text-align: center;
+	}
 
-nav#mainnav > ul > li
-{
-	padding-left: 12px;
-	padding-right: 18px;
-	display: inline-block;
-	min-height: 50px;
-	min-width: 59px;
-}
+		nav#mainnav > ul > li
+		{
+			padding-left: 12px;
+			padding-right: 18px;
+			display: inline-block;
+			min-height: 50px;
+			min-width: 59px;
+		}
 
 
 /* SEARCH BAR */
@@ -90,32 +82,32 @@ div#searchnav
 	padding-right: 120px;
 }
 
-div#searchnav > input, div#searchnav > button
-{
-	position: relative;
-	float: left;
-}
+	div#searchnav > input, div#searchnav > button
+	{
+		position: relative;
+		float: left;
+	}
 		
-div#searchnav > .middle
-{
-	top: 3px;
-	width: 100%;
-}
+	div#searchnav > .middle
+	{
+		top: 3px;
+		width: 100%;
+	}
+			
+	div#searchnav > .left
+	{
+		top: 4px;
+		width: 90px;
+		margin-left: -110px;
+	}
 		
-div#searchnav > .left
-{
-	top: 4px;
-	width: 90px;
-	margin-left: -110px;
-}
-		
-div#searchnav > .right 
-{
-	top: 4px;
-	width: 90px;
-	margin-right: -100%;
-	margin-left: 10px;
-}
+	div#searchnav > .right 
+	{
+		top: 4px;
+		width: 90px;
+		margin-right: -100%;
+		margin-left: 10px;
+	}
 
 /* END OF HEADER */
 
@@ -126,31 +118,51 @@ aside#motd
 	width: 100%;
 }
 
-aside#motd > section#motdmessages
-{
-	height: 150px;
-	text-align: center;
-	margin: 0 auto;
-}
+	aside#motd > ul#motdmessages
+	{
+		height: 150px;
+		margin: 0 auto;
+	}
 
-aside#motd > section#motdmessages > article
-{
-	width: 500px;
-	height: 100%;
-	display: none;
-}
+		aside#motd > ul#motdmessages > li
+		{
+			height: 100%;
+			display: none;
+		}
 
-aside#motd > div#motdbg
-{
-	position: absolute;
-	top: 198px;
-	height: 150px;
-	width: 100%;
-}
+			aside#motd > ul#motdmessages > li > div
+			{
+				width: 500px;
+				height: 100%;
+				
+				/** Vertical centered **/
+				-webkit-box-align: center;
+				-moz-box-align: center;
+				box-align: center;
+				
+				display: -webkit-box;
+				display: -moz-box;
+				display: box;
+			}
 
-aside#motd > div#motdhelper
-{
-	height: 3px;
-}
+	aside#motd > div#motdbg
+	{
+		height: 150px;
+		width: 100%;
+		
+		/* Option 1 */
+		position: absolute;
+		top: 198px;
+		
+		/* Option 2
+		position: relative;
+		margin-bottom: -150px;
+		top: -150px;*/
+	}
+
+	aside#motd > div#motdhelper
+	{
+		height: 3px;
+	}
 
 /* END OF MOTD */

@@ -62,51 +62,51 @@ nav#mainnav
 	font-size: 18px;
 }
 
-nav#mainnav > ul > li
-{
-	background: url(../images/separator.png) no-repeat center right;	
-}
+	nav#mainnav > ul > li
+	{
+		background: url(../images/separator.png) no-repeat center right;	
+	}
 
-nav#mainnav > ul > li:last-child
-{
-	background-image: none;	
-}
+		nav#mainnav > ul > li:last-child
+		{
+			background-image: none;	
+		}
 
-nav#mainnav > ul > li > a.home
-{
-	color: #258daa;
-}
+		nav#mainnav > ul > li > a.home
+		{
+			color: #258daa;
+		}
 
-nav#mainnav > ul > li > a.pract
-{
-	color: #38bcbe;
-}
+		nav#mainnav > ul > li > a.pract
+		{
+			color: #38bcbe;
+		}
 
-nav#mainnav > ul > li > a.eval
-{
-	color: #7b980a;
-}
+		nav#mainnav > ul > li > a.eval
+		{
+			color: #7b980a;
+		}
 
-nav#mainnav > ul > li > a.subt
-{
-	color: #962b07;
-}
-
-nav#mainnav > ul > li > a.config
-{
-	color: #de5c04;
-}
-
-nav#mainnav > ul > li > a.about
-{
-	color: #e6ce56;
-}
-
-nav#mainnav > ul > li > a:hover
-{
-	text-decoration: none;
-	text-shadow: 1px 1px 1px rgba(0,0,0,.2);	
-}
+		nav#mainnav > ul > li > a.subt
+		{
+			color: #962b07;
+		}
+		
+		nav#mainnav > ul > li > a.config
+		{
+			color: #de5c04;
+		}
+		
+		nav#mainnav > ul > li > a.about
+		{
+			color: #e6ce56;
+		}
+		
+		nav#mainnav > ul > li > a:hover
+		{
+			text-decoration: none;
+			text-shadow: 1px 1px 1px rgba(0,0,0,.2);	
+		}
 
 /*
  * SEARCH BAR
@@ -148,23 +148,28 @@ aside#motd
 	resize: vertical;
 }
 
-aside#motd > section#motdmessages > article
-{
-	opacity: 0;
-}
+	aside#motd > ul#motdmessages
+	{
+		text-align: center;
+	}
 
-aside#motd > div#motdbg
-{
-	background: url(../images/pattern.jpg);
-	opacity: 0.25;
-}
+		aside#motd > ul#motdmessages > li
+		{
+			opacity: 0;
+		}
 
-aside#motd > div#motdhelper
-{
-	cursor: move;
-	background-color: #E2EFF3;
-	border: 1px solid #38babc;
-}
+	aside#motd > div#motdbg
+	{
+		background: url(../images/pattern.jpg);
+		opacity: 0.25;
+	}
+
+	aside#motd > div#motdhelper
+	{
+		cursor: move;
+		background-color: #E2EFF3;
+		border: 1px solid #38babc;
+	}
 
 /*
  * MAIN SECTION
