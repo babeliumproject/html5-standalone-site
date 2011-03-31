@@ -56,7 +56,14 @@ function initNavigationLinks()
 	});
 	
 	/**
-	 * Remove section header on init (home)
+	 * LOAD INITIAL SECTION
 	 */
-	$("section#maincontent > header").slideUp(0);
+	var location = $.url.fragment(0);
+	$("#motd").slideUp(500);
+	$("section#maincontent > header").slideUp(500);
+	
+	if ( location == null || location == "home" )
+		$("#motd").slideDown(500);
+	else
+		$("section#maincontent > header").slideDown(500);
 }

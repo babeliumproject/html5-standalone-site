@@ -10,6 +10,7 @@
 	<!-- JS -->
 	<script type="text/javascript" src="js/jquery1.5.1.js"></script>
 	<script type="text/javascript" src="js/jquery-ui-1.8.11.custom.min.js"></script>
+	<script type="text/javascript" src="js/jquery.url.js"></script>
 	<script type="text/javascript" src="js/localebox.js"></script>
 	<script type="text/javascript" src="js/navigationlinks.js"></script>
 	<script type="text/javascript" src="js/motd.js"></script>
@@ -42,12 +43,12 @@
 		
 		<nav id="mainnav">
 			<ul>
-				<li><a class="home">Home</a></li>
-				<li><a class="pract">Practice</a></li>
-				<li><a class="eval">Evaluate</a></li>
-				<li><a class="subt">Subtitle</a></li>
-				<li><a class="config">Configure</a></li>
-				<li><a class="about">About Babelium</a></li>
+				<li><a href="#/home/" class="home">Home</a></li>
+				<li><a href="#/practice/" class="pract">Practice</a></li>
+				<li><a href="#/evaluate/" class="eval">Evaluate</a></li>
+				<li><a href="#/subtitle/" class="subt">Subtitle</a></li>
+				<li><a href="#/config/" class="config">Configure</a></li>
+				<li><a href="#/about/" class="about">About Babelium</a></li>
 			</ul>
 		</nav>		
 		
@@ -62,9 +63,9 @@
 	<aside id="motd" class="unsignedMotdBox">
 		<ul id="motdmessages">
 			<li style="background:red"><div>Message of the Day 1</div></li>
-			<li style="background:blue"><div>Message of the Day 1</div></li>
-			<li style="background:green"><div>Message of the Day 1</div></li>
-			<li style="background:yellow"><div>Message of the Day 1</div></li>
+			<li style="background:blue"><div>Message of the Day 2</div></li>
+			<li style="background:green"><div>Message of the Day 3</div></li>
+			<li style="background:yellow"><div>Message of the Day 4</div></li>
 		</ul>
 		<div id="motdhelper"></div>
 	</aside>
@@ -83,6 +84,12 @@
 		<div class="ui-state-highlight ui-corner-all" style="margin: 20px; padding: 5px;"> 
 			<p><span class="ui-icon ui-icon-info" style="float: left; margin-right: .3em;"></span>
 			<strong>Hey!</strong> You should try to press keyboard arrows!</p>
+		</div>
+	</div>
+	<div class="ui-widget">
+		<div class="ui-state-highlight ui-corner-all" style="margin: 20px; padding: 5px;"> 
+			<p><span class="ui-icon ui-icon-info" style="float: left; margin-right: .3em;"></span>
+			You should also try to navigate through the sections!</p>
 		</div>
 	</div>
 <!-- FOOTER -->

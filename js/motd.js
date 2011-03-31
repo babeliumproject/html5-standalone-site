@@ -34,10 +34,12 @@ function initMotd()
 			updateMotd(1);
 			break;
 		case 38: // Up Arrow
-			$("#motd, #motd > div").slideUp(500);
+			if ( jQuery.url.fragment(0) == null || jQuery.url.fragment(0) == "home" )
+				$("#motd, #motd > div").slideUp(500);
 			break;
 		case 40: // Down Arrow
-			$("#motd, #motd > div").slideDown(500);
+			if ( jQuery.url.fragment(0) == null || jQuery.url.fragment(0) == "home" )
+				$("#motd, #motd > div").slideDown(500);
 			break;
 		default:
 		}
