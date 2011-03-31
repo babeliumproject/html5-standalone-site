@@ -18,4 +18,45 @@ function initNavigationLinks()
 	{
 		$(this).parent().css("background-image","none");
 	});
+	
+	
+	/**
+	 * On Click Functions
+	 */
+	$("nav#mainnav > ul > li > a.home").click(function()
+	{
+		if ( $("#motd").css("display") == "none" )
+		{
+			$("section#maincontent > header").slideUp(500, function()
+			{
+				$("#motd").slideDown(500);
+			});
+		}
+	});
+	
+	$("nav#mainnav > ul > li > a").not(".home").click(function()
+	{
+		var pressed = $(this);
+		if ( $("#motd").css("display") == "none" )
+		{
+			$("section#maincontent > header").slideUp(500, function()
+			{
+				$("section#maincontent > header > h1").html(pressed.text());
+				$("section#maincontent > header").slideDown(500);
+			});
+		}
+		else
+		{
+			$("#motd").slideUp(500, function()
+			{
+				$("section#maincontent > header > h1").html(pressed.text());
+				$("section#maincontent > header").slideDown(500);
+			});
+		}
+	});
+	
+	/**
+	 * Remove section header on init (home)
+	 */
+	$("section#maincontent > header").slideUp(0);
 }

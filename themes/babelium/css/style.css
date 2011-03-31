@@ -1,4 +1,6 @@
-/** Starts style definition **/
+/*
+ * DEFAULT
+ */
 
 body
 {
@@ -71,6 +73,11 @@ nav#mainnav
 		{
 			background-image: none;	
 		}
+		
+		nav#mainnav > ul > li > a
+		{
+			cursor: pointer;
+		}
 
 		nav#mainnav > ul > li > a.home
 		{
@@ -139,7 +146,6 @@ div#searchnav
 	box-shadow: -4px 4px 4px #999;	
 }
 
-
 /*
  * MOTD
  */
@@ -151,6 +157,7 @@ aside#motd
 	aside#motd > ul#motdmessages
 	{
 		text-align: center;
+		background: url(../images/pattern2.png);
 	}
 
 		aside#motd > ul#motdmessages > li
@@ -158,15 +165,8 @@ aside#motd
 			opacity: 0;
 		}
 
-	aside#motd > div#motdbg
+	aside#motd > div#motdhelper, section#maincontent > header > div#hhelper
 	{
-		background: url(../images/pattern.jpg);
-		opacity: 0.25;
-	}
-
-	aside#motd > div#motdhelper
-	{
-		cursor: move;
 		background-color: #E2EFF3;
 		border: 1px solid #38babc;
 	}
@@ -175,9 +175,13 @@ aside#motd
  * MAIN SECTION
  */
  
-section#main
-{
-	width: 100%;
-	height: 200px;
-	background-color: #DDD;
-}
+ section#maincontent > header
+ {
+ 	background: url(../images/pattern2.png);
+ }
+	 section#maincontent > header > h1 
+	 {
+	 	font-weight: bold;
+		font-size: 24px;
+		color: #972c0a;
+	 }

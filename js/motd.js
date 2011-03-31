@@ -52,6 +52,7 @@ function initMotd()
 function updateMotd(num)
 {
 	if ( animatingMotd ) return;
+	//if ( $("#motd").css("display") == "none" ) return;
 	animatingMotd = true;
 	var lastMotdIndex = motdIndex;
 	motdIndex = motdIndex+num;

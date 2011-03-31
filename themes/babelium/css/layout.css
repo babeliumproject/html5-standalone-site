@@ -33,8 +33,6 @@ nav#topnav
 	float: left;
 }
 
-/* LOGO */
-
 div#logo
 {
 	position: absolute;
@@ -145,24 +143,24 @@ aside#motd
 				display: box;
 			}
 
-	aside#motd > div#motdbg
-	{
-		height: 150px;
-		width: 100%;
-		
-		/* Option 1 */
-		position: absolute;
-		top: 198px;
-		
-		/* Option 2
-		position: relative;
-		margin-bottom: -150px;
-		top: -150px;*/
-	}
-
-	aside#motd > div#motdhelper
+	aside#motd > div#motdhelper, section#maincontent > header > div#hhelper
 	{
 		height: 3px;
 	}
 
 /* END OF MOTD */
+
+/* MAIN CONTENT */
+
+section#maincontent > header
+{
+	padding-top: 15px;
+}
+
+	section#maincontent > header > h1 
+	{
+		padding-left: 20px;
+		height: 57px;
+	}
+
+/* END OF MAIN CONTENT */
