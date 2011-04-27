@@ -14,8 +14,8 @@ import sys
 import os
 import getopt
 import xml.parsers.expat
-from util import tabln, parseAttrs
-from string import split, strip, replace
+import util
+import string
 
 #---------------------------
 # Create required variables
@@ -31,7 +31,6 @@ idcount = 0
 # Import available structure plugins
 
 import box
-#import vbox
 
 #-------------------------
 # Create function bindings
@@ -40,7 +39,6 @@ funcmap = dict()
 
 # For each imported plugin
 funcmap[box.name] = box
-funcmap[vbox.name] = vbox
 
 #----------------------------------
 # Define handlers for mxml parsing
@@ -55,14 +53,14 @@ def startElement(name, attrs):
     # if plugin does not exist
     else:
         # generate new id
-        idstr = split(name, ":")[1] + str(idcount)
+        idstr = string.split(name, ":")[1] + str(idcount)
         idcount = idcount + 1
         # print as a div
-        tabln('<div id="'+idstr+'">', tabindex, outHtmlFile)
+        util.tabln('<div id="'+idstr+'">', tabindex, outHtmlFile)
         # parse styles
-        tabln('.'+idstr+'\n{', 0, outCssFile)
-        parseAttrs(attrs, outCssFile, chromeSupport, firefoxSupport)
-        tabln("}\n", 0, outCssFile)
+        util.tabln('.'+idstr+'\n{', 0, outCssFile)
+        util.parseAttrs(attrs, outCssFile, chromeSupport, firefoxSupport)
+        util.tabln("}\n", 0, outCssFile)
     
     # update tab index
     tabindex = tabindex + 1
@@ -79,7 +77,7 @@ def endElement(name):
     if name in funcmap:
         funcmap[name].end(outHtmlFile, tabindex)
     else:
-        tabln('</div>', tabindex, outHtmlFile)
+        util.tabln('</div>', tabindex, outHtmlFile)
 
 
 
@@ -88,13 +86,13 @@ def charData(data):
     global tabindex, outHtmlFile
     data = data.strip(" \n\t")
     if len(data) > 0:
-        tabln(data, tabindex, outHtmlFile)
+        util.tabln(data, tabindex, outHtmlFile)
 
 #---------------
 # Main Method 
 
 def usage():
-    print """Usage: python main.py [options]"
+    print("""Usage: python main.py [options] [input file]
 
 Options:
 ---------
@@ -105,11 +103,13 @@ Options:
     -5 --html5=<file>   set html5 output file: default = out.html
     -3 --css3=<file>    set css3 output file: default = out.css
     -h --help           show usage
-"""
+""")
 
 def main(argv):
     # Default initialization
-    inFilestr = "input.mxml"
+    inFileStr = "input.mxml"
+    outHtmlFileStr = "out.html"
+    outCssFileStr = "out.css"
     outDirStr = "_out"
     global tabindex
     global outHtmlFile
@@ -119,7 +119,8 @@ def main(argv):
 
     # Get command line arguments
     try:
-        opts, args = getopt.getopt(argv, "hfci53", ["help", "firefox", "chrome", "input=", "html5=", "css3="])
+        opts, args = getopt.getopt(argv, "hfci53", ["help", "firefox",\
+                    "chrome", "input=", "html5=", "css3="])
     except getopt.GetoptError:
         usage()
         sys.exit(2)
@@ -134,13 +135,16 @@ def main(argv):
         elif opt in ("-f", "--firefox"):
             firefoxSupport = True
         elif opt in ("-i", "--input"):
-            inFilestr = arg
+            inFileStr = arg
         elif opt in ("-5", "--html5"):
-            outHtmlFile = open(arg, "w+")
+            outHtmlFileStr = arg
         elif opt in ("-3", "--css3"):
-            outCssFile = open(arg, "w+")
+            outCssFileStr = arg 
         elif opt in ("-t", "--target"):
             outDirStr = arg
+
+    if len(args) == 1:
+        inFileStr = args[0]
 
     # Setup parser
     p = xml.parsers.expat.ParserCreate()
@@ -150,9 +154,9 @@ def main(argv):
 
     # Try load input file
     try:
-        inputFile = open(inFilestr, "r")
+        inputFile = open(inFileStr, "r")
     except:
-        print "No such file or directory: input file: ", inFilestr
+        print("No such file or directory: input file: " + inFileStr)
         sys.exit(2)
 
     # Try open output files
@@ -160,16 +164,18 @@ def main(argv):
         if not(os.path.isdir(outDirStr)):
             os.mkdir(outDirStr)
 
-        if outHtmlFile == 0:
-            outHtmlFile = open(outDirStr+"/out.html", "w+")
-        if outCssFile == 0:
-            outCssFile = open(outDirStr+"/out.css", "w+")
+        
+        outHtmlFile = open(outDirStr+"/"+outHtmlFileStr, "w+")
+        outCssFile = open(outDirStr+"/"+outCssFileStr, "w+")
     except:
-        print "Output dir does not exist or cannot create output files:" + outDirStr
+        print("Output dir does not exist or cannot create output files:"\
+                    + outDirStr)
         sys.exit(2)
 
     # Start parsing
+    util.printHeader(outHtmlFile, outCssFileStr)
     p.ParseFile(inputFile)
+    util.printFooter(outHtmlFile)
 
 
 if __name__ == "__main__":

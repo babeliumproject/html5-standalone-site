@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-from string import split
+from string import *
 
 # Prints a 's' pharagraph with 't' indentation
 # index into an 'o' output file
@@ -26,3 +26,25 @@ def checkLen(s):
         return s+"px"
     else:
         return s
+
+
+def printHeader(out, cssfile):
+    out.write("""<!DOCTYPE html> 
+<html> 
+<head> 
+	<meta charset="UTF-8" /> 
+	<title>Output Title</title> 
+ 
+	<!-- CSS --> 
+	<link rel="stylesheet" type="text/css" media="screen" href=\""""+cssfile+"""\" />
+</head>
+</body>
+<!-- Start of generated content -->
+
+""")
+
+def printFooter(out):
+    out.write("""
+<!-- End of generated content -->
+</body>
+</html>""")
