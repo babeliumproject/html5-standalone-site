@@ -33,37 +33,4 @@ function initNavigationLinks()
 			});
 		}
 	});
-	
-	$("nav#mainnav > ul > li > a").not(".home").click(function()
-	{
-		var pressed = $(this);
-		if ( $("#motd").css("display") == "none" )
-		{
-			$("section#maincontent > header").slideUp(500, function()
-			{
-				$("section#maincontent > header > h1").html(pressed.text());
-				$("section#maincontent > header").slideDown(500);
-			});
-		}
-		else
-		{
-			$("#motd").slideUp(500, function()
-			{
-				$("section#maincontent > header > h1").html(pressed.text());
-				$("section#maincontent > header").slideDown(500);
-			});
-		}
-	});
-	
-	/**
-	 * LOAD INITIAL SECTION
-	 */
-	var location = $.url.fragment(0);
-	$("#motd").slideUp(500);
-	$("section#maincontent > header").slideUp(500);
-	
-	if ( location == null || location == "home" )
-		$("#motd").slideDown(500);
-	else
-		$("section#maincontent > header").slideDown(500);
 }

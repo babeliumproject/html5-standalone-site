@@ -1,67 +1,44 @@
 $(document).ready(function()
 {
-	initNavigationLinks();
 	initLocalebox();
-	initMotd();
-});
+	initNavigationLinks();
 
-$(function() {
-	var availableTags = [
-		"aa",
-		"aaa",
-		"bb",
-		"bbb",
-		"cc",
-		"ccc",
-		"dd",
-		"ddd",
-		"ee",
-		"eee",
-		"ff",
-		"fff",
-		"gg",
-		"ggg",
-		"hh",
-		"hhh",
-		"ii",
-		"iii",
-		"jj",
-		"jjj",
-		"kk",
-		"kkk",
-		"ll",
-		"lll",
-		"mm",
-		"mmm",
-		"nn",
-		"nnn",
-		"ññ",
-		"ñññ",
-		"oo",
-		"ooo",
-		"pp",
-		"ppp",
-		"qq",
-		"qqq",
-		"rr",
-		"rrr",
-		"ss",
-		"sss",
-		"tt",
-		"ttt",
-		"uu",
-		"uuu",
-		"vv",
-		"vvv",
-		"xx",
-		"xxx",
-		"yy",
-		"yyy",
-		"zz",
-		"zzz"
-	];
-
-	$( "#txtSearch" ).autocomplete({
-		source: availableTags
+	// Setup url change handler
+	$(window).hashchange(function()
+	{
+		updateState(location.hash)
 	});
+	updateState(location.hash);
 });
+
+/**
+ * URL CHANGE HANDLER
+ */
+function updateState(h)
+{
+	/**
+	 * LOAD INITIAL SECTION
+	 */
+	hash = h.split("/");
+	var location = hash[1];
+
+	$("#motd").slideUp(500);
+	$("section#maincontent > header").slideUp(500, function()
+	{
+		$("section#maincontent > header > h1").text("");
+	});
+
+	if ( location == null || location == "home" )
+	{
+		$("#motd").slideDown(500);
+		// TODO: Load main section
+	}
+	else
+	{
+		$("section#maincontent > header").slideDown(500, function()
+		{
+			$("section#maincontent > header > h1").text(location);
+		});
+		// TODO: Load section
+	}
+}

@@ -60,7 +60,6 @@ nav#mainnav
 	/** Default background **/
 	background-color: #FEFEFE;
 	background-image: url(../images/rainbow_bgr.png);
-
 	font-size: 18px;
 }
 
@@ -156,14 +155,8 @@ aside#motd
 
 	aside#motd > ul#motdmessages
 	{
-		text-align: center;
 		background: url(../images/pattern2.png);
 	}
-
-		aside#motd > ul#motdmessages > li
-		{
-			opacity: 0;
-		}
 
 	aside#motd > div#motdhelper, section#maincontent > header > div#hhelper
 	{
