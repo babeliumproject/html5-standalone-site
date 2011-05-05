@@ -1,16 +1,3 @@
-/**********************************************************
- * Bindings for flex 4.0 spark components
- * --------------------------------
- * Author: Babelium Project - www.babeliumproject.com
- * Version: Alpha
- * --------------------------------
- * References:
- * - Components
- * http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/spark/components/package-detail.html
- * - Skins
- * http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/spark/skins/spark/package-detail.html
- *********************************************************/
-
 /**
  * Flexible Box Model
  * ---------------------
@@ -175,26 +162,3 @@
 	-moz-box-pack: center;
 	box-pack: center;
 }
-
-/**
- * Scrollbars
- * ----------------------
- * Scroller, HScrollBar
- * VScrollBar
- * ----------------------
- **/
-.Scroller
-{
-    overflow: auto;
-}
-
-.HScrollBar
-{
-    overflow-x: auto; 
-}
-
-.VScrollBar
-{
-    overflow-y: auto;
-}
-
