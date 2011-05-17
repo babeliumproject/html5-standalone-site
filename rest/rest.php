@@ -30,9 +30,9 @@ require_once 'ZendRestJson.php';
 //Instantiate custom Zend Rest Server
 $server = new ZendRestJson();
 
-//Set the data representation for the response received from the server. Default representation mode is XML
-if ( isset($_GET['mode']) )
-	$server->setResponseMode($_GET['mode']);
+//Set the data representation for the response received from the server. Default representation mode is JSON
+if ( isset($_REQUEST['mode']) )
+	$server->setResponseMode($_REQUEST['mode']);
 else
 	$server->setResponseMode('json');
 	
