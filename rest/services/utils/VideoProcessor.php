@@ -22,7 +22,7 @@
  */
 
 if(!defined('SERVICE_PATH_VPROC'))
-	define('SERVICE_PATH_VPROC', '/var/www/babelium/services/');
+	define('SERVICE_PATH_VPROC', __DIR__."/../");
 
 require_once SERVICE_PATH_VPROC . 'utils/Config.php';
 
