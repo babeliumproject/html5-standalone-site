@@ -40,6 +40,9 @@ class ZendRestJson extends Zend_Rest_Server
 		if($mode == 'xml' || $mode == 'json'){
 			$this->_responseMode = $mode;
 		}
+		else{
+			$this->_responseMode = 'json';
+		}
 	}
 
 	/**

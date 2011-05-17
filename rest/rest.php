@@ -31,8 +31,11 @@ require_once 'ZendRestJson.php';
 $server = new ZendRestJson();
 
 //Set the data representation for the response received from the server. Default representation mode is XML
-$server->setResponseMode('json');
-
+if ( isset($_GET['mode']) )
+	$server->setResponseMode($_GET['mode']);
+else
+	$server->setResponseMode('json');
+	
 //Set the path to reach the services
 define ('SERVICE_PATH', '/services/');
 
