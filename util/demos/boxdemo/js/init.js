@@ -56,20 +56,19 @@ function updateState(h)
 	transition = true;
 
 	if ( lastState != -1 )
-	{
-		$(lastState).removeClass("VBox");
 		$(lastState).hide(1000);
-		
-	}
 
 	// Default page
 	if ( $(h).length == 0 )
-		h = "#example1";
+	{
+		transition = false;
+		window.location.href = "#example1";
+		return;
+	}
 
 	if ( h != lastState )
 	{
 		$(h).show(1500, function(){
-			$(h).addClass("VBox");
 			transition = false;
 		});
 		lastState = h;
