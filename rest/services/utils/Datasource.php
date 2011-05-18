@@ -30,6 +30,9 @@ class Datasource
 {
 	
 	private $dbLink;
+	
+	const FETCH_MODE_ASSOC = 'fetch_assoc';
+	const FETCH_MODE_OBJECT = 'fetch_object';
 
 	/**
 	 * Constructor function
@@ -136,6 +139,32 @@ class Datasource
 	}
 	
 	/**
+	 * Retrieve the next line of data for the given resultSet as an associative array
+	 * 
+	 * @param mixed $result
+	 * 		The resultset of a SQL query
+	 * @return mixed $row
+	 * 		Returns an associative array with the data of the next row of the resultSet or NULL if there are no more rows in resultset. 
+	 */
+	public function _nextRowAssoc($result){
+		$row = mysqli_fetch_assoc($result);
+		return $row;
+	}
+	
+	/**
+	 * Retrieve the next line of data for the given resultSet as an object
+	 * 
+	 * @param mixed $result
+	 * 		The resultset of a SQL query
+	 * @return mixed $row
+	 * 		Returns an object with the data of the next row of the resultSet or NULL if there are no more rows in resultset. 
+	 */
+	public function _nextRowObject($result){
+		$row = mysqli_fetch_object($result);
+		return $row;
+	}
+	
+	/**
 	 * Perform a SQL Insert operation against the database
 	 * 
 	 * @return mixed $row
@@ -153,6 +182,31 @@ class Datasource
 		} else {
 			return false;
 		}
+	}
+	
+	/**
+	 * Perform a SQL Select operation against the database
+	 * @return mixed $result
+	 * 		Returns an array of objects if the query had more than one row, an object if the query had only one row
+	 *		and false if the query had no results at all.
+	 */
+	public function _select(){
+		$rowList = array();
+		$result = $this->_execute ( func_get_args() );
+		while($row = $this->_nextRowObject($result)){
+			if($row && is_object($row)){
+				array_push($rowList, $row);
+			}
+		}
+		if(!$rowList || count($rowList) == 0){
+			$result = false;
+		} 
+		elseif (count($rowList) == 1){
+			$result = $rowList[0];
+		} else {
+			$result = $rowList;
+		}
+		return $result;
 	}
 	
 	/**

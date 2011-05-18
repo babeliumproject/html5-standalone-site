@@ -60,19 +60,19 @@ class Auth{
 	 * 		Returns the current user data. Or an error message when wrong login data is provided
 	 */
 	public function processLogin($user){
-		if($user != null){
+		if($user != null && is_object($user)){
 			//Check if the given username exists
 			if($this->getUserInfo($user->name)==false){
 				return "wrong_user";
 			} else {
 				//Check whether the user is active or not
 				$sql = "SELECT id FROM users WHERE (name = '%s' AND active = 0)";
-				$result = $this->_singleQuery($sql, $user->name);
+				$result = $this->conn->_select($sql, $user->name);
 				if ( $result )
 				return "inactive_user";
 				//Check if the user provided correct authentication data
 				$sql = "SELECT id, name, realName, realSurname, email, creditCount, joiningDate, isAdmin FROM users WHERE (name='%s' AND password='%s') ";
-				$result = $this->_singleQuery($sql, $user->name, $user->pass);
+				$result = $this->conn->_select($sql, $user->name, $user->pass);
 				if($result){
 					$userId = $result->id;
 					$userLanguages = $this->_getUserLanguages($userId);
@@ -116,7 +116,7 @@ class Auth{
 		$isUserLogged = false;
 
 		//The user authenticated on this session and still hasn't asked for logout
-		if(isset($_COOKIE['PHPSESSID']) &&  $_COOKIE['PHPSESSID'] == session_id() && $_SESSION['logged'] == true){
+		if(isset($_COOKIE['PHPSESSID']) &&  $_COOKIE['PHPSESSID'] == session_id() && isset($_SESSION['logged']) && $_SESSION['logged'] == true){
 			$isUserLogged = true;
 		}
 		//The user has a cookie with a valid expiry date and there's a record on the database that remembers this user token
@@ -139,35 +139,7 @@ class Auth{
 
 		$sql = "SELECT id, name, realName, realSurname, email, creditCount FROM users WHERE (name = '%s') ";
 
-		return $this->_singleQuery($sql, $username);
-	}
-
-	/**
-	 * Performs a sql query whose result is expected to be of one-row length to retrieve one user's data
-	 * @return mixed $result
-	 * 		Returns an object with the user data or false when no user with that username is found in the database.
-	 */
-	private function _singleQuery(){
-		$valueObject = new stdClass();
-		$result = $this->conn->_execute(func_get_args());
-
-		$row = $this->conn->_nextRow($result);
-		if ($row)
-		{
-			$valueObject->id = $row[0];
-			$valueObject->name = $row[1];
-			$valueObject->realName = $row[2];
-			$valueObject->realSurname = $row[3];
-			$valueObject->email = $row[4];
-			$valueObject->creditCount = $row[5];
-			$valueObject->joiningDate = $row[6];
-			$valueObject->isAdmin = $row[7] == 1;
-		}
-		else
-		{
-			return false;
-		}
-		return $valueObject;
+		return $this->conn->_select($sql, $username);
 	}
 
 	/**
@@ -200,7 +172,7 @@ class Auth{
 			return "wrong_user";
 		} else {
 			$sql = "SELECT id, activation_hash FROM users WHERE (name= '%s' AND email= '%s' AND active = 0 AND activation_hash <> '')";
-			$inactiveUserExists = $this->_singleQueryInactiveUser($sql, $user->name, $user->email);
+			$inactiveUserExists = $this->conn->_select($sql, $user->name, $user->email);
 			if ($inactiveUserExists){
 				$userId = $inactiveUserExists->id;
 				$activationHash = $inactiveUserExists->hash;
@@ -230,28 +202,6 @@ class Auth{
 				return "user_active_wrong_email";
 			}
 		}
-
-	}
-
-	/**
-	 * Performs a sql query whose result is expected to be of one-row length to retrieve the account activation status of an user.
-	 * 
-	 * @return mixed $valueObject
-	 * 		Returns an object with the activation hash and the userId or false when no user with that username is found in the database.
-	 */
-	private function _singleQueryInactiveUser(){
-		$valueObject = new stdClass();
-		$result = $this->conn->_execute(func_get_args());
-
-		$row = $this->conn->_nextRow($result);
-		if ($row)
-		{
-			$valueObject->id = $row[0];
-			$valueObject->hash = $row[1];
-		} else {
-			return false;
-		}
-		return $valueObject;
 	}
 
 	/**
@@ -279,7 +229,8 @@ class Auth{
 	 */
 	private function _setSessionData($userData){
 		//We are changing the privilege level, so we generate a new session id
-		session_regenerate_id();
+		if(!headers_sent())
+			session_regenerate_id();
 		$_SESSION['logged'] = true;
 		$_SESSION['uid'] = $userData->id;
 		$_SESSION['user-agent-hash'] = sha1($_SERVER['HTTP_USER_AGENT']);
@@ -293,7 +244,8 @@ class Auth{
 	 */
 	private function _resetSessionData(){
 		//We are changing the privilege level, so first we generate a new session id
-		session_regenerate_id();
+		if(!headers_sent())
+			session_regenerate_id();
 		$_SESSION['logged'] = false;
 		$_SESSION['uid'] = 0;
 		$_SESSION['user-agent-hash'] = '';
@@ -312,29 +264,7 @@ class Auth{
 	private function _getUserLanguages($userId){
 		$sql = "SELECT language, level, positives_to_next_level, purpose
 				FROM user_languages WHERE (fk_user_id='%d')";
-		return $this->_listUserLanguagesQuery($sql, $userId);
-	}
-
-	/**
-	 * Performs a sql query whose result is expected to be of several-row length to retrieve users preferred languages.
-	 * 
-	 * @return mixed $searchResults
-	 * 		Returns an array of objects or null if the query didn't gave results.
-	*/
-	private function _listUserLanguagesQuery(){
-		$searchResults = array();
-
-		$result = $this->conn->_execute(func_get_args());
-		while($row = $this->conn->_nextRow($result)){
-			$temp = new stdClass();
-			$temp->language = $row[0];
-			$temp->level = $row[1];
-			$temp->positivesToNextLevel = $row[2];
-			$temp->purpose = $row[3];
-
-			array_push($searchResults, $temp);
-		}
-		return $searchResults;
+		return $this->conn->_select($sql, $userId);
 	}
 
 }
