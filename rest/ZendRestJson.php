@@ -22,6 +22,7 @@
  */
 
 require_once 'Zend/Rest/Server.php';
+require_once 'Zend/Json.php';
 
 /**
  * A customized version of Zend's Rest Server class that allows to receive base64 encoded json parameters
@@ -156,8 +157,14 @@ class ZendRestJson extends Zend_Rest_Server
 		}
 
 		if($this->_responseMode == 'json'){
-			$obj = simplexml_load_string($response);
-			$response = json_encode($obj);
+			//$obj = simplexml_load_string($response);
+			//$response = json_encode($obj);
+			
+			$response = Zend_Json::fromXml($response, false);
+
+            $response = preg_replace_callback('/\\\\u([0-9a-f]{4})/i',
+											  create_function('$match','return mb_convert_encoding(pack("H*", $match[1]), "UTF-8", "UCS-2BE");'),
+											  $response);
 		}
 
 		if (!$this->returnResponse()) {
@@ -174,68 +181,29 @@ class ZendRestJson extends Zend_Rest_Server
 		return $response;
 	}
 
-	protected function _handleStruct($struct)
-	{
-		$function = $this->_functions[$this->_method];
-		if ($function instanceof Zend_Server_Reflection_Method) {
-			$class = $function->getDeclaringClass()->getName();
-		} else {
-			$class = false;
-		}
-
-		$method = $function->getName();
-		//	if($this->_responseMode == 'xml'){
-		$dom    = new DOMDocument('1.0', $this->getEncoding());
-		if ($class) {
-			$root   = $dom->createElement($class);
-			$method = $dom->createElement($method);
-			$root->appendChild($method);
-		} else {
-			$root   = $dom->createElement($method);
-			$method = $root;
-		}
-		$root->setAttribute('generator', 'zend');
-		$root->setAttribute('version', '1.0');
-		$dom->appendChild($root);
-
-		$this->_structValue($struct, $dom, $method);
-
-		$struct = (array) $struct;
-		if (!isset($struct['status'])) {
-			$status = $dom->createElement('status', 'success');
-			$method->appendChild($status);
-		}
-
-		return $dom->saveXML();
-		//	}
-		//	if($this->_responseMode == 'json'){
-		//		return json_encode($struct);
-		//	}
-		}
-
-		/**
-		 * Checks whether the provided parameter is an base64 encoded json representation of an object and if so
-		 * returns a stdClass representation of it. If the parameter is not base64 decodable or doesn't have
-		 * a valid json representation we assume it's an scalar parameter and return it as it is.
-		 * 
-		 * @param mixed $parameter
-		 * 		An HTTP request parameter of undetermined type
-		 * @return mixed $result_parameter
-		 * 		Returns an stdClass representation of the parameter given this parameter is a base64 encoded json representation. Otherways it returns the parameter as is.
-		 */
-		protected function _convertParameter($parameter){
-			$result_parameter = $parameter;
-			//JSON object parameters are encoded using base64 on the client
-			if(base64_decode($parameter) !== false){
-				$json_parameter = base64_decode($parameter);
-				if(json_decode($json_parameter) !== null){
-					$object_parameter = json_decode($json_parameter);
-					$result_parameter = $object_parameter;
-				}
+	/**
+	 * Checks whether the provided parameter is an base64 encoded json representation of an object and if so
+	 * returns a stdClass representation of it. If the parameter is not base64 decodable or doesn't have
+	 * a valid json representation we assume it's an scalar parameter and return it as it is.
+	 *
+	 * @param mixed $parameter
+	 * 		An HTTP request parameter of undetermined type
+	 * @return mixed $result_parameter
+	 * 		Returns an stdClass representation of the parameter given this parameter is a base64 encoded json representation. Otherways it returns the parameter as is.
+	 */
+	protected function _convertParameter($parameter){
+		$result_parameter = $parameter;
+		//JSON object parameters are encoded using base64 on the client
+		if(base64_decode($parameter) !== false){
+			$json_parameter = base64_decode($parameter);
+			if(json_decode($json_parameter) !== null){
+				$object_parameter = json_decode($json_parameter);
+				$result_parameter = $object_parameter;
 			}
-			return $result_parameter;
-
 		}
+		return $result_parameter;
+
+	}
 
 }
 
