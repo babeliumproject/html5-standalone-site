@@ -1,0 +1,166 @@
+input[type=text],
+input[type=email],
+input[type=url],
+input[type=password],
+input[type=number],
+textarea
+{
+	border: 1px solid #92D3D5;
+	height: 25px;
+	padding-left: 5px;	
+	
+	/** rounded border **/
+	-moz-border-radius: 4px; 
+	-webkit-border-radius: 4px; 
+	border-radius: 4px;
+	
+	/** box shadow **/ 
+	-webkit-box-shadow: -2px 2px 2px rgba(0,0,0,.2);
+	-moz-box-shadow: -2px 2px 2px rgba(0,0,0,.2);
+	box-shadow: -2px 2px 2px rgba(0,0,0,.2);
+}
+
+input[type=text]:focus, 
+input[type=email]:focus,
+input[type=url]:focus,
+input[type=password]:focus,
+input[type=number]:focus,
+textarea:focus
+{
+	border-width: 3px;
+}
+
+form > input[type=button], button
+{		
+	border: 1px solid #92D3D5;
+	height: 27px;
+	font-size: 14px;
+	font-weight: bold;
+	color: #92D3D5;
+
+	/** rounded border **/
+	-moz-border-radius: 6px; 
+	-webkit-border-radius: 6px; 
+	border-radius:6px;
+	
+	/** box shadow **/ 
+	-webkit-box-shadow: -2px 2px 2px rgba(0,0,0,.2);
+	-moz-box-shadow: -2px 2px 2px rgba(0,0,0,.2);
+	box-shadow: -2px 2px 2px rgba(0,0,0,.2);
+	
+	/** Gradient for mozilla and webkit powered **/
+	background: -webkit-gradient(linear, 0 0, 0 100%, from(white), to(#E2EFF3));
+	background: -moz-linear-gradient(top, white, #E2EFF3);
+}
+
+form input[type=button]:hover, button:hover
+{
+	cursor: pointer;	
+	text-shadow: 1px 1px 1px rgba(0,0,0,.2);
+	
+	/** Gradient for mozilla and webkit powered **/
+	background: -webkit-gradient(linear, 0 0, 0 100%, from(white), to(#BFDCE3));
+	background: -moz-linear-gradient(top, white, #BFDCE3);
+}
+
+form > input[type=button].upload, button.upload
+{
+	/** Gradient for mozilla and webkit powered **/
+	background: -webkit-gradient(linear, 0 0, 0 100%, from(#AB0D0D), to(#F13737));
+	background: -moz-linear-gradient(top, #630707, #E31010);
+	
+	color: #ECECEC;
+	border-color: #630707;
+}
+
+form > input[type=button].upload:hover, button.upload:hover
+{
+	text-shadow: 1px 1px 1px rgba(0,0,0,.2);	
+	
+	/** Gradient for mozilla and webkit powered **/
+	background: -webkit-gradient(linear, 0 0, 0 100%, from(#FF7E29), to(#F67E7E));
+	background: -moz-linear-gradient(top, #FF7E29, #F67E7E);
+
+	border-color: #D95700;
+}
+
+/**
+ * LOCALE BOX
+ */
+.localebox
+{
+	/* This is the container of the new select element */	
+	height: 17px;
+	display: inline-block;
+	min-width: 170px;
+	position: relative;
+}
+
+.localebox .selectBox
+{
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	padding-left: 3px;
+	line-height: 18px;
+	
+	/* Font settings */
+	font-size:11px;
+	text-shadow:1px 1px 0 #EEEEEE;
+	color:#666666;
+	
+	cursor:pointer;
+	
+	/** Border **/
+	border: 1px solid BFDCE3;
+	-moz-border-radius:3px;
+	-webkit-border-radius:3px;
+	border-radius:3px;
+	
+	background-color: #666;
+	/** Gradient for mozilla and webkit powered **/
+	background: -webkit-gradient(linear, 0 0, 0 100%, from(white), to(#BFDCE3));
+	background: -moz-linear-gradient(top, white, #BFDCE3);
+
+	/** Shadow **/	
+	-moz-box-shadow: -1px 1px 3px #111;
+	-webkit-box-shadow: -1px 1px 3px #111;
+	box-shadow: -1px 1px 3px #111;
+}
+
+.localebox .selectBox:hover,
+.localebox .selectBox.expanded
+{
+	color:#2c5667;
+	text-shadow:1px 1px 0 #9bc2d0;
+}
+
+.localebox .dropDown
+{
+	position:absolute;
+	top: 20px;
+	left: 3px;
+	width: 100%;
+	border:1px solid #38babc;
+	list-style: none;
+	cursor: pointer;
+	line-height: 20px;
+	
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	
+	-moz-box-shadow: 0 0 4px #111;
+	-webkit-box-shadow: 0 0 4px #111;
+	box-shadow: 0 0 4px #111;
+	
+	background-color: white;
+	
+	/* display over logo */
+	z-index: 2;
+}
+
+.localebox .dropDown li:hover
+{
+	background-color: #38babc;
+}

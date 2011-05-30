@@ -1,0 +1,115 @@
+/*
+ * HEADER
+ */
+
+/* TOP NAVIGATION */
+
+html, body
+{
+	width: 100%;
+}
+
+nav#topnav
+{
+	height: 35px;
+}
+
+	nav#topnav > ul > li
+	{
+		margin-left: 8px;
+		margin-right: 8px;
+	}
+
+	nav#topnav > ul > li:first-child {margin-left: 16px;}
+	nav#topnav > ul > li:last-child {margin-right: 16px;}
+
+div#logo
+{
+	position: absolute;
+	left: 15px;
+	top: 35px;
+	z-index: 1;
+}
+
+/* MAIN NAVIGATION */
+
+nav#mainnav
+{
+	height: 118px;
+}
+
+	nav#mainnav > ul
+	{
+		min-width: 720px;
+	}
+
+		nav#mainnav > ul > li
+		{
+			padding-left: 18px;
+			padding-right: 18px;
+			min-height: 50px;
+			line-height: 50px;
+		}
+
+
+/* SEARCH BAR */
+
+div#searchnav
+{
+	height: 35px;
+	/* logo width  */
+	padding-left: 200px;
+	padding-right: 10px;
+}
+
+/* END OF HEADER */
+
+/* START OF MOTD */
+
+aside#motd
+{
+	width: 100%;
+}
+
+	aside#motd > ul#motdmessages
+	{
+		width: 100%;
+		height: 150px;
+	}
+
+		aside#motd > ul#motdmessages > li
+		{
+			display: none;
+		}
+
+		aside#motd > ul#motdmessages > li:first-child
+		{
+			display: block;
+		}
+
+			aside#motd > ul#motdmessages > li > div
+			{
+				width: 500px;
+			}
+
+	aside#motd > div#motdhelper, section#maincontent > header > div#hhelper
+	{
+		height: 3px;
+	}
+
+/* END OF MOTD */
+
+/* MAIN CONTENT */
+
+section#maincontent > header
+{
+	padding-top: 15px;
+}
+
+	section#maincontent > header > h1 
+	{
+		height: 50px;
+		padding-left: 20px;
+	}
+
+/* END OF MAIN CONTENT */

@@ -1,0 +1,200 @@
+/**********************************************************
+ * Bindings for flex 4.0 spark components
+ * --------------------------------
+ * Author: Babelium Project - www.babeliumproject.com
+ * Version: Alpha
+ * --------------------------------
+ * References:
+ * - Components
+ * http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/spark/components/package-detail.html
+ * - Skins
+ * http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/spark/skins/spark/package-detail.html
+ *********************************************************/
+
+/**
+ * Flexible Box Model
+ * ---------------------
+ * Group, HGroup, VGroup
+ * Box, HBox, VBox
+ * ---------------------
+ * References: 
+ * http://infrequently.org/2009/08/css-3-progress/
+ * http://stackoverflow.com/questions/4465264/css3-flexible-box-model-and-nested-layouts
+ **/
+
+/* Box container */
+.HBox, .HGroup, .VBox, .VGroup
+{
+	display: -webkit-box !important;
+	-webkit-box-align: stretch;
+ 
+	display: -moz-box !important;
+	-moz-box-align: stretch;
+ 
+	display: box !important;
+	box-align: stretch;
+}
+
+/* Horizontal boxes */
+.HBox, .HGroup
+{
+	-webkit-box-orient: horizontal;
+	-moz-box-orient: horizontal;
+	box-orient: horizontal;
+}
+
+/* Vertical boxes */
+.VBox, .VGroup
+{
+	-webkit-box-orient: vertical;
+	-moz-box-orient: vertical;
+	box-orient: vertical;
+}
+
+/* Elements of boxes */
+.HBox > *, .HGroup > *, .VBox > *, .VGroup > *
+{
+	-webkit-box-flex: 0;
+	-moz-box-flex: 0;
+	box-flex: 0;
+	display: block;
+}
+
+/* Util */
+.spacer
+{
+	-webkit-box-flex: 1;
+	-moz-box-flex: 1;
+	box-flex: 1;
+}
+ 
+.reverse 
+{
+	-webkit-box-direction: reverse;
+	-moz-box-direction: reverse;
+	box-direction: reverse;
+}
+
+/* Element fill space */
+.boxFlex1, .boxFlex 
+{
+	-webkit-box-flex: 1;
+	-moz-box-flex: 1;
+	box-flex: 1;
+}
+ 
+.boxFlex2 
+{
+	-webkit-box-flex: 2;
+	-moz-box-flex: 2;
+	box-flex: 2;
+}
+
+/* HBox: aligment of elements */
+.HBox.vstart, .HGroup.vstart
+{
+	-webkit-box-align: start;
+	-moz-box-align: start;
+	box-align: start;
+}
+ 
+.HBox.vend, .HGroup.vend
+{
+	-webkit-box-align: end;
+	-moz-box-align: end;
+	box-align: end;
+}
+ 
+.HBox.vcenter, .HGroup.vcenter
+{
+	-webkit-box-align: center;
+	-moz-box-align: center;
+	box-align: center;
+}
+
+.HBox.hstart, .HGroup.hstart
+{
+	-webkit-box-pack: start;
+	-moz-box-pack: start;
+	box-pack: start;
+}
+
+.HBox.hend, .HGroup.hend
+{
+	-webkit-box-pack: end;
+	-moz-box-pack: end;
+	box-pack: end;
+}
+
+.HBox.hcenter, .HGroup.hcenter
+{
+	-webkit-box-pack: center;
+	-moz-box-pack: center;
+	box-pack: center;
+}
+
+/* VBox: aligment of elements */
+.VBox.hstart, .VGroup.hstart
+{
+	-webkit-box-align: start;
+	-moz-box-align: start;
+	box-align: start;
+}
+ 
+.VBox.hend, .VGroup.hend
+{
+	-webkit-box-align: end;
+	-moz-box-align: end;
+	box-align: end;
+}
+ 
+.VBox.hcenter, .VGroup.hcenter
+{
+	-webkit-box-align: center;
+	-moz-box-align: center;
+	box-align: center;
+}
+
+.VBox.vstart, .VGroup.vstart
+{
+	-webkit-box-pack: start;
+	-moz-box-pack: start;
+	box-pack: start;
+}
+
+.VBox.vend, .VGroup.vend
+{
+	-webkit-box-pack: end;
+	-moz-box-pack: end;
+	box-pack: end;
+}
+
+.VBox.vcenter, .VGroup.vcenter
+{
+	-webkit-box-pack: center;
+	-moz-box-pack: center;
+	box-pack: center;
+}
+
+/**
+ * Scrollbars
+ * ----------------------
+ * Scroller, HScrollBar
+ * VScrollBar
+ * ----------------------
+ **/
+.Scroller
+{
+    overflow: auto;
+}
+
+.HScrollBar
+{
+    overflow-x: auto; 
+}
+
+.VScrollBar
+{
+    overflow-y: auto;
+}
+
