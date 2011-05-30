@@ -1,0 +1,527 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+	<meta charset="UTF-8" /> 
+	<title>Flexible box model examples</title>
+
+	<!-- JQuery -->
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+	<script type="text/javascript" src="js/jquery-hashchange.js"></script>
+
+	<!-- Syntax Highlighter -->
+	<link rel="stylesheet" type="text/css" href="css/shCore.css" />
+	<link rel="stylesheet" type="text/css" href="css/shThemeDefault.css" />
+	<script type="text/javascript" src="js/shCore.js"></script>
+	<script type="text/javascript" src="js/shBrushXml.js"></script>
+
+	<!-- Init presentation -->
+	<script type="text/javascript" src="js/init.js"></script>
+
+	<!-- style for demo, not relevant -->
+	<link rel="stylesheet" type="text/css" href="css/demo.css" />
+
+	<!-- HBOX / VBOX bindings, IMPORTANT -->
+	<link rel="stylesheet" type="text/css" href="css/boxes.css" />
+
+	<!-- Style -->
+	<style type="text/css">
+		.VBox {background-color: #FF9999;}
+		.HBox {background-color: #99FF99;}
+
+/*********************************
+ **** EXAMPLE 1               ****
+ ********************************/
+		#example1 > div.VBox
+		{
+			width: 400px;
+			height: 120px;
+		}
+
+/*********************************
+ **** EXAMPLE 2               ****
+ ********************************/
+		#example2 > div.VBox
+		{
+			width: 400px;
+			height: 120px;
+		}
+
+/*********************************
+ **** EXAMPLE 3               ****
+ ********************************/
+		#example3 > div.VBox
+		{
+			width: 400px;
+			height: 120px;
+		}
+
+/*********************************
+ **** EXAMPLE 4               ****
+ ********************************/
+		#example4 > div.HBox
+		{
+			width: 500px;
+			height: 50px;
+		}
+
+/*********************************
+ **** EXAMPLE 5               ****
+ ********************************/
+		#example5 > div.HBox
+		{
+			width: 500px;
+			height: 50px;
+		}
+
+/*********************************
+ **** EXAMPLE 6               ****
+ ********************************/
+		#example6 > div.HBox
+		{
+			width: 500px;
+			height: 50px;
+		}
+
+/*********************************
+ **** EXAMPLE 7               ****
+ ********************************/
+		#example7 > div.VBox
+		{
+			width: 400px;
+			height: 120px;
+		}
+
+/*********************************
+ **** EXAMPLE 8               ****
+ ********************************/
+		#example8 > div.VBox
+		{
+			width: 400px;
+			height: 120px;
+		}
+
+/*********************************
+ **** EXAMPLE 9               ****
+ ********************************/
+		#example9 > div.HBox
+		{
+			width: 500px;
+			height: 50px;
+		}
+
+/*********************************
+ **** EXAMPLE 10              ****
+ ********************************/
+		#example10 > div.HBox
+		{
+			width: 500px;
+			height: 50px;
+		}
+
+/*********************************
+ **** EXAMPLE 11                ****
+ ********************************/
+		#example11 > div.VBox
+		{
+			width: 500px;
+			height: 150px;
+		}
+
+		#example11 > div.VBox > div.HBox:first-child
+		{
+			margin-bottom: 10px;
+		}
+
+		#example11 > div.VBox > div.HBox
+		{
+			width: 450px;
+			height: 60px;
+		}
+
+	</style>
+</head>
+<body class="VBox vcenter hcenter">
+	<aside>
+		Use arrow keys to navigate through examples
+	</aside>
+
+<!-- EXAMPLE 1 -->
+	<section id="example1" class="VBox hcenter">
+		<hgroup class="HBox vcenter">
+			<h1>Example 1</h1>
+			<h2>Vertical box</h2>
+		</hgroup>
+
+		<p>By default VBox elements fills horizontal space.</p>
+		
+		<div class="VBox">
+			<label>I'm a label</label>
+			<button>I'm a button</button>
+			<input type="text" />
+			<select>
+				<option>Option 1</option>
+				<option>Option 2</option>
+			</select>	
+		</div>
+		<div class="code">
+			<script type="syntaxhighlighter" class="brush: html"><![CDATA[
+<div class="VBox">
+	<label>I'm a label</label>
+	<button>I'm a button</button>
+	<input type="text" />
+	<select>
+		<option>Option 1</option>
+		<option>Option 2</option>
+	</select>	
+</div>]]></script>
+		</div>
+	</section>
+<!-- END OF EXAMPLE 1 -->
+
+<!-- EXAMPLE 2 -->
+	<section id="example2" class="VBox hcenter">
+		<hgroup class="HBox vcenter">
+			<h1>Example 2</h1>
+			<h2>Vertical box, horizontally centered</h2>
+		</hgroup>
+
+		<p>Elements are displayed horizontally centered and fills only their own space.</p>
+
+		<div class="VBox hcenter">
+			<label>I'm a label</label>
+			<button>I'm a button</button>
+			<input type="text" />
+			<select>
+				<option>Option 1</option>
+				<option>Option 2</option>
+			</select>	
+		</div>
+		<div class="code">
+			<script type="syntaxhighlighter" class="brush: html"><![CDATA[
+<div class="VBox hcenter">
+	<label>I'm a label</label>
+	<button>I'm a button</button>
+	<input type="text" />
+	<select>
+		<option>Option 1</option>
+		<option>Option 2</option>
+	</select>	
+</div>]]></script>
+		</div>
+	</section>
+<!-- END OF EXAMPLE 2 -->
+
+<!-- EXAMPLE 3 -->
+	<section id="example3" class="VBox hcenter">
+		<hgroup class="HBox vcenter">
+			<h1>Example 3</h1>
+			<h2>Vertical box, vertically centered, horizontally at start</h2>
+		</hgroup>
+
+		<p>Elements are displayed horizontally at start and vertically centered.</p>
+
+		<div class="VBox hstart vcenter">
+			<label>I'm a label</label>
+			<button>I'm a button</button>
+			<input type="text" />
+			<select>
+				<option>Option 1</option>
+				<option>Option 2</option>
+			</select>	
+		</div>
+		<div class="code">
+			<script type="syntaxhighlighter" class="brush: html"><![CDATA[
+<div class="VBox hstart vcenter">
+	<label>I'm a label</label>
+	<button>I'm a button</button>
+	<input type="text" />
+	<select>
+		<option>Option 1</option>
+		<option>Option 2</option>
+	</select>	
+</div>]]></script>
+		</div>
+	</section>	
+<!-- END OF EXAMPLE 3 -->
+
+<!-- EXAMPLE 4 -->
+	<section id="example4" class="VBox hcenter">
+		<hgroup class="HBox vcenter">
+			<h1>Example 4</h1>
+			<h2>Horizontal box</h2>
+		</hgroup>
+
+		<p>By default HBox elements fills vertical space.</p>
+
+		<div class="HBox">
+			<label>I'm a label</label>
+			<button>I'm a button</button>
+			<input type="text" />
+			<select>
+				<option>Option 1</option>
+				<option>Option 2</option>
+			</select>	
+		</div>
+		<div class="code">
+			<script type="syntaxhighlighter" class="brush: html"><![CDATA[
+<div class="HBox">
+	<label>I'm a label</label>
+	<button>I'm a button</button>
+	<input type="text" />
+	<select>
+		<option>Option 1</option>
+		<option>Option 2</option>
+	</select>	
+</div>]]></script>
+		</div>
+	</section>
+<!-- END OF EXAMPLE 4 -->
+
+<!-- EXAMPLE 5 -->
+	<section id="example5" class="VBox hcenter">
+		<hgroup class="HBox vcenter">
+			<h1>Example 5</h1>
+			<h2>Horizontal box, vertically centered</h2>
+		</hgroup>
+
+		<p>Elements are displayed vertically centered and doesn't fill whole vertical space.</p>
+
+		<div class="HBox vcenter">
+			<label>I'm a label</label>
+			<button>I'm a button</button>
+			<input type="text" />
+			<select>
+				<option>Option 1</option>
+				<option>Option 2</option>
+			</select>	
+		</div>
+		<div class="code">
+			<script type="syntaxhighlighter" class="brush: html"><![CDATA[
+<div class="HBox vcenter">
+	<label>I'm a label</label>
+	<button>I'm a button</button>
+	<input type="text" />
+	<select>
+		<option>Option 1</option>
+		<option>Option 2</option>
+	</select>	
+</div>]]></script>
+		</div>
+	</section>
+<!-- END OF EXAMPLE 5 -->
+
+<!-- EXAMPLE 6 -->
+	<section id="example6" class="VBox hcenter">
+		<hgroup class="HBox vcenter">
+			<h1>Example 6</h1>
+			<h2>Horizontal box, vertically and horizontally aligned at end</h2>
+		</hgroup>
+
+		<p>Elements are displayed horizontally and vertically at the end of container.</p>
+
+		<div class="HBox hend vend">
+			<label>I'm a label</label>
+			<button>I'm a button</button>
+			<input type="text" />
+			<select>
+				<option>Option 1</option>
+				<option>Option 2</option>
+			</select>	
+		</div>
+		<div class="code">
+			<script type="syntaxhighlighter" class="brush: html"><![CDATA[
+<div class="HBox hend vend">
+	<label>I'm a label</label>
+	<button>I'm a button</button>
+	<input type="text" />
+	<select>
+		<option>Option 1</option>
+		<option>Option 2</option>
+	</select>	
+</div>]]></script>
+		</div>
+	</section>
+<!-- END OF EXAMPLE 6 -->
+
+<!-- EXAMPLE 7 -->
+	<section id="example7" class="VBox hcenter">
+		<hgroup class="HBox vcenter">
+			<h1>Example 7</h1>
+			<h2>Vertical box, use of boxFlex</h2>
+		</hgroup>
+
+		<p>Text input fills unused vertical space</p>
+
+		<div class="VBox hcenter">
+			<label>I'm a label</label>
+			<button>I'm a button</button>
+			<input type="text" class="boxFlex" />
+			<select>
+				<option>Option 1</option>
+				<option>Option 2</option>
+			</select>	
+		</div>
+		<div class="code">
+			<script type="syntaxhighlighter" class="brush: html"><![CDATA[
+<div class="HBox hend vend">
+	<label>I'm a label</label>
+	<button>I'm a button</button>
+	<input type="text" class="boxFlex" />
+	<select>
+		<option>Option 1</option>
+		<option>Option 2</option>
+	</select>	
+</div>]]></script>
+		</div>
+	</section>
+<!-- END OF EXAMPLE 7 -->
+
+<!-- EXAMPLE 8 -->
+<section id="example8" class="VBox hcenter">
+		<hgroup class="HBox vcenter">
+			<h1>Example 8</h1>
+			<h2>Vertical box, use of boxFlex as spacer</h2>
+		</hgroup>
+
+		<p>Spacer div takes unused space. Spacer class just puts element's box-flex to 1, like boxFlex.</p>
+
+		<div class="VBox hcenter">
+			<button>I'm a button</button>
+			<div class="spacer"></div>
+			<select>
+				<option>Option 1</option>
+				<option>Option 2</option>
+			</select>	
+		</div>
+		<div class="code">
+			<script type="syntaxhighlighter" class="brush: html"><![CDATA[
+<div class="VBox hcenter">
+	<button>I'm a button</button>
+	<div class="spacer"></div>
+	<select>
+		<option>Option 1</option>
+		<option>Option 2</option>
+	</select>	
+</div>]]></script>
+		</div>
+	</section>
+<!-- END OF EXAMPLE 8 -->
+
+<!-- EXAMPLE 9 -->
+<section id="example9" class="VBox hcenter">
+		<hgroup class="HBox vcenter">
+			<h1>Example 9</h1>
+			<h2>Horizontal box, use of boxFlex</h2>
+		</hgroup>
+
+		<p>Text input fills unused horizontal space</p>
+
+		<div class="HBox vcenter">
+			<label>I'm a label</label>
+			<button>I'm a button</button>
+			<input type="text" class="boxFlex" />
+			<select>
+				<option>Option 1</option>
+				<option>Option 2</option>
+			</select>	
+		</div>
+		<div class="code">
+			<script type="syntaxhighlighter" class="brush: html"><![CDATA[
+<div class="HBox vcenter">
+	<label>I'm a label</label>
+	<button>I'm a button</button>
+	<input type="text" class="boxFlex" />
+	<select>
+		<option>Option 1</option>
+		<option>Option 2</option>
+	</select>	
+</div>]]></script>
+		</div>
+	</section>
+<!-- END OF EXAMPLE 9 -->
+
+<!-- EXAMPLE 10 -->
+	<section id="example10" class="VBox hcenter">
+		<hgroup class="HBox vcenter">
+			<h1>Example 10</h1>
+			<h2>Horizontal box, use of boxFlex as spacer</h2>
+		</hgroup>
+
+		<p>Spacer div takes unused horizontal space. Spacer class just puts element's box-flex to 1, like boxFlex.</p>
+
+		<div class="HBox vcenter">
+			<button>I'm a button</button>
+			<div class="spacer"></div>
+			<select>
+				<option>Option 1</option>
+				<option>Option 2</option>
+			</select>	
+		</div>
+		<div class="code">
+			<script type="syntaxhighlighter" class="brush: html"><![CDATA[
+<div class="HBox vcenter">
+	<button>I'm a button</button>
+	<div class="spacer"></div>
+	<select>
+		<option>Option 1</option>
+		<option>Option 2</option>
+	</select>	
+</div>]]></script>
+		</div>
+	</section>
+<!-- END OF EXAMPLE 10 -->
+
+<!-- EXAMPLE 11 -->
+	<section id="example11" class="VBox hcenter">
+		<hgroup class="HBox vcenter">
+			<h1>Example 11</h1>
+			<h2>Nested flexible boxes</h2>
+		</hgroup>
+
+		<div class="VBox vcenter hcenter">
+			<div class="HBox hend vend">
+				<label>I'm a label</label>
+				<button>I'm a button</button>
+				<input type="text" />
+				<select>
+					<option>Option 1</option>
+					<option>Option 2</option>
+				</select>	
+			</div>
+
+			<div class="HBox vcenter">
+				<button>I'm a button</button>
+				<div class="spacer"></div>
+				<select>
+					<option>Option 1</option>
+					<option>Option 2</option>
+				</select>	
+			</div>
+		</div>
+		<div class="code">
+			<script type="syntaxhighlighter" class="brush: html"><![CDATA[
+<div class="VBox vcenter hcenter">
+	<div class="HBox hend vend">
+		<label>I'm a label</label>
+		<button>I'm a button</button>
+		<input type="text" />
+		<select>
+			<option>Option 1</option>
+			<option>Option 2</option>
+		</select>	
+	</div>
+
+	<div class="HBox vcenter">
+		<button>I'm a button</button>
+		<div class="spacer"></div>
+		<select>
+			<option>Option 1</option>
+			<option>Option 2</option>
+		</select>	
+	</div>
+</div>]]></script>
+		</div>
+	</section>
+<!-- END OF EXAMPLE 11 -->
+</body>
+</html>

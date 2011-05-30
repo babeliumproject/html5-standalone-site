@@ -1,0 +1,206 @@
+/**
+ * Main css file
+ */
+
+@import url("reset.css");  /* resets browsers default style */
+@import url("mxml.css"); /* mxml bindings */
+@import url("smoothness/jquery-ui-1.8.12.custom.css");  /* jquery ui style */
+
+html, body
+{
+	width: 100%;
+	height: 100%;
+	min-width: 800px;
+	min-height: 660px;
+}
+
+body
+{
+	font-family: Arial, Helvetica;
+	font-size: 12px;
+	color: #EEE;
+	background-color: #363636;
+}
+
+a
+{
+	color: #77F;
+	text-decoration: none;
+}
+
+a:hover
+{
+	color: #33F;
+}
+
+body > header
+{
+	height: 40px;
+	padding: 10px 0 10px 20px;
+
+	/* Background */
+	/* doc: https://developer.mozilla.org/en/Using_gradients */
+	background: -webkit-linear-gradient(top, #666, #000 30%);
+	background: -moz-linear-gradient(top, #666, #000 30%);
+	background-color: #000;
+
+	/* Shadow */
+	/* doc: left position, top position, smooth, shadow color */
+	-moz-box-shadow: 0 2px 2px #444;
+	-webkit-box-shadow: 0 2px 2px #444;
+	box-shadow: 0 2px 2px #444;	
+}
+
+body > header > h1 > a
+{
+	font-size: 18px;
+	color: white;
+}
+
+body > header, body > footer
+{
+	border-top: 1px solid #666;
+	border-bottom: 1px solid #666;
+}
+
+body > footer
+{
+	padding: 7px;
+
+	/* Background */
+	/* doc: https://developer.mozilla.org/en/Using_gradients */
+	background: -webkit-linear-gradient(top, #000 80%, #333);
+	background: -moz-linear-gradient(top, #000 80%, #333);
+	background-color: #000;
+
+	/* Shadow */
+	/* doc: left position, top position, smooth, shadow color */
+	-moz-box-shadow: 0 2px 2px #444;
+	-webkit-box-shadow: 0 2px 2px #444;
+	box-shadow: 0 2px 2px #444;	
+}
+
+/**
+ * CONTAINER
+ **/
+
+#container
+{
+	padding: 10px;
+}
+
+
+/**
+ * LINKS
+ **/
+#links
+{
+	width: 200px;
+	padding: 10px;
+	background-color: #CECECE;
+	margin-right: 15px;
+
+	-moz-border-radius: 6px; 
+	-webkit-border-radius: 6px; 
+	border-radius:6px;
+}
+
+#links > header
+{
+	color: #333;
+	font-size: 18px;
+	font-weight: bold;
+	font-style: italic;
+	height: 20px;
+	line-height: 20px;
+	margin-bottom: 15px;
+}
+
+
+/**
+ * EXAMPLES
+ **/
+#examples
+{
+	background-color: #CECECE;
+	padding: 10px;
+}
+
+#examples > header
+{
+	height: 40px;
+	padding-bottom: 5px;
+	margin-bottom: 10px;
+	border-bottom: 1px solid #AAA;
+	font-style: italic;
+}
+
+#examples > header > h1
+{
+	font-style: normal;
+}
+
+#examples > header > h1 > a
+{
+	font-size: 18px;
+}
+
+#examples > header, #examples > header > h1 > a
+{
+	color: #333;
+}
+
+#examples > article
+{
+	padding: 10px;
+	background-color: #BCBCBC;
+	border: 1px solid #AAA;
+
+	-moz-border-radius: 6px; 
+	-webkit-border-radius: 6px; 
+	border-radius: 6px;
+}
+
+#info
+{
+	min-height: 190px;
+	margin-bottom: 10px;
+}
+
+#info > div
+{	
+	background-color: #FFF;
+	-moz-border-radius: 6px; 
+	-webkit-border-radius: 6px; 
+	border-radius: 6px;
+	padding: 10px;
+	color: #333;
+	overflow: auto;
+}
+
+#tabs
+{
+	height: 200px;
+}
+
+#tabs > div
+{
+	overflow: auto;
+}
+
+#tabs > div > pre
+{
+	max-height: 135px;
+}
+
+#tabs > div > * > *
+{
+	max-height: 135px;
+}
+
+.shadow
+{
+	-moz-box-shadow: 2px 2px 2px #444;
+	-webkit-box-shadow: 0 2px 2px #444;
+	box-shadow: 2px 2px 2px #444;
+}

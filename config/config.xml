@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<!-- LOG -->
+	<logfile>log/Babelium.log</logfile>
+	<loglevel>7</loglevel>
+	<logformat>[%priorityName% : %timestamp%]: %message%</logformat>
+</config>
+

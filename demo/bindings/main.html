@@ -1,0 +1,89 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+	<meta charset="UTF-8" /> 
+	<title>Tour de Flex - Built in HTML5</title> 
+ 
+	<!-- CSS --> 
+	<link rel="stylesheet" type="text/css" media="screen" href="css/main.css" />
+
+	<!-- JQuery -->
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="js/jquery-hashchange.js"></script>
+
+	<!-- Syntax Highlighter -->
+	<link rel="stylesheet" type="text/css" href="css/shCore.css" />
+	<link rel="stylesheet" type="text/css" href="css/shThemeDefault.css" />
+	<script type="text/javascript" src="js/shCore.js"></script>
+	<script type="text/javascript" src="js/shBrushXml.js"></script>
+	<script type="text/javascript" src="js/shBrushCss.js"></script>
+	<script type="text/javascript" src="js/shBrushJScript.js"></script>
+
+	<!-- Custom -->
+	<script type="text/javascript" src="js/tour.js"></script>
+</head>
+<body class="VBox">
+
+<header>
+	<h1><a href="http://www.adobe.com/devnet-apps/flex/tourdeflex/web/" target="_blank">Tour de FLEX</a></h1>
+	Built in HTML5 by <a href="www.babeliumproject.com" target="_blank">Babelium Project</a>
+</header>
+
+<section id="container" class="boxFlex HBox">
+
+	<!-- NAVIGATOR -->
+	<section id="links" class="VBox shadow">
+		<header>
+			Flex 4.0 Components
+		</header>
+
+		<nav id="accordion" class="boxFlex shadow"></nav>
+	</section>
+
+	<!-- MAIN CONTENT -->
+	<section id="examples" class="boxFlex VBox shadow">
+		<header>
+		</header>
+
+		<!-- EXAMPLES -->
+		<article id="info" class="boxFlex shadow">
+			<div></div>
+		</article>
+
+		<!-- CODE -->
+		<article id="code" class="shadow">
+			<div id="tabs">
+				<ul>
+					<li><a href="#tabs-1">HTML</a></li>
+					<li><a href="#tabs-2">CSS</a></li>
+					<li><a href="#tabs-3">JS</a></li>
+				</ul>
+				<div id="tabs-1">
+					<pre class="brush: html">
+
+					</pre>
+				</div>
+				<div id="tabs-2">
+					<pre class="brush: css">
+
+					</pre>
+				</div>
+				<div id="tabs-3">
+					<pre class="brush: js">
+
+					</pre>
+				</div>
+			</div>
+		</article>
+	</section>
+</section>
+
+<footer class="HBox">
+	<div>About</div>
+	<div class="spacer"></div>
+	<div>Version: 0.0.1</div>
+</footer>
+
+</body>
+</html>

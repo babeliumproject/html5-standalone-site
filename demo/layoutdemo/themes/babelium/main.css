@@ -1,0 +1,12 @@
+/*
+	Name: Babelium Project
+	Description: Main CSS file for babelium style
+	Version: 1.0
+*/
+
+/* Imports */
+@import url("css/reset.css");	/* resets browsers default style */
+@import url("css/layout.css");	/* base layout */
+@import url("css/style.css");	/* main style */
+@import url("css/mxml.css");	/* flex bindings */
+@import url("css/forms.css");	/* modifications of some form elements */
