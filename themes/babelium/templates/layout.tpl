@@ -8,16 +8,14 @@
 	<link rel="stylesheet" type="text/css" media="screen" href="themes/babelium/main.css" />
 	
 	<!-- JQuery -->
-	<script type="text/javascript" src="themes/babelium/js/jquery1.5.1.js"></script>
-	<script type="text/javascript" src="themes/babelium/js/jquery-hashchange.js"></script>
-
-	<!-- Localebox -->
-	<script type="text/javascript" src="themes/babelium/js/localebox.js"></script>
-	<!-- Navigation Links -->
-	<script type="text/javascript" src="themes/babelium/js/navigationlinks.js"></script>
+	<!--<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.js"></script>-->
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.js"></script>
 
 	<!-- Init -->
 	<script type="text/javascript" src="themes/babelium/js/init.js"></script>
+	
+	<!-- Loader -->
+	<script type="text/javascript" src="themes/babelium/js/loader.js"></script>
 </head>
 <body class="VBox">
 <!-- HEADER -->
@@ -57,12 +55,12 @@
 			<div class="spacer" style="min-width: 174px;"></div>
 			<!-- nav links -->
 			<ul class="HBox">
-				<li><a href="#/home/" class="home">Home</a></li>
-				<li><a href="#/practice/" class="pract">Practice</a></li>
-				<li><a href="#/evaluate/" class="eval">Evaluate</a></li>
-				<li><a href="#/subtitle/" class="subt">Subtitle</a></li>
-				<li><a href="#/config/" class="config">Configure</a></li>
-				<li><a href="#/about/" class="about">About Babelium</a></li>
+				<li><a href="javascript:go('home');" class="home">Home</a></li>
+				<li><a href="javascript:go('practice');" class="pract">Practice</a></li>
+				<li><a href="javascript:go('evaluation');" class="eval">Evaluate</a></li>
+				<li><a href="javascript:go('subtitle');" class="subt">Subtitle</a></li>
+				<li><a href="javascript:go('config');" class="config">Configure</a></li>
+				<li><a href="javascript:go('about');" class="about">About Babelium</a></li>
 			</ul>
 			<!-- right space -->
 			<div class="spacer"></div>
@@ -89,6 +87,11 @@
 			<h1></h1>
 			<div id="hhelper"></div>
 		</header>
+		<aside id="loader">
+			<progress>
+				<span id="loadprogress">76</span>%
+			</progress>
+		</aside>
 	</section>
 <!-- END OF MAIN CONTENT -->
 <!-- FOOTER -->

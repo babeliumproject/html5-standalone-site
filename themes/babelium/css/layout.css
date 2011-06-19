@@ -71,6 +71,7 @@ div#searchnav
 aside#motd
 {
 	width: 100%;
+	display: none;
 }
 
 	aside#motd > ul#motdmessages
@@ -113,5 +114,11 @@ section#maincontent > header
 		height: 50px;
 		padding-left: 20px;
 	}
+
+section#maincontent > aside#loader
+{
+	width: 100px;
+	height: 20px;
+}
 
 /* END OF MAIN CONTENT */
