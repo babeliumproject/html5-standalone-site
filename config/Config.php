@@ -8,7 +8,7 @@ include_once("Smarty/Smarty.class.php");
 
 
 /**
- * Setup babelium's configuration
+ * Setups babelium's configuration
  */
 class Config implements ISingleton
 {
@@ -31,6 +31,8 @@ class Config implements ISingleton
 	public $logger;						// Logger
 	// Template engine
 	public $smarty;
+	// Api bridge
+	public $api = "http://localhost/api/rest.php";
 	
 	/*
 	 * CONSTS

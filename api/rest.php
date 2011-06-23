@@ -21,10 +21,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/** DEBUG MODE **/
-error_reporting(E_ALL);
-ini_set('display_errors', '1');
-
 require_once 'ZendRestJson.php';
 
 //Instantiate custom Zend Rest Server

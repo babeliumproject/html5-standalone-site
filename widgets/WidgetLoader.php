@@ -2,19 +2,24 @@
 
 include_once(__DIR__."/../config/Config.php");
 
+/**
+ * Widget loader
+ */
 final class WidgetLoader
 {
+	const ERROR_WIDGET = "404";
+	
 	/* Constructor */
 	private function __construct()
 	{
 		throw new Exception("This class cannot be instantiated");
 	}
 	
-	/* loads widget */
+	/* loads a widget */
 	public static function loadWidget($widget)
 	{
 		if ( !self::widgetAvailable($widget) )
-			return false;
+			$widget = self::ERROR_WIDGET;
 		
 		$cfg = Config::getInstance();
 		
@@ -34,23 +39,8 @@ final class WidgetLoader
 	/* checks if a widget is available */
 	private static function widgetAvailable($widget)
 	{
-		$cfg = Config::getInstance();
-		
-		$cfg->logger->info("Checking widget ($widget) availabillity");
-		
-		// Try to load widget xml file
-		try{
-			$xml = simplexml_load_file(strval($cfg->widgetDescFile));
-		} catch (Exception $e){}
-		
-		if ( !isset($xml->$widget) )
-		{
-			$cfg->logger->warn("Widget ($widget) is not available");
-			return false;
-		}
-
-		$cfg->logger->info("Widget ($widget) is available");
-		return true;
+		return ( $widget == "home" || $widget == "head" || $widget == "nav"
+		 			|| $widget == "footer" || $widget == "module404" );
 	}
 }
 

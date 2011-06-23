@@ -1,10 +1,11 @@
 <?xml version="1.0"?>
 <modules>
-	<module1>
-
-	</module1>
-
-	<module2>
-
-	</module2>
+	<module name="home">
+		<title>Home</title>
+		<widgets>
+			<widget name="head"/>
+			<widget name="nav"/>
+			widget name="footer"/>
+		</widgets>
+	</module>
 </modules>
