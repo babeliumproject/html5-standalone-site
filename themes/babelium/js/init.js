@@ -1,6 +1,3 @@
-var SERVER_URL = "http://localhost/html5/";
-var GATEWAY = "api/rest.php";
-
 $(document).ready(function()
 {
 	initLocalebox();
@@ -8,30 +5,6 @@ $(document).ready(function()
 	
 	window.onpopstate = updateLocation;
 });
-
-			/*var query_string = SERVER_URL +"/"+ GATEWAY + "?class=Exercise&method=getExercises";
-			
-			$.getJSON(query_string, function(data)
-			{
-				var content = "<section style='width:100%; background-color: green;'>";
-				content += "<h1>Exercise List</h1>";
-
-				// parse json
-				$.each(data.getExercises, function(i, item)
-				{
-					if ( item.id == undefined )
-						return;
-					
-					content += "<article style='width:50%;height:100px;float:left;background-color:#CECECE;'>";
-					content += "<h1 style='background-color:red;'>" + item.title + "</h1>";
-					
-					content += "</article>";
-					
-				});
-				
-				content += "</section>";
-				$("#maincontent").html(content);
-			});*/
 
 
 function loadSection(data)

@@ -88,10 +88,14 @@
 			<div id="hhelper"></div>
 		</header>
 		<aside id="loader">
-			<progress>
-				<span id="loadprogress">76</span>%
-			</progress>
+			<div id="loadcontext" class="HBox vcenter hcenter">
+				<span></span>
+				<div class="spacer"></div>
+				<progress style="width: 20px; height: 10px;"></progress>
+			</div>
 		</aside>
+		<section>
+		</section>
 	</section>
 <!-- END OF MAIN CONTENT -->
 <!-- FOOTER -->
