@@ -5,7 +5,7 @@
 		<widgets>
 			<widget name="head"/>
 			<widget name="nav"/>
-			widget name="footer"/>
+			<widget name="footer"/>
 		</widgets>
 	</module>
 </modules>
