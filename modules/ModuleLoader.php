@@ -31,11 +31,13 @@ final class ModuleLoader
 	{
 		$cfg = Config::getInstance();
 		$moduleName = $module;
-
+		
 		if ( in_array("IModule", class_implements(self::$_module[$module])) )
-			call_user_func(self::$_module[$module] . "::load", $moduleName);
+			$r = call_user_func(self::$_module[$module] . "::load", $moduleName);
 		else
-			call_user_func(self::$_module[self::ERROR_MODULE] . "::load", $moduleName);
+			$r = call_user_func(self::$_module[self::ERROR_MODULE] . "::load", $moduleName);
+	
+		return $r;
 	}
 	
 }

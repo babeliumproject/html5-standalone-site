@@ -6,23 +6,24 @@ ini_set('display_errors', '0'); // DEBUG MODE: turn to 1
 
 /** BEGIN CODE **/
 include_once("config/Config.php");
-include_once("modules/ModuleLoader.php");
 
 $cfg = Config::getInstance();
 $log = $cfg->logger;
 $log->info("Initiating index.php");
 
-WidgetLoader::loadWidget("head");
-$cfg->smarty->assign("moduleTitle", $_GET["module"]);
-$cfg->smarty->assign("sectionTitle", $_GET["section"]);
-WidgetLoader::loadWidget("nav");
+// Load header
+echo WidgetLoader::loadWidget("Head");
+echo WidgetLoader::loadWidget("Nav", $_GET["module"], $_GET["section"]);
 
 // Loads home module
-ModuleLoader::loadModule("home");
+if ( isset($_GET["module"]) )
+	echo ModuleLoader::loadModule($_GET["module"]);
+else
+	echo ModuleLoader::loadModule("home");
 
 // Load footer
-WidgetLoader::loadWidget("footer");
+echo WidgetLoader::loadWidget("Footer");
 
-$log->info("Index.php successfully served");
+$log->info("Index.php successfully loaded");
 
 ?>

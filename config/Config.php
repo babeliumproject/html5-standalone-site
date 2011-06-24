@@ -5,6 +5,8 @@ include_once("Zend/Log.php");
 include_once("Zend/Log/Writer/Stream.php");
 include_once("Zend/Log/Formatter/Simple.php");
 include_once("Smarty/Smarty.class.php");
+include_once(__DIR__."/../widgets/WidgetLoader.php");
+include_once(__DIR__."/../modules/ModuleLoader.php");
 
 
 /**
@@ -16,7 +18,7 @@ class Config implements ISingleton
 	private static $_instance;
 
 	/* Initial variable */
-	const CONFIG_FILE = "config/config.xml";
+	const CONFIG_FILE = "config.xml";
 
 	/*
 	 * Configuration
@@ -78,7 +80,7 @@ class Config implements ISingleton
 		 * Load config file
 		 */
 		try{
-			$cfg = simplexml_load_file(self::CONFIG_FILE);
+			$cfg = simplexml_load_file(__DIR__."/".self::CONFIG_FILE);
 		} catch (Exception $e){
 			die("Critical error: unable to load config file.");
 		}
@@ -99,7 +101,7 @@ class Config implements ISingleton
 		$formatter = new Zend_Log_Formatter_Simple($format);
 		
 		if ( isset($cfg->logfile) )
-			$writer = new Zend_Log_Writer_Stream($cfg->logfile);
+			$writer = new Zend_Log_Writer_Stream(__DIR__ . "/../" . $cfg->logfile);
 		else // Default
 			$writer = new Zend_Log_Writer_Stream(self::DEFAULT_LOG_FILE);
 		
