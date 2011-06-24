@@ -1,7 +1,6 @@
 
 		<section>
 			<header>
-				<h1>Error</h1>
-				Widget not found!
+				<h1>Error 404</h1>
 			</header>
 		</section>

@@ -1,13 +1,31 @@
 <?php
 
-include_once(__DIR__."/../config/Config.php");
+include_once(__DIR__."/../util/interfaces/iWidget.php");
+
+include_once("WExerciseList.php");
+include_once("WNav.php");
+include_once("WHead.php");
+include_once("WFooter.php");
+
+include_once("W404.php");
 
 /**
  * Widget loader
  */
 final class WidgetLoader
 {
+	/* ERROR WIDGET */
 	const ERROR_WIDGET = "404";
+	
+	/* AVAILABLE MODULES */
+	private static $_widget = array
+			(
+				"404" => "W404",
+				"ExerciseList" => "WExerciseList",
+				"Nav" => "WNav",
+				"Head" => "WHead",
+				"Footer" => "WFooter"
+			);
 	
 	/* Constructor */
 	private function __construct()
@@ -18,29 +36,17 @@ final class WidgetLoader
 	/* loads a widget */
 	public static function loadWidget($widget)
 	{
-		if ( !self::widgetAvailable($widget) )
-			$widget = self::ERROR_WIDGET;
-		
 		$cfg = Config::getInstance();
+		$widgetName = $widget;
 		
-		$theme = $cfg->theme;
-		
-		if ( !file_exists("themes/".$theme."/templates/".$widget.".tpl") )
-		{
-			$cfg->logger->error("Cant load Widget ($widget) template");
-			return false;
-		}
-		
-		$cfg->smarty->display($widget.".tpl");
+		if ( in_array("IWidget", class_implements(self::$_widget[$widget])) )
+			$r = call_user_func(self::$_widget[$widget] . "::load", func_get_args());
+		else
+			$r = call_user_func(self::$_widget[self::ERROR_WIDGET] . "::load", func_get_args());
 		
 		$cfg->logger->info("Widget ($widget) successfully loaded");
-	}
-	
-	/* checks if a widget is available */
-	private static function widgetAvailable($widget)
-	{
-		return ( $widget == "home" || $widget == "head" || $widget == "nav"
-		 			|| $widget == "footer" || $widget == "module404" );
+		
+		return $r;
 	}
 }
 
