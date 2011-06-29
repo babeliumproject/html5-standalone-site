@@ -1,14 +1,18 @@
 
-		<section style='width:100%; background-color: green;'>
+		<section class="exerciseList">
 			<header>
-				<h1>This is home!</h1>
+				<h1>Practice exercise list</h1>
 			</header>
 			
 {foreach from=$exercises item=exercise}
-  			<article style='width:50%;height:100px;float:left;background-color:#CECECE;'>
-				<h1 style='background-color:red;'>
+  			<article>
+				<h1>
 					{$exercise.title}
 				</h1>
+				
+				<aside>
+					<div style="width:150px; height:80px; background-color: black"></div>
+				</aside>
 			</article>
 {/foreach}
 		</section>

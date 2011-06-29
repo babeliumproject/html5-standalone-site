@@ -167,17 +167,21 @@ aside#motd
 /*
  * MAIN SECTION
  */
- 
- section#maincontent > header
+ section#maincontent
  {
- 	background: url(../images/pattern2.png);
+ 	background-color: #eef2f5;
  }
-	 section#maincontent > header > h1 
+ 
+	 section#maincontent > header
 	 {
-	 	font-weight: bold;
-		font-size: 24px;
-		color: #972c0a;
+	 	background: url(../images/pattern2.png);
 	 }
+		 section#maincontent > header > h1 
+		 {
+		 	font-weight: bold;
+			font-size: 24px;
+			color: #972c0a;
+		 }
 	 
 	section#maincontent > aside#loader
 	{
@@ -202,3 +206,17 @@ aside#motd
 		-webkit-box-shadow: 1px 1px 2px #CCC;
 		box-shadow: 1px 1px 2px #CCC;
 	}
+
+	section#maincontent > section > header > h1
+	{
+		color: #268caa;
+		font-weight: bold;
+		font-size: 20px;
+		text-decoration: underline;
+	}
+	
+		section#maincontent > section.exerciseList > article > h1
+		{
+			font-weight: normal;
+			border-bottom: 2px solid #cacdcf;
+		}

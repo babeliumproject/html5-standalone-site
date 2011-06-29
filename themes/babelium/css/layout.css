@@ -130,5 +130,31 @@ section#maincontent > header
 			width: 100%;
 			height: 100%;
 		}
+	
+	section#maincontent > section > header
+	{
+		height: 70px;
+		padding-left: 20px;
+		padding-top: 20px;
+	}
+	
+	section#maincontent > section.exerciseList > article
+	{
+		width: 50%;
+		height: 100px;
+		float: left;
+	}
+	
+		section#maincontent > section.exerciseList > article > h1
+		{
+			width: 350px;
+			margin-left: 170px;
+		}
+	
+		section#maincontent > section.exerciseList > article > aside
+		{
+			width: 170px;
+			padding: 10px;
+		}
 
 /* END OF MAIN CONTENT */
