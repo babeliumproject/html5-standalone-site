@@ -11,15 +11,15 @@ $cfg = Config::getInstance();
 $log = $cfg->logger;
 $log->info("Initiating index.php");
 
+$module = (isset($_GET["module"]))? $_GET["module"] : "home";
+$section = (isset($_GET["section"]))? $_GET["section"] : "";
+	
 // Load header
 echo WidgetLoader::loadWidget("Head");
-echo WidgetLoader::loadWidget("Nav", $_GET["module"], $_GET["section"]);
+echo WidgetLoader::loadWidget("Nav", $module, $section);
 
-// Loads home module
-if ( isset($_GET["module"]) )
-	echo ModuleLoader::loadModule($_GET["module"]);
-else
-	echo ModuleLoader::loadModule("home");
+// Load module
+echo ModuleLoader::loadModule("home");
 
 // Load footer
 echo WidgetLoader::loadWidget("Footer");

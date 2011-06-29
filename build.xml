@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<project name="Babelium Project" default="LH_deploylocal">
+
+	<property file="build.properties" />
+
+	<target name="LH_deploylocal" description="Copy deployed app to local webserver">
+		<copy preservelastmodified="yes" todir="${local.server.path}/html5">
+			<fileset dir="${BASE_DIR}" includes="**/*" />
+		</copy>
+	</target>
+
+</project>

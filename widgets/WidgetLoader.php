@@ -1,6 +1,7 @@
 <?php
 
-include_once(__DIR__."/../util/interfaces/iWidget.php");
+include_once(dirname(__FILE__)."/../util/interfaces/iWidget.php");
+include_once(dirname(__FILE__)."/../config/Config.php");
 
 include_once("WExerciseList.php");
 include_once("WNav.php");

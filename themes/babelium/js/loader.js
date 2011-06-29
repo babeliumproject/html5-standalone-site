@@ -1,6 +1,5 @@
 var loading = false;
 var SERVER_URL = "http://localhost/";
-//var GATEWAY = "modules/loader.php";
 var GATEWAY = "modules/bridge.php";
 
 /*

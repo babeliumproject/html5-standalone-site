@@ -3,3 +3,5 @@ syntax: regexp
 ^rest/services/utils/Config\.php$
 syntax: regexp
 ^api/services/utils/Config\.php$
+syntax: regexp
+^build\.properties$

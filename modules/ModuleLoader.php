@@ -1,7 +1,9 @@
 <?php
 
-include_once(__DIR__."/../util/interfaces/iModule.php");
+include_once(dirname(__FILE__)."/../util/interfaces/iModule.php");
+include_once(dirname(__FILE__)."/../config/Config.php");
 
+// Available modules
 include_once("M404.php");
 include_once("MHome.php");
 
@@ -30,12 +32,12 @@ final class ModuleLoader
 	public static function loadModule($module)
 	{
 		$cfg = Config::getInstance();
-		$moduleName = $module;
+		$args = func_get_args();
 		
 		if ( in_array("IModule", class_implements(self::$_module[$module])) )
-			$r = call_user_func(self::$_module[$module] . "::load", $moduleName);
+			$r = call_user_func(self::$_module[$module] . "::load", $args);
 		else
-			$r = call_user_func(self::$_module[self::ERROR_MODULE] . "::load", $moduleName);
+			$r = call_user_func(self::$_module[self::ERROR_MODULE] . "::load", $args);
 	
 		return $r;
 	}

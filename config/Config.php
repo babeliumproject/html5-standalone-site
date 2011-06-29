@@ -1,13 +1,13 @@
 <?php
 
-include_once(__DIR__."/../util/interfaces/iSingleton.php");
+include_once(dirname(__FILE__)."/../util/interfaces/iSingleton.php");
+include_once(dirname(__FILE__)."/../widgets/WidgetLoader.php");
+include_once(dirname(__FILE__)."/../modules/ModuleLoader.php");
+
 include_once("Zend/Log.php");
 include_once("Zend/Log/Writer/Stream.php");
 include_once("Zend/Log/Formatter/Simple.php");
 include_once("Smarty/Smarty.class.php");
-include_once(__DIR__."/../widgets/WidgetLoader.php");
-include_once(__DIR__."/../modules/ModuleLoader.php");
-
 
 /**
  * Setups babelium's configuration
@@ -80,7 +80,7 @@ class Config implements ISingleton
 		 * Load config file
 		 */
 		try{
-			$cfg = simplexml_load_file(__DIR__."/".self::CONFIG_FILE);
+			$cfg = simplexml_load_file(dirname(__FILE__)."/".self::CONFIG_FILE);
 		} catch (Exception $e){
 			die("Critical error: unable to load config file.");
 		}

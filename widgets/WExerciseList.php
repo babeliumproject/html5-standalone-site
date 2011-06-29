@@ -1,6 +1,9 @@
 <?php
 
-include_once(__DIR__."/../util/interfaces/iWidget.php");
+include_once(dirname(__FILE__)."/../util/interfaces/iWidget.php");
+include_once(dirname(__FILE__)."/../config/Config.php");
+include_once("Zend/Http/Client.php");
+include_once("Zend/Json.php");
 
 class WExerciseList implements IWidget
 {	
@@ -11,7 +14,7 @@ class WExerciseList implements IWidget
 		$widget = $args[0];
 		$theme = $cfg->theme;
 
-		if ( !file_exists(__DIR__."/../themes/".$theme."/templates/".$widget.".tpl") )
+		if ( !file_exists(dirname(__FILE__)."/../themes/".$theme."/templates/".$widget.".tpl") )
 		{
 			$cfg->logger->error("Cant load Widget ($widget) template");
 			return false;
