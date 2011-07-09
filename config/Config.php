@@ -91,7 +91,7 @@ class Config implements ISingleton
 		/*
 		 * Logger setup
 		 */
-		$this->logger = new Zend_Log();
+		/*$this->logger = new Zend_Log();
 
 		if ( isset($cfg->logformat) )
 			$format = strval($cfg->logformat). PHP_EOL;
@@ -111,7 +111,7 @@ class Config implements ISingleton
 		if ( isset($cfg->loglevel) )
 			$writer->addFilter(intval($cfg->loglevel));
 		else
-			$writer->addFilter(self::DEFAULT_LOG_LEVEL);
+			$writer->addFilter(self::DEFAULT_LOG_LEVEL);*/
 			
 		/*
 		 * Desc variables
@@ -137,9 +137,9 @@ class Config implements ISingleton
 		 */
 		$this->smarty = new Smarty();
 
-		$this->smarty->setTemplateDir("themes/".$this->theme."/templates");
-		$this->smarty->setCompileDir("themes/".$this->theme."/templates_c");
-		$this->smarty->setCacheDir("themes/".$this->theme."/cache");
-		$this->smarty->setConfigDir("themes/".$this->theme."/configs");
+		$this->smarty->setTemplateDir(dirname(__FILE__)."/../themes/".$this->theme."/templates");
+		$this->smarty->setCompileDir(dirname(__FILE__)."/../themes/".$this->theme."/templates_c");
+		$this->smarty->setCacheDir(dirname(__FILE__)."/../themes/".$this->theme."/cache");
+		$this->smarty->setConfigDir(dirname(__FILE__)."/../themes/".$this->theme."/configs");
 	}
 }

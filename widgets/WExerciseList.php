@@ -16,7 +16,7 @@ class WExerciseList implements IWidget
 
 		if ( !file_exists(dirname(__FILE__)."/../themes/".$theme."/templates/".$widget.".tpl") )
 		{
-			$cfg->logger->error("Cant load Widget ($widget) template");
+			//$cfg->logger->error("Cant load Widget ($widget) template");
 			return false;
 		}
 		

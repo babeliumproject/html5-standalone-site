@@ -45,7 +45,7 @@ final class WidgetLoader
 		else
 			$r = call_user_func(self::$_widget[self::ERROR_WIDGET] . "::load", func_get_args());
 		
-		$cfg->logger->info("Widget ($widget) successfully loaded");
+		//$cfg->logger->info("Widget ($widget) successfully loaded");
 		
 		return $r;
 	}
