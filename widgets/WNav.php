@@ -1,7 +1,7 @@
 <?php
 
-include_once($_SERVER["DOCUMENT_ROOT"] . "/util/interfaces/iWidget.php");
-include_once($_SERVER["DOCUMENT_ROOT"] . "/config/Config.php");
+include_once(dirname(__FILE__) . "/../util/interfaces/iWidget.php");
+include_once(dirname(__FILE__) . "/../config/Config.php");
 
 class WNav implements IWidget
 {	

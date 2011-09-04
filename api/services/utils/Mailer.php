@@ -22,7 +22,7 @@
  */
 
 require_once 'Datasource.php';
-require_once $_SERVER["DOCUMENT_ROOT"] . "/config/Config.php";
+require_once dirname(__FILE__) . "/../../../config/Config.php";
 require_once 'Zend/Mail.php';
 require_once 'Zend/Mail/Transport/Smtp.php';
 require_once 'EmailAddressValidator.php';

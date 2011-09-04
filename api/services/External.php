@@ -22,7 +22,7 @@
  */
 
 require_once 'Zend/Loader.php';
-require_once $_SERVER["DOCUMENT_ROOT"] . "/config/Config.php";
+require_once dirname(__FILE__) . "/../../config/Config.php";
 require_once 'utils/Datasource.php';
 require_once 'utils/SessionHandler.php';
 require_once 'utils/VideoProcessor.php';
