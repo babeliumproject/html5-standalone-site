@@ -39,11 +39,12 @@ final class WidgetLoader
 	{
 		$cfg = Config::getInstance();
 		$widgetName = $widget;
+		$args = func_get_args();
 		
 		if ( in_array("IWidget", class_implements(self::$_widget[$widget])) )
-			$r = call_user_func(self::$_widget[$widget] . "::load", func_get_args());
+			$r = call_user_func(self::$_widget[$widget] . "::load", $args);
 		else
-			$r = call_user_func(self::$_widget[self::ERROR_WIDGET] . "::load", func_get_args());
+			$r = call_user_func(self::$_widget[self::ERROR_WIDGET] . "::load", $args);
 		
 		//$cfg->logger->info("Widget ($widget) successfully loaded");
 		
