@@ -1,9 +1,9 @@
 <?php
 
 // Project includes
-include_once($_SERVER["DOCUMENT_ROOT"] . "/util/interfaces/iSingleton.php");
-include_once($_SERVER["DOCUMENT_ROOT"] . "/widgets/WidgetLoader.php");
-include_once($_SERVER["DOCUMENT_ROOT"] . "/modules/ModuleLoader.php");
+include_once(dirname(__FILE__) . "/../util/interfaces/iSingleton.php");
+include_once(dirname(__FILE__) . "/../widgets/WidgetLoader.php");
+include_once(dirname(__FILE__) . "/../modules/ModuleLoader.php");
 
 /* External libraries:
  * ----
@@ -240,9 +240,9 @@ class Config implements ISingleton
 		 */
 		$this->smarty = new Smarty();
 
-		$this->smarty->setTemplateDir($_SERVER["DOCUMENT_ROOT"] . "/themes/".$this->theme."/templates");
-		$this->smarty->setCompileDir($_SERVER["DOCUMENT_ROOT"] . "/themes/".$this->theme."/templates_c");
-		$this->smarty->setCacheDir($_SERVER["DOCUMENT_ROOT"] . "/themes/".$this->theme."/cache");
-		$this->smarty->setConfigDir($_SERVER["DOCUMENT_ROOT"] . "/themes/".$this->theme."/configs");
+		$this->smarty->setTemplateDir(dirname(__FILE__) . "/../themes/".$this->theme."/templates");
+		$this->smarty->setCompileDir(dirname(__FILE__) . "/../themes/".$this->theme."/templates_c");
+		$this->smarty->setCacheDir(dirname(__FILE__) . "/../themes/".$this->theme."/cache");
+		$this->smarty->setConfigDir(dirname(__FILE__) . "/../themes/".$this->theme."/configs");
 	}
 }
