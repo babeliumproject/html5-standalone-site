@@ -21,7 +21,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-require_once 'utils/Config.php';
+require_once $_SERVER["DOCUMENT_ROOT"] . "/config/Config.php";
 require_once 'utils/Datasource.php';
 
 /**
@@ -35,7 +35,7 @@ class TagCloud {
 	private $numTags;
 	 
 	public function TagCloud() {
-			$settings = new Config ( );
+			$settings = Config::getInstance();
 			$this->numTags = $settings->numTags;
 			$this->conn = new Datasource ( $settings->host, $settings->db_name, $settings->db_username, $settings->db_password );
 	}

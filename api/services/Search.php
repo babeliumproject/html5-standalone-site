@@ -21,7 +21,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-require_once 'utils/Config.php';
+require_once $_SERVER["DOCUMENT_ROOT"] . "/config/Config.php";
 require_once 'utils/Datasource.php';
 require_once 'utils/SessionHandler.php';
 
@@ -41,7 +41,7 @@ class Search {
 	public function Search() {
 		try {
 			$verifySession = new SessionHandler();
-			$settings = new Config ( );
+			$settings = Config::getInstance();
 			$this->indexPath = $settings->indexPath;
 			$this->conn = new Datasource ($settings->host, $settings->db_name, $settings->db_username, $settings->db_password );
 		} catch (Exception $e) {

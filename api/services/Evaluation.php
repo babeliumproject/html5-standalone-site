@@ -21,7 +21,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-require_once 'utils/Config.php';
+require_once $_SERVER["DOCUMENT_ROOT"] . "/config/Config.php";
 require_once 'utils/Datasource.php';
 require_once 'utils/Mailer.php';
 require_once 'utils/SessionHandler.php';
@@ -55,7 +55,7 @@ class Evaluation {
 	public function Evaluation(){
 		try {
 			$verifySession = new SessionHandler(true);
-			$settings = new Config ( );
+			$settings = Config::getInstance();
 			$this->imagePath = $settings->imagePath;
 			$this->red5Path = $settings->red5Path;
 			$this->conn = new Datasource ( $settings->host, $settings->db_name, $settings->db_username, $settings->db_password );

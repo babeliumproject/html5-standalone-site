@@ -21,7 +21,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-require_once 'utils/Config.php';
+require_once $_SERVER["DOCUMENT_ROOT"] . "/config/Config.php";
 require_once 'utils/Datasource.php';
 require_once 'utils/SessionHandler.php';
 require_once 'utils/VideoProcessor.php';
@@ -48,7 +48,7 @@ class Response {
 	public function Response() {
 		try {
 			$verifySession = new SessionHandler(true);
-			$settings = new Config ( );
+			$settings = Config::getInstance();
 			$this->filePath = $settings->filePath;
 			$this->imagePath = $settings->imagePath;
 			$this->red5Path = $settings->red5Path;

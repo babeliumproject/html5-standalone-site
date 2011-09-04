@@ -25,7 +25,7 @@
 BASE_DIR= #Project root
 
 #Local host data
-local.server.path= #Webroot path
+local.project.path= #Webroot path
 
 
 

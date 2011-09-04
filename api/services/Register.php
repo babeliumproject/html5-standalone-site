@@ -21,7 +21,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-require_once 'utils/Config.php';
+require_once $_SERVER["DOCUMENT_ROOT"] . "/config/Config.php";
 require_once 'utils/Datasource.php';
 require_once 'utils/EmailAddressValidator.php';
 require_once 'utils/Mailer.php';
@@ -41,7 +41,7 @@ class Register{
 	public function Register(){
 		try{
 			$verifySession = new SessionHandler();
-			$this->settings = new Config();
+			$this->settings = Config::getInstance();
 			$this->conn = new Datasource($this->settings->host, $this->settings->db_name, $this->settings->db_username, $this->settings->db_password);
 		} catch (Exception $e){
 			throw new Exception($e->getMessage());

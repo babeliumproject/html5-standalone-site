@@ -22,7 +22,7 @@
  */
 
 require_once 'Zend/Loader.php';
-require_once 'utils/Config.php';
+require_once $_SERVER["DOCUMENT_ROOT"] . "/config/Config.php";
 require_once 'utils/Datasource.php';
 require_once 'utils/SessionHandler.php';
 require_once 'utils/VideoProcessor.php';
@@ -64,7 +64,7 @@ class External {
 		try {
 			$verifySession = new SessionHandler();
 		
-			$settings = new Config();
+			$settings = Config::getInstance();
 		
 			$this->filePath = $settings->filePath;
 			$this->imagePath = $settings->imagePath;

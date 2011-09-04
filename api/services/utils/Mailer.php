@@ -22,7 +22,7 @@
  */
 
 require_once 'Datasource.php';
-require_once 'Config.php';
+require_once $_SERVER["DOCUMENT_ROOT"] . "/config/Config.php";
 require_once 'Zend/Mail.php';
 require_once 'Zend/Mail/Transport/Smtp.php';
 require_once 'EmailAddressValidator.php';
@@ -54,7 +54,7 @@ class Mailer
 
 	public function Mailer($username)
 	{
-		$this->_settings = new Config();
+		$this->_settings = Config::getInstance();
 		$this->_conn = new DataSource($this->_settings->host, $this->_settings->db_name, $this->_settings->db_username, $this->_settings->db_password);
 
 		$this->_tplDir = $this->_settings->templatePath . "/";

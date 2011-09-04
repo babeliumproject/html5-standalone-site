@@ -22,7 +22,7 @@
  */
 
 require_once 'utils/Datasource.php';
-require_once 'utils/Config.php';
+require_once $_SERVER["DOCUMENT_ROOT"] . "/config/Config.php";
 require_once 'utils/SessionHandler.php';
 require_once 'utils/EmailAddressValidator.php';
 require_once 'utils/Mailer.php';
@@ -39,7 +39,7 @@ class User {
 	private $conn;
 
 	public function User(){
-		$settings = new Config();
+		$settings = Config::getInstance();
 		try {
 			$verifySession = new SessionHandler();
 			$this->conn = new Datasource($settings->host, $settings->db_name, $settings->db_username, $settings->db_password);

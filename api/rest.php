@@ -21,7 +21,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+/** DEBUG MODE **/
+error_reporting(E_ALL);
+ini_set('display_errors', '1'); // DEBUG MODE: turn to 1
+
 require_once 'ZendRestJson.php';
+require_once '../config/Config.php';
 
 //Instantiate custom Zend Rest Server
 $server = new ZendRestJson();
@@ -33,7 +38,7 @@ else
 	$server->setResponseMode('json');
 	
 //Set the path to reach the services
-define ('SERVICE_PATH', '/services/');
+define ('SERVICE_PATH', Config::getInstance()->service_path);
 
 require_once dirname(__FILE__) . SERVICE_PATH . 'Auth.php';
 require_once dirname(__FILE__) . SERVICE_PATH . 'Credit.php';

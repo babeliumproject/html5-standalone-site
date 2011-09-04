@@ -16,6 +16,9 @@
 	<script type="text/javascript" src="themes/babelium/js/init.js"></script>
 	
 	<!-- Loader -->
+	<script type="text/javascript">
+		var MODULE_GATEWAY = "{$MODULE_GATEWAY}";
+	</script>
 	<script type="text/javascript" src="themes/babelium/js/loader.js"></script>
 </head>
 <body class="VBox">

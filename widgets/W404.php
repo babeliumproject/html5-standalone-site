@@ -1,6 +1,6 @@
 <?php
 
-include_once(dirname(__FILE__)."/../util/interfaces/iWidget.php");
+include_once($_SERVER["DOCUMENT_ROOT"] . "/util/interfaces/iWidget.php");
 
 class W404 implements IWidget
 {	

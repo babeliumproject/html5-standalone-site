@@ -21,10 +21,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-require_once 'Config.php';
+require_once $_SERVER["DOCUMENT_ROOT"] . "/config/Config.php";
 require_once 'Datasource.php';
 
-$settings = new Config();
+$settings = Config::getInstance();
 $json_input = file_get_contents('php://input');
 
 $commit_info = json_decode($json_input, true);

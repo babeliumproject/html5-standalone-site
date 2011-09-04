@@ -1,7 +1,7 @@
 <?php
 
-include_once(dirname(__FILE__)."/../util/interfaces/iModule.php");
-include_once(dirname(__FILE__)."/../config/Config.php");
+include_once($_SERVER["DOCUMENT_ROOT"] . "/util/interfaces/iModule.php");
+include_once($_SERVER["DOCUMENT_ROOT"] . "/config/Config.php");
 
 class M404 implements IModule
 {	

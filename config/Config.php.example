@@ -1,0 +1,248 @@
+<?php
+
+// Project includes
+include_once($_SERVER["DOCUMENT_ROOT"] . "/util/interfaces/iSingleton.php");
+include_once($_SERVER["DOCUMENT_ROOT"] . "/widgets/WidgetLoader.php");
+include_once($_SERVER["DOCUMENT_ROOT"] . "/modules/ModuleLoader.php");
+
+/* External libraries:
+ * ----
+ * Zend Framework: http://framework.zend.com/
+ * Smarty Template Engine: http://www.smarty.net/
+ */
+include_once("Zend/Log.php");
+include_once("Zend/Log/Writer/Stream.php");
+include_once("Zend/Log/Formatter/Simple.php");
+include_once("Smarty/Smarty.class.php");
+
+/**
+ * Setups babelium's configuration
+ */
+class Config implements ISingleton
+{
+	/* Unique instance */
+	private static $_instance;
+
+	/* Initial variable */
+	const CONFIG_FILE = "config.xml";
+
+	/*
+	 * General Config
+	 */
+	// Module definition file
+	public $moduleDescFile;			// XML config file
+	// Widget definition file
+	public $widgetDescFile;			// XML config file
+	// Theme
+	public $theme;
+	// Logger
+	public $logger;						// Logger
+	// Template engine
+	public $smarty;
+	// Gateways
+	public $server_url;
+	public $api_bridge = "/api/rest.php";
+	public $module_bridge = "/modules/bridge.php";
+	
+	
+	/**
+	 * Service config
+	 */
+	public $host = "";
+	public $db_username = "";
+	public $db_password = "";
+	public $db_name = "babeliumproject";
+		
+	//Server path to store uploaded files
+	public $filePath = "/resources/uploads";
+	public $imagePath = "/resources/images/thumbs";
+	public $red5Path = '/opt/red5/webapps/oflaDemo/streams';
+		
+	//Youtube authentication data
+	public $yt_user = '';
+	public $yt_password = '';
+	public $yt_developerKey = '';
+		
+	//SpinVox settings
+	public $spinvox_user = '';
+	public $spinvox_password = '';
+	public $spinvox_accountId = '';
+	public $spinvox_appName = '';
+	public $spinvox_useragent = 'babelium';
+		
+	//Smtp server settings
+	public $smtp_server_host = 'smtp.googlemail.com';
+	public $smtp_server_username = ''; //example -> from example@gmail.com
+	public $smtp_server_password = '';
+	public $smtp_server_ssl = 'ssl';
+	public $smtp_server_port = 465;
+	public $smtp_mail_setFromMail = ''; //example@gmail.com
+	public $smtp_mail_setFromName = 'Babelium Project Admin';
+		
+	//Video upload constants
+	public $frameHeight = 240;
+	public $frameWidth16_9 = 426;
+	public $frameWidth4_3 = 320;
+	public $maxDuration = 120; //seconds
+	public $maxSize = 180; //MByte
+	
+	//Path to store the notification templates
+	public $templatePath = "/resources/templates";
+
+	//Directory for temporary files
+	public $temp_folder = '/tmp';
+		
+	//Server path to store the search index. Must be a folder with write permissions set for www-data
+	public $indexPath = "/resources/searchIndexes";
+
+	//Number of tags for the cloud of tags
+	public $numTags = 25;
+		
+	//Secret key used for GoogleCode's webhooks' authentication
+	public $project_secret_key = '';
+		
+	//
+	public $logPath = '';
+
+		
+	/*
+	 * PHP CLI gets no value from $_SERVER ['DOCUMENT_ROOT'] so we must use getcwd() and 
+	 * cut off the subfolders or use a variable and remember to change it.
+	 */ 
+	public $webRootPath = "/var/www/babelia";
+	
+	
+	/*
+	 * CONSTS
+	 */
+	const DEFAULT_LOG_FILE 			= "php://output";
+	const DEFAULT_LOG_FORMAT 		= "[%priorityName% : %timestamp%]: %message%";
+	
+	/* ==== @Zend/Log.php ===
+	 * EMERG   = 0;  // Emergency: system is unusable
+     * ALERT   = 1;  // Alert: action must be taken immediately
+     * CRIT    = 2;  // Critical: critical conditions
+     * ERR     = 3;  // Error: error conditions
+     * WARN    = 4;  // Warning: warning conditions
+     * NOTICE  = 5;  // Notice: normal but significant condition
+     * INFO    = 6;  // Informational: informational messages
+     * DEBUG   = 7;  // Debug: debug messages
+     */
+	const DEFAULT_LOG_LEVEL			= 2;
+	
+	const DEFAULT_MODULE_DESC_FILE 	= "modules/modules.xml";
+	const DEFAULT_WIDGET_DESC_FILE 	= "widgets/widgets.xml";
+	const DEFAULT_THEME				= "babelium";
+
+	/* Constructor */
+	private function __construct()
+	{
+		$this->parseConfigFile();
+	}
+
+	/* Returns an unique instance */
+	public static function getInstance()
+	{
+		if ( !(self::$_instance instanceof self) )
+			self::$_instance = new self;
+
+		return self::$_instance;
+	}
+
+	/* Parses configuration xml file */
+	public function parseConfigFile()
+	{
+		/*
+		 * Load config file
+		 */
+		try
+		{
+			$cfg = simplexml_load_file(dirname(__FILE__)."/".self::CONFIG_FILE);
+		} catch (Exception $e){
+			die("Critical error: unable to load config file.");
+		}
+		
+		if ( !isset($cfg) )
+			die("Critical error: invalid config file.");
+		
+		/*
+		 * Logger setup
+		 */
+		$this->logger = new Zend_Log();
+
+		if ( isset($cfg->logformat) )
+			$format = strval($cfg->logformat). PHP_EOL;
+		else
+			$format = self::DEFAULT_LOG_FORMAT . PHP_EOL;
+
+		$formatter = new Zend_Log_Formatter_Simple($format);
+		
+		if ( isset($cfg->logfile) )
+			$writer = new Zend_Log_Writer_Stream(dirname(__FILE__) . "/../" . $cfg->logfile);
+		else // Default
+			$writer = new Zend_Log_Writer_Stream(self::DEFAULT_LOG_FILE);
+		
+		$writer->setFormatter($formatter);
+		$this->logger->addWriter($writer);
+		
+		if ( isset($cfg->loglevel) )
+			$writer->addFilter(intval($cfg->loglevel));
+		else
+			$writer->addFilter(self::DEFAULT_LOG_LEVEL);
+			
+		/*
+		 * Desc variables
+		 */
+		/*if ( isset($cfg->widgetDescFile) )
+			$this->widgetDescFile = $cfg->widgetDescFile;
+		else
+			$this->widgetDescFile = self::DEFAULT_WIDGET_DESC_FILE;
+			
+		if ( isset($cfg->moduleDescFile) )
+			$this->moduleDescFile = $cfg->moduleDescFile;
+		else
+			$this->moduleDescFile = self::DEFAULT_MODULE_DESC_FILE;*/
+			
+		if ( isset($cfg->defaultTheme) )
+			$this->theme = $cfg->defaultTheme;
+		else
+			$this->theme = self::DEFAULT_THEME;
+
+		/**
+		 * Setup Gateways
+		 */
+		if ( !isset($this->server_url) )
+			$this->server_url = "http://" . $_SERVER['SERVER_NAME'];
+
+		$this->api_bridge = $this->server_url . $this->api_bridge;
+		$this->module_bridge = $this->server_url . $this->module_bridge;
+
+		/**
+		 * Path config
+		 */
+		if (!empty($_SERVER ['DOCUMENT_ROOT']))
+		{
+			$this->filePath = $_SERVER ['DOCUMENT_ROOT'] . $this->filePath;
+			$this->imagePath = $_SERVER ['DOCUMENT_ROOT'] . $this->imagePath;
+			$this->templatePath = $_SERVER ['DOCUMENT_ROOT'] . $this->templatePath;
+			$this->indexPath = $_SERVER ['DOCUMENT_ROOT'] . $this->indexPath;
+		}
+		else
+		{
+			$this->filePath = $this->webRootPath . $this->filePath;
+			$this->imagePath = $this->webRootPath . $this->imagePath;
+			$this->templatePath = $this->webRootPath . $this->templatePath;
+			$this->indexPath = $this->webRootPath . $this->indexPath;
+		}
+		
+		/*
+		 * Template engine
+		 */
+		$this->smarty = new Smarty();
+
+		$this->smarty->setTemplateDir($_SERVER["DOCUMENT_ROOT"] . "/themes/".$this->theme."/templates");
+		$this->smarty->setCompileDir($_SERVER["DOCUMENT_ROOT"] . "/themes/".$this->theme."/templates_c");
+		$this->smarty->setCacheDir($_SERVER["DOCUMENT_ROOT"] . "/themes/".$this->theme."/cache");
+		$this->smarty->setConfigDir($_SERVER["DOCUMENT_ROOT"] . "/themes/".$this->theme."/configs");
+	}
+}

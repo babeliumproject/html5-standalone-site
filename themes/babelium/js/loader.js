@@ -1,7 +1,3 @@
-var loading = false;
-var SERVER_URL = "http://localhost/";
-var GATEWAY = "modules/bridge.php";
-
 /*
  * Parses location when catched navigation
  * back/foward events and loads the appropiate module
@@ -26,7 +22,7 @@ function go(location)
  */
 function load(location)
 {
-	var query_string = SERVER_URL +"/"+ GATEWAY + "?module=" + location;
+	var query_string = MODULE_GATEWAY + "?module=" + location;
 	
 	$("#maincontent > aside#loader > div#loadcontext > span").html("Loading <strong>"+location+"</strong>");
 	$("#maincontent > aside#loader").slideDown(500);

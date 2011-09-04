@@ -21,10 +21,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-if(!defined('SERVICE_PATH_VPROC'))
-	define('SERVICE_PATH_VPROC', __DIR__."/../");
-
-require_once SERVICE_PATH_VPROC . 'utils/Config.php';
+require_once $_SERVER["DOCUMENT_ROOT"] . "/config/Config.php";
 
 /**
  * Helper class to perform media transcoding tasks.
@@ -48,7 +45,7 @@ class VideoProcessor{
 	private $conn;
 
 	public function VideoProcessor(){
-		$settings = new Config();
+		$settings = Config::getInstance();
 
 		$this->uploadsPath = $settings->filePath;
 		$this->imagePath = $settings->imagePath;
