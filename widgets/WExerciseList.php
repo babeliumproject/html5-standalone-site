@@ -1,9 +1,9 @@
 <?php
 
-include_once(dirname(__FILE__) . "/../util/interfaces/iWidget.php");
-include_once(dirname(__FILE__) . "/../config/Config.php");
-include_once("Zend/Http/Client.php");
-include_once("Zend/Json.php");
+require_once(dirname(__FILE__) . "/../util/interfaces/iWidget.php");
+require_once(dirname(__FILE__) . "/../config/Config.php");
+require_once("Zend/Http/Client.php");
+require_once("Zend/Json.php");
 
 class WExerciseList implements IWidget
 {	

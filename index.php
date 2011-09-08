@@ -5,9 +5,13 @@ error_reporting(E_ALL);
 ini_set('display_errors', '0'); // DEBUG MODE: turn to 1
 
 /** BEGIN CODE **/
-include_once("config/Config.php");
+require_once("config/Config.php");
+require_once("modules/SessionManager.php");
 
+/** Init session and config **/
 $cfg = Config::getInstance();
+$session = SessionManager::getInstance();
+
 $cfg->logger->info("Initiating index.php");
 
 $module = (isset($_GET["module"]))? $_GET["module"] : "home";

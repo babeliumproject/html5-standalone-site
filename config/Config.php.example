@@ -1,19 +1,19 @@
 <?php
 
 // Project includes
-include_once(dirname(__FILE__) . "/../util/interfaces/iSingleton.php");
-include_once(dirname(__FILE__) . "/../widgets/WidgetLoader.php");
-include_once(dirname(__FILE__) . "/../modules/ModuleLoader.php");
+require_once(dirname(__FILE__) . "/../util/interfaces/iSingleton.php");
+require_once(dirname(__FILE__) . "/../widgets/WidgetLoader.php");
+require_once(dirname(__FILE__) . "/../modules/ModuleLoader.php");
 
 /* External libraries:
  * ----
  * Zend Framework: http://framework.zend.com/
  * Smarty Template Engine: http://www.smarty.net/
  */
-include_once("Zend/Log.php");
-include_once("Zend/Log/Writer/Stream.php");
-include_once("Zend/Log/Formatter/Simple.php");
-include_once("Smarty/Smarty.class.php");
+require_once("Zend/Log.php");
+require_once("Zend/Log/Writer/Stream.php");
+require_once("Zend/Log/Formatter/Simple.php");
+require_once("Smarty/Smarty.class.php");
 
 /**
  * Setups babelium's configuration
@@ -43,6 +43,7 @@ class Config implements ISingleton
 	public $server_url;
 	public $api_bridge = "/api/rest.php";
 	public $module_bridge = "/modules/bridge.php";
+	public $service_path = "/services/";
 	
 	
 	/**

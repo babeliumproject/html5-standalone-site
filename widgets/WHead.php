@@ -1,7 +1,7 @@
 <?php
 
-include_once(dirname(__FILE__) . "/../util/interfaces/iWidget.php");
-include_once(dirname(__FILE__) . "/../config/Config.php");
+require_once(dirname(__FILE__) . "/../util/interfaces/iWidget.php");
+require_once(dirname(__FILE__) . "/../config/Config.php");
 
 class WHead implements IWidget
 {	

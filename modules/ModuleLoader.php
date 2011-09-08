@@ -1,11 +1,11 @@
 <?php
 
-include_once(dirname(__FILE__) . "/../util/interfaces/iModule.php");
-include_once(dirname(__FILE__) . "/../config/Config.php");
+require_once(dirname(__FILE__) . "/../util/interfaces/iModule.php");
+require_once(dirname(__FILE__) . "/../config/Config.php");
 
 // Available modules
-include_once("M404.php");
-include_once("MHome.php");
+require_once("M404.php");
+require_once("MHome.php");
 
 /**
  * Module loader

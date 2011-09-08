@@ -1,14 +1,14 @@
 <?php
 
-include_once(dirname(__FILE__) . "/../util/interfaces/iWidget.php");
-include_once(dirname(__FILE__) . "/../config/Config.php");
+require_once(dirname(__FILE__) . "/../util/interfaces/iWidget.php");
+require_once(dirname(__FILE__) . "/../config/Config.php");
 
-include_once("WExerciseList.php");
-include_once("WNav.php");
-include_once("WHead.php");
-include_once("WFooter.php");
+require_once("WExerciseList.php");
+require_once("WNav.php");
+require_once("WHead.php");
+require_once("WFooter.php");
 
-include_once("W404.php");
+require_once("W404.php");
 
 /**
  * Widget loader
