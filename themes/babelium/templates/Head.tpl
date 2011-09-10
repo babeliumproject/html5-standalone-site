@@ -20,5 +20,11 @@
 		var MODULE_GATEWAY = "{$MODULE_GATEWAY}";
 	</script>
 	<script type="text/javascript" src="themes/babelium/js/loader.js"></script>
+	
+	<!-- MVC -->
+	<script type="text/javascript" src="themes/babelium/js/mvc/base.js"></script>
+	<script type="text/javascript" src="themes/babelium/js/mvc/cairngorm.js"></script>
+	<script type="text/javascript" src="themes/babelium/js/mvc/mvc.js"></script>
+	
 </head>
 <body class="VBox">

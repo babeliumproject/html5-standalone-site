@@ -36,12 +36,12 @@
 			<div class="spacer" style="min-width: 174px;"></div>
 			<!-- nav links -->
 			<ul class="HBox">
-				<li><a href="javascript:go('home');" class="home">Home</a></li>
-				<li><a href="javascript:go('practice');" class="pract">Practice</a></li>
-				<li><a href="javascript:go('evaluation');" class="eval">Evaluate</a></li>
-				<li><a href="javascript:go('subtitle');" class="subt">Subtitle</a></li>
-				<li><a href="javascript:go('config');" class="config">Configure</a></li>
-				<li><a href="javascript:go('about');" class="about">About Babelium</a></li>
+				<li><a href="javascript:new ViewChangeEvent(ViewChangeEvent.VIEW_HOME_MODULE).dispatch();" class="home">Home</a></li>
+				<li><a href="javascript:new ViewChangeEvent(ViewChangeEvent.VIEW_EXERCISE_MODULE).dispatch();" class="pract">Practice</a></li>
+				<li><a href="javascript:new ViewChangeEvent(ViewChangeEvent.VIEW_EVALUATION_MODULE).dispatch();" class="eval">Evaluate</a></li>
+				<li><a href="javascript:new ViewChangeEvent(ViewChangeEvent.VIEW_SUBTITLE_MODULE).dispatch();" class="subt">Subtitle</a></li>
+				<li><a href="javascript:new ViewChangeEvent(ViewChangeEvent.VIEW_CONFIG_MODULE).dispatch();" class="config">Configure</a></li>
+				<li><a href="javascript:new ViewChangeEvent(ViewChangeEvent.VIEW_ABOUT_MODULE).dispatch();" class="about">About Babelium</a></li>
 			</ul>
 			<!-- right space -->
 			<div class="spacer"></div>
