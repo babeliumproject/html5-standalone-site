@@ -1,7 +1,18 @@
 /**
+ * ==========================================================
+ * 
  * This is not an official port of Cairngorm MVC Framework
  * @author Babelium Project -> http://www.babeliumproject.com
- * @source http://sourceforge.net/adobe/cairngorm/code/839/tree/cairngorm/trunk/frameworks/cairngorm/com/adobe/cairngorm/
+ * 
+ * ==========================================================
+ * 
+ * @source Cairngorm (Flex) Open Source Code:
+ * http://sourceforge.net/adobe/cairngorm/code/839/tree/cairngorm/trunk/frameworks/cairngorm/com/adobe/cairngorm/
+ * @source Simple Javascript Inheritance (./base.js):
+ * http://ejohn.org/blog/simple-javascript-inheritance/#postcomment
+ * @source Singleton Pattern w and w/o private members:
+ * http://stackoverflow.com/questions/1479319/simplest-cleanest-way-to-implement-singleton-in-javascript
+ * 
  */
 
 /* ============================================================
@@ -18,7 +29,6 @@ Cairngorm.FrontController = Class.extend(
 	init : function ()
 	{
 		this.commands = {};
-		this.self = "Super";
 	},
 	
 	/**
@@ -63,33 +73,36 @@ Cairngorm.FrontController = Class.extend(
  * control/CairngormEventDispatcher.as
  * ==========================================================*/
 
-Cairngorm.EventDispatcher =
+Cairngorm.EventDispatcher = (function()
 {
-	// Listeners hash map
-	listeners : {},
-
-	/**
-	 * Add Event Listener
-	 * @param type = Event Type (String)
-	 * @param listener = function
-	 */
-	addEventListener : function ( type, listener )
-	{
-		if ( type != null && typeof listener.executeCommand == 'function' )
-			this.listeners[type] = listener;
-	},
+	// Private interface
+	var _listeners = {};
 	
-	/**
-	 * Dispatch event
-	 * @param ev = Cairngorm Event
-	 */
-	dispatchEvent : function ( ev )
-	{	
-		if ( this.listeners[ev.type] != null )
-			this.listeners[ev.type].executeCommand(ev);
-	}
-};
-
+	// Public interface
+	return {
+		
+		/**
+		 * Add Event Listener
+		 * @param type = Event Type (String)
+		 * @param listener = function
+		 */
+		addEventListener : function ( type, listener )
+		{
+			if ( type != null && typeof listener.executeCommand == 'function' )
+				_listeners[type] = listener;
+		},
+		
+		/**
+		 * Dispatch event
+		 * @param ev = Cairngorm Event
+		 */
+		dispatchEvent : function ( ev )
+		{	
+			if ( _listeners[ev.type] != null )
+				_listeners[ev.type].executeCommand(ev);
+		}
+	};
+})();
 
 /* ============================================================
  * control/CairngormEvent.as
@@ -139,17 +152,119 @@ Cairngorm.Event = Class.extend(
  * ==========================================================*/
 
 Cairngorm.Command = Class.extend(
+{	
+	/**
+	 * Execute an action
+	 */
+	execute : function () {}
+});
+
+
+/* ============================================================
+ * business/HTTPServices.as
+ * ==========================================================*/
+
+Cairngorm.HTTPServices = Class.extend(
 {
 	/**
 	 * Constructor
 	 */
 	init : function ()
 	{
-		this.commands = {};
+		this.services = {};
+	},
+		
+	/**
+	 * Finds a service by name
+	 * @param name : service id
+	 * @return RemoteObject
+	 */
+	getService : function ( name )
+	{
+		return this.services[name];
 	},
 	
 	/**
-	 * Execute an action
+	 * Register a service identified by its id
+	 * @param name : service id
+	 * @param service : httpservice
 	 */
-	execute : function () {}
+	registerService : function ( name, service )
+	{
+		this.services[name] = service;
+	}
+
 });
+
+
+/* ============================================================
+ * RemoteObject.as
+ * ==========================================================*/
+
+Cairngorm.HTTPService = Class.extend(
+{
+	/**
+	 * Constructor
+	 */
+	init : function ( gateway, target )
+	{
+		this.gateway = gateway;
+		this.target = target;
+	},
+
+	call : function ( params, responder ) 
+	{
+		if ( params == null )
+			params = "";
+
+		var src = this.gateway + this.target + "&" + params;
+		
+		$.ajax(
+		{
+			// Target url
+			url : src,
+			// The success call back.
+			success : responder.onResult,
+			// The error handler.
+			error : responder.onFault
+		});
+	}
+
+});
+
+
+/* ============================================================
+ * business/ServiceLocator.as
+ * ==========================================================*/
+
+Cairngorm.ServiceLocator = (function()
+{
+	// Private interface
+	var _httpServices = new Cairngorm.HTTPServices();
+	// TODO var _remoteObjects = null;
+	// TODO var _webServices = null;
+	
+	// Public interface
+	return {
+		
+		/**
+		 * Finds remote object by name
+		 * @return RemoteObject
+		 */
+		getHttpService : function ( name )
+		{
+			return _httpServices.getService(name);
+		},
+	
+		/**
+		 * Register a service identified by its id
+		 * @param name : service id
+		 * @param service : httpservice
+		 */
+		registerHttpService : function ( name, service )
+		{
+			_httpServices.registerService(name, service);
+		}
+	};
+
+})();

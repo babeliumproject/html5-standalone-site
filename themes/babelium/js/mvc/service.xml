@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services>
+	<gateway id="API" target="/api/rest.php?class=" type="http" method="get" />
+	<gateway id="MODULES" target="/modules/bridge.php?module=" type="http" method="get" />
+	
+	<service id="userMOD" destination="MODULES" class="user"/>
+	<service id="homeMOD" destination="MODULES" class="home" />
+	<service id="pracMOD" destination="MODULES" class="practice" />
+	<service id="evalMOD" destination="MODULES" class="evaluate" />
+	<service id="subtMOD" destination="MODULES" class="subtitle" />
+	<service id="confMOD" destination="MODULES" class="configure" />
+	<service id="about" destination="MODULES" class="about" />
+	
+</services>

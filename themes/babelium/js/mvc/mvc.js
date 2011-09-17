@@ -1,8 +1,11 @@
 
+// Babelium Project
+var BP = {};
 
 /* ============================================================
  * Babelium Controller
  * ==========================================================*/
+
 var Controller = Cairngorm.FrontController.extend(
 {
 	init : function ()
@@ -51,7 +54,32 @@ var ViewHomeModuleCommand = Cairngorm.Command.extend(
 {
 	execute : function ()
 	{
-		load("home");
+		var location = "home", _this = this;
+		window.history.pushState({module : location }, location, "?module="+location);
+	
+		$("#maincontent > aside#loader > div#loadcontext > span").html("Loading <strong>"+location+"</strong>");
+		$("#maincontent > aside#loader").slideDown(500);
+
+		$("#maincontent > section").slideUp(500, function()
+		{
+			$("#maincontent > section").remove();
+			
+			BP.HomeDelegate.viewHomeModule(_this);
+		});
+	},
+	
+	onResult : function ( response )
+	{
+		var data = $.parseJSON(response);
+		$("#maincontent > header > h1").text(data.title);
+		var content = $(data.content).hide();
+		content.appendTo("#maincontent").slideDown(500);
+		$("#maincontent > aside#loader").slideUp(500);
+	},
+	
+	onFault : function ()
+	{
+		alert("Error loading home module");
 	}
 });
 
@@ -60,7 +88,7 @@ var ViewExerciseModuleCommand = Cairngorm.Command.extend(
 {
 	execute : function ()
 	{
-		load("exercises");
+		
 	}
 });
 
@@ -69,7 +97,7 @@ var ViewEvaluationModuleCommand = Cairngorm.Command.extend(
 {
 	execute : function ()
 	{
-		load("evaluation");
+		
 	}
 });
 
@@ -78,7 +106,7 @@ var ViewSubtitleModuleCommand = Cairngorm.Command.extend(
 {
 	execute : function ()
 	{
-		load("subtitle");
+		
 	}
 });
 
@@ -87,7 +115,7 @@ var ViewConfigModuleCommand = Cairngorm.Command.extend(
 {
 	execute : function ()
 	{
-		load("config");
+		
 	}
 });
 
@@ -96,7 +124,7 @@ var ViewAboutModuleCommand = Cairngorm.Command.extend(
 {
 	execute : function ()
 	{
-		load("about");
+		
 	}
 });
 
@@ -104,4 +132,57 @@ var ViewAboutModuleCommand = Cairngorm.Command.extend(
  * INIT CONTROLLER
  * ==========================================================*/
 
-var control = new Controller();
+BP.control = new Controller();
+
+/* ============================================================
+ * LOAD SERVICES FROM A XML FILE
+ * ==========================================================*/
+
+$.get("/themes/babelium/js/mvc/service.xml", null, function ( data, textStatus)
+{
+	var _httpGateways = {};
+	
+	$(data).find("gateway").each(function()
+	{
+		var p = $(this);
+		
+		if ( p.attr("type") == "http" )
+			_httpGateways[p.attr("id")] = p.attr("target");
+	});
+	
+	$(data).find("service").each(function ()
+	{
+		var p = $(this), g = _httpGateways[p.attr("destination")];
+		
+		if ( g == null )
+			return;
+		
+		// Create HTTP Service: gateway + target
+		var hs = new Cairngorm.HTTPService(g, p.attr("class"));
+		
+		// Register HTTP Service: id + http service object
+		Cairngorm.ServiceLocator.registerHttpService(p.attr("id"), hs);
+	});
+});
+
+/* ============================================================
+ * HOME MODULE DELEGATE
+ * ==========================================================*/
+
+BP.HomeDelegate = (function ()
+{
+	var _serviceID = "homeMOD";
+	
+	return {
+		
+		viewHomeModule : function ( responder )
+		{
+			var _service = Cairngorm.ServiceLocator.getHttpService(_serviceID);
+			_service.call( null, responder );
+		}
+	};
+
+})();
+
+
+alert("Successfully loaded");
