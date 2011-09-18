@@ -13,20 +13,6 @@ function loadSection(data)
 }
 
 /**
- * Navigation Links
- */
-function initNavigationLinks()
-{
-	$("nav#mainnav > ul > li > a").hover(function()
-	{
-		$(this).parent().css("background","url(themes/babelium/images/button_nav_highlight_"+$(this).attr('class')+".png) no-repeat 50% 58%");
-	}, function()
-	{
-		$(this).parent().css("background","none");
-	});
-}
-
-/**
  * Locale Box
  */
 function initLocalebox()

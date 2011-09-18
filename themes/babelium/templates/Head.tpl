@@ -9,22 +9,14 @@
 	
 	<!-- JQuery -->
 	<!--<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.js"></script>-->
-	<!--<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.js"></script>-->
-	<script type="text/javascript" src="themes/babelium/js/jquery1.5.1.js"></script>
-
-	<!-- Init -->
-	<script type="text/javascript" src="themes/babelium/js/init.js"></script>
-	
-	<!-- Loader -->
-	<script type="text/javascript">
-		var MODULE_GATEWAY = "{$MODULE_GATEWAY}";
-	</script>
-	<script type="text/javascript" src="themes/babelium/js/loader.js"></script>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.js"></script>
+	<!--<script type="text/javascript" src="themes/babelium/js/jquery1.5.1.js"></script>-->
 	
 	<!-- MVC -->
 	<script type="text/javascript" src="themes/babelium/js/mvc/base.js"></script>
 	<script type="text/javascript" src="themes/babelium/js/mvc/cairngorm.js"></script>
 	<script type="text/javascript" src="themes/babelium/js/mvc/mvc.js"></script>
+	<script type="text/javascript" src="themes/babelium/js/mvc/cms.js"></script>
 	
 </head>
 <body class="VBox">

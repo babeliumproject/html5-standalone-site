@@ -7,3 +7,5 @@ syntax: regexp
 ^build\.properties$
 syntax: regexp
 ^config/Config\.php$
+syntax: regexp
+^themes/babelium/js/mvc/test\.html$

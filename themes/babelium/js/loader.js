@@ -4,7 +4,7 @@
  */
 function updateLocation(event)
 {
-	load(event.state.module);
+	//load(event.state.module);
 }
 
 /*
@@ -13,6 +13,4 @@ function updateLocation(event)
 function loadModule(data)
 {
 	var query_string = MODULE_GATEWAY + "?module=" + location;
-	
-	
 }

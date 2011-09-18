@@ -206,10 +206,11 @@ Cairngorm.HTTPService = Class.extend(
 	/**
 	 * Constructor
 	 */
-	init : function ( gateway, target )
+	init : function ( gateway, service )
 	{
-		this.gateway = gateway;
-		this.target = target;
+		this.target = gateway.target;
+		this.method = gateway.method;
+		this.service = service;
 	},
 
 	call : function ( params, responder ) 
@@ -217,17 +218,20 @@ Cairngorm.HTTPService = Class.extend(
 		if ( params == null )
 			params = "";
 
-		var src = this.gateway + this.target + "&" + params;
-		
-		$.ajax(
+		if ( this.method == "get" )
 		{
-			// Target url
-			url : src,
-			// The success call back.
-			success : responder.onResult,
-			// The error handler.
-			error : responder.onFault
-		});
+			var src = this.target + this.service + "&" + params;
+		
+			$.ajax(
+			{
+				// Target url
+				url : src,
+				// The success call back.
+				success : responder.onResult,
+				// The error handler.
+				error : responder.onFault
+			});
+		}
 	}
 
 });

@@ -11,7 +11,7 @@ var Controller = Cairngorm.FrontController.extend(
 	init : function ()
 	{
 		this._super();
-		
+
 		// View Change Event
 		this.addCommand(ViewChangeEvent.VIEW_HOME_MODULE, ViewHomeModuleCommand);
 		this.addCommand(ViewChangeEvent.VIEW_EXERCISE_MODULE, ViewExerciseModuleCommand);
@@ -54,27 +54,19 @@ var ViewHomeModuleCommand = Cairngorm.Command.extend(
 {
 	execute : function ()
 	{
-		var location = "home", _this = this;
-		window.history.pushState({module : location }, location, "?module="+location);
+		var _this = this;
 	
-		$("#maincontent > aside#loader > div#loadcontext > span").html("Loading <strong>"+location+"</strong>");
-		$("#maincontent > aside#loader").slideDown(500);
-
-		$("#maincontent > section").slideUp(500, function()
+		window.history.pushState({module : "home" }, "Home - Babelium Project", "?module=home");
+		
+		BP.CMS.prepareMainContent("home", function ()
 		{
-			$("#maincontent > section").remove();
-			
 			BP.HomeDelegate.viewHomeModule(_this);
 		});
 	},
 	
 	onResult : function ( response )
 	{
-		var data = $.parseJSON(response);
-		$("#maincontent > header > h1").text(data.title);
-		var content = $(data.content).hide();
-		content.appendTo("#maincontent").slideDown(500);
-		$("#maincontent > aside#loader").slideUp(500);
+		BP.CMS.innerMainContent(response);
 	},
 	
 	onFault : function ()
@@ -88,43 +80,128 @@ var ViewExerciseModuleCommand = Cairngorm.Command.extend(
 {
 	execute : function ()
 	{
+		var _this = this;
+	
+		window.history.pushState({module : "pract" }, "Practice - Babelium Project", "?module=pract");
 		
+		BP.CMS.prepareMainContent("practice module", function ()
+		{
+			BP.PracticeDelegate.viewPracticeModule(_this);
+		});
+	},
+	
+	onResult : function ( response )
+	{
+		BP.CMS.innerMainContent(response);
+	},
+	
+	onFault : function ()
+	{
+		alert("Error loading practice module");
 	}
 });
 
-//ViewHomeModuleCommand
+//ViewEvaluationModuleCommand
 var ViewEvaluationModuleCommand = Cairngorm.Command.extend(
 {
 	execute : function ()
 	{
+		var _this = this;
+	
+		window.history.pushState({module : "eval" }, "Evaluation - Babelium Project", "?module=eval");
 		
+		BP.CMS.prepareMainContent("evaluation module", function ()
+		{
+			BP.EvaluationDelegate.viewEvaluationModule(_this);
+		});
+	},
+	
+	onResult : function ( response )
+	{
+		BP.CMS.innerMainContent(response);
+	},
+	
+	onFault : function ()
+	{
+		alert("Error loading evaluation module");
 	}
 });
 
-//ViewExerciseModuleCommand
+//ViewSubtitleModuleCommand
 var ViewSubtitleModuleCommand = Cairngorm.Command.extend(
 {
 	execute : function ()
 	{
+		var _this = this;
+	
+		window.history.pushState({module : "subs" }, "Subtitles - Babelium Project", "?module=subs");
 		
+		BP.CMS.prepareMainContent("subtitle module", function ()
+		{
+			BP.SubtitleDelegate.viewSubtitleModule(_this);
+		});
+	},
+	
+	onResult : function ( response )
+	{
+		BP.CMS.innerMainContent(response);
+	},
+	
+	onFault : function ()
+	{
+		alert("Error loading subtitle module");
 	}
 });
 
-//ViewHomeModuleCommand
+//ViewConfigModuleCommand
 var ViewConfigModuleCommand = Cairngorm.Command.extend(
 {
 	execute : function ()
 	{
+		var _this = this;
+	
+		window.history.pushState({module : "conf" }, "Configuration - Babelium Project", "?module=conf");
 		
+		BP.CMS.prepareMainContent("configuration module", function ()
+		{
+			BP.ConfigDelegate.viewConfigModule(_this);
+		});
+	},
+	
+	onResult : function ( response )
+	{
+		BP.CMS.innerMainContent(response);
+	},
+	
+	onFault : function ()
+	{
+		alert("Error loading config module");
 	}
 });
 
-//ViewExerciseModuleCommand
+//ViewAboutModuleCommand
 var ViewAboutModuleCommand = Cairngorm.Command.extend(
 {
 	execute : function ()
 	{
+		var _this = this;
+	
+		window.history.pushState({module : "about" }, "About - Babelium Project", "?module=about");
 		
+		BP.CMS.prepareMainContent("about", function ()
+		{
+			BP.AboutDelegate.viewAboutModule(_this);
+		});
+	},
+	
+	onResult : function ( response )
+	{
+		BP.CMS.innerMainContent(response);
+	},
+	
+	onFault : function ()
+	{
+		alert("Error loading about module");
 	}
 });
 
@@ -147,7 +224,7 @@ $.get("themes/babelium/js/mvc/service.xml", null, function ( data, textStatus)
 		var p = $(this);
 		
 		if ( p.attr("type") == "http" )
-			_httpGateways[p.attr("id")] = p.attr("target");
+			_httpGateways[p.attr("id")] = {target: p.attr("target"), method: p.attr("method")};
 	});
 	
 	$(data).find("service").each(function ()
@@ -176,6 +253,101 @@ BP.HomeDelegate = (function ()
 	return {
 		
 		viewHomeModule : function ( responder )
+		{
+			var _service = Cairngorm.ServiceLocator.getHttpService(_serviceID);
+			_service.call( null, responder );
+		}
+	};
+
+})();
+
+/* ============================================================
+ * PRACTICE MODULE DELEGATE
+ * ==========================================================*/
+
+BP.PracticeDelegate = (function ()
+{
+	var _serviceID = "pracMOD";
+	
+	return {
+		
+		viewPracticeModule : function ( responder )
+		{
+			var _service = Cairngorm.ServiceLocator.getHttpService(_serviceID);
+			_service.call( null, responder );
+		}
+	};
+
+})();
+
+/* ============================================================
+ * EVALUATION MODULE DELEGATE
+ * ==========================================================*/
+
+BP.EvaluationDelegate = (function ()
+{
+	var _serviceID = "evalMOD";
+	
+	return {
+		
+		viewEvaluationModule : function ( responder )
+		{
+			var _service = Cairngorm.ServiceLocator.getHttpService(_serviceID);
+			_service.call( null, responder );
+		}
+	};
+
+})();
+
+/* ============================================================
+ * SUBTITLE MODULE DELEGATE
+ * ==========================================================*/
+
+BP.SubtitleDelegate = (function ()
+{
+	var _serviceID = "subsMOD";
+	
+	return {
+		
+		viewSubtitleModule : function ( responder )
+		{
+			var _service = Cairngorm.ServiceLocator.getHttpService(_serviceID);
+			_service.call( null, responder );
+		}
+	};
+
+})();
+
+/* ============================================================
+ * CONFIG MODULE DELEGATE
+ * ==========================================================*/
+
+BP.ConfigDelegate = (function ()
+{
+	var _serviceID = "confMOD";
+	
+	return {
+		
+		viewConfigModule : function ( responder )
+		{
+			var _service = Cairngorm.ServiceLocator.getHttpService(_serviceID);
+			_service.call( null, responder );
+		}
+	};
+
+})();
+
+/* ============================================================
+ * ABOUT MODULE DELEGATE
+ * ==========================================================*/
+
+BP.AboutDelegate = (function ()
+{
+	var _serviceID = "aboutMOD";
+	
+	return {
+		
+		viewAboutModule : function ( responder )
 		{
 			var _service = Cairngorm.ServiceLocator.getHttpService(_serviceID);
 			_service.call( null, responder );

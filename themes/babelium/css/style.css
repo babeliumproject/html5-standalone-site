@@ -108,6 +108,39 @@ nav#mainnav
 			color: #e6ce56;
 		}
 		
+		/*
+		 * Background images on Hover
+		 */
+		.bghome 
+		{
+			background: url(themes/babelium/images/button_nav_highlight_home.png) no-repeat 50% 58%;
+		}
+		
+		.bgpract 
+		{
+			background: url(themes/babelium/images/button_nav_highlight_pract.png) no-repeat 50% 58%;
+		}
+		
+		.bgeval 
+		{
+			background: url(themes/babelium/images/button_nav_highlight_eval.png) no-repeat 50% 58%;
+		}
+		
+		.bgsubt 
+		{
+			background: url(themes/babelium/images/button_nav_highlight_subt.png) no-repeat 50% 58%;
+		}
+		
+		.bgconfig 
+		{
+			background: url(themes/babelium/images/button_nav_highlight_config.png) no-repeat 50% 58%;
+		}
+		
+		.bgabout 
+		{
+			background: url(themes/babelium/images/button_nav_highlight_about.png) no-repeat 50% 58%;
+		}
+		
 		nav#mainnav > ul > li > a:hover
 		{
 			text-decoration: none;
