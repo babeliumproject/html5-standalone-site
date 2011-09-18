@@ -5,7 +5,7 @@
 		<!-- top naviation -->
 		<nav id="topnav" class="HBox">
 			<!-- left aligned box -->
-			<ul class="HBox vcenter">
+			<ul id="localenav" class="HBox vcenter">
 				<li>Language:</li>
 				<li>
 					<select id="localebox">
@@ -18,12 +18,8 @@
 			<!-- spacer just to fill space between boxes -->
 			<div class="spacer"></div>
 			<!-- right aligned box -->
-			<ul class="HBox vcenter">
-				<li><a href="#" class="img"><img src="themes/babelium/images/help_icon.png" alt="Help" width="17" height="17" /></a></li>
-				<li><a href="#" class="blue">Help</a></li>
-				<li><a href="#" class="blue">Blog</a></li>
-				<li><a href="#" class="yellow">Login</a></li>
-				<li><a href="#" class="yellow">Register</a></li>
+			<ul id="usernav" class="HBox vcenter">
+{include file="UserNav.tpl"}
 			</ul>
 		</nav>
 		

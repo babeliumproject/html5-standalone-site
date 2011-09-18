@@ -138,7 +138,7 @@ BP.control = new Controller();
  * LOAD SERVICES FROM A XML FILE
  * ==========================================================*/
 
-$.get("/themes/babelium/js/mvc/service.xml", null, function ( data, textStatus)
+$.get("themes/babelium/js/mvc/service.xml", null, function ( data, textStatus)
 {
 	var _httpGateways = {};
 	
@@ -184,5 +184,3 @@ BP.HomeDelegate = (function ()
 
 })();
 
-
-alert("Successfully loaded");

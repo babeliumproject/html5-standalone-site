@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <services>
-	<gateway id="API" target="/api/rest.php?class=" type="http" method="get" />
-	<gateway id="MODULES" target="/modules/bridge.php?module=" type="http" method="get" />
+	<gateway id="API" target="http://babelium/html5/api/rest.php?class=" type="http" method="get" />
+	<gateway id="MODULES" target="http://babelium/html5/modules/bridge.php?module=" type="http" method="get" />
 	
 	<service id="userMOD" destination="MODULES" class="user"/>
 	<service id="homeMOD" destination="MODULES" class="home" />
