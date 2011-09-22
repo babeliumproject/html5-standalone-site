@@ -12,6 +12,7 @@ BP.CMS = (function()
 	var _motd = "#motd";
 	var _maincontent = "#maincontent";
 	var _initiated = false;
+	var _loading = false;
 	
 	/**
 	 * Setup Babelium's CMS
@@ -79,6 +80,11 @@ BP.CMS = (function()
 		 */
 		prepareMainContent : function ( location, callback )
 		{
+			if ( _loading || !_initiated )
+				return;
+			
+			_loading = true;
+			
 			// Display loading message
 			$("#maincontent > aside#loader > div#loadcontext > span").html("Loading <strong>"+location+"</strong>");
 			$("#maincontent > aside#loader").slideDown(500);
@@ -104,7 +110,34 @@ BP.CMS = (function()
 			var content = $(data.content).hide();
 			content.appendTo("#maincontent").slideDown(500);
 			$("#maincontent > aside#loader").slideUp(500);
+			
+			_loading = false;
+		},
+		
+		/**
+		 * Shows or hides login popup
+		 * @param title : popup title
+		 * @param content : popup content
+		 */
+		toggleLoginPopup : function ( title, content )
+		{
+			if ( _loading || !_initiated )
+				return;
+			
+			var popup = $("aside#popup");
+			
+			if ( popup.is(":visible") )
+			{
+				popup.slideUp(500);
+				$("div#logo").animate({top: '35px'}, 500);
+			}
+			else
+			{
+				popup.slideDown(500);
+				$("div#logo").animate({top: '65px'}, 500);
+			}
 		}
+		
 	};
 
 })();
@@ -116,5 +149,11 @@ BP.CMS = (function()
 $(document).ready(function()
 {
 	BP.CMS.init();
-	//window.onpopstate = updateLocation;
+	
+	/**
+	 * On popstate
+	 */
+	window.onpopstate = function(event)
+	{
+	};
 });

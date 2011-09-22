@@ -41,6 +41,15 @@ nav#topnav
 	background: -moz-linear-gradient(top, white, #E2EFF3);	
 }
 
+aside#popup
+{
+	border-bottom: 1px solid #38babc;
+	
+	/** Default background **/
+	background-color: #E2EFF3;
+	background-image: url(../images/rainbow_bgr.png);	
+}
+
 a.yellow, a.yellow:active, a.yellow:visited
 {
 	color: #cc9900;

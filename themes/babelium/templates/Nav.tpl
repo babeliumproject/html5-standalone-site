@@ -23,6 +23,8 @@
 			</ul>
 		</nav>
 		
+{include file="LoginForm.tpl"}
+		
 		<!-- logo -->
 		<div id="logo"><img src="themes/babelium/images/flan_dullv2.png" alt="Bablium Project" width="174" height="156" /></div>
 		

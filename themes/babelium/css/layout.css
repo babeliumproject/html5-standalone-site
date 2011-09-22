@@ -11,6 +11,10 @@ html, body
 	height: 100%;
 }
 
+/*
+ * TOP NAVIGATION
+ */
+
 nav#topnav
 {
 	height: 35px;
@@ -24,6 +28,36 @@ nav#topnav
 
 	nav#topnav > ul > li:first-child {margin-left: 16px;}
 	nav#topnav > ul > li:last-child {margin-right: 16px;}
+
+aside#popup
+{
+	width: 100%;
+	height: 30px;
+	
+	display: none;
+}
+
+	aside#popup > div
+	{
+		width: 100%;
+		height: 30px;	
+	}
+	
+			aside#popup > div > ul > li
+			{
+				padding-left: 5px;
+				padding-right: 5px;
+			}
+		
+				aside#popup > div > ul > li > input
+				{
+					height: 20px !important;
+				}
+				
+				aside#popup > div > ul > li > button
+				{
+					height: 20px !important;
+				}
 
 div#logo
 {

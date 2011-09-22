@@ -252,8 +252,8 @@ Cairngorm.ServiceLocator = (function()
 	return {
 		
 		/**
-		 * Finds remote object by name
-		 * @return RemoteObject
+		 * Finds http service by name
+		 * @return HTTPService
 		 */
 		getHttpService : function ( name )
 		{
@@ -263,7 +263,7 @@ Cairngorm.ServiceLocator = (function()
 		/**
 		 * Register a service identified by its id
 		 * @param name : service id
-		 * @param service : httpservice
+		 * @param service : HTTPService
 		 */
 		registerHttpService : function ( name, service )
 		{

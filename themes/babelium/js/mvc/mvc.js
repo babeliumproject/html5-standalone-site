@@ -19,6 +19,7 @@ var Controller = Cairngorm.FrontController.extend(
 		this.addCommand(ViewChangeEvent.VIEW_SUBTITLE_MODULE, ViewSubtitleModuleCommand);
 		this.addCommand(ViewChangeEvent.VIEW_ABOUT_MODULE, ViewAboutModuleCommand);
 		this.addCommand(ViewChangeEvent.VIEW_CONFIG_MODULE, ViewConfigModuleCommand);
+		this.addCommand(ViewChangeEvent.VIEW_LOGIN_POPUP, ViewLoginPopupCommand);
 	}
 });
 
@@ -43,6 +44,7 @@ ViewChangeEvent.VIEW_EVALUATION_MODULE = "viewEvaluationModule";
 ViewChangeEvent.VIEW_SUBTITLE_MODULE = "viewSubtitleModule";
 ViewChangeEvent.VIEW_ABOUT_MODULE = "viewAboutModule";
 ViewChangeEvent.VIEW_CONFIG_MODULE = "viewConfigModule";
+ViewChangeEvent.VIEW_LOGIN_POPUP = "viewLoginPopup";
 
 
 /* ============================================================
@@ -205,6 +207,15 @@ var ViewAboutModuleCommand = Cairngorm.Command.extend(
 	}
 });
 
+//ViewAboutModuleCommand
+var ViewLoginPopupCommand = Cairngorm.Command.extend(
+{
+	execute : function ()
+	{
+		BP.CMS.toggleLoginPopup();
+	}
+});
+
 /* ============================================================
  * INIT CONTROLLER
  * ==========================================================*/
@@ -215,7 +226,7 @@ BP.control = new Controller();
  * LOAD SERVICES FROM A XML FILE
  * ==========================================================*/
 
-$.get("themes/babelium/js/mvc/service.xml", null, function ( data, textStatus)
+$.get("themes/babelium/js/mvc/services.xml", null, function ( data, textStatus)
 {
 	var _httpGateways = {};
 	
@@ -351,6 +362,24 @@ BP.AboutDelegate = (function ()
 		{
 			var _service = Cairngorm.ServiceLocator.getHttpService(_serviceID);
 			_service.call( null, responder );
+		}
+	};
+
+})();
+
+/* ============================================================
+ * USER MODULE DELEGATE
+ * ==========================================================*/
+
+BP.UserDelegate = (function ()
+{
+	var _serviceID = "userMOD";
+	
+	return {
+		
+		viewUserModule : function ( responder )
+		{
+			
 		}
 	};
 
