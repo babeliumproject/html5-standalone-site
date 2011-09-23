@@ -64,7 +64,7 @@ Cairngorm.FrontController = Class.extend(
 	 */
 	executeCommand : function ( ev )
 	{
-		new this.commands[ev.type]().execute();
+		new this.commands[ev.type](ev.data).execute();
 	}
 });
 
@@ -153,6 +153,14 @@ Cairngorm.Event = Class.extend(
 
 Cairngorm.Command = Class.extend(
 {	
+	/**
+	 * Constructor
+	 */
+	init : function ( data )
+	{
+		this.data = data;
+	},
+	
 	/**
 	 * Execute an action
 	 */

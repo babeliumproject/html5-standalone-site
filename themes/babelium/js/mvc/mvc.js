@@ -19,7 +19,10 @@ var Controller = Cairngorm.FrontController.extend(
 		this.addCommand(ViewChangeEvent.VIEW_SUBTITLE_MODULE, ViewSubtitleModuleCommand);
 		this.addCommand(ViewChangeEvent.VIEW_ABOUT_MODULE, ViewAboutModuleCommand);
 		this.addCommand(ViewChangeEvent.VIEW_CONFIG_MODULE, ViewConfigModuleCommand);
-		this.addCommand(ViewChangeEvent.VIEW_LOGIN_POPUP, ViewLoginPopupCommand);
+		this.addCommand(ViewChangeEvent.VIEW_LOGIN_POPUP, ToggleLoginPopupCommand);
+		
+		// User management
+		this.addCommand(LoginEvent.PROCESS_LOGIN, ProcessLoginCommand);
 	}
 });
 
@@ -28,7 +31,9 @@ var Controller = Cairngorm.FrontController.extend(
  * Custom Events
  * ==========================================================*/
 
-// View Change Event
+/**
+ * View Change Event
+ */ 
 var ViewChangeEvent = Cairngorm.Event.extend(
 {
 	// Just a simple event, no action needed
@@ -46,12 +51,28 @@ ViewChangeEvent.VIEW_ABOUT_MODULE = "viewAboutModule";
 ViewChangeEvent.VIEW_CONFIG_MODULE = "viewConfigModule";
 ViewChangeEvent.VIEW_LOGIN_POPUP = "viewLoginPopup";
 
+/**
+ * LoginEvent
+ */
+var LoginEvent = Cairngorm.Event.extend(
+{
+	// Just a simple event, no action needed
+	init : function ( type, user )
+	{
+		this._super(type);
+		this.setData(user);
+	}
+});
+// Constants
+LoginEvent.PROCESS_LOGIN = "processLogin";
 
 /* ============================================================
  * Custom Commands
  * ==========================================================*/
 
-// ViewHomeModuleCommand
+/**
+ * ViewHomeModuleCommand
+ */
 var ViewHomeModuleCommand = Cairngorm.Command.extend(
 {
 	execute : function ()
@@ -77,7 +98,9 @@ var ViewHomeModuleCommand = Cairngorm.Command.extend(
 	}
 });
 
-//ViewExerciseModuleCommand
+/**
+ * ViewExerciseModuleCommand
+ */
 var ViewExerciseModuleCommand = Cairngorm.Command.extend(
 {
 	execute : function ()
@@ -103,7 +126,9 @@ var ViewExerciseModuleCommand = Cairngorm.Command.extend(
 	}
 });
 
-//ViewEvaluationModuleCommand
+/**
+ * ViewEvaluationModuleCommand
+ */
 var ViewEvaluationModuleCommand = Cairngorm.Command.extend(
 {
 	execute : function ()
@@ -129,7 +154,9 @@ var ViewEvaluationModuleCommand = Cairngorm.Command.extend(
 	}
 });
 
-//ViewSubtitleModuleCommand
+/**
+ * ViewSubtitleModuleCommand
+ */
 var ViewSubtitleModuleCommand = Cairngorm.Command.extend(
 {
 	execute : function ()
@@ -155,7 +182,9 @@ var ViewSubtitleModuleCommand = Cairngorm.Command.extend(
 	}
 });
 
-//ViewConfigModuleCommand
+/**
+ * ViewConfigModuleCommand
+ */
 var ViewConfigModuleCommand = Cairngorm.Command.extend(
 {
 	execute : function ()
@@ -181,7 +210,9 @@ var ViewConfigModuleCommand = Cairngorm.Command.extend(
 	}
 });
 
-//ViewAboutModuleCommand
+/**
+ * ViewAboutModuleCommand
+ */
 var ViewAboutModuleCommand = Cairngorm.Command.extend(
 {
 	execute : function ()
@@ -207,12 +238,38 @@ var ViewAboutModuleCommand = Cairngorm.Command.extend(
 	}
 });
 
-//ViewAboutModuleCommand
-var ViewLoginPopupCommand = Cairngorm.Command.extend(
+/**
+ * ToggleLoginPopupCommand
+ */
+var ToggleLoginPopupCommand = Cairngorm.Command.extend(
 {
 	execute : function ()
 	{
 		BP.CMS.toggleLoginPopup();
+	}
+});
+
+/**
+ * ProcessLoginPopupCommand
+ */
+var ProcessLoginCommand = Cairngorm.Command.extend(
+{
+	execute : function ()
+	{
+		if ( this.data == null )
+			return;
+
+		BP.UserDelegate.processLogin(this, this.data);
+	},
+	
+	onResult : function ( response )
+	{
+		alert(response);
+	},
+	
+	onFault : function ()
+	{
+		alert("Error loading about module");
 	}
 });
 
@@ -380,8 +437,29 @@ BP.UserDelegate = (function ()
 		viewUserModule : function ( responder )
 		{
 			
+		},
+		
+		processLogin : function ( responder, user )
+		{
+			var _service = Cairngorm.ServiceLocator.getHttpService(_serviceID);
+			var params = "&action=login&user="+user.name+"&pass="+user.pass+"&checked="+(user.remember);
+			_service.call( params, responder );
 		}
 	};
 
 })();
 
+
+/* ============================================================
+ * VALUE OBJECTS
+ * ==========================================================*/
+
+var LoginVO = Class.extend(
+{
+	init : function ( name, pass, remember )
+	{
+		this.name = name;
+		this.pass = pass;
+		this.remember = (remember)? 1 : 0;
+	}
+});
