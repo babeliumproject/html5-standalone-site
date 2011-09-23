@@ -27,7 +27,7 @@ class MAuth implements IModule
 			$loggedIn = self::processLogin($args[2]);
 			if ( $loggedIn === true )
 			{
-				$cfg->smarty->assign("username", SessionManager::getInstance()->getVar("loggedUser"));
+				$cfg->smarty->assign("user", SessionManager::getInstance()->getVar("loggedUser"));
 				return $cfg->smarty->fetch("userManagement/UserLoggedInNav.tpl");
 			}
 			else
