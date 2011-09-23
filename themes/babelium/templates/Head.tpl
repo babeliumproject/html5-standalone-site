@@ -17,7 +17,7 @@
 	<script type="text/javascript" src="themes/babelium/js/mvc/cairngorm.js"></script>
 	<script type="text/javascript" src="themes/babelium/js/mvc/mvc.js"></script>
 	<script type="text/javascript" src="themes/babelium/js/mvc/cms.js"></script>
-	<script type="text/javascript" src="themes/babelium/js/mvc/sha1.js"></script>
+	<script type="text/javascript" src="themes/babelium/js/mvc/encode.js"></script>
 	
 </head>
 <body class="VBox">

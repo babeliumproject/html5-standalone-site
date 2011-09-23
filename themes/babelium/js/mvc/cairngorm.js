@@ -229,7 +229,7 @@ Cairngorm.HTTPService = Class.extend(
 		if ( this.method == "get" )
 		{
 			var src = this.target + this.service + "&" + params;
-		
+			
 			$.ajax(
 			{
 				// Target url

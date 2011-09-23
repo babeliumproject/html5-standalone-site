@@ -6,6 +6,7 @@ require_once(dirname(__FILE__) . "/../config/Config.php");
 // Available modules
 require_once("M404.php");
 require_once("MHome.php");
+require_once("MAuth.php");
 
 /**
  * Module loader
@@ -19,7 +20,8 @@ final class ModuleLoader
 	private static $_module = array
 			(
 				"404" => "M404",
-				"home" => "MHome"
+				"home" => "MHome",
+				"auth" => "MAuth"
 			);
 	
 	/* Constructor */

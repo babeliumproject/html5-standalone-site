@@ -259,7 +259,7 @@ var ProcessLoginCommand = Cairngorm.Command.extend(
 		if ( this.data == null )
 			return;
 
-		BP.UserDelegate.processLogin(this, this.data);
+		BP.AuthDelegate.processLogin(this, this.data);
 	},
 	
 	onResult : function ( response )
@@ -437,12 +437,25 @@ BP.UserDelegate = (function ()
 		viewUserModule : function ( responder )
 		{
 			
-		},
+		}
+	};
+
+})();
+
+/* ============================================================
+ * Auth MODULE DELEGATE
+ * ==========================================================*/
+
+BP.AuthDelegate = (function ()
+{
+	var _serviceID = "authMOD";
+	
+	return {
 		
-		processLogin : function ( responder, user )
+		processLogin : function ( responder, data )
 		{
 			var _service = Cairngorm.ServiceLocator.getHttpService(_serviceID);
-			var params = "&action=login&user="+user.name+"&pass="+user.pass+"&checked="+(user.remember);
+			var params = "action=login&params="+Base64.encode('{"name": "'+data.name+'", "pass": "'+data.pass+'"}');
 			_service.call( params, responder );
 		}
 	};
