@@ -264,7 +264,16 @@ var ProcessLoginCommand = Cairngorm.Command.extend(
 	
 	onResult : function ( response )
 	{
-		alert(response);
+		response = $.parseJSON(response);
+		
+		if ( response.content.indexOf("<li>") != -1 )
+		{
+			// Logged in
+			$("ul#usernav").html(response.content);
+			BP.CMS.hideLoginPopup();
+		}
+		else
+			alert(response.content);
 	},
 	
 	onFault : function ()

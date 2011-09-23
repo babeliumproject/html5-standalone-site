@@ -13,6 +13,7 @@ class MAuth implements IModule
 	 */
 	public static function load($args)
 	{
+		$cfg = Config::getInstance();
 		$action = "";
 		
 		if ( isset($args[1]) )
@@ -25,7 +26,10 @@ class MAuth implements IModule
 		{
 			$loggedIn = self::processLogin($args[2]);
 			if ( $loggedIn === true )
-				return true;
+			{
+				$cfg->smarty->assign("username", SessionManager::getInstance()->getVar("loggedUser"));
+				return $cfg->smarty->fetch("userManagement/UserLoggedInNav.tpl");
+			}
 			else
 				return $loggedIn;
 		}

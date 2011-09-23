@@ -2,7 +2,7 @@
 
 /** DEBUG MODE **/
 error_reporting(E_ALL);
-ini_set('display_errors', '1'); // DEBUG MODE: turn to 1
+ini_set('display_errors', '0'); // DEBUG MODE: turn to 1
 
 require_once("ModuleLoader.php");
 require_once("Zend/Json.php");

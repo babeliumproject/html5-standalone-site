@@ -116,26 +116,47 @@ BP.CMS = (function()
 		
 		/**
 		 * Shows or hides login popup
-		 * @param title : popup title
-		 * @param content : popup content
 		 */
-		toggleLoginPopup : function ( title, content )
+		toggleLoginPopup : function ( )
+		{
+			var popup = $("aside#popup");
+			
+			if ( popup.is(":visible") )
+			{
+				this.hideLoginPopup();
+			}
+			else
+			{
+				this.showLoginPopup();
+			}
+		},
+		
+		/**
+		 * Hides login popup
+		 */
+		hideLoginPopup : function ( )
 		{
 			if ( _loading || !_initiated )
 				return;
 			
 			var popup = $("aside#popup");
 			
-			if ( popup.is(":visible") )
-			{
-				popup.slideUp(500);
-				$("div#logo").animate({top: '35px'}, 500);
-			}
-			else
-			{
-				popup.slideDown(500);
-				$("div#logo").animate({top: '65px'}, 500);
-			}
+			popup.slideUp(500);
+			$("div#logo").animate({top: '35px'}, 500);
+		},
+		
+		/**
+		 * Shows login popup
+		 */
+		showLoginPopup : function ()
+		{
+			if ( _loading || !_initiated )
+				return;
+			
+			var popup = $("aside#popup");
+			
+			popup.slideDown(500);
+			$("div#logo").animate({top: '65px'}, 500);
 		}
 		
 	};
