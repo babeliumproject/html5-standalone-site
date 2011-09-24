@@ -280,3 +280,37 @@ Cairngorm.ServiceLocator = (function()
 	};
 
 })();
+
+
+/* ============================================================
+ * vo/ValueObject.as
+ * ==========================================================*/
+
+Cairngorm.VO = Class.extend(
+{
+	init : function (){},
+	
+	/**
+	 * Convert this object's properties
+	 * to json object
+	 */
+	toJSONStr : function ()
+	{
+		var obj = "{";
+		
+		for ( var i in this )
+		{
+			if ( typeof this[i] != "function" )
+			{
+				if ( obj.length != 1 )
+					obj += ",";
+
+				obj += '"' + i + '": "' + this[i] + '"';
+			}
+		}
+		
+		obj += "}";
+		
+		return obj;
+	}
+});

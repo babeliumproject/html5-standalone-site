@@ -19,7 +19,11 @@
 			<div class="spacer"></div>
 			<!-- right aligned box -->
 			<ul id="usernav" class="HBox vcenter">
-{include file="userManagement/UserNav.tpl"}
+{if $isLoggedIn and isset($user) }
+	{include file="userManagement/UserLoggedInNav.tpl"}
+{else}
+	{include file="userManagement/UserLoggedOutNav.tpl"}
+{/if}
 			</ul>
 		</nav>
 		

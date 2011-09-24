@@ -23,6 +23,7 @@ var Controller = Cairngorm.FrontController.extend(
 		
 		// User management
 		this.addCommand(LoginEvent.PROCESS_LOGIN, ProcessLoginCommand);
+		this.addCommand(LoginEvent.SIGN_OUT, SignOutCommand);
 	}
 });
 
@@ -65,6 +66,7 @@ var LoginEvent = Cairngorm.Event.extend(
 });
 // Constants
 LoginEvent.PROCESS_LOGIN = "processLogin";
+LoginEvent.SIGN_OUT = "signOut";
 
 /* ============================================================
  * Custom Commands
@@ -250,7 +252,7 @@ var ToggleLoginPopupCommand = Cairngorm.Command.extend(
 });
 
 /**
- * ProcessLoginPopupCommand
+ * ProcessLoginCommand
  */
 var ProcessLoginCommand = Cairngorm.Command.extend(
 {
@@ -259,6 +261,7 @@ var ProcessLoginCommand = Cairngorm.Command.extend(
 		if ( this.data == null )
 			return;
 
+		$("li#loginhelper").html("<img src='themes/babelium/images/loading.gif' alt='Loading..' width='16' height='16' />");
 		BP.AuthDelegate.processLogin(this, this.data);
 	},
 	
@@ -269,16 +272,44 @@ var ProcessLoginCommand = Cairngorm.Command.extend(
 		if ( response.content.indexOf("<li>") != -1 )
 		{
 			// Logged in
+			$("li#loginhelper").html("");
 			$("ul#usernav").html(response.content);
 			BP.CMS.hideLoginPopup();
 		}
 		else
-			alert(response.content);
+			$("li#loginhelper").html(response.content);
 	},
 	
 	onFault : function ()
 	{
-		alert("Error loading about module");
+		alert("Error trying to connect to the login server");
+	}
+});
+
+/**
+ * SignOutCommand
+ */
+var SignOutCommand = Cairngorm.Command.extend(
+{
+	execute : function ()
+	{
+		BP.AuthDelegate.signOut(this);
+	},
+	
+	onResult : function ( response )
+	{
+		response = $.parseJSON(response);
+		
+		if ( response.content.indexOf("<li>") != -1 )
+		{
+			$("li#loginhelper").html("");
+			$("ul#usernav").html(response.content);
+		}
+	},
+	
+	onFault : function ()
+	{
+		alert("Error trying to connect to the login server");
 	}
 });
 
@@ -463,8 +494,18 @@ BP.AuthDelegate = (function ()
 		
 		processLogin : function ( responder, data )
 		{
+			if ( !data || typeof data.toJSONStr != "function" )
+				return;
+
 			var _service = Cairngorm.ServiceLocator.getHttpService(_serviceID);
-			var params = "action=login&params="+Base64.encode('{"name": "'+data.name+'", "pass": "'+data.pass+'"}');
+			var params = "action=login&params="+Base64.encode(data.toJSONStr());
+			_service.call( params, responder );
+		},
+		
+		signOut : function ( responder )
+		{
+			var _service = Cairngorm.ServiceLocator.getHttpService(_serviceID);
+			var params = "action=logout";
 			_service.call( params, responder );
 		}
 	};
@@ -476,7 +517,7 @@ BP.AuthDelegate = (function ()
  * VALUE OBJECTS
  * ==========================================================*/
 
-var LoginVO = Class.extend(
+var LoginVO = Cairngorm.VO.extend(
 {
 	init : function ( name, pass, remember )
 	{

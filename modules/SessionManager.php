@@ -69,5 +69,30 @@ class SessionManager
 			$this->namespace->$var = $value;
 		}
 	}
+	
+	/**
+	 * Remember an user for 30 days
+	 */
+	public function rememberMe()
+	{
+		Zend_Session::rememberMe(60*60*24*30);
+	}
+	
+	/**
+	 * For an user at the end of the user agent session
+	 */
+	public function forgetMe()
+	{
+		Zend_Session::forgetMe();
+	}
+	
+	/**
+	 * Expire the session and delete all session data
+	 */
+	public function expireSession()
+	{
+		Zend_Session::destroy();
+		Zend_Session::expireSessionCookie();
+	}
 }
 ?>

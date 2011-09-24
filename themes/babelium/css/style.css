@@ -50,6 +50,12 @@ aside#popup
 	background-image: url(../images/rainbow_bgr.png);	
 }
 
+li#loginhelper
+{
+	color: #ad0a0a;
+	font-weight: bold;
+}
+
 a.yellow, a.yellow:active, a.yellow:visited
 {
 	color: #cc9900;

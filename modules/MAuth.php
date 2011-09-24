@@ -10,10 +10,14 @@ class MAuth implements IModule
 {	
 	/**
 	 * Load module
+	 * @param args[0] : auth
+	 * @param args[1] : action {login | logout}
+	 * [@param args[2] : login info {name, pass, remember}]
 	 */
 	public static function load($args)
 	{
 		$cfg = Config::getInstance();
+		$sm = SessionManager::getInstance();
 		$action = "";
 		
 		if ( isset($args[1]) )
@@ -25,20 +29,43 @@ class MAuth implements IModule
 		if ( $action == "login" && isset($args[2]) )
 		{
 			$loggedIn = self::processLogin($args[2]);
+
 			if ( $loggedIn === true )
 			{
-				$cfg->smarty->assign("user", SessionManager::getInstance()->getVar("loggedUser"));
+				$user = $sm->getVar("loggedUser");
+	
+				// Login object
+				$phpObj = Zend_Json::decode(base64_decode($args[2]));
+				$remember = $phpObj["remember"];
+				
+				if ( $remember )
+					$sm->rememberMe();
+				else
+					$sm->forgetMe();
+				
+				$cfg->smarty->assign("user", $user);
 				return $cfg->smarty->fetch("userManagement/UserLoggedInNav.tpl");
 			}
 			else
 				return $loggedIn;
+		}
+		/**
+		 * Process Logout
+		 */
+		else if ( $action == "logout" )
+		{
+			if ( $sm->getVar("isLoggedIn") )
+			{
+				$sm->expireSession();
+				return $cfg->smarty->fetch("userManagement/UserLoggedOutNav.tpl");
+			}
 		}
 		
 		return false;
 	}
 	
 	/**
-	 * 
+	 * Process user login
 	 */
 	public static function processLogin($user)
 	{
