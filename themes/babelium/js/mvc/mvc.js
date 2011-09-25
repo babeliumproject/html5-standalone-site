@@ -498,7 +498,7 @@ BP.AuthDelegate = (function ()
 				return;
 
 			var _service = Cairngorm.ServiceLocator.getHttpService(_serviceID);
-			var params = "action=login&params="+Base64.encode(data.toJSONStr());
+			var params = "action=login&params="+data.toBase64();
 			_service.call( params, responder );
 		},
 		
