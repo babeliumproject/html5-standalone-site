@@ -2,6 +2,7 @@
 
 require_once(dirname(__FILE__) . "/../util/interfaces/iModule.php");
 require_once(dirname(__FILE__) . "/../config/Config.php");
+require_once(dirname(__FILE__) . "/../widgets/WidgetLoader.php");
 require_once("SessionManager.php");
 
 require_once("Zend/Json.php");
@@ -16,7 +17,6 @@ class MAuth implements IModule
 	 */
 	public static function load($args)
 	{
-		$cfg = Config::getInstance();
 		$sm = SessionManager::getInstance();
 		$action = "";
 		
@@ -43,8 +43,7 @@ class MAuth implements IModule
 				else
 					$sm->forgetMe();
 				
-				$cfg->smarty->assign("user", $user);
-				return $cfg->smarty->fetch("userManagement/UserLoggedInNav.tpl");
+				return WidgetLoader::loadWidget("LoggedIn", $user);
 			}
 			else
 				return $loggedIn;
@@ -57,7 +56,7 @@ class MAuth implements IModule
 			if ( $sm->getVar("isLoggedIn") )
 			{
 				$sm->expireSession();
-				return $cfg->smarty->fetch("userManagement/UserLoggedOutNav.tpl");
+				return WidgetLoader::loadWidget("LoggedOut");
 			}
 		}
 		

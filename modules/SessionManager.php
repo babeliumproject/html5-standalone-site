@@ -71,15 +71,15 @@ class SessionManager
 	}
 	
 	/**
-	 * Remember an user for 30 days
+	 * Remember an user for 7 days
 	 */
 	public function rememberMe()
 	{
-		Zend_Session::rememberMe(60*60*24*30);
+		Zend_Session::rememberMe(60*60*24*7);
 	}
 	
 	/**
-	 * For an user at the end of the user agent session
+	 * Forget an user at the end of the user agent session
 	 */
 	public function forgetMe()
 	{

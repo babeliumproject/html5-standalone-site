@@ -7,6 +7,8 @@ require_once("WExerciseList.php");
 require_once("WNav.php");
 require_once("WHead.php");
 require_once("WFooter.php");
+require_once("userManagement/WLoggedIn.php");
+require_once("userManagement/WLoggedOut.php");
 
 require_once("W404.php");
 
@@ -25,7 +27,9 @@ final class WidgetLoader
 				"ExerciseList" => "WExerciseList",
 				"Nav" => "WNav",
 				"Head" => "WHead",
-				"Footer" => "WFooter"
+				"Footer" => "WFooter",
+				"LoggedIn" => "WLoggedIn",
+				"LoggedOut" => "WLoggedOut"
 			);
 	
 	/* Constructor */
@@ -45,8 +49,6 @@ final class WidgetLoader
 			$r = call_user_func(self::$_widget[$widget] . "::load", $args);
 		else
 			$r = call_user_func(self::$_widget[self::ERROR_WIDGET] . "::load", $args);
-		
-		//$cfg->logger->info("Widget ($widget) successfully loaded");
 		
 		return $r;
 	}
