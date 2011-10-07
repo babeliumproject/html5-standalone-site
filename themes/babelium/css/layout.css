@@ -167,28 +167,78 @@ section#maincontent > header
 	
 	section#maincontent > section > header
 	{
-		height: 70px;
+		height: 50px;
 		padding-left: 20px;
 		padding-top: 20px;
 	}
 	
-	section#maincontent > section.exerciseList > article
+	section#maincontent > section > header > h1
 	{
-		width: 50%;
-		height: 100px;
-		float: left;
+		width: 400px;
+		height: 27px;
 	}
 	
-		section#maincontent > section.exerciseList > article > h1
+	section#maincontent > section.exerciseList
+	{
+		margin: 20px;
+	}
+	
+	section#maincontent > section.exerciseList > article
+	{
+		width: 49%;
+		min-width: 470px;
+		min-height: 130px;
+		float: left;
+		padding-top: 15px;
+		padding-bottom: 10px;
+	}
+	
+		section#maincontent > section.exerciseList > article > *
 		{
-			width: 350px;
-			margin-left: 170px;
+			display: inline-block;
 		}
+		
+		section#maincontent > section.exerciseList > article > div
+		{
+			width: 300px;
+			height: 100%;
+		}
+		
+			section#maincontent > section.exerciseList > article > div > *
+			{
+				width: 300px;
+			}
+		
+			section#maincontent > section.exerciseList > article > div > h1
+			{
+				padding-bottom: 3px;
+				margin-bottom: 3px;
+			}
+			
+			section#maincontent > section.exerciseList > article > div > p
+			{
+				margin-bottom: 3px;
+			}
 	
 		section#maincontent > section.exerciseList > article > aside
 		{
 			width: 170px;
 			padding: 10px;
 		}
+		
+			section#maincontent > section.exerciseList > article > aside > div
+			{
+				width: 150px;
+				height: 80px;
+				border: 1px solid black;
+			}
+			
+				section#maincontent > section.exerciseList > article > aside > div > span
+				{
+					position: absolute;
+					width: 30px;
+					height: 10px;
+					background-color: black;
+				}
 
 /* END OF MAIN CONTENT */

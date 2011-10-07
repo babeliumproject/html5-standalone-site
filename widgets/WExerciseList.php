@@ -5,6 +5,10 @@ require_once(dirname(__FILE__) . "/../config/Config.php");
 require_once("Zend/Http/Client.php");
 require_once("Zend/Json.php");
 
+// Utils
+require_once(dirname(__FILE__) . "/../util/view/LevelCorrespondence.php");
+require_once(dirname(__FILE__) . "/../util/view/LocaleFlagResource.php");
+
 class WExerciseList implements IWidget
 {	
 	public static function load($args)
@@ -16,6 +20,9 @@ class WExerciseList implements IWidget
 		
 		// Prepare template
 		$cfg->smarty->assign("exercises", $phpObj);
+		$cfg->smarty->assign("locale", new LocaleFlagResource());
+		$cfg->smarty->assign("level", new LevelCorrespondence());
+		
 		
 		return $cfg->smarty->fetch($widget.".tpl");
 	}

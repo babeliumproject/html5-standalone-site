@@ -221,8 +221,8 @@ aside#motd
  	background: #eef2f5;
  	
  	/** Background **/
-	background: -webkit-radial-gradient(80% 80%, ellipse farthest-side, rgb(226, 239, 243) 70%, white 100%);
-	background: -moz-radial-gradient(80% 80%, ellipse farthest-side, rgb(226, 239, 243) 70%, white 100%);
+	background: -webkit-radial-gradient(40% 30%, ellipse farthest-side, rgb(226, 239, 243) 40%, white 100%);
+	background: -moz-radial-gradient(40% 30%, ellipse farthest-side, rgb(226, 239, 243) 40%, white 100%);
  }
  
 	 section#maincontent > header
@@ -265,11 +265,67 @@ aside#motd
 		color: #268caa;
 		font-weight: bold;
 		font-size: 20px;
-		text-decoration: underline;
+		border-bottom: 3px solid #268caa;
 	}
 	
-		section#maincontent > section.exerciseList > article > h1
+		section#maincontent > section.exerciseList > article > aside > div
 		{
-			font-weight: normal;
+			/** Background **/
+			background: -webkit-radial-gradient(80% 80%, ellipse farthest-side, rgb(134, 188, 206) 10%, white 100%);
+			background: -moz-radial-gradient(80% 80%, ellipse farthest-side, rgb(134, 188, 206) 10%, white 100%);
+			
+			/** box shadow **/ 
+			-moz-box-shadow: 2px 2px 4px #666;
+			-webkit-box-shadow: 2px 2px 4px #666;
+			box-shadow: 2px 2px 4px #666;
+		}
+		
+		
+		section#maincontent > section.exerciseList > article > div > h1
+		{
+			font-size: 14px;
+			font-weight: bold;
 			border-bottom: 2px solid #cacdcf;
+		}
+		
+		section#maincontent > section.exerciseList > article
+		{
+			margin: 1px;
+		}
+		
+		section#maincontent > section.exerciseList > article:hover
+		{
+			background-color: #cedbef;
+			border: 1px solid #86bcce;
+			margin: 0px;
+			-webkit-border-radius: 8px;  
+			-moz-border-radius: 8px;  
+			border-radius: 8px;
+			cursor: pointer;
+		}
+		
+		
+		section#maincontent > section.exerciseList > article > div > *
+		{
+			font-size: 13px;
+		}
+		
+		section#maincontent > section.exerciseList > article > div > div.dtop > *
+		{
+			font-weight: bold;
+			color: #d3aa31;
+		}
+		
+		section#maincontent > section.exerciseList > article > div > p.username
+		{
+			text-align: right;
+		}
+		
+		section#maincontent > section.exerciseList > article > aside > div > span
+		{
+			color: white;
+			font-size: 11px;
+			font-weight: bold;
+			text-align: right;
+			padding: 2px;
 		}
