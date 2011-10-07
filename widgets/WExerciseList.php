@@ -12,26 +12,10 @@ class WExerciseList implements IWidget
 		$cfg = Config::getInstance();
 		
 		$widget = $args[0];
-		$theme = $cfg->theme;
-
-		if ( !file_exists(dirname(__FILE__) . "/../themes/".$theme."/templates/".$widget.".tpl") )
-		{
-			//$cfg->logger->error("Cant load Widget ($widget) template");
-			return false;
-		}
-		
-		$client = new Zend_Http_Client();
-		$client->setUri($cfg->api_bridge . "?class=Exercise&method=getExercises");
-		$client->setConfig(array(
-			"maxredirects" => 0,
-		    "timeout"      => 30));
-		
-		$response = $client->request();
-		
-		$phpObj = Zend_Json::decode($response->getBody());
+		$phpObj = $args[1];
 		
 		// Prepare template
-		$cfg->smarty->assign("exercises", $phpObj['Exercise']['getExercises']);
+		$cfg->smarty->assign("exercises", $phpObj);
 		
 		return $cfg->smarty->fetch($widget.".tpl");
 	}

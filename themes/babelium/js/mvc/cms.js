@@ -141,7 +141,7 @@ BP.CMS = (function()
 			
 			var popup = $("aside#popup");
 			
-			popup.slideUp(500);
+			popup.slideUp(500, function(){document.getElementById("loginForm").reset();});
 			$("div#logo").animate({top: '35px'}, 500);
 		},
 		

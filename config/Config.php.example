@@ -2,8 +2,8 @@
 
 // Project includes
 require_once(dirname(__FILE__) . "/../util/interfaces/iSingleton.php");
-require_once(dirname(__FILE__) . "/../widgets/WidgetLoader.php");
-require_once(dirname(__FILE__) . "/../modules/ModuleLoader.php");
+require_once(dirname(__FILE__) . "/../core/WidgetLoader.php");
+require_once(dirname(__FILE__) . "/../core/ModuleLoader.php");
 
 /* External libraries:
  * ----
@@ -89,6 +89,7 @@ class Config implements ISingleton
 	
 	//Path to store the notification templates
 	public $templatePath = "/resources/templates";
+	public $posterPath = "/resources/images/posters";
 
 	//Directory for temporary files
 	public $temp_folder = '/tmp';
@@ -225,6 +226,7 @@ class Config implements ISingleton
 		{
 			$this->filePath = $_SERVER ['DOCUMENT_ROOT'] . $this->filePath;
 			$this->imagePath = $_SERVER ['DOCUMENT_ROOT'] . $this->imagePath;
+			$this->posterPath = $_SERVER ['DOCUMENT_ROOT'] . $this->posterPath;
 			$this->templatePath = $_SERVER ['DOCUMENT_ROOT'] . $this->templatePath;
 			$this->indexPath = $_SERVER ['DOCUMENT_ROOT'] . $this->indexPath;
 		}
@@ -232,6 +234,7 @@ class Config implements ISingleton
 		{
 			$this->filePath = $this->webRootPath . $this->filePath;
 			$this->imagePath = $this->webRootPath . $this->imagePath;
+			$this->posterPath = $this->webRootPath . $this->posterPath
 			$this->templatePath = $this->webRootPath . $this->templatePath;
 			$this->indexPath = $this->webRootPath . $this->indexPath;
 		}

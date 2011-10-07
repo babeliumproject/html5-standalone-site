@@ -21,7 +21,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-require_once dirname(__FILE__) . "/../../config/Config.php";
+require_once(dirname(__FILE__) . "/../../config/Config.php");
 require_once 'utils/Datasource.php';
 require_once 'utils/Mailer.php';
 require_once 'utils/SessionHandler.php';
@@ -50,6 +50,35 @@ class Auth{
 			throw new Exception($e->getMessage());
 		}
 	}
+
+	/**
+	 *
+	 */
+	public function getCommunicationToken($secretKey){
+		//Check if the request if made via HTTPS or not
+		//TODO
+
+		$length = 13;		
+
+		if(session_id() != "" && md5(session_id()) == $secretKey){
+			$commToken = $this->_generateRandomCommunicationToken($length);
+			$_SESSION['commToken'] = $commToken;
+			return $commToken;
+		} else {
+			return FALSE;
+		}
+	}
+
+	 private function _generateRandomCommunicationToken($length){
+                $token = '';
+                $i = 0;
+                while ($i < $length){
+                        $token = $token . dechex(floor((rand(0,1000000) * 16)/1000000));
+                        $i++;
+                }
+                return $token;
+        }
+
 
 	/**
 	 * Checks the provided authentication data and logs the user in the system if everything is ok
@@ -229,8 +258,8 @@ class Auth{
 	 */
 	private function _setSessionData($userData){
 		//We are changing the privilege level, so we generate a new session id
-		if(!headers_sent())
-			session_regenerate_id();
+		//if(!headers_sent())
+		//	session_regenerate_id();
 		$_SESSION['logged'] = true;
 		$_SESSION['uid'] = $userData->id;
 		$_SESSION['user-agent-hash'] = sha1($_SERVER['HTTP_USER_AGENT']);
@@ -244,8 +273,8 @@ class Auth{
 	 */
 	private function _resetSessionData(){
 		//We are changing the privilege level, so first we generate a new session id
-		if(!headers_sent())
-			session_regenerate_id();
+		//if(!headers_sent())
+		//	session_regenerate_id();
 		$_SESSION['logged'] = false;
 		$_SESSION['uid'] = 0;
 		$_SESSION['user-agent-hash'] = '';

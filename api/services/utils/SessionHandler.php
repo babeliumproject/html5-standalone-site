@@ -25,9 +25,9 @@
  * Import here the definitions of the classes of the data you're going to store in 
  * the $_SESSION superglobal to avoid PHP and Zend AMF errors.
  */
- require_once dirname(__FILE__).'/../vo/UserVO.php';
- require_once dirname(__FILE__).'/../vo/UserLanguageVO.php';
- require_once dirname(__FILE__).'/../vo/SubtitleLineVO.php';
+// require_once dirname(__FILE__).'/../vo/UserVO.php';
+// require_once dirname(__FILE__).'/../vo/UserLanguageVO.php';
+// require_once dirname(__FILE__).'/../vo/SubtitleLineVO.php';
 
 
 /**
@@ -41,8 +41,10 @@ class SessionHandler{
 	//logging out the users for security purposes.
 	
 	public function SessionHandler($restrictedArea = false){
-		if(session_id() == '')
+		if(session_id() == ''){
 			session_start();
+			$_SESSION['initiated'] = true;	
+		}
 		$this->avoidSessionFixation();
 		
 		if($restrictedArea)

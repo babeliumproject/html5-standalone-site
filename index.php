@@ -6,7 +6,9 @@ ini_set('display_errors', '0'); // DEBUG MODE: turn to 1
 
 /** BEGIN CODE **/
 require_once("config/Config.php");
-require_once("modules/SessionManager.php");
+require_once("core/SessionManager.php");
+require_once("core/ModuleLoader.php");
+require_once("core/WidgetLoader.php");
 
 /** Init session and config **/
 $cfg = Config::getInstance();

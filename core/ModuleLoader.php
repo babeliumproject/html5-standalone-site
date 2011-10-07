@@ -3,10 +3,12 @@
 require_once(dirname(__FILE__) . "/../util/interfaces/iModule.php");
 require_once(dirname(__FILE__) . "/../config/Config.php");
 
-// Available modules
-require_once("M404.php");
-require_once("MHome.php");
-require_once("MAuth.php");
+/**
+ * Available modules
+ */
+require_once(dirname(__FILE__) . "/../modules/M404.php");
+require_once(dirname(__FILE__) . "/../modules/MHome.php");
+require_once(dirname(__FILE__) . "/../modules/MAuth.php");
 
 /**
  * Module loader

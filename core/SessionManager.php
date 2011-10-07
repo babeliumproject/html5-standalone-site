@@ -9,7 +9,7 @@ require_once(dirname(__FILE__) . "/../config/Config.php");
  */
 require_once("Zend/Session.php");
 
-class SessionManager
+class SessionManager implements ISingleton
 {
 	protected static $_instance;
 	public $namespace = null;
@@ -17,21 +17,30 @@ class SessionManager
 	/* Private constructor */
 	private function __construct() 
 	{
+		if ( session_id() == '' ){
+			session_start(); 
+		    $_SESSION['initiated'] = true;
+		}
+		if ( !isset($_SESSION['initiated']) ){
+		    session_regenerate_id();
+		    $_SESSION['initiated'] = true;
+		} 
+		
 		/* Explicitly start the session */
-		Zend_Session::start();
+		//Zend_Session::start();
 
 		/* Create our Session namespace - using 'Default' namespace */
-		$this->namespace = new Zend_Session_Namespace();
+		//$this->namespace = new Zend_Session_Namespace();
 
 		/** 
 		 * Check that our namespace has been initialized - if not, regenerate the session id
 		 * Makes Session fixation more difficult to achieve
 		 */
-		if ( !isset($this->namespace->initialized) ) 
+		/*if ( !isset($this->namespace->initialized) ) 
 		{
 			Zend_Session::regenerateId();
 			$this->namespace->initialized = true;
-		}
+		}*/
 	}
 
 	/* Returns an unique instance */
@@ -93,6 +102,28 @@ class SessionManager
 	{
 		Zend_Session::destroy();
 		Zend_Session::expireSessionCookie();
+	}
+	
+	/**
+	 * For now, we disable the IP check. Many ISPs have load-balance based dynamic IPs
+	 * so it could be a bother for the user.
+	 * 
+	 * @throws Exception
+	 */
+	public function avoidSessionHijacking()
+	{
+		if( $this->getVar("LoggedIn") != null && $this->getVar("uid") != null 
+				&& $this->getVar("user-agent-hash") != null )
+		{
+
+			if ( $this->getVar("LoggedIn") == false || $this->getVar("uid") == 0 
+					|| $this->getVar("user-agent-hash") != sha1($_SERVER['HTTP_USER_AGENT']) )		
+			{
+				throw new Exception("Unauthorized");
+			}
+		}
+		else
+			throw new Exception("Unauthorized");
 	}
 }
 ?>

@@ -218,7 +218,11 @@ aside#motd
  */
  section#maincontent
  {
- 	background-color: #eef2f5;
+ 	background: #eef2f5;
+ 	
+ 	/** Background **/
+	background: -webkit-radial-gradient(80% 80%, ellipse farthest-side, rgb(226, 239, 243) 70%, white 100%);
+	background: -moz-radial-gradient(80% 80%, ellipse farthest-side, rgb(226, 239, 243) 70%, white 100%);
  }
  
 	 section#maincontent > header

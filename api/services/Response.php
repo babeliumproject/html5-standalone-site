@@ -21,7 +21,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-require_once dirname(__FILE__) . "/../../config/Config.php";
+require_once(dirname(__FILE__) . "/../../config/Config.php");
 require_once 'utils/Datasource.php';
 require_once 'utils/SessionHandler.php';
 require_once 'utils/VideoProcessor.php';
@@ -51,6 +51,7 @@ class Response {
 			$settings = Config::getInstance();
 			$this->filePath = $settings->filePath;
 			$this->imagePath = $settings->imagePath;
+			$this->posterPath = $settings->posterPath;
 			$this->red5Path = $settings->red5Path;
 			$this->conn = new Datasource ( $settings->host, $settings->db_name, $settings->db_username, $settings->db_password );
 			
@@ -64,15 +65,17 @@ class Response {
 	public function saveResponse($data){
 		set_time_limit(0);
 		$this->_getResourceDirectories();
-		$imagePath = $data->thumbnailUri;
+		$thumbnail = 'nothumb.png';
 		
 		try{
 			$videoPath = $this->red5Path .'/'. $this->responseFolder .'/'. $data->fileIdentifier . '.flv';
-			$imagePath = $this->imagePath .'/'. $data->fileIdentifier . '.jpg';
 			$mediaData = $this->mediaHelper->retrieveMediaInfo($videoPath);
 			$duration = $mediaData->duration;
-			if($mediaData->hasVideo)
-				$this->mediaHelper->takeRandomSnapshot($videoPath, $imagePath);
+
+			if($mediaData->hasVideo){
+				$snapshot_output = $this->mediaHelper->takeFolderedRandomSnapshots($videoPath, $this->imagePath, $this->posterPath);
+				$thumbnail = 'default.jpg';
+			}
 		} catch (Exception $e){
 			throw new Exception($e->getMessage());
 		}
@@ -81,14 +84,15 @@ class Response {
 		$insert = "INSERT INTO response (fk_user_id, fk_exercise_id, file_identifier, is_private, thumbnail_uri, source, duration, adding_date, rating_amount, character_name, fk_subtitle_id) ";
 		$insert = $insert . "VALUES ('%d', '%d', '%s', 1, '%s', '%s', '%s', now(), 0, '%s', %d ) ";
 
-		return $this->conn->_insert($insert, $_SESSION['uid'], $data->exerciseId, $data->fileIdentifier, $data->fileIdentifier . '.jpg', $data->source, $duration, $data->characterName, $data->subtitleId );
-
+		$result = $this->conn->_insert($insert, $_SESSION['uid'], $data->exerciseId, $data->fileIdentifier, $thumbnail, $data->source, $duration, $data->characterName, $data->subtitleId );
+		$r = new stdClass();
+		$r->responseId = $result;
+		return $r;
 	}
 
-	public function makePublic($data)
+	public function makePublic($responseId)
 	{
 		$result = 0;
-		$responseId = $data->id;
 		
 		$this->conn->_startTransaction();
 		

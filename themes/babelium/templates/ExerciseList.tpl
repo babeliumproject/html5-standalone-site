@@ -7,7 +7,7 @@
 {foreach from=$exercises item=exercise}
   			<article>
 				<h1>
-					{$exercise.title}
+					{$exercise->title}
 				</h1>
 				
 				<aside>

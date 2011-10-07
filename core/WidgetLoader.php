@@ -3,14 +3,16 @@
 require_once(dirname(__FILE__) . "/../util/interfaces/iWidget.php");
 require_once(dirname(__FILE__) . "/../config/Config.php");
 
-require_once("WExerciseList.php");
-require_once("WNav.php");
-require_once("WHead.php");
-require_once("WFooter.php");
-require_once("userManagement/WLoggedIn.php");
-require_once("userManagement/WLoggedOut.php");
-
-require_once("W404.php");
+/**
+ * Widgets
+ */
+require_once(dirname(__FILE__) . "/../widgets/WExerciseList.php");
+require_once(dirname(__FILE__) . "/../widgets/WNav.php");
+require_once(dirname(__FILE__) . "/../widgets/WHead.php");
+require_once(dirname(__FILE__) . "/../widgets/WFooter.php");
+require_once(dirname(__FILE__) . "/../widgets/userManagement/WLoggedIn.php");
+require_once(dirname(__FILE__) . "/../widgets/userManagement/WLoggedOut.php");
+require_once(dirname(__FILE__) . "/../widgets/W404.php");
 
 /**
  * Widget loader
