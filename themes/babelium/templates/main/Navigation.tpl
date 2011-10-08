@@ -74,7 +74,5 @@
 		<aside id="loader">
 			<div id="loadcontext" class="HBox vcenter hcenter">
 				<span></span>
-				<div class="spacer"></div>
-				<progress style="width: 20px; height: 10px;"></progress>
 			</div>
 		</aside>

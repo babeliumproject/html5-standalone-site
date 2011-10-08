@@ -150,22 +150,6 @@ section#maincontent > header
 		height: 50px;
 		padding-left: 20px;
 	}
-
-	section#maincontent > aside#loader
-	{
-		position: absolute;
-		display: none;
-		width: 150px;
-		height: 30px;
-		padding-left: 10px;
-		padding-right: 10px;
-	}
-	
-		section#maincontent > aside#loader > div#loadcontext
-		{
-			width: 100%;
-			height: 100%;
-		}
 	
 	section#maincontent > section > header
 	{
@@ -181,6 +165,26 @@ section#maincontent > header
 	}
 	
 /* END OF MAIN CONTENT */
+
+/* LOADER */
+
+section#maincontent > #loader
+{
+	position: absolute;
+	display: none;
+	width: 200px;
+	height: 50px;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+	
+		section#maincontent > #loader > div#loadcontext
+		{
+			width: 100%;
+			height: 100%;
+		}
+		
+/* END OF LOADER */
 
 /* EXERCISE LIST */
 	

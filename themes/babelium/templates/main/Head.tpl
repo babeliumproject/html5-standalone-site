@@ -11,14 +11,13 @@
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
 	<!--<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>-->
 	<!--<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>-->
-	<!--<script type="text/javascript" src="themes/babelium/js/jquery1.5.1.js"></script>-->
 	
 	<!-- MVC -->
-	<script type="text/javascript" src="themes/babelium/js/mvc/base.js"></script>
-	<script type="text/javascript" src="themes/babelium/js/mvc/cairngorm.js"></script>
-	<script type="text/javascript" src="themes/babelium/js/mvc/mvc.js"></script>
-	<script type="text/javascript" src="themes/babelium/js/mvc/cms.js"></script>
-	<script type="text/javascript" src="themes/babelium/js/mvc/encode.js"></script>
+	<script type="text/javascript" src="themes/babelium/js/base.js"></script>
+	<script type="text/javascript" src="themes/babelium/js/cairngorm.js"></script>
+	<script type="text/javascript" src="themes/babelium/js/mvc.js"></script>
+	<script type="text/javascript" src="themes/babelium/js/cms.js"></script>
+	<script type="text/javascript" src="themes/babelium/js/encode.js"></script>
 	
 </head>
 <body class="VBox">

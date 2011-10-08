@@ -236,30 +236,6 @@ aside#motd
 			font-size: 24px;
 			color: #972c0a;
 		 }
-	 
-	section#maincontent > aside#loader
-	{
-		/** Default background **/
-		background-color: #FEFEFE;
-		
-		/** Gradient for mozilla and webkit powered **/
-		background: -webkit-gradient(linear, 0 0, 0 100%, from(white), to(#E2EFF3));
-		background: -moz-linear-gradient(top, white, #E2EFF3);
-		
-		/** Border bottom right roundered **/
-		-moz-border-bottom-right-radius: 6px; 
-		-webkit-border-bottom-right-radius: 6px; 
-		border-bottom-right-radius:6px;
-		
-		border-bottom: 1px solid #38babc;
-		border-right: 1px solid #38babc;
-		
-		/** Shadow **/
-		/** box shadow **/ 
-		-moz-box-shadow: 1px 1px 2px #CCC;
-		-webkit-box-shadow: 1px 1px 2px #CCC;
-		box-shadow: 1px 1px 2px #CCC;
-	}
 
 	section#maincontent > section > header > h1
 	{
@@ -268,6 +244,35 @@ aside#motd
 		font-size: 20px;
 		border-bottom: 3px solid #268caa;
 	}
+	
+/*
+ * LOADER
+ */
+ 
+section#maincontent > #loader
+{
+	font-size: 14px;
+	
+	/** Default background **/
+	background-color: #FEFEFE;
+		
+	/** Gradient for mozilla and webkit powered **/
+	background: -webkit-gradient(linear, 0 0, 0 100%, from(white), to(#E2EFF3));
+	background: -moz-linear-gradient(top, white, #E2EFF3);
+		
+	/** Border bottom right roundered **/
+	-moz-border-bottom-right-radius: 6px; 
+	-webkit-border-bottom-right-radius: 6px; 
+	border-bottom-right-radius:6px;
+		
+	border-bottom: 1px solid #38babc;
+	border-right: 1px solid #38babc;
+		
+	/** Shadow **/
+	-moz-box-shadow: 1px 1px 2px #CCC;
+	-webkit-box-shadow: 1px 1px 2px #CCC;
+	box-shadow: 1px 1px 2px #CCC;
+}
 	
 /*
  * EXERCISE LIST

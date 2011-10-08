@@ -195,7 +195,7 @@ var ViewConfigModuleCommand = Cairngorm.Command.extend(
 	
 		window.history.pushState({module : "conf" }, "Configuration - Babelium Project", "?module=conf");
 		
-		BP.CMS.prepareMainContent("configuration module", function ()
+		BP.CMS.prepareMainContent("config module", function ()
 		{
 			BP.ConfigDelegate.viewConfigModule(_this);
 		});
@@ -323,7 +323,7 @@ BP.control = new Controller();
  * LOAD SERVICES FROM A XML FILE
  * ==========================================================*/
 
-$.get("themes/babelium/js/mvc/services.xml", null, function ( data, textStatus)
+$.get("themes/babelium/js/services.xml", null, function ( data, textStatus)
 {
 	var _httpGateways = {};
 	

@@ -141,11 +141,18 @@ BP.CMS = (function()
 			_loading = true;
 			
 			// Display loading message
-			$("#maincontent > aside#loader > div#loadcontext > span").html("Loading <strong>"+location+"</strong>");
-			$("#maincontent > aside#loader").slideDown(500);
-
+			var loader = $("aside#loader");
+			var pos = $("section#maincontent > header").offset();
+			var h = $("section#maincontent > header").outerHeight(true);
+			
+			loader.css("top", pos.top + h);
+			loader.find("div#loadcontext > span").html("Loading <strong>"+location+"</strong>");
+			loader.slideDown(500);
+			
+			//$("#maincontent > section > article").hide("slow");
+			
 			// Slide up current section and remove it on animation end
-			$("#maincontent > section").slideUp(500, function()
+			$("#maincontent > section").fadeOut(500, function()
 			{
 				$("#maincontent > section").remove();
 				
