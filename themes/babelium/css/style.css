@@ -307,6 +307,11 @@ aside#motd
 			-moz-border-radius: 8px;  
 			border-radius: 8px;
 			cursor: pointer;
+			
+			/** box shadow **/ 
+			-moz-box-shadow: 2px 2px 4px #666;
+			-webkit-box-shadow: 2px 2px 4px #666;
+			box-shadow: 2px 2px 4px #666;
 		}
 		
 		
@@ -350,11 +355,11 @@ footer
 		background: url(../images/pattern2.png);
 	}
 	
-	footer > div.HBox
+	footer > ul.HBox
 	{
 		/** Border top right roundered **/
 		-moz-border-top-right-radius: 6px; 
-		-webkit-top-bottom-right-radius: 6px; 
+		-webkit-border-top-right-radius: 6px; 
 		border-top-right-radius:6px;
 		
 		/** Border top left roundered **/
@@ -367,5 +372,17 @@ footer
 		border-right: 2px solid #38babc;
 		
 	}
+	
+		footer > ul.HBox > li
+		{
+			font-weight: bold;
+			color: #2d89a4;
+			border-right: 2px solid #CCC;
+		}
+		
+		footer > ul.HBox > li:last-child
+		{
+			border-right: none;
+		}
 	
 	

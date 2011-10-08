@@ -7,9 +7,13 @@
 	<div class="spacer">
 		<div class="helper"></div>
 	</div>
-	<div class="HBox hcenter vcenter">
-		asassas
-	</div>
+	<ul class="HBox hcenter vcenter">
+		<li><a href="#">FAQ</a></li>
+		<li><a href="#">About Us</a></li>
+		<li><a href="#">Developers</a></li>
+		<li><a href="#">Terms of Use</a></li>
+		<li>Copyleft 2011 Babelium Project</a></li>
+	</ul>
 	<div class="spacer">
 		<div class="helper"></div>
 	</div>

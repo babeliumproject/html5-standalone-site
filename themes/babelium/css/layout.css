@@ -256,10 +256,18 @@ footer
 		height: 30px;
 	}
 	
-	footer > div.HBox
+	footer > ul.HBox
 	{
-		width: 90%;
+		width: 1000px;
 		height: 40px;
 	}
+	
+		footer > ul.HBox > li
+		{
+			padding-right: 20px;
+			padding-left: 20px;
+		}
+		
+		
 
 /* END OF FOOTER */

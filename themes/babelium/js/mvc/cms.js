@@ -58,7 +58,62 @@ BP.CMS = (function()
 	 */
 	function _initLocalebox()
 	{
-		// TODO
+		// Hide select
+		var select = $("select#localebox").css("display", "none");
+		
+		// Add a div in its place
+		select.parent().append("<div class='localebox'></div>");
+		var localeBox = $(".localebox");
+		
+		// Containing 2 divs
+		localeBox.append("<div class='selectBox'></div>");
+		localeBox.append("<ul class='dropDown'></ul>");
+		
+		var selectBox = $(".selectBox");
+		var dropDown = $(".dropDown").hide();
+		
+		// Add options to localebox
+		select.find("option").each(function (index)
+		{
+			var option = $(this);
+			var text = $(this).text();
+			var flag = $(this).data("icon");
+			var content = "<img src='" + flag + "' width='16' height='16' align='left' hspace='3' vspace='3' "
+							+ "alt='" + text + "' />" + text;
+			var arrow = "<img src='themes/babelium/images/arrow-down.png'"
+				+ "alignt='left' style='float:right; margin-right: 3px;' />";
+
+			// Is is checked as default initialize localebox
+			if ( $(this).is(":selected") )
+				selectBox.html(content+arrow);
+			
+			// Add option
+			var li = $('<li>',{html: content});
+			dropDown.append(li);
+			
+			// Trigger action on click the option
+			li.click(function()
+			{
+				selectBox.html($(this).html()+arrow);
+				dropDown.slideUp();
+				select.val(option.val());
+			});
+		});
+		
+		// Show/hide dropDown
+		selectBox.click(function()
+		{
+			dropDown.slideToggle();
+		});
+	
+		// Hide dropdown
+		$(document).click(function()
+		{
+			if ( dropDown.is(':animated') )
+				return false;
+			
+			dropDown.slideUp();
+		});
 	}
 	
 	
