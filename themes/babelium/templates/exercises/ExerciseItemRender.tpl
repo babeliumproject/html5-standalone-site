@@ -17,13 +17,13 @@
 							{$level->getLevelCorrespondence($exercise->avgDifficulty)}
 						</div>
 						
-						<div class="boxFlex"></div>
+						<div class="spacer"></div>
 						
 						<div>
 							<img src="themes/babelium/images/rating.png" width="84" height="16" alt="rating" />
 						</div>
 						
-						<div class="boxFlex"></div>
+						<div class="spacer"></div>
 							
 						<div>
 							{$exercise->addingDate|date_format:"%d/%m/%Y"}
