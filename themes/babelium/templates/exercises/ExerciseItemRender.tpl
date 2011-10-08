@@ -1,11 +1,4 @@
-
-		<section class="exerciseList">
-			<header>
-				<h1>Practice exercise list</h1>
-			</header>
-			
-{foreach from=$exercises item=exercise}
-  			<article>
+			<article>
   				<aside>
 					<div><span>{$time->format($exercise->duration)}</span></div>
 				</aside>
@@ -58,5 +51,3 @@
 					</p>
 				</div>
 			</article>
-{/foreach}
-		</section>

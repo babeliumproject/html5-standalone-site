@@ -166,7 +166,6 @@ nav#mainnav
 /*
  * SEARCH BAR
  */
-
 div#searchnav
 {
 	/** Default background **/
@@ -207,10 +206,11 @@ aside#motd
 		background: url(../images/pattern2.png);
 	}
 
-	aside#motd > div#motdhelper, section#maincontent > header > div#hhelper
+	aside#motd > div#motdhelper, section#maincontent > header > div#hhelper, footer > div.spacer > div.helper
 	{
 		background-color: #E2EFF3;
-		border: 1px solid #38babc;
+		border-top: 1px solid #38babc;
+		border-bottom: 1px solid #38babc;
 	}
 
 /*
@@ -229,6 +229,7 @@ aside#motd
 	 {
 	 	background: url(../images/pattern2.png);
 	 }
+
 		 section#maincontent > header > h1 
 		 {
 		 	font-weight: bold;
@@ -267,6 +268,10 @@ aside#motd
 		font-size: 20px;
 		border-bottom: 3px solid #268caa;
 	}
+	
+/*
+ * EXERCISE LIST
+ */
 	
 		section#maincontent > section.exerciseList > article > aside > div
 		{
@@ -329,3 +334,38 @@ aside#motd
 			text-align: right;
 			padding: 2px;
 		}
+
+
+/*
+ * FOOTER
+ */
+
+footer
+{
+	background-color: none;
+}
+
+	footer > div.spacer
+	{
+		background: url(../images/pattern2.png);
+	}
+	
+	footer > div.HBox
+	{
+		/** Border top right roundered **/
+		-moz-border-top-right-radius: 6px; 
+		-webkit-top-bottom-right-radius: 6px; 
+		border-top-right-radius:6px;
+		
+		/** Border top left roundered **/
+		-moz-border-top-left-radius: 6px; 
+		-webkit-border-top-left-radius: 6px; 
+		border-top-left-radius:6px;
+
+		border-top: 2px solid #38babc;
+		border-left: 2px solid #38babc;
+		border-right: 2px solid #38babc;
+		
+	}
+	
+	

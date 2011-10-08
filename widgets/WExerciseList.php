@@ -27,8 +27,7 @@ class WExerciseList implements IWidget
 		$cfg->smarty->assign("license", new License());
 		$cfg->smarty->assign("time", new TimeFormatter());
 		
-		
-		return $cfg->smarty->fetch($widget.".tpl");
+		return $cfg->smarty->fetch("exercises/VideoList.tpl");
 	}
 }
 

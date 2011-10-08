@@ -17,15 +17,15 @@ $session = SessionManager::getInstance();
 $cfg->logger->info("Initiating index.php");
 
 $module = (isset($_GET["module"]))? $_GET["module"] : "home";
-$section = (isset($_GET["section"]))? $_GET["section"] : "";
+$action = (isset($_GET["action"]))? $_GET["action"] : "";
 $state = (isset($_GET["state"]))? $_GET["state"] : "";
 
 // Load header
 echo WidgetLoader::loadWidget("Head");
-echo WidgetLoader::loadWidget("Nav", $module, $section);
+echo WidgetLoader::loadWidget("Nav", $module, $action);
 
 // Load module
-echo ModuleLoader::loadModule($module, $section, $state);
+echo ModuleLoader::loadModule($module, $action, $state);
 
 // Load footer
 echo WidgetLoader::loadWidget("Footer");

@@ -8,7 +8,7 @@ class WFooter implements IWidget
 	public static function load($args)
 	{
 		$cfg = Config::getInstance();
-		return $cfg->smarty->fetch($args[0] . ".tpl");
+		return $cfg->smarty->fetch("main/Footer.tpl");
 	}
 }
 

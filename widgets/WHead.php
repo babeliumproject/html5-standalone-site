@@ -10,7 +10,7 @@ class WHead implements IWidget
 		$cfg = Config::getInstance();
 		$cfg->smarty->assign("MODULE_GATEWAY", $cfg->module_bridge);
 		
-		return $cfg->smarty->fetch($args[0] . ".tpl");
+		return $cfg->smarty->fetch("main/Head.tpl");
 	}
 }
 
