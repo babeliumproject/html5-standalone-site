@@ -7,7 +7,7 @@
 {foreach from=$exercises item=exercise}
   			<article>
   				<aside>
-					<div><span>{$exercise->duration}</span></div>
+					<div><span>{$time->format($exercise->duration)}</span></div>
 				</aside>
 				
 				<div>
@@ -33,7 +33,7 @@
 						<div class="boxFlex"></div>
 							
 						<div>
-							{$exercise->addingDate}
+							{$exercise->addingDate|date_format:"%d/%m/%Y"}
 						</div>
 					</div>
 					
@@ -50,45 +50,11 @@
 					</p>
 					
 					<p>
-					{if $exercise->license eq "cc-by-nc-nd"}
-						<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/">
+						<a href="http://creativecommons.org/licenses/{$exercise->license|replace:'cc-':''}/3.0/">
 							<img src="themes/babelium/images/licenses/{$exercise->license}.png" 
 										width="80" height="15" alt="{$exercise->license}" border="0">
 						</a>
-						Non-Commercial No Derivatives
-					{elseif $exercise->license eq "cc-by-nc-sa"}
-						<a href="http://creativecommons.org/licenses/by-nc-sa/3.0/">
-							<img src="themes/babelium/images/licenses/{$exercise->license}.png" 
-										width="80" height="15" alt="{$exercise->license}" border="0">
-						</a>
-						Non-Commercial Share Alike
-					{elseif $exercise->license eq "cc-by-nc"}
-						<a href="http://creativecommons.org/licenses/by-nc/3.0/">
-							<img src="themes/babelium/images/licenses/{$exercise->license}.png" 
-										width="80" height="15" alt="{$exercise->license}" border="0">
-						</a>
-						Non-Commercial
-					{elseif $exercise->license eq "cc-by-nd"}
-						<a href="http://creativecommons.org/licenses/by-nd/3.0/">
-							<img src="themes/babelium/images/licenses/{$exercise->license}.png" 
-										width="80" height="15" alt="{$exercise->license}" border="0">
-						</a>
-						No Derivatives
-					{elseif $exercise->license eq "cc-by-sa"}
-						<a href="http://creativecommons.org/licenses/by-sa/3.0/">
-							<img src="themes/babelium/images/licenses/{$exercise->license}.png" 
-										width="80" height="15" alt="{$exercise->license}" border="0">
-						</a>
-						Share Alike
-					{elseif $exercise->license eq "cc-by"}
-						<a href="http://creativecommons.org/licenses/by/3.0/">
-							<img src="themes/babelium/images/licenses/{$exercise->license}.png" 
-										width="80" height="15" alt="{$exercise->license}" border="0">
-						</a>
-					{elseif $exercise->license eq "copyrighted"}
-							<img src="themes/babelium/images/licenses/{$exercise->license}.png" 
-										width="80" height="15" alt="{$exercise->license}" border="0">
-					{/if}
+						{$license->getTooltip($exercise->license)}
 					</p>
 				</div>
 			</article>

@@ -8,6 +8,8 @@ require_once("Zend/Json.php");
 // Utils
 require_once(dirname(__FILE__) . "/../util/view/LevelCorrespondence.php");
 require_once(dirname(__FILE__) . "/../util/view/LocaleFlagResource.php");
+require_once(dirname(__FILE__) . "/../util/view/License.php");
+require_once(dirname(__FILE__) . "/../util/view/TimeFormatter.php");
 
 class WExerciseList implements IWidget
 {	
@@ -22,6 +24,8 @@ class WExerciseList implements IWidget
 		$cfg->smarty->assign("exercises", $phpObj);
 		$cfg->smarty->assign("locale", new LocaleFlagResource());
 		$cfg->smarty->assign("level", new LevelCorrespondence());
+		$cfg->smarty->assign("license", new License());
+		$cfg->smarty->assign("time", new TimeFormatter());
 		
 		
 		return $cfg->smarty->fetch($widget.".tpl");
