@@ -13,6 +13,7 @@ class WNav implements IWidget
 		$cfg->smarty->assign("isLoggedIn", $_SESSION['logged']);
 		$cfg->smarty->assign("moduleTitle", $args[1]);
 		$cfg->smarty->assign("sectionTitle", $args[2]);
+		$cfg->smarty->assign("hideHeader", $args[3]);
 		return $cfg->smarty->fetch("main/Navigation.tpl");
 	}
 }

@@ -133,7 +133,7 @@ BP.CMS = (function()
 		 * @param location : target module name, just for a loading message
 		 * @param callback : callback function
 		 */
-		prepareMainContent : function ( location, callback )
+		prepareMainContent : function ( location, callback, hideHeader )
 		{
 			if ( _loading || !_initiated )
 				return;
@@ -142,8 +142,23 @@ BP.CMS = (function()
 			
 			// Display loading message
 			var loader = $("aside#loader");
-			var pos = $("section#maincontent > header").offset();
-			var h = $("section#maincontent > header").outerHeight(true);
+			var motd = $("aside#motd");
+			var header = $("section#maincontent > header");
+			
+			var pos = 0;
+			var h = 0;
+			
+			// Loading position
+			if ( hideHeader || motd.length > 0 )
+			{
+				pos = $("section#maincontent").offset();
+				h = 0;
+			}
+			else
+			{
+				pos = header.offset();
+				h = header.outerHeight(true);
+			}
 			
 			loader.css("top", pos.top + h);
 			loader.find("div#loadcontext > span").html("Loading <strong>"+location+"</strong>");
@@ -152,6 +167,18 @@ BP.CMS = (function()
 			// Slide up current section and remove it on animation end
 			if ( $("#maincontent > section").length > 0 )
 			{
+				// Hide motd if visible
+				if ( motd.length > 0 && !hideHeader )
+				{
+					motd.fadeOut(500, function(){motd.remove();});
+					header.slideDown(500);
+				}
+				
+				// We are loading home = motd messages instead usual header
+				if ( hideHeader )
+					header.slideUp(500);
+				
+				// Hide content
 				$("#maincontent > section").fadeOut(500, function()
 				{
 					$("#maincontent > section").remove();

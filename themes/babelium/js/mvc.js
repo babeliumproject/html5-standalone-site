@@ -2,6 +2,16 @@
 // Babelium Project
 var BP = {};
 
+// Push state
+BP.pushState = function ( data, title, href )
+{
+	window.history.pushState(data, title, href);
+	BP.state = data;
+};
+
+// Application state
+BP.state = null;
+
 /* ============================================================
  * Babelium Controller
  * ==========================================================*/
@@ -24,6 +34,10 @@ var Controller = Cairngorm.FrontController.extend(
 		// User management
 		this.addCommand(LoginEvent.PROCESS_LOGIN, ProcessLoginCommand);
 		this.addCommand(LoginEvent.SIGN_OUT, SignOutCommand);
+		
+		// Home module
+		this.addCommand(HomepageEvent.LATEST_USER_UPLOADED_VIDEOS, LatestUploadedVideosCommand);
+		this.addCommand(HomepageEvent.BEST_RATED_VIDEOS_SIGNED_IN, SignedBestVideosCommand);
 	}
 });
 
@@ -68,6 +82,21 @@ var LoginEvent = Cairngorm.Event.extend(
 LoginEvent.PROCESS_LOGIN = "processLogin";
 LoginEvent.SIGN_OUT = "signOut";
 
+/**
+ * HomepageEvent
+ */
+var HomepageEvent = Cairngorm.Event.extend(
+{
+	// Just a simple event, no action needed
+	init : function ( type )
+	{
+		this._super(type);
+	}
+});
+// Constants
+HomepageEvent.BEST_RATED_VIDEOS_SIGNED_IN = "bestRatedVideosSignedIn";
+HomepageEvent.LATEST_USER_UPLOADED_VIDEOS = "latestUserUploadedVideos";
+
 /* ============================================================
  * Custom Commands
  * ==========================================================*/
@@ -81,12 +110,12 @@ var ViewHomeModuleCommand = Cairngorm.Command.extend(
 	{
 		var _this = this;
 	
-		window.history.pushState({module : "home" }, "Home - Babelium Project", "?module=home");
+		BP.pushState({module : "home" }, "Home - Babelium Project", "?module=home");
 		
 		BP.CMS.prepareMainContent("home", function ()
 		{
 			BP.HomeDelegate.viewHomeModule(_this);
-		});
+		}, true);
 	},
 	
 	onResult : function ( response )
@@ -109,7 +138,7 @@ var ViewExerciseModuleCommand = Cairngorm.Command.extend(
 	{
 		var _this = this;
 	
-		window.history.pushState({module : "practice" }, "Practice - Babelium Project", "?module=practice");
+		BP.pushState({module : "practice" }, "Practice - Babelium Project", "?module=practice");
 		
 		BP.CMS.prepareMainContent("practice module", function ()
 		{
@@ -137,7 +166,7 @@ var ViewEvaluationModuleCommand = Cairngorm.Command.extend(
 	{
 		var _this = this;
 	
-		window.history.pushState({module : "evaluation" }, "Evaluation - Babelium Project", "?module=evaluation");
+		BP.pushState({module : "evaluation" }, "Evaluation - Babelium Project", "?module=evaluation");
 		
 		BP.CMS.prepareMainContent("evaluation module", function ()
 		{
@@ -165,7 +194,7 @@ var ViewSubtitleModuleCommand = Cairngorm.Command.extend(
 	{
 		var _this = this;
 	
-		window.history.pushState({module : "subtitles" }, "Subtitles - Babelium Project", "?module=subtitles");
+		BP.pushState({module : "subtitles" }, "Subtitles - Babelium Project", "?module=subtitles");
 		
 		BP.CMS.prepareMainContent("subtitle module", function ()
 		{
@@ -193,7 +222,7 @@ var ViewConfigModuleCommand = Cairngorm.Command.extend(
 	{
 		var _this = this;
 	
-		window.history.pushState({module : "config" }, "Configuration - Babelium Project", "?module=config");
+		BP.pushState({module : "config" }, "Configuration - Babelium Project", "?module=config");
 		
 		BP.CMS.prepareMainContent("config module", function ()
 		{
@@ -221,7 +250,7 @@ var ViewAboutModuleCommand = Cairngorm.Command.extend(
 	{
 		var _this = this;
 	
-		window.history.pushState({module : "about" }, "About - Babelium Project", "?module=about");
+		BP.pushState({module : "about" }, "About - Babelium Project", "?module=about");
 		
 		BP.CMS.prepareMainContent("about", function ()
 		{
@@ -275,6 +304,12 @@ var ProcessLoginCommand = Cairngorm.Command.extend(
 			$("li#loginhelper").html("");
 			$("ul#usernav").html(response.content);
 			BP.CMS.hideLoginPopup();
+			
+			if ( BP.state == null || BP.state.module == "home" )
+			{
+				$("aside#motd").remove();
+				new ViewChangeEvent(ViewChangeEvent.VIEW_HOME_MODULE).dispatch();
+			}
 		}
 		else
 			$("li#loginhelper").html(response.content);
@@ -304,12 +339,74 @@ var SignOutCommand = Cairngorm.Command.extend(
 		{
 			$("li#loginhelper").html("");
 			$("ul#usernav").html(response.content);
+			
+			if ( BP.state == null || BP.state.module == "home" )
+			{
+				$("aside#motd").remove();
+				new ViewChangeEvent(ViewChangeEvent.VIEW_HOME_MODULE).dispatch();
+			}
 		}
 	},
 	
 	onFault : function ()
 	{
 		alert("Error trying to connect to the login server");
+	}
+});
+
+/**
+ * LatestUploadedVideosCommand
+ */
+var LatestUploadedVideosCommand = Cairngorm.Command.extend(
+{
+	execute : function ()
+	{
+		var _this = this;
+		
+		BP.pushState({module : "home", action : "uploaded"}, "Home :: Latest uploaded videos - Babelium Project", "?module=about&action=uploaded");
+		
+		BP.CMS.prepareMainContent("latest videos", function ()
+		{
+			BP.HomeDelegate.latestAvailableVideos(_this);
+		}, true);
+	},
+		
+	onResult : function ( response )
+	{
+		BP.CMS.innerMainContent(response);
+	},
+			
+	onFault : function ()
+	{
+		alert("Error retrieving latest videos");
+	}
+});
+
+/**
+ * SignedBestVideosCommand
+ */
+var SignedBestVideosCommand = Cairngorm.Command.extend(
+{
+	execute : function ()
+	{
+		var _this = this;
+	
+		BP.pushState({module : "home", action : "rated"}, "Home :: Best rated videos - Babelium Project", "?module=home&action=rated");
+		
+		BP.CMS.prepareMainContent("best videos", function ()
+		{
+			BP.HomeDelegate.topScoreMostViewedVideos(_this);
+		}, true);
+	},
+			
+	onResult : function ( response )
+	{
+		BP.CMS.innerMainContent(response);
+	},
+					
+	onFault : function ()
+	{
+		alert("Error retrieving best rated videos");
 	}
 });
 
@@ -364,6 +461,18 @@ BP.HomeDelegate = (function ()
 		{
 			var _service = Cairngorm.ServiceLocator.getHttpService(_serviceID);
 			_service.call( null, responder );
+		},
+		
+		latestAvailableVideos : function ( responder )
+		{
+			var _service = Cairngorm.ServiceLocator.getHttpService(_serviceID);
+			_service.call( "action=latest&params=min", responder );
+		},
+		
+		topScoreMostViewedVideos : function ( responder )
+		{
+			var _service = Cairngorm.ServiceLocator.getHttpService(_serviceID);
+			_service.call( "action=rated&params=min", responder );
 		}
 	};
 

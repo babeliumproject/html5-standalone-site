@@ -5,7 +5,7 @@
 <div class="boxFlex"></div>
 <footer class="HBox vend">
 	<div class="spacer">
-		<div class="helper"></div>
+		<div class="hhelper"></div>
 	</div>
 	<ul class="HBox hcenter vcenter">
 		<li><a href="#">FAQ</a></li>
@@ -15,7 +15,7 @@
 		<li>Copyleft 2011 Babelium Project</a></li>
 	</ul>
 	<div class="spacer">
-		<div class="helper"></div>
+		<div class="hhelper"></div>
 	</div>
 </footer>
 <!-- END OF FOOTER -->

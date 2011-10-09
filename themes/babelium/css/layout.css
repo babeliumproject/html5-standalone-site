@@ -106,35 +106,90 @@ div#searchnav
 aside#motd
 {
 	width: 100%;
-	display: none;
 }
 
-	aside#motd > ul#motdmessages
+	ul#motdmessages
 	{
 		width: 100%;
-		height: 150px;
+		padding: 20px;
 	}
 
-		aside#motd > ul#motdmessages > li
+		ul#motdmessages > li
 		{
 			display: none;
 		}
 
-		aside#motd > ul#motdmessages > li:first-child
+		ul#motdmessages > li:first-child
 		{
 			display: block;
 		}
 
-			aside#motd > ul#motdmessages > li > div
+			ul#motdmessages > li > div
 			{
-				width: 500px;
+				width: 1000px;
 			}
 
-	aside#motd > div#motdhelper, section#maincontent > header > div#hhelper,
-	footer > div.spacer > div.helper
+div.motdContent
+{
+	width: 500px;
+}
+
+	div.motdContent > *
 	{
-		height: 3px;
+		margin-bottom: 15px;
 	}
+	
+	div.motdContent > p
+	{
+		font-size: 13px;
+		line-height: 1.5em;
+	}
+
+				
+ul.features
+{
+	padding: 20px;
+}
+				
+	ul.featureButtons > li
+	{
+		padding: 15px;
+		margin: 3px;
+	}
+	
+	ul.featureButtons > li.whitespace
+	{
+		width: 5px;
+		margin-left: 5px;
+		margin-right: 5px;
+		padding: 0px;
+	}
+						
+		ul.featureButtons > li > *
+		{
+			padding-bottom: 5px;
+		}
+
+ aside#motd > ul.motdLinksHelper
+ {
+ 	width: 100%;
+ }
+
+ul#motdLinks
+{
+	margin-right: 30px; 
+}
+
+	ul#motdLinks > li
+	{
+		padding: 7px 15px 5px 15px; 
+		margin-right: 3px;
+	}
+
+div.hhelper
+{
+	height: 3px;
+}
 
 /* END OF MOTD */
 
@@ -145,7 +200,7 @@ section#maincontent > header
 	padding-top: 15px;
 }
 
-	section#maincontent > header > h1 
+	section#maincontent > header > h1
 	{
 		height: 50px;
 		padding-left: 20px;

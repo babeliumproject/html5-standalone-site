@@ -59,9 +59,13 @@
 <!--  END OF HEADER -->
 <!-- MAIN CONTENT -->
 	<section id="maincontent" class="VBox">
+{if $hideHeader}
+		<header style="display: none;">
+{else}
 		<header>
+{/if}
 			<h1>{$moduleTitle}</h1>
-			<div id="hhelper"></div>
+			<div class="hhelper"></div>
 		</header>
 		<aside id="loader">
 			<div id="loadcontext" class="HBox vcenter hcenter">

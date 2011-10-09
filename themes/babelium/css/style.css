@@ -199,14 +199,139 @@ div#searchnav
 aside#motd
 {
 	resize: vertical;
+	background: url(../images/pattern2.png);
+}
+	
+ul.features
+{
+	/** Background **/
+	background: -webkit-radial-gradient(80% 80%, ellipse farthest-side, rgb(134, 188, 206) 10%, white 100%);
+	background: -moz-radial-gradient(80% 80%, ellipse farthest-side, rgb(134, 188, 206) 10%, white 100%);
+	
+	/** rounded borders **/
+	-moz-border-radius: 6px; 
+	-webkit-border-radius: 6px; 
+	border-radius:6px;
+		
+	/** box shadow **/ 
+	-moz-box-shadow: 2px 2px 4px #999;
+	-webkit-box-shadow: 2px 2px 4px #999;
+	box-shadow: 2px 2px 4px #999;
 }
 
-	aside#motd > ul#motdmessages
+	li.featureText > *
 	{
-		background: url(../images/pattern2.png);
+		text-align: center;
+	}
+	
+	ul.featureButtons > li.homeUploadButton
+	{
+		color: #b09002;
+
+		background: -webkit-gradient(linear, 0 0, 0 100%, from(white), to(#e3bb03));
+		background: -moz-linear-gradient(top, white, #e3bb03);
+	}
+	
+	ul.featureButtons > li.homeSubtitleButton
+	{
+		color: #6b2712;
+
+		background: -webkit-gradient(linear, 0 0, 0 100%, from(white), to(#972c0a));
+		background: -moz-linear-gradient(top, white, #972c0a);
+	}
+	
+	ul.featureButtons > li.homeEvaluateButton
+	{
+		color: #516307;
+
+		background: -webkit-gradient(linear, 0 0, 0 100%, from(white), to(#7b970a));
+		background: -moz-linear-gradient(top, white, #7b970a);
+	}
+	
+	ul.featureButtons > li.homePracticeButton
+	{
+		color: #29888a;
+
+		background: -webkit-gradient(linear, 0 0, 0 100%, from(white), to(#38babc));
+		background: -moz-linear-gradient(top, white, #38babc);
+	}
+	
+	ul.featureButtons > li.whitespace
+	{
+		background-color: #3d3d3d;
+		
+		/** rounded borders **/
+		-moz-border-radius: 6px; 
+		-webkit-border-radius: 6px; 
+		border-radius:6px;
+		
+		/** box shadow **/ 
+		-moz-box-shadow: 2px 2px 4px #999;
+		-webkit-box-shadow: 2px 2px 4px #999;
+		box-shadow: 2px 2px 4px #999;
+	}
+	
+	ul.featureButtons > li.VBox
+	{
+		font-weight: bold;
+		border: 2px solid #FFFFFF;
+	
+		/** rounded borders **/
+		-moz-border-radius: 6px; 
+		-webkit-border-radius: 6px; 
+		border-radius:6px;
+	
+		/** box shadow **/ 
+		-moz-box-shadow: 2px 2px 4px #999;
+		-webkit-box-shadow: 2px 2px 4px #999;
+		box-shadow: 2px 2px 4px #999;
+	}
+	
+	ul.featureButtons > li.VBox:hover
+	{
+		cursor: pointer;
+	
+		background: -webkit-gradient(linear, 0 0, 0 100%, from(white), to(#3d3d3d));
+		background: -moz-linear-gradient(top, white, #3d3d3d);
+		
+		text-decoration: none;
+		text-shadow: 1px 1px 1px rgba(0,0,0,.2);
+	}
+	
+	ul#motdLinks > li
+	{
+		font-weight: bold;
+		
+		border-top: 1px solid #38babc;
+		border-left: 1px solid #38babc;
+		border-right: 1px solid #38babc;
+	
+		background-color: white;
+		/** Gradient for mozilla and webkit powered **/
+		background: -webkit-gradient(linear, 0 0, 0 100%, from(white), to(#E2EFF3));
+		background: -moz-linear-gradient(top, white, #E2EFF3);	
+	
+		/** rounded borders **/
+		-moz-border-top-left-radius: 6px; 
+		-webkit-border-top-left-radius: 6px; 
+		border-top-left-radius:6px;
+		-moz-border-top-right-radius: 6px; 
+		-webkit-border-top-right-radius: 6px; 
+		border-top-right-radius:6px;  
+	}
+	
+	ul#motdLinks > li:hover
+	{
+		cursor: pointer;
+	
+		background: -webkit-gradient(linear, 0 0, 0 100%, from(white), to(#86BCCE));
+		background: -moz-linear-gradient(top, white, #86BCCE);
+	
+		text-decoration: none;
+		text-shadow: 1px 1px 1px rgba(0,0,0,.2);
 	}
 
-	aside#motd > div#motdhelper, section#maincontent > header > div#hhelper, footer > div.spacer > div.helper
+	div.hhelper
 	{
 		background-color: #E2EFF3;
 		border-top: 1px solid #38babc;
@@ -230,7 +355,7 @@ aside#motd
 	 	background: url(../images/pattern2.png);
 	 }
 
-		 section#maincontent > header > h1 
+		 section#maincontent > header > h1, span.title
 		 {
 		 	font-weight: bold;
 			font-size: 24px;

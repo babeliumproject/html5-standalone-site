@@ -9,30 +9,16 @@ class MHome implements IModule
 {	
 	public static function load($args)
 	{
-		
-		/*$client = new Zend_Http_Client();
-		$client->setUri($cfg->api_bridge . "?class=Exercise&method=getExercises");
-		$client->setConfig(array(
-			"maxredirects" => 0,
-		    "timeout"      => 30));
-		
-		$response = $client->request();
-		
-		$phpObj = Zend_Json::decode($response->getBody());*/
-		
-		/*$ex = new Exercise();
-		$response = $ex->getExercises();
-		
-		$phpObj = $response;*/
-		
 		$action = isset($args[1]) ? $args[1] : "";
+		$state = isset($args[2]) ? $args[2] : "";
 		$content = "";
 
 		if ( SessionManager::getInstance()->isLoggedIn() )
 		{ // Logged In
 			
 			// Load MOTD
-			$content = WidgetLoader::loadWidget("HomeSigned");
+			if ( $state != "min" )
+				$content = WidgetLoader::loadWidget("HomeSigned");
 			
 			// Load content
 			if ( $action == "rated" )

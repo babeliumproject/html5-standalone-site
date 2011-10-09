@@ -105,6 +105,13 @@
 	box-flex: 2;
 }
 
+.boxFlex3
+{
+	-webkit-box-flex: 3;
+	-moz-box-flex: 3;
+	box-flex: 3;
+}
+
 /* HBox: aligment of elements */
 .HBox.vstart
 {
