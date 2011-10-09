@@ -7,8 +7,9 @@ require_once(dirname(__FILE__) . "/../config/Config.php");
  * Available modules
  */
 require_once(dirname(__FILE__) . "/../modules/M404.php");
-require_once(dirname(__FILE__) . "/../modules/MHome.php");
 require_once(dirname(__FILE__) . "/../modules/MAuth.php");
+require_once(dirname(__FILE__) . "/../modules/MExercises.php");
+require_once(dirname(__FILE__) . "/../modules/MHome.php");
 
 /**
  * Module loader
@@ -23,7 +24,8 @@ final class ModuleLoader
 			(
 				"404" => "M404",
 				"home" => "MHome",
-				"auth" => "MAuth"
+				"auth" => "MAuth",
+				"practice" => "MExercises"
 			);
 	
 	/* Constructor */

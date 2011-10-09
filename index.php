@@ -12,7 +12,7 @@ require_once("core/WidgetLoader.php");
 
 /** Init session and config **/
 $cfg = Config::getInstance();
-$session = SessionManager::getInstance();
+$session = SessionManager::getInstance(); // starts session
 
 $cfg->logger->info("Initiating index.php");
 

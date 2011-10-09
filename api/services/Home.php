@@ -41,7 +41,7 @@ class Home{
 	public function Home(){
 		try {
 			$verifySession = new SessionHandler();
-			$settings = new Config ();
+			$settings = Config::getInstance();
 			$this->conn = new Datasource ( $settings->host, $settings->db_name, $settings->db_username, $settings->db_password );
 		} catch (Exception $e) {
 			throw new Exception($e->getMessage());
@@ -119,7 +119,7 @@ class Home{
 		$result = $this->conn->_execute(func_get_args());
 
 		while ($row = $this->conn->_nextRow($result)){
-			$temp = new EvaluationVO();
+			$temp = new stdClass();
 
 			$temp->responseFileIdentifier = $row[0];
 			$temp->responseId = $row[1];
@@ -207,7 +207,7 @@ class Home{
 				ORDER BY e.adding_date DESC";
 
 		$searchResults = $this->_exerciseListQuery($sql);
-		$exercise = new ExerciseDAO();
+		$exercise = new Exercise();
 		$filteredResults = $exercise->filterByLanguage($searchResults, 'practice');
 		
 		usort($filteredResults, array($this, 'sortResultsByScore'));
@@ -217,12 +217,12 @@ class Home{
 	}
 	
 	private function _exerciseListQuery() {
-		$exercise = new ExerciseDAO();
+		$exercise = new Exercise();
 		$searchResults = array ();
 		$result = $this->conn->_execute ( func_get_args() );
 
 		while ( $row = $this->conn->_nextRow ( $result ) ) {
-			$temp = new ExerciseVO ( );
+			$temp = new stdClass ( );
 
 			$temp->id = $row[0];
 			$temp->title = $row[1];
@@ -269,7 +269,7 @@ class Home{
 				ORDER BY e.adding_date DESC";
 
 		$searchResults = $this->_exerciseListQuery($sql, $_SESSION['uid']);
-		$exercise = new ExerciseDAO();
+		$exercise = new Exercise();
 		$filteredResults = $exercise->filterByLanguage($searchResults, 'practice');
 		$slicedResults = $this->sliceResultsByNumber($filteredResults, 10);
 		return $slicedResults;

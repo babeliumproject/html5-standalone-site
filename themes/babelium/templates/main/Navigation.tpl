@@ -57,18 +57,10 @@
 		</div>
 	</header>
 <!--  END OF HEADER -->
-<!-- MOTD -->
-	<aside id="motd" class="unsignedMotdBox">
-		<ul id="motdmessages" class="HBox hcenter">
-		</ul>
-		<div id="motdhelper"></div>
-	</aside>
-<!-- END OF MOTD -->
 <!-- MAIN CONTENT -->
 	<section id="maincontent" class="VBox">
 		<header>
 			<h1>{$moduleTitle}</h1>
-			{$sectionTitle}
 			<div id="hhelper"></div>
 		</header>
 		<aside id="loader">

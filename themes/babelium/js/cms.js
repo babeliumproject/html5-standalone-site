@@ -149,16 +149,20 @@ BP.CMS = (function()
 			loader.find("div#loadcontext > span").html("Loading <strong>"+location+"</strong>");
 			loader.slideDown(500);
 			
-			//$("#maincontent > section > article").hide("slow");
-			
 			// Slide up current section and remove it on animation end
-			$("#maincontent > section").fadeOut(500, function()
+			if ( $("#maincontent > section").length > 0 )
 			{
-				$("#maincontent > section").remove();
-				
-				// Call to callback funcion after animation finished
+				$("#maincontent > section").fadeOut(500, function()
+				{
+					$("#maincontent > section").remove();
+					
+					// Call to callback funcion after animation finished
+					callback();
+				});
+			}
+			else
 				callback();
-			});
+				
 		},
 
 		/**

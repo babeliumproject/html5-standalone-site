@@ -109,7 +109,7 @@ var ViewExerciseModuleCommand = Cairngorm.Command.extend(
 	{
 		var _this = this;
 	
-		window.history.pushState({module : "pract" }, "Practice - Babelium Project", "?module=pract");
+		window.history.pushState({module : "practice" }, "Practice - Babelium Project", "?module=practice");
 		
 		BP.CMS.prepareMainContent("practice module", function ()
 		{
@@ -137,7 +137,7 @@ var ViewEvaluationModuleCommand = Cairngorm.Command.extend(
 	{
 		var _this = this;
 	
-		window.history.pushState({module : "eval" }, "Evaluation - Babelium Project", "?module=eval");
+		window.history.pushState({module : "evaluation" }, "Evaluation - Babelium Project", "?module=evaluation");
 		
 		BP.CMS.prepareMainContent("evaluation module", function ()
 		{
@@ -165,7 +165,7 @@ var ViewSubtitleModuleCommand = Cairngorm.Command.extend(
 	{
 		var _this = this;
 	
-		window.history.pushState({module : "subs" }, "Subtitles - Babelium Project", "?module=subs");
+		window.history.pushState({module : "subtitles" }, "Subtitles - Babelium Project", "?module=subtitles");
 		
 		BP.CMS.prepareMainContent("subtitle module", function ()
 		{
@@ -193,7 +193,7 @@ var ViewConfigModuleCommand = Cairngorm.Command.extend(
 	{
 		var _this = this;
 	
-		window.history.pushState({module : "conf" }, "Configuration - Babelium Project", "?module=conf");
+		window.history.pushState({module : "config" }, "Configuration - Babelium Project", "?module=config");
 		
 		BP.CMS.prepareMainContent("config module", function ()
 		{

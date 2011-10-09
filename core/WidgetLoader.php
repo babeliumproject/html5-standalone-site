@@ -6,12 +6,20 @@ require_once(dirname(__FILE__) . "/../config/Config.php");
 /**
  * Widgets
  */
-require_once(dirname(__FILE__) . "/../widgets/WExerciseList.php");
-require_once(dirname(__FILE__) . "/../widgets/WNav.php");
-require_once(dirname(__FILE__) . "/../widgets/WHead.php");
-require_once(dirname(__FILE__) . "/../widgets/WFooter.php");
+require_once(dirname(__FILE__) . "/../widgets/exercises/WVideoList.php");
+
+require_once(dirname(__FILE__) . "/../widgets/home/WHomeSigned.php");
+require_once(dirname(__FILE__) . "/../widgets/home/WHomeUnsigned.php");
+require_once(dirname(__FILE__) . "/../widgets/home/WLatestUploadedVideos.php");
+require_once(dirname(__FILE__) . "/../widgets/home/WLatestBestRatedVideos.php");
+
+require_once(dirname(__FILE__) . "/../widgets/main/WNav.php");
+require_once(dirname(__FILE__) . "/../widgets/main/WHead.php");
+require_once(dirname(__FILE__) . "/../widgets/main/WFooter.php");
+
 require_once(dirname(__FILE__) . "/../widgets/userManagement/WLoggedIn.php");
 require_once(dirname(__FILE__) . "/../widgets/userManagement/WLoggedOut.php");
+
 require_once(dirname(__FILE__) . "/../widgets/W404.php");
 
 /**
@@ -26,12 +34,16 @@ final class WidgetLoader
 	private static $_widget = array
 			(
 				"404" => "W404",
-				"ExerciseList" => "WExerciseList",
-				"Nav" => "WNav",
-				"Head" => "WHead",
+				"BestRatedVideos" => "WLatestBestRatedVideos",
 				"Footer" => "WFooter",
+				"Head" => "WHead",
+				"HomeSigned" => "WHomeSigned",
+				"HomeUnsigned" => "WHomeUnsigned",
+				"LatestUploadedVideos" => "WLatestUploadedVideos",
 				"LoggedIn" => "WLoggedIn",
-				"LoggedOut" => "WLoggedOut"
+				"LoggedOut" => "WLoggedOut",
+				"Nav" => "WNav",
+				"VideoList" => "WVideoList"
 			);
 	
 	/* Constructor */
@@ -41,14 +53,13 @@ final class WidgetLoader
 	}
 	
 	/* loads a widget */
-	public static function loadWidget($widget)
+	public static function loadWidget($widgetName)
 	{
 		$cfg = Config::getInstance();
-		$widgetName = $widget;
 		$args = func_get_args();
 		
-		if ( in_array("IWidget", class_implements(self::$_widget[$widget])) )
-			$r = call_user_func(self::$_widget[$widget] . "::load", $args);
+		if ( in_array("IWidget", class_implements(self::$_widget[$widgetName])) )
+			$r = call_user_func(self::$_widget[$widgetName] . "::load", $args);
 		else
 			$r = call_user_func(self::$_widget[self::ERROR_WIDGET] . "::load", $args);
 		

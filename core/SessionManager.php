@@ -105,6 +105,14 @@ class SessionManager implements ISingleton
 	}
 	
 	/**
+	 * Is logged in
+	 */
+	public function isLoggedIn()
+	{
+		return isset($_SESSION["logged"]) && $_SESSION["logged"] === true;
+	}
+	
+	/**
 	 * For now, we disable the IP check. Many ISPs have load-balance based dynamic IPs
 	 * so it could be a bother for the user.
 	 * 
