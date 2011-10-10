@@ -6,11 +6,13 @@
 BP.CMS = (function()
 {
 	// Private interface
-	var _usernav = "#usernav";
-	var _mainnav = "#mainnav";
-	var _searchnav = "#searchnav";
-	var _motd = "#motd";
-	var _maincontent = "#maincontent";
+	var _usernav;
+	var _mainnav;
+	var _searchnav;
+	var _maincontent;
+	var _loader;
+	var _motdMessageIndex = 1;
+	var _motdMessageCount = 4;
 	var _initiated = false;
 	var _loading = false;
 	
@@ -21,6 +23,12 @@ BP.CMS = (function()
 	{
 		if ( _initiated )
 			return;
+		
+		_usernav = $("#usernav");
+		_mainnav = $("#mainnav");
+		_searchnav = $("#searchnav");
+		_maincontent = $("section#maincontent");
+		_loader = $("aside#loader");
 		
 		_initNavigationLinks();
 		_initLocalebox();
@@ -33,7 +41,7 @@ BP.CMS = (function()
 	 */
 	function _initNavigationLinks()
 	{
-		$(_mainnav + " > ul > li > a").not(":last").hover(function()
+		_mainnav.find("ul > li > a").not(":last").hover(function()
 		{
 			$(this).parent().css("background", "url(themes/babelium/images/separator.png) no-repeat center right," +
 					" url(themes/babelium/images/button_nav_highlight_" +
@@ -43,7 +51,7 @@ BP.CMS = (function()
 			$(this).parent().css("background","url(themes/babelium/images/separator.png) no-repeat center right");
 		});
 		
-		$(_mainnav + " > ul > li > a:last").hover(function()
+		_mainnav.find("ul > li > a:last").hover(function()
 		{
 			$(this).parent().css("background", " url(themes/babelium/images/button_nav_highlight_" +
 					$(this).attr('class') + ".png) no-repeat 50% 58%");
@@ -141,9 +149,8 @@ BP.CMS = (function()
 			_loading = true;
 			
 			// Display loading message
-			var loader = $("aside#loader");
 			var motd = $("aside#motd");
-			var header = $("section#maincontent > header");
+			var header = _maincontent.find("header");
 			
 			var pos = 0;
 			var h = 0;
@@ -160,9 +167,9 @@ BP.CMS = (function()
 				h = header.outerHeight(true);
 			}
 			
-			loader.css("top", pos.top + h);
-			loader.find("div#loadcontext > span").html("Loading <strong>"+location+"</strong>");
-			loader.slideDown(500);
+			_loader.css("top", pos.top + h);
+			_loader.find("div#loadcontext > span").html("Loading <strong>"+location+"</strong>");
+			_loader.slideDown(500);
 			
 			// Slide up current section and remove it on animation end
 			if ( $("#maincontent > section").length > 0 )
@@ -190,6 +197,24 @@ BP.CMS = (function()
 			else
 				callback();
 				
+		},
+		
+		/**
+		 * Show motd
+		 */
+		showMotd : function ( index )
+		{
+			if ( index < 1 || index > _motdMessageCount )
+				return;
+			
+			//alert($("#motdmessages > li:nth-child(" + index + ")").length);
+			
+			$("#motdmessages > li:nth-child(" + _motdMessageIndex + ")").fadeOut(500, function()
+			{
+				$("#motdmessages > li:nth-child(" + index + ")").fadeIn(500);
+			});
+			
+			_motdMessageIndex = index;
 		},
 
 		/**

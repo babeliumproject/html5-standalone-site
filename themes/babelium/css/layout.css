@@ -108,26 +108,39 @@ aside#motd
 	width: 100%;
 }
 
-	ul#motdmessages
+	ul#motdmessages, ul#motdmessageshelper
 	{
 		width: 100%;
 		padding: 20px;
 	}
+	
+		ul#motdmessageshelper > li
+		{
+			width: 20px;
+			height: 20px;
+			margin: 5px;
+		}
 
 		ul#motdmessages > li
 		{
+			width: 1000px;
+		}
+			
+		ul#motdmessages > li.motdMessage
+		{
 			display: none;
 		}
-
-		ul#motdmessages > li:first-child
+			
+		ul#motdmessages > li.motdMessage:first-child
 		{
 			display: block;
 		}
-
-			ul#motdmessages > li > div
-			{
-				width: 1000px;
-			}
+		
+div.motdImage
+{
+	width: 240px;
+	height: 180px;	
+}
 
 div.motdContent
 {
@@ -137,12 +150,6 @@ div.motdContent
 	div.motdContent > *
 	{
 		margin-bottom: 15px;
-	}
-	
-	div.motdContent > p
-	{
-		font-size: 13px;
-		line-height: 1.5em;
 	}
 
 				

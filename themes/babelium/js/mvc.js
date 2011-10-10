@@ -307,7 +307,7 @@ var ProcessLoginCommand = Cairngorm.Command.extend(
 			
 			if ( BP.state == null || BP.state.module == "home" )
 			{
-				$("aside#motd").remove();
+				$("aside#motd").fadeOut(500, function(){$(this).remove();});
 				new ViewChangeEvent(ViewChangeEvent.VIEW_HOME_MODULE).dispatch();
 			}
 		}
@@ -342,7 +342,7 @@ var SignOutCommand = Cairngorm.Command.extend(
 			
 			if ( BP.state == null || BP.state.module == "home" )
 			{
-				$("aside#motd").remove();
+				$("aside#motd").fadeOut(500, function(){$(this).remove();});
 				new ViewChangeEvent(ViewChangeEvent.VIEW_HOME_MODULE).dispatch();
 			}
 		}

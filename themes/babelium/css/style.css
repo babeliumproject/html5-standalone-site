@@ -201,6 +201,43 @@ aside#motd
 	resize: vertical;
 	background: url(../images/pattern2.png);
 }
+
+	p.motdText
+	{
+		font-size: 13px;
+		line-height: 1.5em;
+	}
+
+	ul#motdmessageshelper > li
+	{
+		color:#2d89a4;
+		
+		border: 1px solid #38babc;
+	
+		-moz-border-radius: 6px; 
+		-webkit-border-radius: 6px; 
+		border-radius:6px;
+		
+		background-color: white;
+
+		background: -webkit-gradient(linear, 0 0, 0 100%, from(white), to(#E2EFF3));
+		background: -moz-linear-gradient(top, white, #E2EFF3);	
+		
+		-moz-box-shadow: 1px 1px 2px #CCC;
+		-webkit-box-shadow: 1px 1px 2px #CCC;
+		box-shadow: 1px 1px 2px #CCC;
+	}
+	
+	ul#motdmessageshelper > li:hover
+	{
+		cursor: pointer;
+	
+		background: -webkit-gradient(linear, 0 0, 0 100%, from(white), to(#86BCCE));
+		background: -moz-linear-gradient(top, white, #86BCCE);
+
+		text-decoration: none;
+		text-shadow: 1px 1px 1px rgba(0,0,0,.2);
+	}
 	
 ul.features
 {
@@ -291,9 +328,10 @@ ul.features
 	{
 		cursor: pointer;
 	
-		background: -webkit-gradient(linear, 0 0, 0 100%, from(white), to(#3d3d3d));
-		background: -moz-linear-gradient(top, white, #3d3d3d);
+		background: -webkit-gradient(linear, 0 0, 0 100%, from(white), to(#86BCCE));
+		background: -moz-linear-gradient(top, white, #86BCCE);
 		
+		color: white;
 		text-decoration: none;
 		text-shadow: 1px 1px 1px rgba(0,0,0,.2);
 	}
