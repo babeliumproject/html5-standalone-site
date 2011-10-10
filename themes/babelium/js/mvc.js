@@ -12,6 +12,17 @@ BP.pushState = function ( data, title, href )
 // Application state
 BP.state = null;
 
+// Last visited module
+BP.at = function ( moduleName )
+{
+	if ( moduleName == null )
+		return BP.state == null ? null : BP.state.module;
+	else if ( moduleName == "home" )
+		return BP.state == null || BP.state.module == moduleName;
+	else
+		return BP.state.module == moduleName;
+};
+
 /* ============================================================
  * Babelium Controller
  * ==========================================================*/
@@ -52,9 +63,9 @@ var Controller = Cairngorm.FrontController.extend(
 var ViewChangeEvent = Cairngorm.Event.extend(
 {
 	// Just a simple event, no action needed
-	init : function ( type )
+	init : function ( type, data )
 	{
-		this._super(type);
+		this._super(type, data);
 	}
 });
 // Constants
@@ -74,8 +85,7 @@ var LoginEvent = Cairngorm.Event.extend(
 	// Just a simple event, no action needed
 	init : function ( type, user )
 	{
-		this._super(type);
-		this.setData(user);
+		this._super(type, user);
 	}
 });
 // Constants
@@ -106,21 +116,20 @@ HomepageEvent.LATEST_USER_UPLOADED_VIDEOS = "latestUserUploadedVideos";
  */
 var ViewHomeModuleCommand = Cairngorm.Command.extend(
 {
-	execute : function ()
+	execute : function ( )
 	{
 		var _this = this;
-	
-		BP.pushState({module : "home" }, "Home - Babelium Project", "?module=home");
 		
 		BP.CMS.prepareMainContent("home", function ()
 		{
-			BP.HomeDelegate.viewHomeModule(_this);
+			BP.HomeDelegate.viewHomeModule(_this, _this.data === true);
 		}, true);
 	},
 	
 	onResult : function ( response )
 	{
 		BP.CMS.innerMainContent(response);
+		BP.pushState({module : "home" }, "Home - Babelium Project", "?module=home");
 	},
 	
 	onFault : function ()
@@ -137,8 +146,6 @@ var ViewExerciseModuleCommand = Cairngorm.Command.extend(
 	execute : function ()
 	{
 		var _this = this;
-	
-		BP.pushState({module : "practice" }, "Practice - Babelium Project", "?module=practice");
 		
 		BP.CMS.prepareMainContent("practice module", function ()
 		{
@@ -149,6 +156,7 @@ var ViewExerciseModuleCommand = Cairngorm.Command.extend(
 	onResult : function ( response )
 	{
 		BP.CMS.innerMainContent(response);
+		BP.pushState({module : "practice" }, "Practice - Babelium Project", "?module=practice");
 	},
 	
 	onFault : function ()
@@ -165,8 +173,6 @@ var ViewEvaluationModuleCommand = Cairngorm.Command.extend(
 	execute : function ()
 	{
 		var _this = this;
-	
-		BP.pushState({module : "evaluation" }, "Evaluation - Babelium Project", "?module=evaluation");
 		
 		BP.CMS.prepareMainContent("evaluation module", function ()
 		{
@@ -177,6 +183,7 @@ var ViewEvaluationModuleCommand = Cairngorm.Command.extend(
 	onResult : function ( response )
 	{
 		BP.CMS.innerMainContent(response);
+		BP.pushState({module : "evaluation" }, "Evaluation - Babelium Project", "?module=evaluation");
 	},
 	
 	onFault : function ()
@@ -193,8 +200,6 @@ var ViewSubtitleModuleCommand = Cairngorm.Command.extend(
 	execute : function ()
 	{
 		var _this = this;
-	
-		BP.pushState({module : "subtitles" }, "Subtitles - Babelium Project", "?module=subtitles");
 		
 		BP.CMS.prepareMainContent("subtitle module", function ()
 		{
@@ -205,6 +210,7 @@ var ViewSubtitleModuleCommand = Cairngorm.Command.extend(
 	onResult : function ( response )
 	{
 		BP.CMS.innerMainContent(response);
+		BP.pushState({module : "subtitles" }, "Subtitles - Babelium Project", "?module=subtitles");
 	},
 	
 	onFault : function ()
@@ -221,8 +227,6 @@ var ViewConfigModuleCommand = Cairngorm.Command.extend(
 	execute : function ()
 	{
 		var _this = this;
-	
-		BP.pushState({module : "config" }, "Configuration - Babelium Project", "?module=config");
 		
 		BP.CMS.prepareMainContent("config module", function ()
 		{
@@ -233,6 +237,7 @@ var ViewConfigModuleCommand = Cairngorm.Command.extend(
 	onResult : function ( response )
 	{
 		BP.CMS.innerMainContent(response);
+		BP.pushState({module : "config" }, "Configuration - Babelium Project", "?module=config");
 	},
 	
 	onFault : function ()
@@ -249,12 +254,11 @@ var ViewAboutModuleCommand = Cairngorm.Command.extend(
 	execute : function ()
 	{
 		var _this = this;
-	
-		BP.pushState({module : "about" }, "About - Babelium Project", "?module=about");
 		
 		BP.CMS.prepareMainContent("about", function ()
 		{
 			BP.AboutDelegate.viewAboutModule(_this);
+			BP.pushState({module : "about" }, "About - Babelium Project", "?module=about");
 		});
 	},
 	
@@ -305,10 +309,11 @@ var ProcessLoginCommand = Cairngorm.Command.extend(
 			$("ul#usernav").html(response.content);
 			BP.CMS.hideLoginPopup();
 			
-			if ( BP.state == null || BP.state.module == "home" )
+			if ( BP.at("home") )
 			{
 				$("aside#motd").fadeOut(500, function(){$(this).remove();});
-				new ViewChangeEvent(ViewChangeEvent.VIEW_HOME_MODULE).dispatch();
+				// set true as data will reload motd
+				new ViewChangeEvent(ViewChangeEvent.VIEW_HOME_MODULE, true).dispatch();
 			}
 		}
 		else
@@ -340,10 +345,11 @@ var SignOutCommand = Cairngorm.Command.extend(
 			$("li#loginhelper").html("");
 			$("ul#usernav").html(response.content);
 			
-			if ( BP.state == null || BP.state.module == "home" )
+			if ( BP.at("home") )
 			{
 				$("aside#motd").fadeOut(500, function(){$(this).remove();});
-				new ViewChangeEvent(ViewChangeEvent.VIEW_HOME_MODULE).dispatch();
+				// set true as data will reload motd
+				new ViewChangeEvent(ViewChangeEvent.VIEW_HOME_MODULE, true).dispatch();
 			}
 		}
 	},
@@ -363,8 +369,6 @@ var LatestUploadedVideosCommand = Cairngorm.Command.extend(
 	{
 		var _this = this;
 		
-		BP.pushState({module : "home", action : "uploaded"}, "Home :: Latest uploaded videos - Babelium Project", "?module=about&action=uploaded");
-		
 		BP.CMS.prepareMainContent("latest videos", function ()
 		{
 			BP.HomeDelegate.latestAvailableVideos(_this);
@@ -374,6 +378,9 @@ var LatestUploadedVideosCommand = Cairngorm.Command.extend(
 	onResult : function ( response )
 	{
 		BP.CMS.innerMainContent(response);
+		BP.pushState({module : "home", action : "uploaded"}, 
+				"Home :: Latest uploaded videos - Babelium Project",
+				"?module=about&action=uploaded");
 	},
 			
 	onFault : function ()
@@ -390,8 +397,6 @@ var SignedBestVideosCommand = Cairngorm.Command.extend(
 	execute : function ()
 	{
 		var _this = this;
-	
-		BP.pushState({module : "home", action : "rated"}, "Home :: Best rated videos - Babelium Project", "?module=home&action=rated");
 		
 		BP.CMS.prepareMainContent("best videos", function ()
 		{
@@ -402,6 +407,9 @@ var SignedBestVideosCommand = Cairngorm.Command.extend(
 	onResult : function ( response )
 	{
 		BP.CMS.innerMainContent(response);
+		BP.pushState({module : "home", action : "rated"}, 
+				"Home :: Best rated videos - Babelium Project", 
+				"?module=home&action=rated");
 	},
 					
 	onFault : function ()
@@ -457,10 +465,12 @@ BP.HomeDelegate = (function ()
 	
 	return {
 		
-		viewHomeModule : function ( responder )
+		viewHomeModule : function ( responder, loadMotd )
 		{
 			var _service = Cairngorm.ServiceLocator.getHttpService(_serviceID);
-			_service.call( null, responder );
+			// Avoid reloading motd
+			var params = (!loadMotd && BP.at("home")) ? "params=min" : null;
+			_service.call( params, responder );
 		},
 		
 		latestAvailableVideos : function ( responder )

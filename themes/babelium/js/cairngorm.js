@@ -114,10 +114,10 @@ Cairngorm.Event = Class.extend(
 	 * Constructor
 	 * @param type = String
 	 */
-	init : function ( type )
+	init : function ( type, data )
 	{
 		this.type = type;
-		this.data = {};
+		this.data = data != null ? data : {};
 	},
 	
 	/**
@@ -126,23 +126,6 @@ Cairngorm.Event = Class.extend(
 	dispatch : function ()
 	{
 		return Cairngorm.EventDispatcher.dispatchEvent(this);
-	},
-	
-	/**
-	 * Set data
-	 * @param data = Object
-	 */
-	setData : function ( data )
-	{
-		this.data = data;
-	},
-	
-	/**
-	 * Get data
-	 */
-	getData : function ()
-	{
-		return this.data;
 	}
 });
 
