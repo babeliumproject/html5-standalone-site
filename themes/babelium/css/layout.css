@@ -111,7 +111,7 @@ aside#motd
 	ul#motdmessages, ul#motdmessageshelper
 	{
 		width: 100%;
-		padding: 20px;
+		padding-top: 20px;
 	}
 	
 		ul#motdmessageshelper > li
