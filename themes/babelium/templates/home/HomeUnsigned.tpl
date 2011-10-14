@@ -1,10 +1,10 @@
 <!-- MOTD MESSAGES -->
 		<aside id="motd">
 			<ul id="motdmessageshelper" class="HBox hcenter vcenter">
-				<li class="HBox vcenter hcenter" onClick="javascript:BP.CMS.showMotd(1);">1</li>
-				<li class="HBox vcenter hcenter" onClick="javascript:BP.CMS.showMotd(2);">2</li>
-				<li class="HBox vcenter hcenter" onClick="javascript:BP.CMS.showMotd(3);">3</li>
-				<li class="HBox vcenter hcenter" onClick="javascript:BP.CMS.showMotd(4);">4</li>
+				<li class="HBox vcenter hcenter">1</li>
+				<li class="HBox vcenter hcenter">2</li>
+				<li class="HBox vcenter hcenter">3</li>
+				<li class="HBox vcenter hcenter">4</li>
 			</ul>
 		
 			<ul id="motdmessages" class="HBox vcenter hcenter">

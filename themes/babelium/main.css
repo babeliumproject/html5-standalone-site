@@ -363,16 +363,6 @@ aside#motd
 	{
 		width: 1000px;
 	}
-	
-	ul#motdmessages > li.motdMessage
-	{
-		display: none;
-	}
-			
-	ul#motdmessages > li.motdMessage:first-child
-	{
-		display: block;
-	}
 
 div.motdImage
 {

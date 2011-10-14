@@ -11,8 +11,8 @@ BP.CMS = (function()
 	var _searchnav;
 	var _maincontent;
 	var _loader;
-	var _motdMessageIndex = 1;
-	var _motdMessageCount = 4;
+	
+	// CMS state	
 	var _initiated = false;
 	var _loading = false;
 	
@@ -134,6 +134,9 @@ BP.CMS = (function()
 		init : function()
 		{
 			_setup();
+			
+			/** Init navigation Menus **/
+			this.navigation("#motdmessageshelper", "#motdmessages");
 		},
 		
 		/**
@@ -190,21 +193,94 @@ BP.CMS = (function()
 		},
 		
 		/**
-		 * Show motd
+		 * Creates a navigation
+		 * @param b: buttons layer (<ul> e.g.)
+		 * @param v: views layer (<ul>, <section>, <article>)
 		 */
-		showMotd : function ( index )
+		navigation : function ( b, v )
 		{
-			if ( index < 1 || index > _motdMessageCount )
+			if ( $(b).length == 0 || $(v).length == 0 )
 				return;
 			
-			//alert($("#motdmessages > li:nth-child(" + index + ")").length);
+			/**
+			 * Nav item
+			 */
+			var nav = (function ()
+			{	
+				var _index = 1;
+				var _b = b;
+				var _v = v;
+				var _count = $(_b + " > *").length;
+				
+				// Hide all views
+				$(_v + " > *").css("display", "none");
+				// Show default
+				$(_v + " > *:first-child").css("display", "block");
+				
+				// For each button
+				$(b + " > *").each(function(index)
+				{
+					$(this).click(function()
+					{
+						_show(index+1);
+					});
+				});
+				
+				// Show index view
+				function _show( newIndex )
+				{					
+					if ( newIndex < 1 || newIndex > _count )
+						return;
+					
+					$(v + " > *:nth-child("+_index+")").fadeOut(500, function()
+					{
+						$( v + " > *:nth-child("+newIndex+")").fadeIn(500);
+					});
+					
+					_index = newIndex;
+				}
+				
+				// show next view
+				function _showNext()
+				{
+					var nextIndex = _index+1;
+					
+					if ( nextIndex > _count )
+						_show(1);
+					else
+						_show(nextIndex);
+				}
+				
+				// show prev view
+				function _showPrev()
+				{
+					var prevIndex = _index-1;
+					
+					if ( prevIndex > 1 )
+						_show(_count);
+					else
+						_show(prevIndex);
+				}
+				
+				return {
+					next : function ()
+					{
+						_showNext();
+					},
+					
+					prev : function ()
+					{
+						_showPrev();
+					},
+					
+					show : function ( i )
+					{
+						_show(i);
+					}
+				};
+			})();
 			
-			$("#motdmessages > li:nth-child(" + _motdMessageIndex + ")").fadeOut(500, function()
-			{
-				$("#motdmessages > li:nth-child(" + index + ")").fadeIn(500);
-			});
-			
-			_motdMessageIndex = index;
+			return nav;
 		},
 
 		/**
@@ -278,6 +354,7 @@ BP.CMS = (function()
 $(document).ready(function()
 {
 	BP.CMS.init();
+	BP.state.module = decodeURI((RegExp("module=(.+?)(&|$)").exec(location.search) || [,"home"])[1]);
 	
 	/**
 	 * On popstate

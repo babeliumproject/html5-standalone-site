@@ -4,6 +4,10 @@
 	<meta charset="UTF-8" /> 
 	<title>Babelium Project</title>
 
+	<!--[if lt IE 9]>
+	<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+
 	<!-- CSS -->
 	<link rel="stylesheet" type="text/css" media="screen" href="themes/babelium/main.css" />
 	
@@ -18,8 +22,5 @@
 	<script type="text/javascript" src="themes/babelium/js/mvc.js"></script>
 	<script type="text/javascript" src="themes/babelium/js/cms.js"></script>
 	<script type="text/javascript" src="themes/babelium/js/encode.js"></script>
-	
-	<!-- Flexie: native support for Flexible Boxes in Opera and IE -->
-	<script type="text/javascript" src="themes/babelium/js/flexie.min.js"></script>
 </head>
 <body class="VBox">

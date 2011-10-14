@@ -10,17 +10,15 @@ BP.pushState = function ( data, title, href )
 };
 
 // Application state
-BP.state = null;
+BP.state = {};
 
 // Last visited module
 BP.at = function ( moduleName )
 {
 	if ( moduleName == null )
 		return BP.state == null ? null : BP.state.module;
-	else if ( moduleName == "home" )
-		return BP.state == null || BP.state.module == moduleName;
-	else
-		return BP.state.module == moduleName;
+	else 
+		return BP.state != null && BP.state.module == moduleName;
 };
 
 /* ============================================================
@@ -131,6 +129,7 @@ var ViewHomeModuleCommand = Cairngorm.Command.extend(
 	onResult : function ( response )
 	{
 		BP.CMS.innerMainContent(response);
+		BP.CMS.navigation("#motdmessageshelper", "#motdmessages");
 		BP.pushState({module : "home" }, "Home - Babelium Project", "?module=home");
 	},
 	
