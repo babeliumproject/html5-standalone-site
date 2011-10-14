@@ -12,6 +12,7 @@ require_once(dirname(__FILE__) . "/../widgets/home/WHomeSigned.php");
 require_once(dirname(__FILE__) . "/../widgets/home/WHomeUnsigned.php");
 require_once(dirname(__FILE__) . "/../widgets/home/WLatestUploadedVideos.php");
 require_once(dirname(__FILE__) . "/../widgets/home/WLatestBestRatedVideos.php");
+require_once(dirname(__FILE__) . "/../widgets/home/WLatestUserActivity.php");
 
 require_once(dirname(__FILE__) . "/../widgets/main/WNav.php");
 require_once(dirname(__FILE__) . "/../widgets/main/WHead.php");
@@ -32,19 +33,20 @@ final class WidgetLoader
 	
 	/* AVAILABLE MODULES */
 	private static $_widget = array
-			(
-				"404" => "W404",
-				"BestRatedVideos" => "WLatestBestRatedVideos",
-				"Footer" => "WFooter",
-				"Head" => "WHead",
-				"HomeSigned" => "WHomeSigned",
-				"HomeUnsigned" => "WHomeUnsigned",
-				"LatestUploadedVideos" => "WLatestUploadedVideos",
-				"LoggedIn" => "WLoggedIn",
-				"LoggedOut" => "WLoggedOut",
-				"Nav" => "WNav",
-				"VideoList" => "WVideoList"
-			);
+	(
+		"404" => "W404",
+		"BestRatedVideos" => "WLatestBestRatedVideos",
+		"Footer" => "WFooter",
+		"Head" => "WHead",
+		"HomeSigned" => "WHomeSigned",
+		"HomeUnsigned" => "WHomeUnsigned",
+		"LatestActivity" => "WLatestUserActivity",
+		"LatestUploadedVideos" => "WLatestUploadedVideos",
+		"LoggedIn" => "WLoggedIn",
+		"LoggedOut" => "WLoggedOut",
+		"Nav" => "WNav",
+		"VideoList" => "WVideoList"
+	);
 	
 	/* Constructor */
 	private function __construct()

@@ -33,7 +33,7 @@
 									
 									<li class="VBox hcenter vcenter homePracticeButton" onClick="new ViewChangeEvent(ViewChangeEvent.VIEW_EXERCISE_MODULE).dispatch();">
 										<img src="themes/babelium/images/practice_icon.png" width="62" height="63" alt="Upload">
-										<span>Upload</span>
+										<span>Practice</span>
 									</li>
 								</ul>
 							</li>
@@ -49,7 +49,7 @@
 					<ul id="motdLinks" class="HBox">
 						<li><a href="javascript:new HomepageEvent(HomepageEvent.LATEST_USER_UPLOADED_VIDEOS).dispatch();">Latest uploaded videos</a></li>
 						<li><a href="javascript:new HomepageEvent(HomepageEvent.BEST_RATED_VIDEOS_SIGNED_IN).dispatch();">Best rated videos</a></li>
-						<li><a href="javascript:void(0);">My recent activity</a></li>
+						<li><a href="javascript:new HomepageEvent(HomepageEvent.LATEST_USER_ACTIVITY).dispatch();">My recent activity</a></li>
 					</ul>
 				</li>
 			</ul>

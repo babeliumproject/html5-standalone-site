@@ -66,7 +66,7 @@ BP.CMS = (function()
 	 */
 	function _initLocalebox()
 	{
-		// Hide select
+		// Hide <select>
 		var select = $("select#localebox").css("display", "none");
 		
 		// Add a div in its place
@@ -152,23 +152,9 @@ BP.CMS = (function()
 			var motd = $("aside#motd");
 			var header = _maincontent.find("header");
 			
-			var pos = 0;
-			var h = 0;
-			
-			// Loading position
-			if ( hideHeader || motd.length > 0 )
-			{
-				pos = $("section#maincontent").offset();
-				h = 0;
-			}
-			else
-			{
-				pos = header.offset();
-				h = header.outerHeight(true);
-			}
-			
-			_loader.css("top", pos.top + h);
-			_loader.find("div#loadcontext > span").html("Loading <strong>"+location+"</strong>");
+			// Loader div
+			_loader.css("top", _maincontent.offset().top);
+			_loader.find("div.loadcontext > span").html("Loading <strong>"+location+"</strong>");
 			_loader.slideDown(500);
 			
 			// Slide up current section and remove it on animation end
@@ -185,8 +171,12 @@ BP.CMS = (function()
 				if ( hideHeader )
 					header.slideUp(500);
 				
-				// Hide content
-				$("#maincontent > section").fadeOut(500, function()
+				/**
+				 * Hide content
+				 * $.when used to avoid multiple callback when maincontent has
+				 * more than 1 section
+				 */ 
+				$.when( $("#maincontent > section").fadeOut(500) ).done(function()
 				{
 					$("#maincontent > section").remove();
 					

@@ -68,7 +68,7 @@
 			<div class="hhelper"></div>
 		</header>
 		<aside id="loader">
-			<div id="loadcontext" class="HBox vcenter hcenter">
+			<div class="HBox vcenter hcenter loadcontext">
 				<span></span>
 			</div>
 		</aside>

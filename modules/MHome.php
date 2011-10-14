@@ -23,7 +23,8 @@ class MHome implements IModule
 			// Load content
 			if ( $action == "rated" )
 				$content = $content . WidgetLoader::loadWidget("BestRatedVideos");
-			else if ( $action == "activity" ) {}
+			else if ( $action == "activity" )
+				$content = $content . WidgetLoader::loadWidget("LatestActivity");
 			else
 				$content = $content . WidgetLoader::loadWidget("LatestUploadedVideos");
 		}

@@ -19,5 +19,7 @@
 	<script type="text/javascript" src="themes/babelium/js/cms.js"></script>
 	<script type="text/javascript" src="themes/babelium/js/encode.js"></script>
 	
+	<!-- Flexie: native support for Flexible Boxes in Opera and IE -->
+	<script type="text/javascript" src="themes/babelium/js/flexie.min.js"></script>
 </head>
 <body class="VBox">

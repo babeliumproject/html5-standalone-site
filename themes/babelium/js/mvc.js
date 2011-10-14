@@ -49,6 +49,7 @@ var Controller = Cairngorm.FrontController.extend(
 		// Home module
 		this.addCommand(HomepageEvent.LATEST_USER_UPLOADED_VIDEOS, LatestUploadedVideosCommand);
 		this.addCommand(HomepageEvent.BEST_RATED_VIDEOS_SIGNED_IN, SignedBestVideosCommand);
+		this.addCommand(HomepageEvent.LATEST_USER_ACTIVITY, LatestUserActivityCommand);
 	}
 });
 
@@ -106,6 +107,7 @@ var HomepageEvent = Cairngorm.Event.extend(
 // Constants
 HomepageEvent.BEST_RATED_VIDEOS_SIGNED_IN = "bestRatedVideosSignedIn";
 HomepageEvent.LATEST_USER_UPLOADED_VIDEOS = "latestUserUploadedVideos";
+HomepageEvent.LATEST_USER_ACTIVITY = "latestUserActivity";
 
 /* ============================================================
  * Custom Commands
@@ -418,6 +420,35 @@ var SignedBestVideosCommand = Cairngorm.Command.extend(
 	}
 });
 
+/**
+ * LatestUserActivityCommand
+ */
+var LatestUserActivityCommand = Cairngorm.Command.extend(
+{
+	execute : function ()
+	{
+		var _this = this;
+		
+		BP.CMS.prepareMainContent("latest activity", function ()
+		{
+			BP.HomeDelegate.latestUserActivity(_this);
+		}, true);
+	},
+			
+	onResult : function ( response )
+	{
+		BP.CMS.innerMainContent(response);
+		BP.pushState({module : "home", action : "activity"}, 
+				"Home :: Best rated videos - Babelium Project", 
+				"?module=home&action=activity");
+	},
+					
+	onFault : function ()
+	{
+		alert("Error retrieving latest user activity");
+	}
+});
+
 /* ============================================================
  * INIT CONTROLLER
  * ==========================================================*/
@@ -483,6 +514,12 @@ BP.HomeDelegate = (function ()
 		{
 			var _service = Cairngorm.ServiceLocator.getHttpService(_serviceID);
 			_service.call( "action=rated&params=min", responder );
+		},
+		
+		latestUserActivity : function ( responder )
+		{
+			var _service = Cairngorm.ServiceLocator.getHttpService(_serviceID);
+			_service.call( "action=activity&params=min", responder );
 		}
 	};
 
