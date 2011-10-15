@@ -15,11 +15,20 @@ BP.state = {};
 // Last visited module
 BP.at = function ( moduleName )
 {
-	if ( moduleName == null )
-		return BP.state == null ? null : BP.state.module;
+	if ( typeof moduleName == 'undefined' )
+		return (typeof BP.state.module == 'undefined') ? null : BP.state.module;
 	else 
-		return BP.state != null && BP.state.module == moduleName;
+		return (typeof BP.state.module == 'undefined') ? false : BP.state.module == moduleName;
 };
+
+// Last requested action
+BP.action = function ( actionName )
+{	
+	if ( typeof actionName == 'undefined' )
+		return (typeof BP.state.action == 'undefined') ? null : BP.state.action;
+	else 
+		return (typeof BP.state.action == 'undefined') ? false : BP.state.action == actionName;
+}
 
 /* ============================================================
  * Babelium Controller
@@ -128,9 +137,8 @@ var ViewHomeModuleCommand = Cairngorm.Command.extend(
 	
 	onResult : function ( response )
 	{
-		BP.CMS.innerMainContent(response);
-		BP.CMS.navigation("#motdmessageshelper", "#motdmessages");
 		BP.pushState({module : "home" }, "Home - Babelium Project", "?module=home");
+		BP.CMS.innerMainContent(response);
 	},
 	
 	onFault : function ()
@@ -156,8 +164,8 @@ var ViewExerciseModuleCommand = Cairngorm.Command.extend(
 	
 	onResult : function ( response )
 	{
-		BP.CMS.innerMainContent(response);
 		BP.pushState({module : "practice" }, "Practice - Babelium Project", "?module=practice");
+		BP.CMS.innerMainContent(response);
 	},
 	
 	onFault : function ()
@@ -183,8 +191,8 @@ var ViewEvaluationModuleCommand = Cairngorm.Command.extend(
 	
 	onResult : function ( response )
 	{
-		BP.CMS.innerMainContent(response);
 		BP.pushState({module : "evaluation" }, "Evaluation - Babelium Project", "?module=evaluation");
+		BP.CMS.innerMainContent(response);
 	},
 	
 	onFault : function ()
@@ -210,8 +218,8 @@ var ViewSubtitleModuleCommand = Cairngorm.Command.extend(
 	
 	onResult : function ( response )
 	{
-		BP.CMS.innerMainContent(response);
 		BP.pushState({module : "subtitles" }, "Subtitles - Babelium Project", "?module=subtitles");
+		BP.CMS.innerMainContent(response);
 	},
 	
 	onFault : function ()
@@ -237,8 +245,8 @@ var ViewConfigModuleCommand = Cairngorm.Command.extend(
 	
 	onResult : function ( response )
 	{
-		BP.CMS.innerMainContent(response);
 		BP.pushState({module : "config" }, "Configuration - Babelium Project", "?module=config");
+		BP.CMS.innerMainContent(response);
 	},
 	
 	onFault : function ()
@@ -259,12 +267,13 @@ var ViewAboutModuleCommand = Cairngorm.Command.extend(
 		BP.CMS.prepareMainContent("about", function ()
 		{
 			BP.AboutDelegate.viewAboutModule(_this);
-			BP.pushState({module : "about" }, "About - Babelium Project", "?module=about");
 		});
 	},
 	
 	onResult : function ( response )
 	{
+
+		BP.pushState({module : "about" }, "About - Babelium Project", "?module=about");
 		BP.CMS.innerMainContent(response);
 	},
 	
@@ -378,10 +387,10 @@ var LatestUploadedVideosCommand = Cairngorm.Command.extend(
 		
 	onResult : function ( response )
 	{
-		BP.CMS.innerMainContent(response);
 		BP.pushState({module : "home", action : "uploaded"}, 
 				"Home :: Latest uploaded videos - Babelium Project",
 				"?module=about&action=uploaded");
+		BP.CMS.innerMainContent(response);
 	},
 			
 	onFault : function ()
@@ -407,10 +416,10 @@ var SignedBestVideosCommand = Cairngorm.Command.extend(
 			
 	onResult : function ( response )
 	{
-		BP.CMS.innerMainContent(response);
 		BP.pushState({module : "home", action : "rated"}, 
 				"Home :: Best rated videos - Babelium Project", 
 				"?module=home&action=rated");
+		BP.CMS.innerMainContent(response);
 	},
 					
 	onFault : function ()
@@ -436,10 +445,10 @@ var LatestUserActivityCommand = Cairngorm.Command.extend(
 			
 	onResult : function ( response )
 	{
-		BP.CMS.innerMainContent(response);
 		BP.pushState({module : "home", action : "activity"}, 
 				"Home :: Best rated videos - Babelium Project", 
 				"?module=home&action=activity");
+		BP.CMS.innerMainContent(response);
 	},
 					
 	onFault : function ()

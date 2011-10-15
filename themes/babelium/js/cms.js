@@ -32,6 +32,8 @@ BP.CMS = (function()
 		
 		_initNavigationLinks();
 		_initLocalebox();
+		_initViewStacks();
+		_initDataTables();
 		
 		_initiated = true;
 	}
@@ -124,6 +126,129 @@ BP.CMS = (function()
 		});
 	}
 	
+	/**
+	 * Init navigation navs
+	 */
+	function _initViewStacks()
+	{
+		/** Init navigation Menus **/
+		if ( BP.at("home") && !BP.action() )
+			_viewStack("#motdmessageshelper", "#motdmessages");
+	}
+	
+	/**
+	 * Init data tables
+	 */
+	function _initDataTables()
+	{
+		/** Home user recent activity data tables **/
+		if ( BP.at("home") && BP.action("activity") )
+		{
+			_dataTable("#assesmentsReceived");
+			_dataTable("#assesmentsGiven");
+		}
+	}
+	
+	/**
+	 * Create a JQuery DataTable
+	 * @param v: table id
+	 */
+	function _dataTable( t )
+	{
+		$(t).dataTable({"bJQueryUI": true,"sPaginationType": "full_numbers"});
+	}
+	
+	/**
+	 * Create a view stack
+	 * @param b: buttons parent layer
+	 * @param v: views parent layer
+	 */
+	function _viewStack(b, v)
+	{
+		if ( $(b).length == 0 || $(v).length == 0 )
+			return;
+		
+		/**
+		 * Nav item
+		 */
+		var nav = (function ()
+		{	
+			var _index = 1;
+			var _b = b;
+			var _v = v;
+			var _count = $(_b + " > *").length;
+			
+			// Hide all views
+			$(_v + " > *").css("display", "none");
+			// Show default
+			$(_v + " > *:first-child").css("display", "block");
+			
+			// For each button
+			$(b + " > *").each(function(index)
+			{
+				$(this).click(function()
+				{
+					_show(index+1);
+				});
+			});
+			
+			// Show index view
+			function _show( newIndex )
+			{					
+				if ( newIndex < 1 || newIndex > _count )
+					return;
+				
+				$(v + " > *:nth-child("+_index+")").fadeOut(500, function()
+				{
+					$( v + " > *:nth-child("+newIndex+")").fadeIn(500);
+				});
+				
+				_index = newIndex;
+			}
+			
+			// show next view
+			function _showNext()
+			{
+				var nextIndex = _index+1;
+				
+				if ( nextIndex > _count )
+					_show(1);
+				else
+					_show(nextIndex);
+			}
+			
+			// show prev view
+			function _showPrev()
+			{
+				var prevIndex = _index-1;
+				
+				if ( prevIndex > 1 )
+					_show(_count);
+				else
+					_show(prevIndex);
+			}
+			
+			return {
+				next : function ()
+				{
+					_showNext();
+				},
+				
+				prev : function ()
+				{
+					_showPrev();
+				},
+				
+				show : function ( i )
+				{
+					_show(i);
+				}
+			};
+		})();
+		
+		return nav;
+	}
+	
 	
 	// Public interface
 	return {
@@ -134,9 +259,6 @@ BP.CMS = (function()
 		init : function()
 		{
 			_setup();
-			
-			/** Init navigation Menus **/
-			this.navigation("#motdmessageshelper", "#motdmessages");
 		},
 		
 		/**
@@ -193,94 +315,38 @@ BP.CMS = (function()
 		},
 		
 		/**
-		 * Creates a navigation
+		 * Creates a view stack
 		 * @param b: buttons layer (<ul> e.g.)
 		 * @param v: views layer (<ul>, <section>, <article>)
 		 */
-		navigation : function ( b, v )
+		viewStack : function ( b, v )
 		{
-			if ( $(b).length == 0 || $(v).length == 0 )
+			if ( !_initiated )
+				return;
+
+			return _viewStack(b, v);
+		},
+		
+		/**
+		 * Reloads view stacks
+		 */
+		reloadViewStacks : function ()
+		{
+			if ( !_initiated )
 				return;
 			
-			/**
-			 * Nav item
-			 */
-			var nav = (function ()
-			{	
-				var _index = 1;
-				var _b = b;
-				var _v = v;
-				var _count = $(_b + " > *").length;
-				
-				// Hide all views
-				$(_v + " > *").css("display", "none");
-				// Show default
-				$(_v + " > *:first-child").css("display", "block");
-				
-				// For each button
-				$(b + " > *").each(function(index)
-				{
-					$(this).click(function()
-					{
-						_show(index+1);
-					});
-				});
-				
-				// Show index view
-				function _show( newIndex )
-				{					
-					if ( newIndex < 1 || newIndex > _count )
-						return;
-					
-					$(v + " > *:nth-child("+_index+")").fadeOut(500, function()
-					{
-						$( v + " > *:nth-child("+newIndex+")").fadeIn(500);
-					});
-					
-					_index = newIndex;
-				}
-				
-				// show next view
-				function _showNext()
-				{
-					var nextIndex = _index+1;
-					
-					if ( nextIndex > _count )
-						_show(1);
-					else
-						_show(nextIndex);
-				}
-				
-				// show prev view
-				function _showPrev()
-				{
-					var prevIndex = _index-1;
-					
-					if ( prevIndex > 1 )
-						_show(_count);
-					else
-						_show(prevIndex);
-				}
-				
-				return {
-					next : function ()
-					{
-						_showNext();
-					},
-					
-					prev : function ()
-					{
-						_showPrev();
-					},
-					
-					show : function ( i )
-					{
-						_show(i);
-					}
-				};
-			})();
-			
-			return nav;
+			_initViewStacks();
+		},
+		
+		/**
+		 * Reloads data tables
+		 */
+		reloadDataTables : function ()
+		{
+			if ( !_initiated )
+				return;
+
+			_initDataTables();
 		},
 
 		/**
@@ -289,11 +355,18 @@ BP.CMS = (function()
 		 */
 		innerMainContent : function ( data )
 		{
+			if ( !_loading )
+				return;
+			
 			data = $.parseJSON(data);
 			$("#maincontent > header > h1").text(data.title);
 			var content = $(data.content).hide();
 			content.appendTo("#maincontent").slideDown(500);
 			$("#maincontent > aside#loader").slideUp(500);
+			
+			// Reload views
+			this.reloadViewStacks();
+			this.reloadDataTables();
 			
 			_loading = false;
 		},
@@ -303,6 +376,9 @@ BP.CMS = (function()
 		 */
 		toggleLoginPopup : function ( )
 		{
+			if ( !_initiated )
+				return;
+			
 			var popup = $("aside#popup");
 			
 			if ( popup.is(":visible") )
@@ -320,9 +396,9 @@ BP.CMS = (function()
 		 */
 		hideLoginPopup : function ( )
 		{
-			if ( _loading || !_initiated )
+			if ( !_initiated )
 				return;
-			
+
 			var popup = $("aside#popup");
 			
 			popup.slideUp(500, function(){document.getElementById("loginForm").reset();});
@@ -334,9 +410,9 @@ BP.CMS = (function()
 		 */
 		showLoginPopup : function ()
 		{
-			if ( _loading || !_initiated )
+			if ( !_initiated )
 				return;
-			
+
 			var popup = $("aside#popup");
 			
 			popup.slideDown(500);
@@ -346,20 +422,3 @@ BP.CMS = (function()
 	};
 
 })();
-
-/* ============================================================
- * INIT BABELIUM's CONTENT MANAGEMENT SYSTEM
- * ==========================================================*/
-
-$(document).ready(function()
-{
-	BP.CMS.init();
-	BP.state.module = decodeURI((RegExp("module=(.+?)(&|$)").exec(location.search) || [,"home"])[1]);
-	
-	/**
-	 * On popstate
-	 */
-	window.onpopstate = function(event)
-	{
-	};
-});

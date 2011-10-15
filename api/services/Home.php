@@ -159,7 +159,7 @@ class Home{
 		$results = array();
 
 		//List of all the assessments done by the user
-		$evaluation = new EvaluationDAO();
+		$evaluation = new Evaluation();
 		$givenAssessments = $evaluation->getResponsesAssessedByCurrentUser();
 
 		return $this->sliceResultsByNumber($givenAssessments, 5);

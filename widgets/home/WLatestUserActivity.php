@@ -18,15 +18,14 @@ class WLatestUserActivity implements IWidget
 	{
 		$cfg = Config::getInstance();
 		
-		/*$home = new Home();
-		$response = $home->latestAvailableVideos();
+		$home = new Home();
+		$received = $home->usersLatestReceivedAssessments();
+		$given = $home->usersLatestGivenAssessments();
 		
 		// Prepare template
-		$cfg->smarty->assign("exercises", $response);
-		$cfg->smarty->assign("locale", new LocaleFlagResource());
-		$cfg->smarty->assign("level", new LevelCorrespondence());
-		$cfg->smarty->assign("license", new License());
-		$cfg->smarty->assign("time", new TimeFormatter());*/
+		$cfg->smarty->assign("received", $received);
+		$cfg->smarty->assign("given", $given);
+		$cfg->smarty->assign("time", new TimeFormatter());
 		
 		return $cfg->smarty->fetch("home/LatestUserActivity.tpl");
 	}

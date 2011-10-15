@@ -5,10 +5,18 @@
 */
 
 /* Imports */
-@import url("css/reset.css");	/* resets browsers default style */
-@import url("css/mxml.css");	/* flex bindings */
-@import url("css/forms.css");	/* modifications of some form elements */
+@import url("css/reset.css");					/* resets browsers default style */
+@import url("css/mxml.css");					/* flex bindings */
+@import url("css/forms.css");					/* modifications of some form elements */
+@import url("css/demo_table_jui.css");			/* data tables */
+@import url("css/jquery-ui-1.8.16.custom.css");	/* data tables */
 
+
+/** Override data tables input search **/
+div.dataTables_filter > label > input
+{
+	height: 15px !important;
+}
 
 /** DEFAULT STYLES **/
 
@@ -130,6 +138,117 @@ li#loginhelper
 }
 
 /** END OF LOGIN POPUP **/
+
+/** LOCALE BOX **/
+
+.localebox
+{	
+	height: 17px;
+	display: inline-block;
+	min-width: 170px;
+	position: relative;
+}
+
+	.localebox > .selectBox
+	{
+		position: absolute;
+		height: 100%;
+		width: 100%;
+		padding-left: 3px;
+		line-height: 18px;
+		
+		/* Font settings */
+		font-size:11px;
+		text-shadow:1px 1px 0 #EEEEEE;
+		color:#666666;
+		
+		cursor:pointer;
+		
+		/** Border **/
+		border: 1px solid BFDCE3;
+		-moz-border-radius:3px;
+		-webkit-border-radius:3px;
+		border-radius:3px;
+		
+		background-color: #666;
+		/** Gradient **/
+		background: -webkit-gradient(linear, 0 0, 0 100%, from(white), to(#BFDCE3));
+		background: -moz-linear-gradient(top, white, #BFDCE3);
+		background: -o-linear-gradient(top, white, #BFDCE3);
+		background: -ms-linear-gradient(top, white, #BFDCE3);
+	
+		/** Shadow **/	
+		-moz-box-shadow: -1px 1px 3px #111;
+		-webkit-box-shadow: -1px 1px 3px #111;
+		-o-box-shadow: -1px 1px 3px #111;
+		-ms-box-shadow: -1px 1px 3px #111;
+		box-shadow: -1px 1px 3px #111;
+	}
+
+	.localebox > .selectBox:hover,
+	.localebox > .dropDown > li:hover
+	{
+		color:#2c5667;
+		text-shadow:1px 1px 0 #9bc2d0;
+	}
+
+	.localebox > .dropDown
+	{
+		position:absolute;
+		top: 20px;
+		left: 3px;
+		width: 100%;
+		border:1px solid #38babc;
+		list-style: none;
+		cursor: pointer;
+		line-height: 20px;
+		padding: 3px;
+		
+		/** Box style **/
+		-moz-box-sizing: border-box;
+		-webkit-box-sizing: border-box;
+		-o-box-sizing: border-box;
+		-ms-box-sizing: border-box;
+		box-sizing: border-box;
+		
+		/** Shadow **/
+		-moz-box-shadow: 0 0 4px #111;
+		-webkit-box-shadow: 0 0 4px #111;
+		-o-box-shadow: 0 0 4px #111;
+		-ms-box-shadow: 0 0 4px #111;
+		box-shadow: 0 0 4px #111;
+		
+		/** Border top right roundered **/
+		-moz-border-bottom-right-radius: 4px; 
+		-webkit-border-bottom-right-radius: 4px;
+		-o-border-bottom-right-radius: 4px;
+		-ms-border-bottom-right-radius: 4px;
+		border-bottom-right-radius:4px;
+			
+		/** Border top left roundered **/
+		-moz-border-bottom-left-radius: 4px; 
+		-webkit-border-bottom-left-radius: 4px;
+		-o-border-bottom-left-radius: 4px;
+		-ms-border-bottom-left-radius: 4px;
+		border-bottom-left-radius:4px;
+		
+		background-color: white;
+		
+		/* display over logo */
+		z-index: 2;
+	}
+
+		.localebox > .dropDown > li
+		{
+			font-size:11px;	
+		}
+		
+		.localebox > .dropDown > li:hover
+		{
+			background-color: #38babc;
+		}
+
+/** END OF LOCALEBOX **/
 
 /** LOGO **/
 
@@ -820,6 +939,7 @@ section.exerciseList
 footer
 {
 	height: 40px;
+	margin-top: 50px;
 	
 	background-color: none;
 }
