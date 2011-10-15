@@ -5,8 +5,9 @@
 
 $(document).ready(function()
 {
-	BP.state.module = (RegExp("module=(.+?)(&|$)").exec(location.search) || [,"home"])[1];
-	BP.state.action = (RegExp("action=(.+?)(&|$)").exec(location.search) || [,undefined])[1];
+	var m = (RegExp("module=(.+?)(&|$)").exec(location.search) || [,"home"])[1];
+	var a = (RegExp("action=(.+?)(&|$)").exec(location.search) || [,undefined])[1];
+	BP.pushState({module: m, action: a}, null, null);	
 	
 	// Init content management system
 	BP.CMS.init();
@@ -16,5 +17,16 @@ $(document).ready(function()
 	 */
 	window.onpopstate = function(event)
 	{
+		if ( typeof event.state == 'undefined' || event.state == null )
+			return;
+		else
+		{
+			var state = event.state;
+			
+			if ( state.module == "home" && BP.at("home") )
+				state.params = "min";
+			
+			new ViewChangeEvent(ViewChangeEvent.VIEW_POPSTATE, state).dispatch();
+		}
 	};
 });

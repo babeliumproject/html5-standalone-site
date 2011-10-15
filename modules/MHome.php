@@ -34,6 +34,8 @@ class MHome implements IModule
 			// Load MOTD
 			if ( $state != "min" )
 				$content = WidgetLoader::loadWidget("HomeUnsigned");
+				
+			$content = $content . WidgetLoader::loadWidget("StepByStep");
 		}
 		
 		return $content;

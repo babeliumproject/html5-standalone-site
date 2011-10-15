@@ -14,8 +14,8 @@ if ( !isset($_GET["module"]) )
 SessionManager::getInstance(); // start session
 
 $moduleName = $_GET["module"];
-$action = $_GET["action"];
-$params = $_GET["params"];
+$action = isset($_GET["action"]) ? $_GET["action"] : NULL;
+$params = isset($_GET["params"]) ? $_GET["params"] : NULL;
 
 $module = array(
 		"content" => ModuleLoader::loadModule($moduleName, $action, $params),

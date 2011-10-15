@@ -57,6 +57,3 @@
 			<div class="hhelper"></div>
 		</aside>
 <!-- END OF MOTD MESSAGES -->
-
-		<section>
-		</section>

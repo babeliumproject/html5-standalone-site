@@ -13,6 +13,7 @@ require_once(dirname(__FILE__) . "/../widgets/home/WHomeUnsigned.php");
 require_once(dirname(__FILE__) . "/../widgets/home/WLatestUploadedVideos.php");
 require_once(dirname(__FILE__) . "/../widgets/home/WLatestBestRatedVideos.php");
 require_once(dirname(__FILE__) . "/../widgets/home/WLatestUserActivity.php");
+require_once(dirname(__FILE__) . "/../widgets/home/WStepByStep.php");
 
 require_once(dirname(__FILE__) . "/../widgets/main/WNav.php");
 require_once(dirname(__FILE__) . "/../widgets/main/WHead.php");
@@ -45,6 +46,7 @@ final class WidgetLoader
 		"LoggedIn" => "WLoggedIn",
 		"LoggedOut" => "WLoggedOut",
 		"Nav" => "WNav",
+		"StepByStep" => "WStepByStep",
 		"VideoList" => "WVideoList"
 	);
 	
