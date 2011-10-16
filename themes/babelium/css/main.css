@@ -5,11 +5,11 @@
 */
 
 /* Imports */
-@import url("css/reset.css");					/* resets browsers default style */
-@import url("css/mxml.css");					/* flex bindings */
-@import url("css/forms.css");					/* modifications of some form elements */
-@import url("css/demo_table_jui.css");			/* data tables */
-@import url("css/jquery-ui-1.8.16.custom.css");	/* data tables */
+@import url("reset.css");					/* resets browsers default style */
+@import url("mxml.css");					/* flex bindings */
+@import url("forms.css");					/* modifications of some form elements */
+@import url("demo_table_jui.css");			/* data tables */
+@import url("jquery-ui-1.8.16.custom.css");	/* data tables */
 
 
 /** Override data tables input search **/
@@ -63,7 +63,7 @@ nav#topnav
 	
 	/** Default background **/
 	background-color: #FEFEFE;
-	background-image: url(./images/rainbow_bgr.png);
+	background-image: url(../images/rainbow_bgr.png);
 	
 	/**css3 gradients **/
 	background: -webkit-gradient(linear, 0 0, 0 100%, from(white), to(#E2EFF3));
@@ -106,7 +106,7 @@ aside#popup
 	
 	/** Default background **/
 	background-color: #E2EFF3;
-	background-image: url(./images/rainbow_bgr.png);
+	background-image: url(../images/rainbow_bgr.png);
 }
 
 	aside#popup > div
@@ -270,7 +270,7 @@ nav#mainnav
 	
 	/** Default background **/
 	background-color: #FEFEFE;
-	background-image: url(./images/rainbow_bgr.png);
+	background-image: url(../images/rainbow_bgr.png);
 	font-size: 18px;
 }
 
@@ -286,7 +286,7 @@ nav#mainnav
 			min-height: 50px;
 			line-height: 50px;
 			
-			background: url(./images/separator.png) no-repeat center right;
+			background: url(../images/separator.png) no-repeat center right;
 		}
 		
 		nav#mainnav > ul > li:last-child
@@ -422,7 +422,7 @@ aside#motd
 	width: 100%;
 	
 	resize: vertical;
-	background: url(./images/pattern2.png);
+	background: url(../images/pattern2.png);
 }
 
 	p.motdText
@@ -724,7 +724,7 @@ section#maincontent
 	{
 		padding-top: 15px;
 		
-		background: url(./images/pattern2.png);
+		background: url(../images/pattern2.png);
 	}
 	
 		section#maincontent > header > h1
@@ -814,8 +814,15 @@ section.exerciseList
 {
 	margin: 20px;
 }
+
+	section.exerciseList > div.exerciseContainer
+	{
+		width: 100%;
+		margin: 0px;
+		padding: 0px;
+	}
 	
-	section.exerciseList > article
+	section.exerciseList > div.exerciseContainer > article
 	{
 		width: 49%;
 		min-width: 470px;
@@ -827,7 +834,7 @@ section.exerciseList
 		margin: 1px;
 	}
 	
-	section.exerciseList > article:hover
+	section.exerciseList > div.exerciseContainer > article:hover
 	{
 		background-color: #cedbef;
 		border: 1px solid #86bcce;
@@ -848,18 +855,18 @@ section.exerciseList
 		box-shadow: 2px 2px 4px #666;
 	}
 	
-		section.exerciseList > article > *
+		section.exerciseList > div.exerciseContainer > article > *
 		{
 			display: inline-block;
 		}
 		
-		section.exerciseList > article > div
+		section.exerciseList > div.exerciseContainer > article > div
 		{
-			width: 300px;
+			width: 350px;
 			height: 100%;
 		}
 		
-			section.exerciseList > article > div > h1
+			section.exerciseList > div.exerciseContainer > article > div > h1
 			{
 				padding-bottom: 3px;
 				margin-bottom: 3px;
@@ -869,36 +876,37 @@ section.exerciseList
 				border-bottom: 2px solid #cacdcf;
 			}
 			
-			section.exerciseList > article > div > p
+			section.exerciseList > div.exerciseContainer > article > div > p
 			{
 				margin-bottom: 3px;
 			}
 			
-			section.exerciseList > article > div > *
+			section.exerciseList > div.exerciseContainer > article > div > *
 			{
 				width: 100%;
 				
 				font-size: 13px;
 			}
 			
-				section.exerciseList > article > div > div.dtop > *
+				section.exerciseList > div.exerciseContainer > article > div > div.dtop > *
 				{
 					font-weight: bold;
 					color: #d3aa31;
 				}
 				
-			section.exerciseList > article > div > p.username
+			section.exerciseList > div.exerciseContainer > article > div > p.username
 			{
 				text-align: right;
 			}
 	
-		section.exerciseList > article > aside
+		section.exerciseList > div.exerciseContainer > article > aside
 		{
-			width: 170px;
+			width: 150px;
 			padding: 10px;
+			float: left;
 		}
 		
-			section.exerciseList > article > aside > div
+			section.exerciseList > div.exerciseContainer > article > aside > div
 			{
 				width: 150px;
 				height: 90px;
@@ -918,7 +926,7 @@ section.exerciseList
 				box-shadow: 2px 2px 4px #666;
 			}
 			
-				section.exerciseList > article > aside > div > span
+				section.exerciseList > div.exerciseContainer > article > aside > div > span
 				{
 					position: absolute;
 					width: 30px;
@@ -934,6 +942,121 @@ section.exerciseList
 
 /** END OF EXERCISE LIST **/
 
+/** PAGINATION **/
+
+aside.paginationPanel
+{
+	width: 600px;
+	height: 35px;
+	padding-left: 30px;
+	padding-right: 30px;
+	margin: 30px;
+	
+	/** Default background **/
+	background-color: #FEFEFE;
+	
+	/** Gradient for mozilla and webkit powered **/
+	background: -webkit-gradient(linear, 0 0, 100% 0, from(white), to(#86BCCE));
+	background: -moz-linear-gradient(left, white, #86BCCE);
+	background: -o-linear-gradient(left, white, #86BCCE);
+	background: -ms-linear-gradient(left, white, #86BCCE);
+	
+	/** rounded border **/
+	-moz-border-radius: 6px; 
+	-webkit-border-radius: 6px;
+	-o-border-radius: 6px; 
+	-ms-border-radius: 6px; 
+	border-radius:6px;
+	
+	/** border **/
+	border: 1px solid #38babc;
+	
+	/** box shadow **/ 
+	-moz-box-shadow: 2px 2px 2px #999;
+	-webkit-box-shadow: 2px 2px 2px #999;
+	-o-box-shadow: 2px 2px 2px #999;
+	-ms-box-shadow: 2px 2px 2px #999;
+	box-shadow: 2px 2px 2px #999;
+}
+
+	aside.paginationPanel > div.paginationPaging > *
+	{
+		margin-right: 10px;
+	}
+	
+	div.paginationButtons > div > span, #pagesbox > span
+	{
+		cursor: pointer;
+		color: blue;
+		padding: 0px 5px 0px 0px;	
+	}
+	
+	div.paginationButtons > div > span.current, #pagesbox > span.current
+	{
+		font-weight: bold;
+		color: red;
+	}
+
+	/* ul drop down */
+	div.paginationDropdown
+	{
+		width: 150px;
+		height: 16px;
+		position: relative;
+		font-size: 12px;
+		border-collapse: collapse;
+	}
+	
+	div.paginationDropdown > div.panel
+	{
+		width: 145px;
+		height: 16px;
+		overflow: hidden;
+		background: #ffffff url(../images/arrow-down.png) no-repeat top right;
+		border: 1px solid #cccccc;
+		padding: 0px 0px 0px 5px;
+		cursor: pointer;
+		
+		/** rounded border **/
+		-moz-border-radius: 6px; 
+		-webkit-border-radius: 6px;
+		-o-border-radius: 6px; 
+		-ms-border-radius: 6px; 
+		border-radius:6px;
+	}
+	
+	div.paginationDropdown > ul
+	{
+		float: left;
+		width: 150px;
+		background-color: #ffffff;
+		border: 1px solid #cccccc;	
+		overflow: hidden;
+		padding: 0px 0px 0px 0px;
+		margin: 0px 0px 0px 0px;
+		list-style: none;
+		display: none;
+		position: absolute;
+		z-index: 1000;
+	}
+	
+	div.paginationDropdown > ul > li
+	{
+		padding: 3px 0px 3px 5px;
+		cursor: pointer;
+		width: 150px;
+		float: left;
+		background-color: #ffffff;
+	}
+	
+	div.paginationDropdown > ul > li:hover
+	{
+		background-color: blue;
+		color: #ffffff;
+	}
+
+/** END OF PAGINATION **/
+
 /** FOOTER **/
 
 footer
@@ -948,7 +1071,7 @@ footer
 	{
 		height: 30px;
 		
-		background: url(./images/pattern2.png);
+		background: url(../images/pattern2.png);
 	}
 	
 	footer > ul.HBox

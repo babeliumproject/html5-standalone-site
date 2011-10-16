@@ -217,6 +217,8 @@ Cairngorm.HTTPService = Class.extend(
 			{
 				// Target url
 				url : src,
+				// timeout in millis
+				timeout : 5000,
 				// The success call back.
 				success : responder.onResult,
 				// The error handler.

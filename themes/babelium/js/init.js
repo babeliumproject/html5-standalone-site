@@ -12,6 +12,20 @@ $(document).ready(function()
 	// Init content management system
 	BP.CMS.init();
 	
+	$("section.exerciseList").jplist(
+	{
+		filter_field: ".paginationFilter input",
+		filter_path: ".exerciseTitle",
+		
+		pagingbox: ".paginationButtons",
+		pageinfo: ".paginationInfo",
+		paging_dd_path: ".paginationPage-by",
+		
+		items_box: ".exerciseContainer",
+		item_path: ".exercise",
+		items_on_page: 10
+	});
+	
 	/**
 	 * On popstate
 	 */

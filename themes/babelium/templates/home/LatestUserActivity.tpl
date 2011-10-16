@@ -30,7 +30,7 @@
 						<td>{$r->intonationScore}</td>
 						<td>{$r->fluencyScore}</td>
 						<td>{$r->rhythmScore}</td>
-						<td>{$r->spontainetyScore}</td>
+						<td>{$r->spontaneityScore}</td>
 						<td>{$r->overallScore}</td>
 					</tr>
 {/foreach}
@@ -61,7 +61,7 @@
 					</tr>
 				</thead>
 				<tbody>
-{foreach from=$received item=r}
+{foreach from=$given item=r}
 					<tr class="gradeA">
 						<td><img src="{$r->exerciseThumbnailUri}" width="96" height="72" border="0" alt="{$r->exerciseThumbnailUri}" /></td>
 						<td>{$r->responseUserName}</td>
@@ -70,7 +70,8 @@
 						<td>{$r->intonationScore}</td>
 						<td>{$r->fluencyScore}</td>
 						<td>{$r->rhythmScore}</td>
-						<td>{$r->spontainetyScore}</td>
+						<td>{$r->spontaneityScore}</td>
+						<td>{$r->overallScore}</td>
 					</tr>
 {/foreach}
 				</tbody>
