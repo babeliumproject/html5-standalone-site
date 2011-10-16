@@ -14,8 +14,8 @@ $(document).ready(function()
 	
 	$("section.exerciseList").jplist(
 	{
-		filter_field: ".paginationFilter input",
-		filter_path: ".exerciseTitle",
+		filter: {title: ".exerciseTitle", description: "p.exerciseDescription"},
+		filter_path: ".paginationFilter",
 		
 		pagingbox: ".paginationButtons",
 		pageinfo: ".paginationInfo",

@@ -31,7 +31,7 @@
 							</div>
 						</div>
 						
-						<p>
+						<p class="exerciseDescription">
 							{$exercise->description|truncate:160:" [..]"}
 						</p>
 						

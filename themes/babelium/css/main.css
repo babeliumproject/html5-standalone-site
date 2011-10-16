@@ -946,7 +946,6 @@ section.exerciseList
 
 aside.paginationPanel
 {
-	width: 600px;
 	height: 35px;
 	padding-left: 30px;
 	padding-right: 30px;
@@ -978,6 +977,11 @@ aside.paginationPanel
 	-ms-box-shadow: 2px 2px 2px #999;
 	box-shadow: 2px 2px 2px #999;
 }
+
+	aside.paginationPanel > div.paginationFilter > input
+	{
+		height: 20px !important;
+	}
 
 	aside.paginationPanel > div.paginationPaging > *
 	{
