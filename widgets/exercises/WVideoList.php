@@ -19,6 +19,7 @@ class WVideoList implements IWidget
 		
 		// Prepare template
 		$cfg->smarty->assign("exercises", $phpObj);
+		$cfg->smarty->assign("cfg", $cfg);
 		$cfg->smarty->assign("locale", new LocaleFlagResource());
 		$cfg->smarty->assign("level", new LevelCorrespondence());
 		$cfg->smarty->assign("license", new License());

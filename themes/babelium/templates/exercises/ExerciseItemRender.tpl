@@ -1,7 +1,8 @@
 				
 				<article class="exercise">
 	  				<aside>
-						<div><span>{$time->format($exercise->duration)}</span></div>
+						<img src="{$cfg->imagePath}/{$exercise->name}/{$exercise->thumbnailUri}" alt="{$cfg->title}" width="120" height="90" align="left" />
+						<span>{$time->format($exercise->duration)}</span>
 					</aside>
 					
 					<div>

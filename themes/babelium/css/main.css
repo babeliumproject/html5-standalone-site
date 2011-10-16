@@ -862,7 +862,7 @@ section.exerciseList
 		
 		section.exerciseList > div.exerciseContainer > article > div
 		{
-			width: 350px;
+			width: 400px;
 			height: 100%;
 		}
 		
@@ -901,14 +901,15 @@ section.exerciseList
 	
 		section.exerciseList > div.exerciseContainer > article > aside
 		{
-			width: 150px;
-			padding: 10px;
+			position: relative;
 			float: left;
+			width: 120px;
+			padding: 10px;
 		}
 		
-			section.exerciseList > div.exerciseContainer > article > aside > div
+			section.exerciseList > div.exerciseContainer > article > aside > img
 			{
-				width: 150px;
+				width: 120px;
 				height: 90px;
 				border: 1px solid black;
 				
@@ -926,19 +927,20 @@ section.exerciseList
 				box-shadow: 2px 2px 4px #666;
 			}
 			
-				section.exerciseList > div.exerciseContainer > article > aside > div > span
-				{
-					position: absolute;
-					width: 30px;
-					height: 10px;
-					background-color: black;
-				
-					color: white;
-					font-size: 11px;
-					font-weight: bold;
-					text-align: right;
-					padding: 2px;
-				}
+			section.exerciseList > div.exerciseContainer > article > aside > span
+			{
+				position: absolute;
+				display: block;
+				width: 30px;
+				height: 10px;
+				background-color: black;
+			
+				color: white;
+				font-size: 11px;
+				font-weight: bold;
+				text-align: right;
+				padding: 2px;
+			}
 
 /** END OF EXERCISE LIST **/
 
