@@ -34,6 +34,7 @@ BP.CMS = (function()
 		_initLocalebox();
 		_initViewStacks();
 		_initDataTables();
+		_initPaginations();
 		
 		_initiated = true;
 	}
@@ -150,12 +151,53 @@ BP.CMS = (function()
 	}
 	
 	/**
+	 * Init pagination
+	 */
+	function _initPaginations()
+	{
+		/** Exercises **/
+		if ( BP.at("practice") && !BP.action() )
+		{
+			_pagination("section.exerciseList", ".exerciseContainer", ".exercise",
+					{title: ".exerciseTitle", description: "p.exerciseDescription"});
+		}
+	}
+	
+	/**
 	 * Create a JQuery DataTable
 	 * @param v: table id
 	 */
 	function _dataTable( t )
 	{
 		$(t).dataTable({"bJQueryUI": true,"sPaginationType": "full_numbers"});
+	}
+	
+	/**
+	 * Create a JQuery pagination
+	 * @param container: main container
+	 * @param wrapper: layer containing paginated items
+	 * @param items: items to paginate
+	 * @param f: json object
+	 * @param itemspp: items per page (default 10)
+	 */
+	function _pagination( container, wrapper, items, f, itemspp )
+	{
+		if ( typeof itemspp == 'undefined' )
+			itemspp = 10;
+		
+		$(container).jplist(
+		{
+			filter: f,
+			filter_path: ".paginationFilter",
+					
+			pagingbox: ".paginationButtons",
+			pageinfo: ".paginationInfo",
+			paging_dd_path: ".paginationPage-by",
+					
+			items_box: wrapper,
+			item_path: items,
+			items_on_page: itemspp
+		});
 	}
 	
 	/**
@@ -348,6 +390,17 @@ BP.CMS = (function()
 
 			_initDataTables();
 		},
+		
+		/**
+		 * Reloads paginations
+		 */
+		reloadPaginations : function ()
+		{
+			if ( !_initiated )
+				return;
+
+			_initPaginations();
+		},
 
 		/**
 		 * Inner and display new content in main section
@@ -367,6 +420,7 @@ BP.CMS = (function()
 			// Reload views
 			this.reloadViewStacks();
 			this.reloadDataTables();
+			this.reloadPaginations();
 			
 			_loading = false;
 		},
