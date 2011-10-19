@@ -20,18 +20,23 @@
 					</tr>
 				</thead>
 				<tbody>
-{foreach from=$received item=r}
+{foreach from=$received item=r name=received}
 					<tr class="gradeA">
-						<td><img src="{$r->exerciseThumbnailUri}" width="96" height="72" border="0" alt="{$r->exerciseThumbnailUri}" /></td>
-						<td>{$r->responseUserName}</td>
-						<td>{$r->addingDate}</td>
-						<td>{$r->responseCharacterName}</td>
-						<td>{$r->responseRatingAmount}</td>
-						<td>{$r->intonationScore}</td>
-						<td>{$r->fluencyScore}</td>
-						<td>{$r->rhythmScore}</td>
-						<td>{$r->spontaneityScore}</td>
-						<td>{$r->overallScore}</td>
+						<td>
+							<figure class="thumbnail">
+								<figcaption>{$time->format($r->exerciseDuration)}</figcaption>
+								<img src="{$cfg->imagePath}/{$r->exerciseName}/{$r->exerciseThumbnailUri}" width="96" height="72" border="0" alt="{$r->exerciseTitle}" />
+							<figure>
+						</td>
+						<td style="vertical-align: middle !important;">{$r->responseUserName}</td>
+						<td style="vertical-align: middle !important;">{$r->addingDate}</td>
+						<td style="vertical-align: middle !important;">{$r->responseCharacterName}</td>
+						<td style="vertical-align: middle !important;">{$r->responseRatingAmount}</td>
+						<td style="vertical-align: middle !important;" id="raty-received-{$smarty.foreach.received.iteration}1" class="raty" data-readonly="true" data-rating="{$r->intonationScore}"></td>
+						<td style="vertical-align: middle !important;" id="raty-received-{$smarty.foreach.received.iteration}2" class="raty" data-readonly="true" data-rating="{$r->fluencyScore}"></td>
+						<td style="vertical-align: middle !important;" id="raty-received-{$smarty.foreach.received.iteration}3" class="raty" data-readonly="true" data-rating="{$r->rhythmScore}"></td>
+						<td style="vertical-align: middle !important;" id="raty-received-{$smarty.foreach.received.iteration}4" class="raty" data-readonly="true" data-rating="{$r->spontaneityScore}"></td>
+						<td style="vertical-align: middle !important;" id="raty-received-{$smarty.foreach.received.iteration}5" class="raty" data-readonly="true" data-rating="{$r->overallScore}"></td>
 					</tr>
 {/foreach}
 				</tbody>
@@ -61,17 +66,21 @@
 					</tr>
 				</thead>
 				<tbody>
-{foreach from=$given item=r}
+{foreach from=$given item=r name=given}
 					<tr class="gradeA">
-						<td><img src="{$r->exerciseThumbnailUri}" width="96" height="72" border="0" alt="{$r->exerciseThumbnailUri}" /></td>
-						<td>{$r->responseUserName}</td>
-						<td>{$r->addingDate}</td>
-						<td>{$r->responseCharacterName}</td>
-						<td>{$r->intonationScore}</td>
-						<td>{$r->fluencyScore}</td>
-						<td>{$r->rhythmScore}</td>
-						<td>{$r->spontaneityScore}</td>
-						<td>{$r->overallScore}</td>
+						<td>
+							<figure class="thumbnail">
+								<figcaption>{$time->format($r->exerciseDuration)}</figcaption>
+								<img src="{$cfg->imagePath}/{$r->exerciseName}/{$r->exerciseThumbnailUri}" width="96" height="72" border="0" alt="{$r->exerciseTitle}" />
+							</td>
+						<td style="vertical-align: middle !important;">{$r->responseUserName}</td>
+						<td style="vertical-align: middle !important;">{$r->addingDate}</td>
+						<td style="vertical-align: middle !important;">{$r->responseCharacterName}</td>
+						<td style="vertical-align: middle !important;" id="raty-given-{$smarty.foreach.given.iteration}1" class="raty" data-readonly="true" data-rating="{$r->intonationScore}"></td>
+						<td style="vertical-align: middle !important;" id="raty-given-{$smarty.foreach.given.iteration}2" class="raty" data-readonly="true" data-rating="{$r->fluencyScore}"></td>
+						<td style="vertical-align: middle !important;" id="raty-given-{$smarty.foreach.given.iteration}3" class="raty" data-readonly="true" data-rating="{$r->rhythmScore}"></td>
+						<td style="vertical-align: middle !important;" id="raty-given-{$smarty.foreach.given.iteration}4" class="raty" data-readonly="true" data-rating="{$r->spontaneityScore}"></td>
+						<td style="vertical-align: middle !important;" id="raty-given-{$smarty.foreach.given.iteration}5" class="raty" data-readonly="true" data-rating="{$r->overallScore}"></td>
 					</tr>
 {/foreach}
 				</tbody>

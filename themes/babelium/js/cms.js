@@ -35,6 +35,7 @@ BP.CMS = (function()
 		_initViewStacks();
 		_initDataTables();
 		_initPaginations();
+		// _initRatings();
 		
 		_initiated = true;
 	}
@@ -128,7 +129,7 @@ BP.CMS = (function()
 	}
 	
 	/**
-	 * Init navigation navs
+	 * Init navigation navs widgets
 	 */
 	function _initViewStacks()
 	{
@@ -151,7 +152,7 @@ BP.CMS = (function()
 	}
 	
 	/**
-	 * Init pagination
+	 * Init pagination widgets
 	 */
 	function _initPaginations()
 	{
@@ -164,12 +165,41 @@ BP.CMS = (function()
 	}
 	
 	/**
+	 * Init ratings widgets
+	 */
+	function _initRatings()
+	{
+		_rating(".raty");
+	}
+	
+	/**
+	 * Create a 5 star rate widget
+	 * @param c: class or id
+	 */
+	function _rating(c)
+	{
+		$(c).each(function ()
+		{
+			var _this = this;
+			$(_this).raty({
+				path: "themes/babelium/images/raty",
+				readOnly: $(_this).data("readonly"),
+				half: true,
+				start: $(_this).data("rating")/2
+			});
+		});
+	}
+	
+	/**
 	 * Create a JQuery DataTable
 	 * @param v: table id
 	 */
 	function _dataTable( t )
 	{
-		$(t).dataTable({"bJQueryUI": true,"sPaginationType": "full_numbers"});
+		var dtable = $(t).dataTable({"bJQueryUI": true,"sPaginationType": "full_numbers"});
+		
+		// If table has rating widgets, redraw them
+		_rating($(dtable.fnGetNodes()).find(".raty"));
 	}
 	
 	/**
@@ -196,7 +226,9 @@ BP.CMS = (function()
 					
 			items_box: wrapper,
 			item_path: items,
-			items_on_page: itemspp
+			items_on_page: itemspp,
+			
+			redraw_callback: _initRatings // enable rating widgets
 		});
 	}
 	
@@ -401,6 +433,17 @@ BP.CMS = (function()
 
 			_initPaginations();
 		},
+		
+		/**
+		 * Reloads ratings
+		 */
+		reloadRatings : function ()
+		{
+			if ( !_initiated )
+				return;
+
+			_initRatings();
+		},
 
 		/**
 		 * Inner and display new content in main section
@@ -421,6 +464,7 @@ BP.CMS = (function()
 			this.reloadViewStacks();
 			this.reloadDataTables();
 			this.reloadPaginations();
+			//this.reloadRatings();
 			
 			_loading = false;
 		},

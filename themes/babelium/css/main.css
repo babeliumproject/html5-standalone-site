@@ -8,8 +8,8 @@
 @import url("reset.css");					/* resets browsers default style */
 @import url("mxml.css");					/* flex bindings */
 @import url("forms.css");					/* modifications of some form elements */
-@import url("demo_table_jui.css");			/* data tables */
-@import url("jquery-ui-1.8.16.custom.css");	/* data tables */
+@import url("jquery.dataTable.css");		/* data tables */
+@import url("jquery-ui-1.8.16.custom.css");	/* jquery ui: data tables */
 
 
 /** Override data tables input search **/
@@ -906,51 +906,55 @@ section.exerciseList
 			{
 				text-align: right;
 			}
-	
-		section.exerciseList > div.exerciseContainer > article > aside
-		{
-			position: relative;
-			float: left;
-			width: 120px;
-			padding: 10px;
-		}
-		
-			section.exerciseList > div.exerciseContainer > article > aside > img
-			{
-				width: 120px;
-				height: 90px;
-				border: 1px solid black;
-				
-				/** Background **/
-				background: -webkit-radial-gradient(80% 80%, ellipse farthest-side, rgb(134, 188, 206) 10%, white 100%);
-				background: -moz-radial-gradient(80% 80%, ellipse farthest-side, rgb(134, 188, 206) 10%, white 100%);
-				background: -o-radial-gradient(80% 80%, ellipse farthest-side, rgb(134, 188, 206) 10%, white 100%);
-				background: -ms-radial-gradient(80% 80%, ellipse farthest-side, rgb(134, 188, 206) 10%, white 100%);
-				
-				/** box shadow **/ 
-				-moz-box-shadow: 2px 2px 4px #666;
-				-webkit-box-shadow: 2px 2px 4px #666;
-				-o-box-shadow: 2px 2px 4px #666;
-				-ms-box-shadow: 2px 2px 4px #666;
-				box-shadow: 2px 2px 4px #666;
-			}
-			
-			section.exerciseList > div.exerciseContainer > article > aside > span
-			{
-				position: absolute;
-				display: block;
-				width: 30px;
-				height: 10px;
-				background-color: black;
-			
-				color: white;
-				font-size: 11px;
-				font-weight: bold;
-				text-align: right;
-				padding: 2px;
-			}
 
 /** END OF EXERCISE LIST **/
+
+/** THUMBNAIL **/
+	
+figure.thumbnail
+{
+	position: relative;
+	float: left;
+	width: 120px;
+	padding: 10px;
+}
+		
+	figure.thumbnail > img
+	{
+		width: 120px;
+		height: 90px;
+		border: 1px solid black;
+				
+		/** Background **/
+		background: -webkit-radial-gradient(80% 80%, ellipse farthest-side, rgb(134, 188, 206) 10%, white 100%);
+		background: -moz-radial-gradient(80% 80%, ellipse farthest-side, rgb(134, 188, 206) 10%, white 100%);
+		background: -o-radial-gradient(80% 80%, ellipse farthest-side, rgb(134, 188, 206) 10%, white 100%);
+		background: -ms-radial-gradient(80% 80%, ellipse farthest-side, rgb(134, 188, 206) 10%, white 100%);
+				
+		/** box shadow **/ 
+		-moz-box-shadow: 2px 2px 4px #666;
+		-webkit-box-shadow: 2px 2px 4px #666;
+		-o-box-shadow: 2px 2px 4px #666;
+		-ms-box-shadow: 2px 2px 4px #666;
+		box-shadow: 2px 2px 4px #666;
+	}
+			
+	figure.thumbnail > figcaption
+	{
+		position: absolute;
+		display: block;
+		width: 30px;
+		height: 10px;
+		background-color: black;
+	
+		color: white;
+		font-size: 11px;
+		font-weight: bold;
+		text-align: right;
+		padding: 2px;
+	}
+
+/** END OF THUMBNAIL **/
 
 /** PAGINATION **/
 
@@ -1070,6 +1074,15 @@ aside.paginationPanel
 	}
 
 /** END OF PAGINATION **/
+
+/** JQUERY RATING **/
+
+.raty
+{
+	min-width: 90px;	
+}
+
+/** END OF JQUERY RATING **/
 
 /** FOOTER **/
 

@@ -1,9 +1,9 @@
 				
 				<article class="exercise">
-	  				<aside>
+	  				<figure class="thumbnail">
 						<img src="{$cfg->imagePath}/{$exercise->name}/{$exercise->thumbnailUri}" alt="{$cfg->title}" width="120" height="90" align="left" />
-						<span>{$time->format($exercise->duration)}</span>
-					</aside>
+						<figcaption>{$time->format($exercise->duration)}</figcaption>
+					</figure>
 					
 					<div>
 						<h1 class="exerciseTitle">
@@ -21,8 +21,7 @@
 							
 							<div class="spacer"></div>
 							
-							<div>
-								<img src="themes/babelium/images/rating.png" width="84" height="16" alt="rating" />
+							<div class="raty" data-rating="{$exercise->avgRating}" data-readonly="true" id="raty-videos-{$iteration}">
 							</div>
 							
 							<div class="spacer"></div>
