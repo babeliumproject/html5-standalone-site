@@ -485,9 +485,17 @@ aside#motd
 
 div.motdImage
 {
-	width: 240px;
-	height: 180px;	
+	width: 200px;
+	height: 150px;
+	margin-right: 10px;
+	margin-bottom: 10px;
 }
+
+	div.motdImage > img
+	{
+		max-width: 200px;
+		max-height: 150px;	
+	}
 
 div.motdContent
 {

@@ -12,8 +12,8 @@ class WHomeSigned implements IWidget
 	{
 		$cfg = Config::getInstance();
 		
-		/**$home = new Home();
-		$response = $home->signedMessagesOfTheDay("en");**/
+		/*$home = new Home();
+		$response = $home->signedMessagesOfTheDay("en_US");*/
 		
 		$title = "Welcome to Babelium";
 		$motd = "Babelium it's community of people who likes to learn and teach languages.

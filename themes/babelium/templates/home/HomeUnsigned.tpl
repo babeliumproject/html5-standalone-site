@@ -8,50 +8,19 @@
 			</ul>
 		
 			<ul id="motdmessages" class="HBox vcenter hcenter">
+{foreach from=$motds item=motd}
 				<li class="motdMessage">
 					<div class="HBox">
-						<div class="HBox vcenter hcenter motdImage">
-							<img src="themes/babelium/images/{$image1}" alt="{$image1}" />
+						<div class="HBox vstart hcenter motdImage">
+							<img src="http://babeliumproject.com/{$motd->resourceUrl}" alt="{$motd->resourceUrl}" />
 						</div>
 						<div class="VBox motdContent" style="margin-right: 15px;">
-							<span class="title">{$title1}</span>
-							<p class="motdText">{$motd1}</p>
+							<span class="title">{$motd->title}</span>
+							<p class="motdText">{$motd->message}</p>
 						</div>
 					</div>
 				</li>
-				<li class="motdMessage">
-					<div class="HBox">
-						<div class="HBox vcenter hcenter motdImage">
-							<img src="themes/babelium/images/{$image1}" alt="{$image2}" />
-						</div>
-						<div class="VBox motdContent" style="margin-right: 15px;">
-							<span class="title">{$title2}</span>
-							<p class="motdText">{$motd2}</p>
-						</div>
-					</div>
-				</li>
-				<li class="motdMessage">
-					<div class="HBox">
-						<div class="HBox vcenter hcenter motdImage">
-							<img src="themes/babelium/images/{$image1}" alt="{$image3}" />
-						</div>
-						<div class="VBox motdContent" style="margin-right: 15px;">
-							<span class="title">{$title3}</span>
-							<p class="motdText">{$motd3}</p>
-						</div>
-					</div>
-				</li>
-				<li class="motdMessage">
-					<div class="HBox">
-						<div class="HBox vcenter hcenter motdImage">
-							<img src="themes/babelium/images/{$image1}" alt="{$image4}" />
-						</div>
-						<div class="VBox motdContent" style="margin-right: 15px;">
-							<span class="title">{$title4}</span>
-							<p class="motdText">{$motd4}</p>
-						</div>
-					</div>
-				</li>
+{/foreach}
 			</ul>
 			
 			<div class="hhelper"></div>
