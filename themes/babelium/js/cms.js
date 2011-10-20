@@ -35,7 +35,9 @@ BP.CMS = (function()
 		_initViewStacks();
 		_initDataTables();
 		_initPaginations();
-		// _initRatings();
+		
+		if ( BP.at("home") )
+			_initRatings(); // Only needed at home, datatables and paginators loads ratings itselfs
 		
 		_initiated = true;
 	}
