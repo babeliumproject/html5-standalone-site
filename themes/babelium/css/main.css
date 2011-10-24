@@ -422,11 +422,10 @@ aside#motd
 		line-height: 1.5em;
 	}
 	
-	ul#motdmessages, ul#motdmessageshelper
+	ul#motdsignedmessage, ul#motdmessages, ul#motdmessageshelper
 	{
 		width: 100%;
-		padding: 20px 50px 10px 50px;
-		list-style: none;
+		padding: 20px 0 10px 0;
 	}
 
 		ul#motdmessageshelper > li
@@ -470,8 +469,9 @@ aside#motd
 			text-shadow: 1px 1px 1px rgba(0,0,0,.2);
 		}
 
-		ul#motdmessages > li
+		ul#motdsignedmessage > li
 		{
+			padding-left: 50px;
 			display: block;
 			float: left;
 		}
@@ -492,7 +492,7 @@ div.motdImage
 
 div.motdContent
 {
-	width: 500px;
+	width: 400px;
 }
 
 	div.motdContent > *
