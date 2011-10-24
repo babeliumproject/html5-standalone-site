@@ -1,11 +1,13 @@
 <!-- MOTD MESSAGES -->
-		<aside id="motd">
-			<ul id="motdmessages" class="HBox vcenter hcenter">
-				<li class="HBox">
+		<aside id="motd" class="VBox">
+			<ul id="motdmessages">
+				<li>
 					<div class="VBox motdContent" style="margin-right: 15px;">
 						<span class="title">{$title}</span>
 						<p class="motdText">{$motd}</p>
 					</div>
+				</li>
+				<li>
 					<div class="VBox">
 						<ul class="VBox features">
 							<li class="HBox featureText">

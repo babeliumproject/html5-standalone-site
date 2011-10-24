@@ -36,7 +36,7 @@ BP.CMS = (function()
 		_initDataTables();
 		_initPaginations();
 		
-		if ( BP.at("home") )
+		if ( BP.at("home") && !BP.action("activity") )
 			_initRatings(); // Only needed at home, datatables and paginators loads ratings itselfs
 		
 		_initiated = true;

@@ -25,14 +25,12 @@ html, body
 	width: 100%;
 	min-height: 100%;
 	height: 100%;
-	min-width: 1000px;
 }
 
 body
 {
 	font-family: Arial, Verdana;
 	font-size: 12px;
-	min-width: 580px;
 }
 
 a, a:active, a:visited
@@ -274,11 +272,6 @@ nav#mainnav
 	font-size: 18px;
 }
 
-	nav#mainnav > ul
-	{
-		min-width: 720px;
-	}
-
 		nav#mainnav > ul > li
 		{
 			padding-left: 18px;
@@ -420,8 +413,6 @@ div#searchnav
 aside#motd
 {
 	width: 100%;
-	
-	resize: vertical;
 	background: url(../images/pattern2.png);
 }
 
@@ -434,54 +425,56 @@ aside#motd
 	ul#motdmessages, ul#motdmessageshelper
 	{
 		width: 100%;
-		padding-top: 20px;
+		padding: 20px 50px 10px 50px;
+		list-style: none;
 	}
 
-	ul#motdmessageshelper > li
-	{
-		width: 20px;
-		height: 20px;
-		margin: 5px;
-	
-		color:#2d89a4;
+		ul#motdmessageshelper > li
+		{
+			width: 20px;
+			height: 20px;
+			margin: 5px;
 		
-		border: 1px solid #38babc;
-	
-		-moz-border-radius: 6px; 
-		-webkit-border-radius: 6px;
-		-o-border-radius: 6px;
-		-ms-border-radius: 6px;
-		border-radius:6px;
+			color:#2d89a4;
+			
+			border: 1px solid #38babc;
 		
-		background-color: white;
+			-moz-border-radius: 6px; 
+			-webkit-border-radius: 6px;
+			-o-border-radius: 6px;
+			-ms-border-radius: 6px;
+			border-radius:6px;
+			
+			background-color: white;
+	
+			background: -webkit-gradient(linear, 0 0, 0 100%, from(white), to(#E2EFF3));
+			background: -moz-linear-gradient(top, white, #E2EFF3);	
+			background: -o-linear-gradient(top, white, #E2EFF3);
+			background: -ms-linear-gradient(top, white, #E2EFF3);
+			
+			-moz-box-shadow: 1px 1px 2px #CCC;
+			-webkit-box-shadow: 1px 1px 2px #CCC;
+			-o-box-shadow: 1px 1px 2px #CCC;
+			-ms-box-shadow: 1px 1px 2px #CCC;
+			box-shadow: 1px 1px 2px #CCC;
+		}
+		
+		ul#motdmessageshelper > li:hover
+		{
+			cursor: pointer;
+		
+			background: -webkit-gradient(linear, 0 0, 0 100%, from(white), to(#86BCCE));
+			background: -moz-linear-gradient(top, white, #86BCCE);
+	
+			text-decoration: none;
+			text-shadow: 1px 1px 1px rgba(0,0,0,.2);
+		}
 
-		background: -webkit-gradient(linear, 0 0, 0 100%, from(white), to(#E2EFF3));
-		background: -moz-linear-gradient(top, white, #E2EFF3);	
-		background: -o-linear-gradient(top, white, #E2EFF3);
-		background: -ms-linear-gradient(top, white, #E2EFF3);
-		
-		-moz-box-shadow: 1px 1px 2px #CCC;
-		-webkit-box-shadow: 1px 1px 2px #CCC;
-		-o-box-shadow: 1px 1px 2px #CCC;
-		-ms-box-shadow: 1px 1px 2px #CCC;
-		box-shadow: 1px 1px 2px #CCC;
-	}
-	
-	ul#motdmessageshelper > li:hover
-	{
-		cursor: pointer;
-	
-		background: -webkit-gradient(linear, 0 0, 0 100%, from(white), to(#86BCCE));
-		background: -moz-linear-gradient(top, white, #86BCCE);
-
-		text-decoration: none;
-		text-shadow: 1px 1px 1px rgba(0,0,0,.2);
-	}
-	
-	ul#motdmessages > li
-	{
-		width: 1000px;
-	}
+		ul#motdmessages > li
+		{
+			display: block;
+			float: left;
+		}
 
 div.motdImage
 {
@@ -823,17 +816,17 @@ section.exerciseList
 	margin: 20px;
 }
 
-	section.exerciseList > div.exerciseContainer
+	div.exerciseContainer
 	{
 		width: 100%;
 		margin: 0px;
 		padding: 0px;
 	}
 	
-	section.exerciseList > div.exerciseContainer > article
+	div.exerciseContainer > article
 	{
 		width: 49%;
-		min-width: 470px;
+		min-width: 540px;
 		max-width: 600px;
 		min-height: 140px;
 		float: left;
@@ -842,7 +835,7 @@ section.exerciseList
 		margin: 1px;
 	}
 	
-	section.exerciseList > div.exerciseContainer > article:hover
+	div.exerciseContainer > article:hover
 	{
 		background-color: #cedbef;
 		border: 1px solid #86bcce;
@@ -863,18 +856,18 @@ section.exerciseList
 		box-shadow: 2px 2px 4px #666;
 	}
 	
-		section.exerciseList > div.exerciseContainer > article > *
+		div.exerciseContainer > article > *
 		{
 			display: inline-block;
 		}
 		
-		section.exerciseList > div.exerciseContainer > article > div
+		div.exerciseContainer > article > div
 		{
 			width: 400px;
 			height: 100%;
 		}
 		
-			section.exerciseList > div.exerciseContainer > article > div > h1
+			div.exerciseContainer > article > div > h1
 			{
 				padding-bottom: 3px;
 				margin-bottom: 3px;
@@ -884,25 +877,24 @@ section.exerciseList
 				border-bottom: 2px solid #cacdcf;
 			}
 			
-			section.exerciseList > div.exerciseContainer > article > div > p
+			div.exerciseContainer > article > div > p
 			{
 				margin-bottom: 3px;
 			}
 			
-			section.exerciseList > div.exerciseContainer > article > div > *
+			div.exerciseContainer > article > div > *
 			{
 				width: 100%;
-				
 				font-size: 13px;
 			}
 			
-				section.exerciseList > div.exerciseContainer > article > div > div.dtop > *
+				div.exerciseContainer > article > div > div.dtop > *
 				{
 					font-weight: bold;
 					color: #d3aa31;
 				}
 				
-			section.exerciseList > div.exerciseContainer > article > div > p.username
+			div.exerciseContainer > article > div > p.username
 			{
 				text-align: right;
 			}
@@ -994,12 +986,13 @@ aside.paginationPanel
 
 	aside.paginationPanel > div.paginationFilter > input
 	{
+		width: 80px !important;
 		height: 20px !important;
 	}
 
 	aside.paginationPanel > div.paginationPaging > *
 	{
-		margin-right: 10px;
+		margin-right: 5px;
 	}
 	
 	div.paginationButtons > div > span, #pagesbox > span
@@ -1103,7 +1096,7 @@ footer
 	
 	footer > ul.HBox
 	{
-		width: 1000px;
+		width: 650px;
 		height: 40px;
 		
 		/** Border top right roundered **/
