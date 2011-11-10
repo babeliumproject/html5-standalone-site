@@ -22,9 +22,6 @@
 	<!-- Babelium -->
 	<script type="text/javascript" src="themes/babelium/js/base.js"></script>
 	<script type="text/javascript" src="themes/babelium/js/cairngorm.js"></script>
-	<script type="text/javascript" src="themes/babelium/js/mvc.js"></script>
-	<script type="text/javascript" src="themes/babelium/js/cms.js"></script>
-	<script type="text/javascript" src="themes/babelium/js/encode.js"></script>
-	<script type="text/javascript" src="themes/babelium/js/init.js"></script>
+	<script type="text/javascript" src="themes/babelium/js/babelium.js"></script>
 </head>
 <body class="VBox">

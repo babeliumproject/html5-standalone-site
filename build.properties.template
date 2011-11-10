@@ -27,5 +27,10 @@ BASE_DIR= #Project root
 #Local host data
 local.project.path= #Webroot path
 
+cairngorm.DIR= #Cairngorm dir
+cairngorm.OUTPUT_DIR= #Cairngorm output dir
+
+babeliumjs.DIR= #Babeliumjs dir
+babeliumjs.OUTPUT_DIR= #Babeliumjs output dir
 
 

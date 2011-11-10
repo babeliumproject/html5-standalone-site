@@ -1,0 +1,18 @@
+/**
+ * ==========================================================
+ * 
+ * This is not an official port of Cairngorm MVC Framework
+ * @author Babelium Project -> http://www.babeliumproject.com
+ * 
+ * ========================================================== 
+ *
+ * @source Cairngorm (Flex) Open Source Code:
+ * http://sourceforge.net/adobe/cairngorm/code/839/tree/cairngorm/trunk/frameworks/cairngorm/com/adobe/cairngorm/
+ * @source Simple Javascript Inheritance (./base.js):
+ * http://ejohn.org/blog/simple-javascript-inheritance/#postcomment
+ * @source Singleton Pattern w and w/o private members:
+ * http://stackoverflow.com/questions/1479319/simplest-cleanest-way-to-implement-singleton-in-javascript
+ *
+ * ========================================================== 
+ *
+ **/
