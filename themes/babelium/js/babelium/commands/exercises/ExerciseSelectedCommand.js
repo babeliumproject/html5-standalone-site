@@ -7,7 +7,12 @@ var ExerciseSelectedCommand = Cairngorm.Command.extend(
 	execute : function ()
 	{
 		var _this = this;
-		alert("something selectad");
+		
+		if ( this.data == null )
+			return;
+		
+		// TODO exercise selected successfully at this.data.exercise
+		
 		/*BP.CMS.prepareMainContent("practice module", function ()
 		{
 			BP.PracticeDelegate.viewPracticeModule(_this);
@@ -16,7 +21,7 @@ var ExerciseSelectedCommand = Cairngorm.Command.extend(
 	
 	onResult : function ( response )
 	{
-		BP.pushState({module : "practice" }, "Practice - Babelium Project", "?module=practice&action=view&id=");
+		BP.pushState({module : "practice" }, "Practice - Babelium Project", "?module=practice&action=view&id=" + this.data.id);
 		BP.CMS.innerMainContent(response);
 	},
 	

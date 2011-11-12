@@ -80,6 +80,7 @@
 			<arg value="--js"/><arg value="business/AuthDelegate.js"/>
 			
 			<arg value="--js"/><arg value="vo/LoginVO.js"/>
+			<arg value="--js"/><arg value="vo/ExerciseVO.js"/>
 
 			<arg value="--js"/><arg value="cms.js"/>
 			<arg value="--js"/><arg value="init.js"/>

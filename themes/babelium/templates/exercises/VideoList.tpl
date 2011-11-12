@@ -6,7 +6,7 @@
 			
 {include file="util/Pagination.tpl"}
 			
-			<div class="exerciseContainer">
+			<div id="exerciseVideoContainer" class="exerciseContainer">
 {foreach from=$exercises item=exercise name=videos}
 	{assign var="iteration" value=$smarty.foreach.videos.iteration}
 	{include file="exercises/ExerciseItemRender.tpl"}

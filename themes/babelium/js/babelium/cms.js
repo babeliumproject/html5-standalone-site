@@ -230,7 +230,28 @@ BP.CMS = (function()
 			item_path: items,
 			items_on_page: itemspp,
 			
-			redraw_callback: _initRatings // enable rating widgets
+			redraw_callback: onRefreshPagination // enable rating widgets
+		});
+	}
+	
+	/**
+	 * On Refresh pagination
+	 */
+	function onRefreshPagination()
+	{
+		_initRatings();
+		
+		var videoContainer = $("#exerciseVideoContainer");
+		
+		if ( videoContainer.length == 0 )
+			return;
+		
+		videoContainer.find("article").each(function ()
+		{
+			var _this = $(this);
+			_this.click(function (){
+				new ExerciseEvent(ExerciseEvent.EXERCISE_SELECTED, new ExerciseVO(_this.data("id"), _this.data("name"), _this.data("title"))).dispatch();
+			});
 		});
 	}
 	
