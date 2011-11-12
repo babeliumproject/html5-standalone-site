@@ -43,6 +43,7 @@ $.get("themes/babelium/js/services.xml", null, function ( data, textStatus)
 
 $(document).ready(function()
 {
+	// Retrieve module and action from location
 	var m = (RegExp("module=(.+?)(&|$)").exec(location.search) || [,"home"])[1];
 	var a = (RegExp("action=(.+?)(&|$)").exec(location.search) || [,undefined])[1];
 	BP.pushState({module: m, action: a}, null, null);	

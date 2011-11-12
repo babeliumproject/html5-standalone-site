@@ -42,9 +42,10 @@
 	
 			<arg value="--js"/><arg value="control/Controller.js"/>
 	
-			<arg value="--js"/><arg value="events/ViewChangeEvent.js"/>
-			<arg value="--js"/><arg value="events/LoginEvent.js"/>
+			<arg value="--js"/><arg value="events/ExerciseEvent.js"/>
 			<arg value="--js"/><arg value="events/HomepageEvent.js"/>
+			<arg value="--js"/><arg value="events/LoginEvent.js"/>
+			<arg value="--js"/><arg value="events/ViewChangeEvent.js"/>
 			
 			<arg value="--js"/><arg value="commands/navigation/ViewPopStateCommand.js"/>
 			<arg value="--js"/><arg value="commands/navigation/ToggleLoginPopupCommand.js"/>
@@ -54,6 +55,8 @@
 			<arg value="--js"/><arg value="commands/home/SignedBestVideosCommand.js"/>
 			<arg value="--js"/><arg value="commands/home/LatestUserActivity.js"/>
 	
+			<arg value="--js"/><arg value="commands/exercises/ExerciseSelectedCommand.js"/>
+			<arg value="--js"/><arg value="commands/exercises/GetRecordableExercisesCommand.js"/>
 			<arg value="--js"/><arg value="commands/exercises/ViewExerciseModuleCommand.js"/>
 	
 			<arg value="--js"/><arg value="commands/evaluation/ViewEvaluationModuleCommand.js"/>

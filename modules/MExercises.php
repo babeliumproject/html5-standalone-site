@@ -14,7 +14,15 @@ class MExercises implements IModule
 	public static function load($args)
 	{
 		$ex = new Exercise();
-		$response = $ex->getExercises();
+		
+		if ( SessionManager::getInstance()->isLoggedIn() )
+		{ // Logged In
+			$response = $ex->getRecordableExercises();
+		}
+		else
+		{ // Logout
+			$response = $ex->getExercises();
+		}
 		
 		return WidgetLoader::loadWidget("VideoList", $response);
 	}

@@ -29,5 +29,9 @@ var Controller = Cairngorm.FrontController.extend(
 		this.addCommand(HomepageEvent.LATEST_USER_UPLOADED_VIDEOS, LatestUploadedVideosCommand);
 		this.addCommand(HomepageEvent.BEST_RATED_VIDEOS_SIGNED_IN, SignedBestVideosCommand);
 		this.addCommand(HomepageEvent.LATEST_USER_ACTIVITY, LatestUserActivityCommand);
+		
+		// Exercise module
+		this.addCommand(ExerciseEvent.EXERCISE_SELECTED, ExerciseSelectedCommand);
+		this.addCommand(ExerciseEvent.GET_RECORDABLE_EXERCISES, GetRecordableExercisesCommand);
 	}
 });
