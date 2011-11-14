@@ -7,6 +7,7 @@ require_once(dirname(__FILE__) . "/../config/Config.php");
  * Widgets
  */
 require_once(dirname(__FILE__) . "/../widgets/exercises/WVideoList.php");
+require_once(dirname(__FILE__) . "/../widgets/exercises/WExerciseInfo.php");
 
 require_once(dirname(__FILE__) . "/../widgets/home/WHomeSigned.php");
 require_once(dirname(__FILE__) . "/../widgets/home/WHomeUnsigned.php");
@@ -37,6 +38,7 @@ final class WidgetLoader
 	(
 		"404" => "W404",
 		"BestRatedVideos" => "WLatestBestRatedVideos",
+		"ExerciseInfo" => "WExerciseInfo",
 		"Footer" => "WFooter",
 		"Head" => "WHead",
 		"HomeSigned" => "WHomeSigned",

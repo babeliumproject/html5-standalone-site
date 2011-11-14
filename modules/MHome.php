@@ -10,7 +10,8 @@ class MHome implements IModule
 	public static function load($args)
 	{
 		$action = isset($args[1]) ? $args[1] : "";
-		$state = isset($args[2]) ? $args[2] : "";
+		$params = isset($args[2]) ? $args[2] : "";
+		$state = isset($args[3]) ? $args[3] : "";
 		$content = "";
 
 		if ( SessionManager::getInstance()->isLoggedIn() )

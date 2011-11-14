@@ -1077,6 +1077,58 @@ aside.paginationPanel
 
 /** END OF JQUERY RATING **/
 
+/** BABELIUM VIDEO PLAYER **/
+
+.babeliumPlayer
+{
+	width: 500px;
+	min-height: 281px;
+}
+
+/** END OF BABELIUM VIDEO PLAYER **/
+
+/** EXERCISE INFO **/
+
+section.exerciseInfo
+{
+	margin-top: 10px;
+}
+
+	section.exerciseInfo > article
+	{
+		margin: 10px;
+	}
+
+	section.exerciseInfo > article.exerciseInfo
+	{
+		width: 350px;
+		height: 200px;
+		
+		/** Border roundered **/
+		-moz-border-radius: 6px; 
+		-webkit-border-radius: 6px;
+		-o-border-radius: 6px;
+		-ms-border-radius: 6px;
+		border-radius:6px;
+		
+		border: 2px solid #38babc;
+		
+		/** Shadow **/
+		-moz-box-shadow: 2px 2px 2px #999;
+		-webkit-box-shadow: 2px 2px 2px #999;
+		-o-box-shadow: 2px 2px 2px #999;
+		-ms-box-shadow: 2px 2px 2px #999;
+		box-shadow: 2px 2px 2px #999;
+		
+		/** Background **/
+		background: -webkit-radial-gradient(40% 30%, ellipse farthest-side, rgb(226, 239, 243) 40%, white 100%);
+		background: -moz-radial-gradient(40% 30%, ellipse farthest-side, rgb(226, 239, 243) 40%, white 100%);
+		background: -o-radial-gradient(40% 30%, ellipse farthest-side, rgb(226, 239, 243) 40%, white 100%);
+		background: -ms-radial-gradient(40% 30%, ellipse farthest-side, rgb(226, 239, 243) 40%, white 100%);
+	}
+
+/** END OF EXERCISE INFO **/
+
 /** FOOTER **/
 
 footer

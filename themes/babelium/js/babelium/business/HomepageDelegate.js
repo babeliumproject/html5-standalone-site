@@ -13,26 +13,26 @@ BP.HomeDelegate = (function ()
 		{
 			var _service = Cairngorm.ServiceLocator.getHttpService(_serviceID);
 			// Avoid reloading motd
-			var params = (!loadMotd && BP.at("home")) ? "params=min" : null;
+			var params = (!loadMotd && BP.at("home")) ? "state=min" : null;
 			_service.call( params, responder );
 		},
 		
 		latestAvailableVideos : function ( responder )
 		{
 			var _service = Cairngorm.ServiceLocator.getHttpService(_serviceID);
-			_service.call( "action=latest&params=min", responder );
+			_service.call( "action=latest&state=min", responder );
 		},
 		
 		topScoreMostViewedVideos : function ( responder )
 		{
 			var _service = Cairngorm.ServiceLocator.getHttpService(_serviceID);
-			_service.call( "action=rated&params=min", responder );
+			_service.call( "action=rated&state=min", responder );
 		},
 		
 		latestUserActivity : function ( responder )
 		{
 			var _service = Cairngorm.ServiceLocator.getHttpService(_serviceID);
-			_service.call( "action=activity&params=min", responder );
+			_service.call( "action=activity&state=min", responder );
 		}
 	};
 

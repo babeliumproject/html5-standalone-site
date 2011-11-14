@@ -159,7 +159,7 @@ BP.CMS = (function()
 	function _initPaginations()
 	{
 		/** Exercises **/
-		if ( BP.at("practice") && !BP.action() )
+		if ( BP.at("practice") )
 		{
 			_pagination("section.exerciseList", ".exerciseContainer", ".exercise",
 					{title: ".exerciseTitle", description: "p.exerciseDescription"});
@@ -249,8 +249,11 @@ BP.CMS = (function()
 		videoContainer.find("article").each(function ()
 		{
 			var _this = $(this);
-			_this.click(function (){
-				new ExerciseEvent(ExerciseEvent.EXERCISE_SELECTED, new ExerciseVO(_this.data("id"), _this.data("name"), _this.data("title"))).dispatch();
+			_this.click(function ()
+			{
+				new ExerciseEvent(ExerciseEvent.EXERCISE_SELECTED, 
+						new ExerciseVO(_this.data("id"), _this.data("name"), _this.data("title"))
+					).dispatch();
 			});
 		});
 	}

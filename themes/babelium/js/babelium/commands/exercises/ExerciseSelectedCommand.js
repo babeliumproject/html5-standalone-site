@@ -11,7 +11,7 @@ var ExerciseSelectedCommand = Cairngorm.Command.extend(
 		if ( this.data == null )
 			return;
 		
-		// TODO exercise selected successfully at this.data.exercise
+		// TODO exercise selected successfully at this.data.exercise (example id: 201)
 		
 		/*BP.CMS.prepareMainContent("practice module", function ()
 		{

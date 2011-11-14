@@ -16,9 +16,10 @@ SessionManager::getInstance(); // start session
 $moduleName = $_GET["module"];
 $action = isset($_GET["action"]) ? $_GET["action"] : NULL;
 $params = isset($_GET["params"]) ? $_GET["params"] : NULL;
+$state = isset($_GET["state"]) ? $_GET["state"] : NULL;
 
 $module = array(
-		"content" => ModuleLoader::loadModule($moduleName, $action, $params),
+		"content" => ModuleLoader::loadModule($moduleName, $action, $params, $state),
 		"title" => $moduleName
 	);
 

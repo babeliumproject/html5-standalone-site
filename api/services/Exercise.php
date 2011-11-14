@@ -241,6 +241,22 @@ class Exercise {
 
 		return $searchResults;
 	}
+	
+	public function getExerciseById($id){
+		$sql = "SELECT e.id, e.title, e.description, e.language, e.tags, e.source, e.name, e.thumbnail_uri,
+       				   e.adding_date, e.duration, u.name, 
+       				   avg (suggested_level) as avgLevel, e.status, license, reference
+				FROM   exercise e INNER JOIN users u ON e.fk_user_id= u.ID
+       				   LEFT OUTER JOIN exercise_score s ON e.id=s.fk_exercise_id
+       				   LEFT OUTER JOIN exercise_level l ON e.id=l.fk_exercise_id
+       			WHERE (e.id = %d)
+				GROUP BY e.id
+				LIMIT 1";
+
+		$searchResults = $this->_exerciseListQuery($sql, $id);
+
+		return array_shift($searchResults);
+	}
 
 	/*
 	 public function getExercisesWithoutSubtitles(){
