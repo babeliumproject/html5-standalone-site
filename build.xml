@@ -41,6 +41,7 @@
 			<arg value="--js"/><arg value="encode.js"/>
 	
 			<arg value="--js"/><arg value="control/Controller.js"/>
+			<arg value="--js"/><arg value="control/ExerciseManager.js"/>
 	
 			<arg value="--js"/><arg value="events/ExerciseEvent.js"/>
 			<arg value="--js"/><arg value="events/HomepageEvent.js"/>
@@ -83,7 +84,7 @@
 			<arg value="--js"/><arg value="vo/ExerciseVO.js"/>
 
 			<arg value="--js"/><arg value="cms.js"/>
-			<arg value="--js"/><arg value="init.js"/>
+			<arg value="--js"/><arg value="bootstrap.js"/>
 			<arg value="--js_output_file"/><arg value="${babeliumjs.OUTPUT_DIR}/babelium.js"/>
 		</java>
 	</target>

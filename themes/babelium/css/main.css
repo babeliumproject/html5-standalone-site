@@ -1082,8 +1082,16 @@ aside.paginationPanel
 .babeliumPlayer
 {
 	width: 500px;
-	min-height: 281px;
 }
+
+	.babeliumPlayer > h1
+	{
+		height: 20px;
+		margin: 5px;
+		color: #268caa;
+		font-weight: bold;
+		font-size: 20px;
+	}
 
 /** END OF BABELIUM VIDEO PLAYER **/
 
@@ -1103,6 +1111,7 @@ section.exerciseInfo
 	{
 		width: 350px;
 		height: 200px;
+		margin-top: 30px;
 		
 		/** Border roundered **/
 		-moz-border-radius: 6px; 
