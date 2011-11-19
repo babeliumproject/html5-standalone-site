@@ -8,6 +8,8 @@ var ViewExerciseModuleCommand = Cairngorm.Command.extend(
 	{
 		var _this = this;
 		
+		BP.selectedExercise = null;
+
 		BP.CMS.prepareMainContent("practice module", function ()
 		{
 			BP.PracticeDelegate.viewPracticeModule(_this);

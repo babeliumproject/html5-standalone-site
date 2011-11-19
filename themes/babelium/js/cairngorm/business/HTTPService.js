@@ -33,7 +33,7 @@ Cairngorm.HTTPService = Class.extend(
 				// The success call back.
 				success : responder.onResult,
 				// The error handler.
-				error : responder.onFault
+				error : responder.onResult
 			});
 		}
 	}

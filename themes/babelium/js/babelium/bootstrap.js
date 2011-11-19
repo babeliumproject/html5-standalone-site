@@ -11,6 +11,7 @@ BP.control = new Controller();
 
 //Application state
 BP.state = {};
+BP.selectedExercise = null;
 
 //Push state
 BP.pushState = function ( data, title, href )
@@ -146,13 +147,6 @@ function onConnectionReady(playerId)
 		return;
 	}
 	
-	
-	// Load the exercises module using the "Sintel" sample video
-	var ex = {
-		'id' : 73,
-		'name' : 'U1MbBtkIGZQ.flv',
-		'title' : 'Sintel'
-	};
-	
-	BP.EM.loadExercise(bpPlayer, ex);
+	if ( BP.selectedExercise )	
+		BP.EM.loadExercise(bpPlayer, BP.selectedExercise);
 }

@@ -362,7 +362,7 @@ BP.CMS = (function()
 		},
 		
 		/**
-		 * Preparas main content for a new content insertion
+		 * Prepares main content for a new content insertion
 		 * @param location : target module name, just for a loading message
 		 * @param callback : callback function
 		 */
@@ -406,6 +406,32 @@ BP.CMS = (function()
 					$("#maincontent > section").remove();
 					
 					// Call to callback funcion after animation finished
+					callback();
+				});
+			}
+			else
+				callback();
+				
+		},
+		
+		/**
+		 * Prepares exercise view for a new exercise insertion
+		 * @param location : target module name, just for a loading message
+		 * @param callback : callback function
+		 */
+		prepareExerciseView : function ( location, callback )
+		{
+			if ( _loading || !_initiated )
+				return;
+			
+			_loading = true;
+			
+			// Slide up current exercise and remove it on animation end
+			if ( $("section.exerciseInfo").length > 0 )
+			{
+				$("section.exerciseInfo").slideUp(500, function()
+				{
+					$("section.exerciseInfo").remove();
 					callback();
 				});
 			}
@@ -491,6 +517,23 @@ BP.CMS = (function()
 			this.reloadDataTables();
 			this.reloadPaginations();
 			//this.reloadRatings();
+			
+			_loading = false;
+		},
+		
+		/**
+		 * Inner and display new exercise
+		 * @param data : JSON object with {title, content}
+		 */
+		innerExerciseView : function ( data )
+		{
+			if ( !_loading )
+				return;
+			
+			data = $.parseJSON(data);
+			var content = $(data.content).hide();
+			content.insertAfter("aside#loader").slideDown(500);
+			$("aside#loader").slideUp(500);
 			
 			_loading = false;
 		},

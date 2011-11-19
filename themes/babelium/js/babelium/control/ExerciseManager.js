@@ -48,7 +48,7 @@ BP.EM = (function ()
 			_exerciseTitle = exercise.title;
 			_exerciseId = exercise.id;
 			_currentExercise = exercise;
-	
+			
 			this.prepareExercise();
 		},
 	
@@ -64,6 +64,9 @@ BP.EM = (function ()
 		// Reset component
 		resetComp : function ()
 		{
+			if ( !_bpPlayer )
+				return;
+			
 			_bpPlayer.endVideo(); // Stop video
 			_bpPlayer.setSubtitle(""); // Clear subtitles if any
 			_bpPlayer.videoSource(""); // Reset video source

@@ -1086,10 +1086,9 @@ aside.paginationPanel
 
 	.babeliumPlayer > h1
 	{
-		height: 20px;
+		min-height: 20px;
 		margin: 5px;
 		color: #268caa;
-		font-weight: bold;
 		font-size: 20px;
 	}
 

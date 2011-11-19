@@ -11,22 +11,24 @@ var ExerciseSelectedCommand = Cairngorm.Command.extend(
 		if ( this.data == null )
 			return;
 		
-		// TODO exercise selected successfully at this.data.exercise (example id: 201)
+		BP.selectedExercise = this.data.exercise;
 		
-		/*BP.CMS.prepareMainContent("practice module", function ()
-		{
-			BP.PracticeDelegate.viewPracticeModule(_this);
-		});*/
+		BP.CMS.prepareExerciseView("exercise: " + BP.selectedExercise.id, function ()
+		{	
+			BP.PracticeDelegate.viewExerciseById(_this, BP.selectedExercise.id);
+		});
 	},
 	
 	onResult : function ( response )
 	{
-		BP.pushState({module : "practice" }, "Practice - Babelium Project", "?module=practice&action=view&id=" + this.data.id);
-		BP.CMS.innerMainContent(response);
+		BP.pushState({module : "practice", action : "view", params : BP.selectedExercise.id},
+				BP.selectedExercise.title + " - Practice - Babelium Project",
+				"?module=practice&action=view&params="+ BP.selectedExercise.id);
+		BP.CMS.innerExerciseView(response);
 	},
 	
 	onFault : function ()
 	{
-		alert("Error loading practice module");
+		alert("Error loading exercise");
 	}
 });
