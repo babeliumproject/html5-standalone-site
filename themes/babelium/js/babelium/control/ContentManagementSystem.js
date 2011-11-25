@@ -438,20 +438,20 @@ BP.CMS = (function()
 			_loader.slideDown(500);
 			
 			// Animate scrolling 
-			$("html, body").animate({scrollTop: top}, "slow");
-			
-			// Slide up current exercise and remove it on animation end
-			if ( $("section.exerciseInfo").length > 0 )
+			$("html, body").animate({scrollTop: top}, "slow", function()
 			{
-				$("section.exerciseInfo").slideUp(500, function()
+				// Slide up current exercise and remove it on animation end
+				if ( $("section.exerciseInfo").length > 0 )
 				{
-					$("section.exerciseInfo").remove();
+					$("section.exerciseInfo").slideUp(500, function()
+					{
+						$("section.exerciseInfo").remove();
+						callback();
+					});
+				}
+				else
 					callback();
-				});
-			}
-			else
-				callback();
-				
+			});
 		},
 		
 		/**
