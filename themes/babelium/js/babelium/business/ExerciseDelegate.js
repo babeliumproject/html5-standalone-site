@@ -21,13 +21,13 @@ BP.PracticeDelegate = (function ()
 			_service.call( null, responder );
 		},
 		
-		viewExerciseById : function ( responder, exerciseId )
+		viewExerciseByName : function ( responder, exerciseName )
 		{
-			if ( !exerciseId )
+			if ( !exerciseName )
 				return;
 
 			var _service = Cairngorm.ServiceLocator.getHttpService(_serviceID);
-			var params = "action=view&state=min&params="+exerciseId;
+			var params = "action=view&state=min&params="+exerciseName;
 			_service.call( params, responder );
 		}
 	};

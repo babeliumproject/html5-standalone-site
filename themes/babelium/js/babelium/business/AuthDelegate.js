@@ -11,7 +11,7 @@ BP.AuthDelegate = (function ()
 
 		processLogin : function ( responder, data )
 		{
-			if ( !data || typeof data.toJSONStr != "function" )
+			if ( !data || typeof data.toBase64 != "function" )
 				return;
 
 			var _service = Cairngorm.ServiceLocator.getHttpService(_serviceID);

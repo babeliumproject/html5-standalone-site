@@ -13,17 +13,19 @@ var ExerciseSelectedCommand = Cairngorm.Command.extend(
 		
 		BP.selectedExercise = this.data.exercise;
 		
-		BP.CMS.prepareExerciseView("exercise: " + BP.selectedExercise.id, function ()
+		BP.CMS.prepareExerciseView(function ()
 		{	
-			BP.PracticeDelegate.viewExerciseById(_this, BP.selectedExercise.id);
+			BP.PracticeDelegate.viewExerciseByName(_this, BP.selectedExercise.name);
 		});
 	},
 	
 	onResult : function ( response )
 	{
-		BP.pushState({module : "practice", action : "view", params : BP.selectedExercise.id},
+		var id = BP.selectedExercise.name;
+		//var id = BP.selectedExercise.id + ":" + BP.selectedExercise.name;
+		BP.pushState({module : "practice", action : "view", params : id},
 				BP.selectedExercise.title + " - Practice - Babelium Project",
-				"?module=practice&action=view&params="+ BP.selectedExercise.id);
+				"?module=practice&action=view&params="+ id);
 		BP.CMS.innerExerciseView(response);
 	},
 	

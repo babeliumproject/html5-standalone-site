@@ -378,9 +378,14 @@ BP.CMS = (function()
 			var header = _maincontent.find("header");
 			
 			// Loader div
-			_loader.css("top", _maincontent.offset().top);
+			var top =  _maincontent.offset().top;
+			_loader.css("top", top);
 			_loader.find("div.loadcontext > span").html("Loading <strong>"+location+"</strong>");
 			_loader.slideDown(500);
+			
+			// Animate scrolling 
+			if ( $("html, body").scrollTop() > top )
+				$("html, body").animate({scrollTop: top}, "slow");
 			
 			// Slide up current section and remove it on animation end
 			if ( $("#maincontent > section").length > 0 )
@@ -419,12 +424,21 @@ BP.CMS = (function()
 		 * @param location : target module name, just for a loading message
 		 * @param callback : callback function
 		 */
-		prepareExerciseView : function ( location, callback )
+		prepareExerciseView : function ( callback )
 		{
 			if ( _loading || !_initiated )
 				return;
 			
 			_loading = true;
+			
+			// Display loading message
+			var top =  _maincontent.offset().top;
+			_loader.css("top", top + _maincontent.find("header").outerHeight());
+			_loader.find("div.loadcontext > span").html("Retrieving exercise information");
+			_loader.slideDown(500);
+			
+			// Animate scrolling 
+			$("html, body").animate({scrollTop: top}, "slow");
 			
 			// Slide up current exercise and remove it on animation end
 			if ( $("section.exerciseInfo").length > 0 )
@@ -510,7 +524,7 @@ BP.CMS = (function()
 			$("#maincontent > header > h1").text(data.title);
 			var content = $(data.content).hide();
 			content.appendTo("#maincontent").slideDown(500);
-			$("#maincontent > aside#loader").slideUp(500);
+			_loader.slideUp(500);
 			
 			// Reload views
 			this.reloadViewStacks();
@@ -533,7 +547,7 @@ BP.CMS = (function()
 			data = $.parseJSON(data);
 			var content = $(data.content).hide();
 			content.insertAfter("aside#loader").slideDown(500);
-			$("aside#loader").slideUp(500);
+			_loader.slideUp(500);
 			
 			_loading = false;
 		},

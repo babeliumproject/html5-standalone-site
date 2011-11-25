@@ -12,6 +12,7 @@ BP.control = new Controller();
 //Application state
 BP.state = {};
 BP.selectedExercise = null;
+BP.bpPlayer = null;
 
 //Push state
 BP.pushState = function ( data, title, href )
@@ -36,6 +37,15 @@ BP.action = function ( actionName )
 		return (typeof BP.state.action == 'undefined') ? null : BP.state.action;
 	else 
 		return (typeof BP.state.action == 'undefined') ? false : BP.state.action == actionName;
+};
+
+// Last requested action's parameters
+BP.params = function( params )
+{
+	if ( typeof actionName == 'undefined' )
+		return (typeof BP.state.params == 'undefined') ? null : BP.state.params;
+	else 
+		return (typeof BP.state.params == 'undefined') ? false : BP.state.params == params;
 };
 
 /* ============================================================
@@ -105,7 +115,8 @@ $(document).ready(function()
 	// Retrieve module and action from location
 	var m = (RegExp("module=(.+?)(&|$)").exec(location.search) || [,"home"])[1];
 	var a = (RegExp("action=(.+?)(&|$)").exec(location.search) || [,undefined])[1];
-	BP.pushState({module: m, action: a}, null, null);	
+	var p = (RegExp("params=(.+?)(&|$)").exec(location.search) || [,undefined])[1];
+	BP.pushState({module: m, action: a, params: p}, null, null);	
 	
 	// Init content management system
 	BP.CMS.init();
@@ -130,7 +141,7 @@ $(document).ready(function()
 });
 
 /* ============================================================
- * VIDEOPLAYER'S CALLBACK
+ * VIDEOPLAYER'S ONREADY CALLBACK
  * ==========================================================*/
 
 function onConnectionReady(playerId)
@@ -147,6 +158,14 @@ function onConnectionReady(playerId)
 		return;
 	}
 	
+	BP.bpPlayer = bpPlayer;
+	
 	if ( BP.selectedExercise )	
 		BP.EM.loadExercise(bpPlayer, BP.selectedExercise);
+	else if ( BP.params() != null )
+	{
+		// Retrieve exercise from url (mostly on first load)
+		BP.selectedExercise = new ExerciseVO("", BP.params(), "");
+		BP.EM.loadExercise(bpPlayer, BP.selectedExercise);
+	}
 }
