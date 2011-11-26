@@ -28,7 +28,7 @@ BP.CMS = (function()
 		_mainnav = $("#mainnav");
 		_searchnav = $("#searchnav");
 		_maincontent = $("section#maincontent");
-		_loader = $("aside#loader");
+		_loader = $("aside#loader > div");
 		
 		_initNavigationLinks();
 		_initLocalebox();
@@ -380,7 +380,7 @@ BP.CMS = (function()
 			// Loader div
 			var top =  _maincontent.offset().top;
 			_loader.css("top", top);
-			_loader.find("div.loadcontext > span").html("Loading <strong>"+location+"</strong>");
+			_loader.find("span").html("Loading <strong>"+location+"</strong>");
 			_loader.slideDown(500);
 			
 			// Animate scrolling 
@@ -434,7 +434,7 @@ BP.CMS = (function()
 			// Display loading message
 			var top =  _maincontent.offset().top;
 			_loader.css("top", top + _maincontent.find("header").outerHeight());
-			_loader.find("div.loadcontext > span").html("Retrieving exercise information");
+			_loader.find("span").html("Retrieving exercise information");
 			_loader.slideDown(500);
 			
 			// Animate scrolling 

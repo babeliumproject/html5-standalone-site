@@ -22,6 +22,7 @@ div.dataTables_filter > label > input
 
 html, body
 {
+	min-width: 100%;
 	width: 100%;
 	min-height: 100%;
 	height: 100%;
@@ -31,6 +32,12 @@ body
 {
 	font-family: Arial, Verdana;
 	font-size: 12px;
+		
+ 	/** Background **/
+	background: -webkit-radial-gradient(40% 30%, ellipse farthest-side, rgb(226, 239, 243) 40%, white 100%);
+	background: -moz-radial-gradient(40% 30%, ellipse farthest-side, rgb(226, 239, 243) 40%, white 100%);
+	background: -o-radial-gradient(40% 30%, ellipse farthest-side, rgb(226, 239, 243) 40%, white 100%);
+	background: -ms-radial-gradient(40% 30%, ellipse farthest-side, rgb(226, 239, 243) 40%, white 100%);
 }
 
 a, a:active, a:visited
@@ -47,10 +54,21 @@ a:hover
 
 /** END OF DEFAULT STYLES **/
 
+header#tophead
+{
+	width: 100%;
+	max-width: 1000px;
+
+	border-left: 1px solid #38babc;
+	border-right: 1px solid #38babc;
+}
+
 /** TOP NAVIGATION **/
 
 nav#topnav
 {
+	width: 100%;
+	max-width: 1000px;
 	height: 35px;
 	
 	font-family: Arial;
@@ -60,7 +78,6 @@ nav#topnav
 	border-bottom: 1px solid #38babc;
 	
 	/** Default background **/
-	background-color: #FEFEFE;
 	background-image: url(../images/rainbow_bgr.png);
 	
 	/**css3 gradients **/
@@ -103,7 +120,6 @@ aside#popup
 	border-bottom: 1px solid #38babc;
 	
 	/** Default background **/
-	background-color: #E2EFF3;
 	background-image: url(../images/rainbow_bgr.png);
 }
 
@@ -253,8 +269,8 @@ li#loginhelper
 div#logo
 {
 	position: absolute;
-	left: 15px;
 	top: 35px;
+	padding-left: 15px;
 	z-index: 1;
 }
 
@@ -264,10 +280,11 @@ div#logo
 
 nav#mainnav
 {
+	width: 100%;
+	max-width: 1000px;
 	height: 118px;
 	
 	/** Default background **/
-	background-color: #FEFEFE;
 	background-image: url(../images/rainbow_bgr.png);
 	font-size: 18px;
 }
@@ -367,13 +384,9 @@ nav#mainnav
 
 div#searchnav
 {
+	width: 100%;
+	max-widh: 1000px;
 	height: 35px;
-	/* logo width  */
-	padding-left: 200px;
-	padding-right: 10px;
-	
-	/** Default background **/
-	background-color: #FEFEFE;
 	
 	/** Gradient for mozilla and webkit powered **/
 	background: -webkit-gradient(linear, 0 0, 100% 0, from(white), to(#86BCCE));
@@ -382,11 +395,11 @@ div#searchnav
 	background: -ms-linear-gradient(left, white, #86BCCE);
 	
 	/** rounded border **/
-	-moz-border-top-right-radius: 6px; 
-	-webkit-border-top-right-radius: 6px;
-	-o-border-top-right-radius: 6px; 
-	-ms-border-top-right-radius: 6px; 
-	border-top-right-radius:6px;
+	-moz-border-bottom-left-radius: 6px; 
+	-webkit-border-bottom-left-radius: 6px;
+	-o-border-bottom-left-radius: 6px; 
+	-ms-border-bottom-left-radius: 6px; 
+	border-bottom-left-radius:6px;
 	
 	-moz-border-bottom-right-radius: 6px; 
 	-webkit-border-bottom-right-radius: 6px;
@@ -395,15 +408,20 @@ div#searchnav
 	border-bottom-right-radius:6px;
 	
 	/** border **/
-	border-bottom: 1px solid #38babc;
 	border-top: 1px solid #38babc;
-	
-	/** box shadow **/ 
-	-moz-box-shadow: -4px 4px 4px #999;
-	-webkit-box-shadow: -4px 4px 4px #999;
-	-o-box-shadow: -4px 4px 4px #999;
-	-ms-box-shadow: -4px 4px 4px #999;
-	box-shadow: -4px 4px 4px #999;	
+	border-bottom: 1px solid #38babc;
+}
+
+div#searchnav > *:first-child
+{
+	/* logo width  */
+	margin-left: 200px;	
+}
+
+div#searchnav > *
+{
+	/* logo width  */
+	margin-right: 10px;	
 }
 
 /** END OF SEARCH BAR **/
@@ -412,8 +430,10 @@ div#searchnav
 
 aside#motd
 {
-	width: 100%;
 	background: url(../images/pattern2.png);
+	
+	border-left: 1px solid #38babc;
+	border-right: 1px solid #38babc;
 }
 
 	p.motdText
@@ -699,6 +719,7 @@ ul#motdLinks
 
 	div.hhelper
 	{
+		width: 100%;
 		height: 3px;
 	
 		background-color: #E2EFF3;
@@ -712,26 +733,54 @@ ul#motdLinks
 
 section#maincontent
 {
-	background: #eef2f5;
- 	
- 	/** Background **/
-	background: -webkit-radial-gradient(40% 30%, ellipse farthest-side, rgb(226, 239, 243) 40%, white 100%);
-	background: -moz-radial-gradient(40% 30%, ellipse farthest-side, rgb(226, 239, 243) 40%, white 100%);
-	background: -o-radial-gradient(40% 30%, ellipse farthest-side, rgb(226, 239, 243) 40%, white 100%);
-	background: -ms-radial-gradient(40% 30%, ellipse farthest-side, rgb(226, 239, 243) 40%, white 100%);
+	width: 100%;
 }
+
+	section#maincontent > *
+	{
+		margin: 0 auto;
+		width: 100%;
+		max-width: 1000px;
+	}
+
+	section#maincontent > section 
+	{		
+		background-color: #daecf2;
+	
+		/** rounded borders **/
+		-moz-border-radius: 6px; 
+		-webkit-borde-radius: 6px;
+		-o-border-radius: 6px;
+		-ms-border-radius: 6px;
+		border-radius:6px;
+		
+		/** box shadow **/ 
+		-moz-box-shadow: -2px 2px 4px #CCC;
+		-webkit-box-shadow: -2px 2px 4px #CCC;
+		-o-box-shadow: -2px 2px 4px #CCC;
+		-ms-box-shadow: -2px 2px 4px #CCC;
+		box-shadow: -2px 2px 4px #CCC;
+		
+		margin-top: 20px;
+	}
 
 	section#maincontent > header
 	{
+
 		padding-top: 15px;
 		
 		background: url(../images/pattern2.png);
+		
+		border-left: 1px solid #38babc;
+		border-right: 1px solid #38babc;
 	}
 	
 		section#maincontent > header > h1
 		{
+			width: 100%;
 			height: 50px;
 			padding-left: 20px;
+			padding-top: 10px;
 		}
 		
 		section#maincontent > header > h1, span.title
@@ -740,6 +789,7 @@ section#maincontent
 			font-size: 24px;
 			color: #972c0a;
 		}
+
 		
 		section#maincontent > section > header
 		{
@@ -765,46 +815,47 @@ section#maincontent
 
 aside#loader
 {
-	position: absolute;
-	display: none;
-	width: 200px;
-	height: 50px;
-	padding-left: 10px;
-	padding-right: 10px;
-	
-	font-size: 14px;
-	
-	/** Default background **/
-	background-color: #FEFEFE;
-		
-	/** Gradient **/
-	background: -webkit-gradient(linear, 0 0, 0 100%, from(white), to(#E2EFF3));
-	background: -moz-linear-gradient(top, white, #E2EFF3);
-	background: -o-linear-gradient(top, white, #E2EFF3);
-	background: -ms-linear-gradient(top, white, #E2EFF3);
-		
-	/** Border bottom right roundered **/
-	-moz-border-bottom-right-radius: 6px; 
-	-webkit-border-bottom-right-radius: 6px;
-	-o-border-bottom-right-radius: 6px;
-	-ms-border-bottom-right-radius: 6px;
-	border-bottom-right-radius:6px;
-		
-	border-bottom: 1px solid #38babc;
-	border-right: 1px solid #38babc;
-		
-	/** Shadow **/
-	-moz-box-shadow: 1px 1px 2px #CCC;
-	-webkit-box-shadow: 1px 1px 2px #CCC;
-	-o-box-shadow: 1px 1px 2px #CCC;
-	-ms-box-shadow: 1px 1px 2px #CCC;
-	box-shadow: 1px 1px 2px #CCC;
+	width: 100%;
+	max-width: 1000px;
 }
 	
 		aside#loader > div.loadcontext
 		{
-			width: 100%;
-			height: 100%;
+			display: none;
+			position: absolute;
+			width: 200px;
+			height: 50px;
+			padding-left: 10px;
+			padding-right: 10px;
+			
+			font-size: 14px;
+			
+			/** Default background **/
+			background-color: #FEFEFE;
+				
+			/** Gradient **/
+			background: -webkit-gradient(linear, 0 0, 0 100%, from(white), to(#E2EFF3));
+			background: -moz-linear-gradient(top, white, #E2EFF3);
+			background: -o-linear-gradient(top, white, #E2EFF3);
+			background: -ms-linear-gradient(top, white, #E2EFF3);
+				
+			/** Border bottom right roundered **/
+			-moz-border-bottom-right-radius: 6px; 
+			-webkit-border-bottom-right-radius: 6px;
+			-o-border-bottom-right-radius: 6px;
+			-ms-border-bottom-right-radius: 6px;
+			border-bottom-right-radius:6px;
+				
+			border-bottom: 1px solid #38babc;
+			border-right: 1px solid #38babc;
+			border-left: 1px solid #38babc;
+				
+			/** Shadow **/
+			-moz-box-shadow: 1px 1px 2px #CCC;
+			-webkit-box-shadow: 1px 1px 2px #CCC;
+			-o-box-shadow: 1px 1px 2px #CCC;
+			-ms-box-shadow: 1px 1px 2px #CCC;
+			box-shadow: 1px 1px 2px #CCC;
 		}
 
 /** END OF LOADER **/
@@ -813,21 +864,20 @@ aside#loader
 
 section.exerciseList
 {
-	margin: 20px;
 }
 
 	div.exerciseContainer
 	{
 		width: 100%;
 		margin: 0px;
-		padding: 0px;
+		padding: 0 0 0 10px;
 	}
 	
 	div.exerciseContainer > article
 	{
 		width: 49%;
-		min-width: 540px;
-		max-width: 600px;
+		min-width: 480px;
+		max-width: 500px;
 		min-height: 140px;
 		float: left;
 		padding-top: 15px;
@@ -863,7 +913,7 @@ section.exerciseList
 		
 		div.exerciseContainer > article > div
 		{
-			width: 400px;
+			width: 340px;
 			height: 100%;
 		}
 		
@@ -1099,19 +1149,22 @@ aside.paginationPanel
 
 section.exerciseInfo
 {
+	height: 400px;
 	margin-top: 10px;
 }
 
 	section.exerciseInfo > article
 	{
 		margin: 10px;
+		float: left;
 	}
 
 	section.exerciseInfo > article.exerciseInfo
 	{
 		width: 350px;
 		height: 200px;
-		margin-top: 30px;
+		margin-top: 38px;
+		float: left;
 		
 		/** Border roundered **/
 		-moz-border-radius: 6px; 
@@ -1142,6 +1195,7 @@ section.exerciseInfo
 
 footer
 {
+	width: 100%;
 	height: 40px;
 	margin-top: 50px;
 	

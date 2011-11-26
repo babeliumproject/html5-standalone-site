@@ -1,5 +1,6 @@
+
 <!-- MOTD MESSAGES -->
-		<aside id="motd" class="VBox">
+		<aside id="motd">
 			<ul id="motdsignedmessage">
 				<li>
 					<div class="VBox motdContent" style="margin-right: 15px;">

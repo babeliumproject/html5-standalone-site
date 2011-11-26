@@ -1,3 +1,4 @@
+
 <!-- MOTD MESSAGES -->
 		<aside id="motd">
 			<ul id="motdmessageshelper" class="HBox hcenter vcenter">

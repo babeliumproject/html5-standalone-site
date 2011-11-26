@@ -24,4 +24,4 @@
 	<script type="text/javascript" src="themes/babelium/js/cairngorm.js"></script>
 	<script type="text/javascript" src="themes/babelium/js/babelium.js"></script>
 </head>
-<body class="VBox">
+<body class="VBox hcenter">

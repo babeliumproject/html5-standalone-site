@@ -1,5 +1,5 @@
 
-		<section class="exerciseInfo HBox hcenter">
+		<section class="exerciseInfo">
 		
 			<article class="babeliumPlayer">
 				<h1>{$exercise->title}</h1>

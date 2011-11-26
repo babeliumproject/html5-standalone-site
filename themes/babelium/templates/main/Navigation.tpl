@@ -1,6 +1,6 @@
 
 <!-- HEADER -->
-	<header id="tophead" class="VBox">
+	<header id="tophead">
 
 		<!-- top naviation -->
 		<nav id="topnav" class="HBox">
@@ -58,7 +58,7 @@
 	</header>
 <!--  END OF HEADER -->
 <!-- MAIN CONTENT -->
-	<section id="maincontent" class="VBox">
+	<section id="maincontent">
 {if $hideHeader}
 		<header style="display: none;">
 {else}
@@ -67,6 +67,7 @@
 			<h1>{$moduleTitle}</h1>
 			<div class="hhelper"></div>
 		</header>
+		
 		<aside id="loader">
 			<div class="HBox vcenter hcenter loadcontext">
 				<span></span>
