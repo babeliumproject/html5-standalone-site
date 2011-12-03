@@ -1162,9 +1162,8 @@ section.exerciseInfo
 	section.exerciseInfo > article.exerciseInfo
 	{
 		width: 350px;
-		height: 200px;
+		min-height: 200px;
 		margin-top: 38px;
-		float: left;
 		
 		/** Border roundered **/
 		-moz-border-radius: 6px; 
@@ -1188,6 +1187,49 @@ section.exerciseInfo
 		background: -o-radial-gradient(40% 30%, ellipse farthest-side, rgb(226, 239, 243) 40%, white 100%);
 		background: -ms-radial-gradient(40% 30%, ellipse farthest-side, rgb(226, 239, 243) 40%, white 100%);
 	}
+	
+	section.exerciseInfo > article.videoInfo
+	{
+		width: 350px;
+		min-height: 100px;
+		margin-top: 10px;
+	}
+	
+		section.exerciseInfo > article.videoInfo > div.topbar
+		{
+			width: 100%;
+			border-bottom: 1px solid #86BCCE;
+			padding-bottom: 3px;
+			margin: 5px;
+		}
+	
+		section.exerciseInfo > article.videoInfo > div.tag
+		{
+			width: 20%;
+			height: 20px;
+			margin: 3px;
+			float: left;
+			display: table;
+		}
+		
+			section.exerciseInfo > article.videoInfo > div.tag > p
+			{
+				vertical-align: middle;
+	 			text-align: center;
+	 			display: table-cell;
+			}
+		
+		section.exerciseInfo > article.videoInfo > div.tag:hover
+		{
+			background-color: #cedbef;
+			cursor: pointer;
+		
+			-webkit-border-radius: 8px;
+			-moz-border-radius: 8px;
+			-o-border-radius: 8px;
+			-ms-border-radius: 8px;
+			border-radius: 8px;
+		}
 
 /** END OF EXERCISE INFO **/
 

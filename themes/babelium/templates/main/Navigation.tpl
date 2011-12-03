@@ -69,7 +69,7 @@
 		</header>
 		
 		<aside id="loader">
-			<div class="HBox vcenter hcenter loadcontext">
-				<span></span>
+			<div class="VBox vcenter loadcontext">
+				<p></p>
 			</div>
 		</aside>

@@ -1,38 +1,29 @@
 
 		<section class="exerciseInfo">
 		
-			<article class="babeliumPlayer">
-				<h1>{$exercise->title}</h1>
+{include file="util/VideoPlayerPreview.tpl"}
 			
-				<div>
-					<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
-						id="babeliumPlayer" width="100%" height="100%"
-						codebase="http://fpdownload.macromedia.com/get/flashplayer/current/swflash.cab">
-						<param name="movie" value="util/player/babeliumPlayer.swf" />
-						<param name="quality" value="high" />
-						<param name="bgcolor" value="#ffffff" />
-						<param name="flashVars" value="" />
-						<param name="wmode" value="window" />
-						<param name="allowScriptAccess" value="sameDomain" />
-						<embed src="util/player/babeliumPlayer.swf" quality="high" bgcolor="#ffffff" flashVars=""
-							width="100%" height="100%" name="babeliumPlayer" align="middle" wmode="window"
-							play="true"
-							loop="false"
-							quality="high"
-							allowScriptAccess="sameDomain"
-							type="application/x-shockwave-flash"
-							pluginspage="http://www.adobe.com/go/getflashplayer">
-						</embed>
-					</object>
-				</div>
-			</article>
-			
-			<article class="exerciseInfo VBox hcenter vcenter">
 {if $loggedIn}
-				
+			<article class="exerciseInfo VBox">	
 {else}
+			<article class="exerciseInfo VBox hcenter vcenter">
 				You must be logged to record an exercise
 {/if}
 			</article>
+
+			<article class="videoInfo">
 			
+				<div class="topbar HBox">
+					<div class="ratyPreview" data-rating="{$exercise->avgRating}" data-readonly="true" id="raty-video-preview"></div>
+					<div class="spacer"></div>
+					<div style="margin-right: 3px"><img src="themes/babelium/images/shield_icon.png" width="20" height="21" alt="Report" align="left"/></div>
+					<div><a href="javascript:void(0);" class="yellow">Report</a></div>
+				</div>
+				
+{assign var=tags value=explode(',', $exercise->tags)}
+{foreach from=$tags item=tag}
+				<div class="tag"><p>{$tag}</p></div>
+{/foreach}
+			</article>
+
 		</section>

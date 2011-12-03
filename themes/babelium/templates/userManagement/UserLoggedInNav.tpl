@@ -1,3 +1,4 @@
+
 				<li><a href="#" class="img"><img src="themes/babelium/images/help_icon.png" alt="Help" width="19" height="19" /></a></li>
 				<li><a href="#" class="blue">Help</a></li>
 				<li>Crédito: <span class="yellow">{$user->creditCount}</span></li>

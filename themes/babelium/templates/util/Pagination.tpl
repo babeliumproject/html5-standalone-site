@@ -1,3 +1,4 @@
+
 			<aside class="paginationPanel HBox vcenter">
 				<div class="paginationFilter HBox vcenter">
 					<strong>By title:</strong>

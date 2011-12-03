@@ -38,6 +38,8 @@ BP.CMS = (function()
 		
 		if ( BP.at("home") && !BP.action("activity") )
 			_initRatings(); // Only needed at home, datatables and paginators loads ratings itselfs
+		if ( BP.at("practice") && BP.action("view") )
+			_rating(".ratyPreview", true);
 		
 		_initiated = true;
 	}
@@ -95,7 +97,7 @@ BP.CMS = (function()
 			var content = "<img src='" + flag + "' width='16' height='16' align='left' hspace='3' vspace='3' "
 							+ "alt='" + text + "' />" + text;
 			var arrow = "<img src='themes/babelium/images/arrow-down.png'"
-				+ "alignt='left' style='float:right; margin-right: 3px;' />";
+							+ "alignt='left' style='float:right; margin-right: 3px;' />";
 
 			// Is is checked as default initialize localebox
 			if ( $(this).is(":selected") )
@@ -178,18 +180,38 @@ BP.CMS = (function()
 	 * Create a 5 star rate widget
 	 * @param c: class or id
 	 */
-	function _rating(c)
+	function _rating(c, s)
 	{
-		$(c).each(function ()
+		if ( s == true )
 		{
-			var _this = this;
-			$(_this).raty({
-				path: "themes/babelium/images/raty",
-				readOnly: $(_this).data("readonly"),
-				half: true,
-				start: $(_this).data("rating")/2
+			$(c).each(function ()
+			{
+				var _this = this;
+				$(_this).raty({
+					path: "themes/babelium/images/raty",
+					readOnly: $(_this).data("readonly"),
+					half: true,
+					start: $(_this).data("rating")/2,
+					size:      24,
+					starHalf:  "star-half-big.png",
+					starOff:   "star-off-big.png",
+					starOn:    "star-on-big.png"
+				});
 			});
-		});
+		}
+		else
+		{
+			$(c).each(function ()
+			{
+				var _this = this;
+				$(_this).raty({
+					path: "themes/babelium/images/raty",
+					readOnly: $(_this).data("readonly"),
+					half: true,
+					start: $(_this).data("rating")/2
+				});
+			});
+		}
 	}
 	
 	/**
@@ -380,7 +402,7 @@ BP.CMS = (function()
 			// Loader div
 			var top =  _maincontent.offset().top;
 			_loader.css("top", top);
-			_loader.find("span").html("Loading <strong>"+location+"</strong>");
+			_loader.find("p").html("Loading <strong>"+location+"</strong>");
 			_loader.slideDown(500);
 			
 			// Animate scrolling 
@@ -434,23 +456,13 @@ BP.CMS = (function()
 			// Display loading message
 			var top =  _maincontent.offset().top;
 			_loader.css("top", top + _maincontent.find("header").outerHeight());
-			_loader.find("span").html("Retrieving exercise information");
+			_loader.find("p").text("Retrieving exercise information");
 			_loader.slideDown(500);
 			
 			// Animate scrolling 
 			$("html, body").animate({scrollTop: top}, "slow", function()
 			{
-				// Slide up current exercise and remove it on animation end
-				if ( $("section.exerciseInfo").length > 0 )
-				{
-					$("section.exerciseInfo").slideUp(500, function()
-					{
-						$("section.exerciseInfo").remove();
-						callback();
-					});
-				}
-				else
-					callback();
+				callback();
 			});
 		},
 		
@@ -509,6 +521,11 @@ BP.CMS = (function()
 				return;
 
 			_initRatings();
+			
+			if ( BP.at("home") && !BP.action("activity") )
+				_initRatings(); // Only needed at home, datatables and paginators loads ratings itselfs
+			if ( BP.at("practice") && BP.action("view") )
+				_rating(".ratyPreview", true);
 		},
 
 		/**
@@ -523,7 +540,7 @@ BP.CMS = (function()
 			data = $.parseJSON(data);
 			$("#maincontent > header > h1").text(data.title);
 			var content = $(data.content).hide();
-			content.appendTo("#maincontent").slideDown(500);
+			content.appendTo("#maincontent").fadeIn(500);
 			_loader.slideUp(500);
 			
 			// Reload views
@@ -546,8 +563,22 @@ BP.CMS = (function()
 			
 			data = $.parseJSON(data);
 			var content = $(data.content).hide();
-			content.insertAfter("aside#loader").slideDown(500);
-			_loader.slideUp(500);
+			
+			// Slide up current exercise and remove it on animation end
+			if ( $("section.exerciseInfo").length > 0 )
+			{
+				$("section.exerciseInfo").fadeOut("fast", function()
+				{
+					$("section.exerciseInfo").remove();
+					content.insertAfter("aside#loader").fadeIn(500);
+					_loader.slideUp(500);
+				});
+			}
+			else
+			{
+				content.insertAfter("aside#loader").fadeIn(500);
+				_loader.slideUp(500);
+			}
 			
 			_loading = false;
 		},
