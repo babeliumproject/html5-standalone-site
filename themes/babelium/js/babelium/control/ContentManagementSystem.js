@@ -519,8 +519,6 @@ BP.CMS = (function()
 		{
 			if ( !_initiated )
 				return;
-
-			_initRatings();
 			
 			if ( BP.at("home") && !BP.action("activity") )
 				_initRatings(); // Only needed at home, datatables and paginators loads ratings itselfs
@@ -547,7 +545,7 @@ BP.CMS = (function()
 			this.reloadViewStacks();
 			this.reloadDataTables();
 			this.reloadPaginations();
-			//this.reloadRatings();
+			this.reloadRatings();
 			
 			_loading = false;
 		},
@@ -561,6 +559,8 @@ BP.CMS = (function()
 			if ( !_loading )
 				return;
 			
+			var _this = this;
+			
 			data = $.parseJSON(data);
 			var content = $(data.content).hide();
 			
@@ -571,12 +571,14 @@ BP.CMS = (function()
 				{
 					$("section.exerciseInfo").remove();
 					content.insertAfter("aside#loader").fadeIn(500);
+					_this.reloadRatings();
 					_loader.slideUp(500);
 				});
 			}
 			else
 			{
 				content.insertAfter("aside#loader").fadeIn(500);
+				_this.reloadRatings();
 				_loader.slideUp(500);
 			}
 			
