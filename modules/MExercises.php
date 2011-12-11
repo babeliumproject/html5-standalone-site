@@ -26,7 +26,7 @@ class MExercises implements IModule
 			// params should be video id or name as long as name is still unique
 			$response = $ex->getExerciseByName($params);
 			
-			if ( $response != NULL )
+			if ( isset($response) )
 				$content = WidgetLoader::loadWidget("ExerciseInfo", $response, $loggedIn);
 		}
 		

@@ -57,10 +57,15 @@ a:hover
 header#tophead
 {
 	width: 100%;
-	max-width: 1000px;
+	max-width: 960px;
 
 	border-left: 1px solid #38babc;
 	border-right: 1px solid #38babc;
+}
+
+header#tophead, section#maincontent
+{
+	min-width: 960px;
 }
 
 /** TOP NAVIGATION **/
@@ -68,7 +73,7 @@ header#tophead
 nav#topnav
 {
 	width: 100%;
-	max-width: 1000px;
+	max-width: 960px;
 	height: 35px;
 	
 	font-family: Arial;
@@ -169,6 +174,7 @@ li#loginhelper
 		height: 100%;
 		width: 100%;
 		padding-left: 3px;
+
 		line-height: 18px;
 		
 		/* Font settings */
@@ -281,7 +287,7 @@ div#logo
 nav#mainnav
 {
 	width: 100%;
-	max-width: 1000px;
+	max-width: 960px;
 	height: 118px;
 	
 	/** Default background **/
@@ -385,7 +391,7 @@ nav#mainnav
 div#searchnav
 {
 	width: 100%;
-	max-widh: 1000px;
+	max-widh: 960px;
 	height: 35px;
 	
 	/** Gradient for mozilla and webkit powered **/
@@ -740,7 +746,7 @@ section#maincontent
 	{
 		margin: 0 auto;
 		width: 100%;
-		max-width: 1000px;
+		max-width: 960px;
 	}
 
 	section#maincontent > section 
@@ -816,7 +822,7 @@ section#maincontent
 aside#loader
 {
 	width: 100%;
-	max-width: 1000px;
+	max-width: 960px;
 }
 	
 		aside#loader > div.loadcontext
@@ -876,9 +882,9 @@ section.exerciseList
 	div.exerciseContainer > article
 	{
 		width: 49%;
-		min-width: 480px;
-		max-width: 500px;
-		min-height: 140px;
+		min-width: 460px;
+		max-width: 475px;
+		min-height: 150px;
 		float: left;
 		padding-top: 15px;
 		padding-bottom: 10px;
@@ -913,7 +919,7 @@ section.exerciseList
 		
 		div.exerciseContainer > article > div
 		{
-			width: 340px;
+			width: 320px;
 			height: 100%;
 		}
 		
@@ -1133,6 +1139,7 @@ aside.paginationPanel
 {
 	width: 500px;
 	height: 400px;
+	padding-left: 15px;
 }
 
 	.babeliumPlayer > h1
@@ -1159,11 +1166,42 @@ section.exerciseInfo
 		float: left;
 	}
 
+	section.exerciseInfo > article.exerciseInfo.centered
+	{
+		display: table;
+	}
+	
+	section.exerciseInfo > article.exerciseInfo.aligned > label,
+	section.exerciseInfo > article.exerciseInfo.aligned > select,
+	section.exerciseInfo > article.exerciseInfo.aligned > div.recordmethod
+	{
+		float: left;
+		width: 170px;
+		margin: 5px 0 5px 0;
+	}
+	
+	section.exerciseInfo > article.exerciseInfo.aligned > label
+	{
+		width: 155px;
+		text-align: right;
+		padding-right: 10px;
+		line-height: 20px;
+		font-weight: bold;
+	}
+	
+	section.exerciseInfo > article.exerciseInfo.aligned > select
+	{
+		height: 20px;
+		font-size: 13px;
+	}
+				
 	section.exerciseInfo > article.exerciseInfo
 	{
-		width: 350px;
-		min-height: 200px;
+		width: 335px;
+		max-width: 335px;
+		height: 150px;
 		margin-top: 38px;
+		padding: 10px;
 		
 		/** Border roundered **/
 		-moz-border-radius: 6px; 
@@ -1188,9 +1226,26 @@ section.exerciseInfo
 		background: -ms-radial-gradient(40% 30%, ellipse farthest-side, rgb(226, 239, 243) 40%, white 100%);
 	}
 	
+		section.exerciseInfo > article.exerciseInfo.centered > *
+		{
+			display: table-cell;
+			vertical-align: middle;
+	 		text-align: center;
+		}
+		
+		.recordButton:hover
+		{
+			/** Shadow **/
+			-moz-box-shadow: 2px 2px 2px #999;
+			-webkit-box-shadow: 2px 2px 2px #999;
+			-o-box-shadow: 2px 2px 2px #999;
+			-ms-box-shadow: 2px 2px 2px #999;
+			box-shadow: 2px 2px 2px #999;
+		}
+	
 	section.exerciseInfo > article.videoInfo
 	{
-		width: 350px;
+		width: 355px;
 		min-height: 100px;
 		margin-top: 10px;
 	}
