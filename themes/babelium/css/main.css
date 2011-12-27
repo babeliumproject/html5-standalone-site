@@ -118,10 +118,11 @@ nav#topnav
 aside#popup
 {
 	width: 100%;
+	max-width: 960px;
 	height: 30px;
 	
 	display: none;
-	
+	position: absolute;
 	border-bottom: 1px solid #38babc;
 	
 	/** Default background **/
@@ -518,7 +519,7 @@ div.motdImage
 
 div.motdContent
 {
-	width: 400px;
+	width: 360px;
 }
 
 	div.motdContent > *

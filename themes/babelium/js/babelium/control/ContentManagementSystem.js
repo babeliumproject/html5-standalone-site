@@ -403,7 +403,7 @@ BP.CMS = (function()
 			var top =  _maincontent.offset().top;
 			_loader.css("top", top);
 			_loader.find("p").html("Loading <strong>"+location+"</strong>");
-			_loader.slideDown(500);
+			_loader.slideDown();
 			
 			// Animate scrolling 
 			if ( $("html, body").scrollTop() > top )
@@ -428,7 +428,7 @@ BP.CMS = (function()
 				 * $.when used to avoid multiple callback when maincontent has
 				 * more than 1 section
 				 */ 
-				$.when( $("#maincontent > section").fadeOut(500) ).done(function()
+				$.when( $("#maincontent > section").fadeOut() ).done(function()
 				{
 					$("#maincontent > section").remove();
 					
@@ -538,8 +538,8 @@ BP.CMS = (function()
 			data = $.parseJSON(data);
 			$("#maincontent > header > h1").text(data.title);
 			var content = $(data.content).hide();
-			content.appendTo("#maincontent").fadeIn(500);
-			_loader.slideUp(500);
+			content.appendTo("#maincontent").fadeIn();
+			_loader.slideUp();
 			
 			// Reload views
 			this.reloadViewStacks();
@@ -570,14 +570,14 @@ BP.CMS = (function()
 				$("section.exerciseInfo").fadeOut("fast", function()
 				{
 					$("section.exerciseInfo").remove();
-					content.insertAfter("aside#loader").fadeIn(500);
+					content.insertAfter("aside#loader").fadeIn();
 					_this.reloadRatings();
 					_loader.slideUp(500);
 				});
 			}
 			else
 			{
-				content.insertAfter("aside#loader").fadeIn(500);
+				content.insertAfter("aside#loader").fadeIn();
 				_this.reloadRatings();
 				_loader.slideUp(500);
 			}
@@ -615,8 +615,8 @@ BP.CMS = (function()
 
 			var popup = $("aside#popup");
 			
-			popup.slideUp(500, function(){document.getElementById("loginForm").reset();});
-			$("div#logo").animate({top: '35px'}, 500);
+			popup.fadeOut("fast", function(){document.getElementById("loginForm").reset();});
+			//$("div#logo").animate({top: '35px'}, 500);
 		},
 		
 		/**
@@ -629,8 +629,8 @@ BP.CMS = (function()
 
 			var popup = $("aside#popup");
 			
-			popup.slideDown(500);
-			$("div#logo").animate({top: '65px'}, 500);
+			popup.fadeIn();
+			//$("div#logo").animate({top: '65px'}, 500);
 		}
 		
 	};
