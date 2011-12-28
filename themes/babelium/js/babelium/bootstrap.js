@@ -126,7 +126,7 @@ $(document).ready(function()
 	 */
 	window.onpopstate = function(event)
 	{
-		if ( typeof event.state == 'undefined' || event.state == null )
+		if ( typeof event.state == "undefined" || event.state == null )
 			return;
 		else
 		{
@@ -154,7 +154,7 @@ function onConnectionReady(playerId)
 		bpPlayer = document[playerId];
 	}
 	if (!bpPlayer) {
-		alert('There was a problem while loading the video player.');
+		alert("There was a problem while loading the video player.");
 		return;
 	}
 	

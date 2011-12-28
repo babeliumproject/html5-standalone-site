@@ -18,7 +18,7 @@
 		</copy>
 	</target>
 	
-	<target name="LH_compilecairngorm" description="Compiles CairngormJS MVC Framework">
+	<target name="LH_compilecairngorm" description="Compile CairngormJS MVC Framework">
 		<java jar="util/closure/compiler.jar" dir="${cairngorm.DIR}" fork="true">
 			<!-- <arg value="\-\-compilation_level"/><arg value="ADVANCED_OPTIMIZATIONS"/> -->
 			<arg value="--js"/><arg value="setup.js"/>
@@ -34,7 +34,7 @@
 		</java>
 	</target>
 	
-	<target name="LH_compilebabeliumjs" description="Compiles Babelium JS Framework">
+	<target name="LH_compilebabeliumjs" description="Compile Babelium JS Framework">
 		<java jar="util/closure/compiler.jar" dir="${babeliumjs.DIR}" fork="true">
 			<!-- <arg value="\-\-compilation_level"/><arg value="ADVANCED_OPTIMIZATIONS"/> -->
 			<arg value="--js"/><arg value="setup.js"/>
@@ -60,6 +60,7 @@
 	
 			<arg value="--js"/><arg value="commands/exercises/ExerciseSelectedCommand.js"/>
 			<arg value="--js"/><arg value="commands/exercises/GetRecordableExercisesCommand.js"/>
+			<arg value="--js"/><arg value="commands/exercises/StartRecordingCommand.js"/>
 			<arg value="--js"/><arg value="commands/exercises/ViewExerciseModuleCommand.js"/>
 	
 			<arg value="--js"/><arg value="commands/evaluation/ViewEvaluationModuleCommand.js"/>

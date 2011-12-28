@@ -1,7 +1,5 @@
 
 			<article class="babeliumPlayer">
-				<h1>{$exercise->title}</h1>
-			
 				<div>
 					<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
 						id="babeliumPlayer" width="100%" height="100%"

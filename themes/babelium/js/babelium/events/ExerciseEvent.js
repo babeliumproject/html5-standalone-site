@@ -14,3 +14,4 @@ var ExerciseEvent = Cairngorm.Event.extend(
 // Constants
 ExerciseEvent.EXERCISE_SELECTED = "exerciseSelected";
 ExerciseEvent.GET_RECORDABLE_EXERCISES = "getRecordableExercises";
+ExerciseEvent.REC_START = "exerciseSelected";

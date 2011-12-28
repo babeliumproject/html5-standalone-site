@@ -23,7 +23,9 @@ BP.EM = (function ()
 	var _exerciseStartedPlaying = false;
 
 	// Public Interface
-	return {	
+	return {
+		// Self instance
+		instance : this,
 		
 		// Loads an exercise
 		loadExercise : function (videoPlayer, ex)
@@ -31,7 +33,6 @@ BP.EM = (function ()
 			_bpPlayer = videoPlayer;
 			this.setupVideoPlayer();
 			this.onExerciseSelected(ex);
-			//$('#bplayer-title').html(ex.title);
 		},
 	
 		// Setups videoplayer
@@ -55,6 +56,9 @@ BP.EM = (function ()
 		// Prepare exercise
 		prepareExercise : function ()
 		{
+			if ( !_bpPlayer )
+				return;
+
 			// Prepare new video in VideoPlayer
 			_bpPlayer.stopVideo();
 			_bpPlayer.state(_bpPlayerStates.PLAY_STATE);
@@ -71,6 +75,21 @@ BP.EM = (function ()
 			_bpPlayer.setSubtitle(""); // Clear subtitles if any
 			_bpPlayer.videoSource(""); // Reset video source
 			_bpPlayer.state(_bpPlayerStates.PLAY_STATE); //Reset the player window to display only the exercise
+		},
+		
+		// Show arrows
+		showArrows : function ()
+		{
+
+			_bpPlayer.arrows(true);
+			//_bpPlayer.setArrows(this.cueManager.cues2rolearray(), this.selectedRole);
+		},
+
+		// Hide arrows
+		hideArrows : function ()
+		{
+			_bpPlayer.arrows(false);
+			_bpPlayer.removeArrows();
 		}
 	};
 

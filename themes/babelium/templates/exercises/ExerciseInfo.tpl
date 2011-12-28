@@ -1,28 +1,30 @@
 
 		<section class="exerciseInfo">
 		
+			<header><h1>{$exercise->title}</h1></header>
+		
 {include file="util/VideoPlayerPreview.tpl"}
 			
 {if $loggedIn}
 			<article class="exerciseInfo aligned">	
 				<label>Choose a role:</label>
-				<select>
-{foreach from=$roles item=role}
+				<select id="recRole">
+	{foreach from=$roles item=role}
 					<option value="{$role->characterName}">{$role->characterName}</option>
-{/foreach}
+	{/foreach}
 				</select>
 				<label>Choose a language:</label>
-				<select>
-{foreach from=$locales item=locale}
+				<select id="recLocale">
+	{foreach from=$locales item=locale}
 					<option value="{$locale->locale}">{$locale->locale}</option>
-{/foreach}
+	{/foreach}
 				</select>
 				<label>Choose recording method:</label>
 				<div class="recordmethod">
 					<input type="radio" name="recordingMethod" value="0" checked>Microphone only</input><br/>
 					<input type="radio" name="recordingMethod" value="1">Webcam and microphone</input>
 				</div>
-				<a href="javascript:void(0);" alt="Record">
+				<a href="javascript:new ExerciseEvent(ExerciseEvent.REC_START).dispatch();" alt="Record">
 					<img src="themes/babelium/images/button_rec.png" class="recordButton" alt="Record!" border="0" width="49" height="49" align="right" />
 				</a>
 				
