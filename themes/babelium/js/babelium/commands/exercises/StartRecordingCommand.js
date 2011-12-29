@@ -11,12 +11,8 @@ var StartRecordingCommand = Cairngorm.Command.extend(
 		if ( BP.selectedExercise == null )
 			return;
 
-		// Retrieve selected role
-		var selectedRole = $("select#recRole > option:selected").val();
-		var selectedLocale = $("select#recLocale > option:selected").val();
-		alert("recording: " + selectedRole + " :: " + selectedLocale);
-		
-		BP.EM.showArrows();
+		// Setup recording
+		BP.EM.setupRecording();
 	},
 	
 	onResult : function ( response )

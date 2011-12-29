@@ -74,6 +74,16 @@
 			<arg value="--js"/><arg value="commands/userManagement/ProcessLoginCommand.js"/>
 			<arg value="--js"/><arg value="commands/userManagement/SignOutCommand.js"/>
 			
+			<arg value="--js"/><arg value="commands/cue/OnPlaybackCuePoint.js"/>
+			<arg value="--js"/><arg value="commands/cue/OnRecordingOtherRoleCuePoint.js"/>
+			<arg value="--js"/><arg value="commands/cue/OnRecordingSelectedRoleStartCuePoint.js"/>
+			<arg value="--js"/><arg value="commands/cue/OnRecordingSelectedRoleStopCuePoint.js"/>
+			<arg value="--js"/><arg value="commands/cue/OnReplayRecordingCuePoint.js"/>
+			
+			<arg value="--js"/><arg value="cue/CueObject.js"/>
+			<arg value="--js"/><arg value="cue/CuePointManager.js"/>
+			<arg value="--js"/><arg value="cue/Services.js"/>
+			
 			<arg value="--js"/><arg value="business/HomepageDelegate.js"/>
 			<arg value="--js"/><arg value="business/ExerciseDelegate.js"/>
 			<arg value="--js"/><arg value="business/EvaluationDelegate.js"/>

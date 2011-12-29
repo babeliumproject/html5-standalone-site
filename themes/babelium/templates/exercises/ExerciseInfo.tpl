@@ -21,8 +21,8 @@
 				</select>
 				<label>Choose recording method:</label>
 				<div class="recordmethod">
-					<input type="radio" name="recordingMethod" value="0" checked>Microphone only</input><br/>
-					<input type="radio" name="recordingMethod" value="1">Webcam and microphone</input>
+					<input type="radio" name="recordingMethod" value="micOnly" checked>Microphone only</input><br/>
+					<input type="radio" name="recordingMethod" value="micCam">Webcam and microphone</input>
 				</div>
 				<a href="javascript:new ExerciseEvent(ExerciseEvent.REC_START).dispatch();" alt="Record">
 					<img src="themes/babelium/images/button_rec.png" class="recordButton" alt="Record!" border="0" width="49" height="49" align="right" />

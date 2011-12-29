@@ -16,15 +16,16 @@ class MExercises implements IModule
 		$ex = new Exercise();
 		$action = isset($args[1]) ? $args[1] : "";
 		$params = isset($args[2]) ? $args[2] : "";
+		$videoInfo = split(";", $params); // id, name, title
 		$state = isset($args[3]) ? $args[3] : "";
 		$content = "";
 		$loggedIn = SessionManager::getInstance()->isLoggedIn();
 		
 		// Obtain video information
-		if ( $action == "view" )
+		if ( $action == "view" && count($videoInfo) == 2 )
 		{
 			// params should be video id or name as long as name is still unique
-			$response = $ex->getExerciseByName($params);
+			$response = $ex->getExerciseByName($videoInfo[1]);
 			
 			if ( isset($response) )
 				$content = WidgetLoader::loadWidget("ExerciseInfo", $response, $loggedIn);

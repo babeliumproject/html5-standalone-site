@@ -49,10 +49,10 @@ BP.params = function( params )
 };
 
 /* ============================================================
- * REGISTER SOME USEFUL FUNCTIONS
+ * REGISTER SOME USEFUL FUNCTIONS FOR BP SERVICES
  * ==========================================================*/
 
-BP.makeUUID = function () 
+BP.getUUID = (function () 
 {
 	// http://www.ietf.org/rfc/rfc4122.txt
 	// section 4.4 (Algorithms for Creating a UUID from Truly Random or
@@ -62,9 +62,9 @@ BP.makeUUID = function ()
 		var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
 		return v.toString(16);
 	}).toUpperCase();
-};
+})();
 
-BP.getSessionID = function () 
+BP.getSessionID = (function () 
 {
 	// http://www.elated.com/articles/javascript-and-cookies/
 	var results = document.cookie.match('(^|;) ?' + 'PHPSESSID' + '=([^;]*)(;|$)');
@@ -72,7 +72,18 @@ BP.getSessionID = function ()
 		return (unescape(results[2]));
 	else
 		return null;
-};
+})();
+
+/* ============================================================
+ * BP SERVICES CALLER
+ * ==========================================================*/
+
+BP.Services = new services();
+BP.Services.getCommunicationToken();
+
+BP.onCommunicationReady = function () {
+	BP.EM = new ExerciseManager();
+}
 
 /* ============================================================
  * LOAD SERVICES FROM A XML FILE
@@ -165,7 +176,8 @@ function onConnectionReady(playerId)
 	else if ( BP.params() != null )
 	{
 		// Retrieve exercise from url (mostly on first load)
-		BP.selectedExercise = new ExerciseVO("", BP.params(), "");
+		var params = BP.params().split(';');
+		BP.selectedExercise = new ExerciseVO(params[0], params[1], params[2]);
 		BP.EM.loadExercise(bpPlayer, BP.selectedExercise);
 	}
 }

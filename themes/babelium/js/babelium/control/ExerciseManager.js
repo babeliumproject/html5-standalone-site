@@ -3,94 +3,248 @@
  * Babelium Exercise Manager
  * ==========================================================*/
 
-BP.EM = (function ()
+function ExerciseManager ()
 {
-	// Private interface
-	var _bpPlayer = null;
+	this.bpPlayer = null;
 
-	var _bpPlayerStates = {
+	this.bpPlayerStates = {
 		PLAY_STATE : 0,
 		PLAY_BOTH_STATE : 1,
 		RECORD_MIC_STATE : 2,
 		RECORD_BOTH_STATE : 3
 	};
 
-	var _exerciseName = null;
-	var _exerciseTitle = null;
-	var _exerciseId = null;
-	var _currentExercise = null;
+	this.exerciseName = null;
+	this.exerciseTitle = null;
+	this.exerciseId = null;
+	this.currentExercise = null;
 	
-	var _exerciseStartedPlaying = false;
+	this.selectedRole = null;
+	this.selectedLocale = null;
+	
+	this.exerciseStartedPlaying = false;
+	
+	this.cueManager = null;
+	this.cueManagerReady = false;
 
-	// Public Interface
-	return {
-		// Self instance
-		instance : this,
+	var instance = this;
 		
-		// Loads an exercise
-		loadExercise : function (videoPlayer, ex)
-		{
-			_bpPlayer = videoPlayer;
-			this.setupVideoPlayer();
-			this.onExerciseSelected(ex);
-		},
+	// Loads an exercise
+	this.loadExercise = function (videoPlayer, ex)
+	{
+		this.bpPlayer = videoPlayer;
+		this.cueManager = new cuePointManager();
+		this.setupVideoPlayer();
+		this.onExerciseSelected(ex);
+	};
 	
-		// Setups videoplayer
-		setupVideoPlayer : function ()
-		{
-			// Nothing to do yet
-		},
+	// Setups videoplayer
+	this.setupVideoPlayer = function ()
+	{
+		this.bpPlayer.addEventListener("onRecordingAborted", "BP.EM.recordingAbortedListener");
+		this.bpPlayer.addEventListener("onRecordingFinished", "BP.EM.recordingFinishedListener");
+	};
 	
-		// On exercise selected
-		onExerciseSelected : function (exercise)
-		{
-			// Store selected exercise's information
-			_exerciseName = exercise.name;
-			_exerciseTitle = exercise.title;
-			_exerciseId = exercise.id;
-			_currentExercise = exercise;
-			
-			this.prepareExercise();
-		},
-	
-		// Prepare exercise
-		prepareExercise : function ()
-		{
-			if ( !_bpPlayer )
-				return;
+	// On exercise selected
+	this.onExerciseSelected = function (exercise)
+	{
+		// Store selected exercise's information
+		this.exerciseName = exercise.name;
+		this.exerciseTitle = exercise.title;
+		this.exerciseId = exercise.id;
 
-			// Prepare new video in VideoPlayer
-			_bpPlayer.stopVideo();
-			_bpPlayer.state(_bpPlayerStates.PLAY_STATE);
-			_bpPlayer.videoSource(_exerciseName);
-		},
+		this.currentExercise = exercise;
 		
-		// Reset component
-		resetComp : function ()
-		{
-			if ( !_bpPlayer )
-				return;
-			
-			_bpPlayer.endVideo(); // Stop video
-			_bpPlayer.setSubtitle(""); // Clear subtitles if any
-			_bpPlayer.videoSource(""); // Reset video source
-			_bpPlayer.state(_bpPlayerStates.PLAY_STATE); //Reset the player window to display only the exercise
-		},
+		this.cueManagerReady = false;
 		
-		// Show arrows
-		showArrows : function ()
-		{
+		this.prepareExercise();
+		this.resetCueManager();
+		this.prepareCueManager();
+	};
+	
+	// Prepare exercise
+	this.prepareExercise = function ()
+	{
+		if ( !this.bpPlayer )
+			return;
 
-			_bpPlayer.arrows(true);
-			//_bpPlayer.setArrows(this.cueManager.cues2rolearray(), this.selectedRole);
-		},
-
-		// Hide arrows
-		hideArrows : function ()
-		{
-			_bpPlayer.arrows(false);
-			_bpPlayer.removeArrows();
-		}
+		// Prepare new video in VideoPlayer
+		this.bpPlayer.stopVideo();
+		this.bpPlayer.state(this.bpPlayerStates.PLAY_STATE);
+		this.bpPlayer.videoSource(this.exerciseName);
+	};
+		
+	// Reset component
+	this.resetComp = function ()
+	{
+		if ( !this.bpPlayer )
+			return;
+		
+		this.bpPlayer.endVideo(); // Stop video
+		this.bpPlayer.setSubtitle(""); // Clear subtitles if any
+		this.bpPlayer.videoSource(""); // Reset video source
+		this.bpPlayer.state(this.bpPlayerStates.PLAY_STATE); //Reset the player window to display only the exercise
+	};
+	
+	// Show arrows
+	this.showArrows = function ()
+	{
+		if ( !this.bpPlayer )
+			return;
+		
+		this.bpPlayer.arrows(true);
+		this.bpPlayer.setArrows(this.cueManager.cues2rolearray(), this.selectedRole);
 	};
 
-})();
+	// Hide arrows
+	this.hideArrows = function ()
+	{
+		if ( !this.bpPlayer )
+			return;
+		
+		this.bpPlayer.arrows(false);
+		this.bpPlayer.removeArrows();
+	};
+		
+	// Setup recording
+	this.setupRecording = function ()
+	{
+		if ( !this.bpPlayer )
+			return;
+		
+		// Retrieve selected role
+		this.selectedRole = $("select#recRole > option:selected").val();
+		this.selectedLocale = $("select#recLocale > option:selected").val();
+		
+		this.setupRecordingCommands();
+		
+		// Recording method
+		if ( $("input[name=recordingMethod]:checked").val() == "micOnly" )
+			this.bpPlayer.state(this.bpPlayerStates.RECORD_MIC_STATE);
+		else
+			this.bpPlayer.state(this.bpPlayerStates.RECORD_BOTH_STATE);
+		
+		this.showArrows();
+	};
+	
+	// Reset Cuepoint Manager
+	this.resetCueManager = function ()
+	{
+		this.cueManager.reset();
+		this.bpPlayer.removeEventListener("onEnterFrame", "BP.EM.enterFrameListener");
+	};
+	
+	// Prepare Cuepoint Manager
+	this.prepareCueManager = function()
+	{
+		this.cueManager.setVideo(this.exerciseId);
+
+		this.cueManager.addEventListener("onSubtitlesRetrieved", instance.onSubtitlesRetrieved);
+		this.selectedLocale = $("select#recLocale > option:selected").val();
+		this.cueManager.setCuesFromSubtitleUsingLocale(this.selectedLocale);
+		this.bpPlayer.removeEventListener("onEnterFrame", "BP.EM.enterFrameListener");
+		this.bpPlayer.addEventListener("onEnterFrame", "BP.EM.enterFrameListener");
+	};
+		
+	// Enter frame listener
+	this.enterFrameListener = function (event)
+	{
+		this.cueManager.monitorCuePoints(event);
+	};
+		
+	/**
+	 * Callback from another scope, use the 'instance' variable to access local properties/methods
+	 */
+	this.onSubtitlesRetrieved = function ()
+	{
+		if ( instance.currentResponse == undefined )
+			instance.setupPlayCommands();
+		else
+		{
+			instance.bpPlayer.state(instance.bpPlayerStates.PLAY_BOTH_STATE);
+			instance.bpPlayer.videoSource(instance.currentResponse.name);
+			instance.bpPlayer.secondSource(instance.currentResponse.file_identifier);
+			instance.selectedRole = instance.currentResponse.character_name;
+			instance.setupRecordingCommands();
+			instance.bpPlayer.addEventListener("onMetadataRetrieved", "BP.EM.onMetadataRetrieved");
+		}
+	};
+		
+	// Setup play commands
+	this.setupPlayCommands = function()
+	{
+		var auxList = this.cueManager.getCuelist();
+		if ( auxList.length <= 0 )
+			return;
+
+		for ( var i in auxList )
+		{
+			auxList[i].setStartCommand(new onPlaybackCuePoint(auxList[i], this.bpPlayer));
+			auxList[i].setEndCommand(new onPlaybackCuePoint(null, this.bpPlayer));
+		}
+			
+		this.cueManagerReady = true;
+
+		this.videoStartedPlayingListener(null);
+	};
+	
+	// Setup Recording Commands
+	this.setupRecordingCommands = function()
+	{
+		var auxList = this.cueManager.getCuelist();
+
+		if ( auxList.length <= 0 )
+			return;
+
+		for ( var i in auxList) {
+
+			if (auxList[i].role != this.selectedRole) {
+				auxList[i].setStartCommand(new onRecordingOtherRoleCuePoint(auxList[i], this.bpPlayer));
+				auxList[i].setEndCommand(new onPlaybackCuePoint(null, this.bpPlayer));
+			} else {
+				auxList[i].setStartCommand(new onRecordingSelectedRoleStartCuePoint(auxList[i], this.bpPlayer));
+				auxList[i].setEndCommand(new onRecordingSelectedRoleStopCuePoint(this.bpPlayer));
+			}
+		}
+		this.bpPlayer.seek(false);
+		this.cueManagerReady = true;
+	};
+		
+	// Setup Replay Commands
+	this.setupReplayCommands = function()
+	{
+		var auxList = this.cueManager.getCuelist();
+
+		if ( auxList.length <= 0 )
+			return;
+
+		for ( var i in auxList )
+		{
+			auxList[i].setStartCommand(new onReplayRecordingCuePoint(auxList[i], this.bpPlayer));
+			auxList[i].setEndCommand(new onReplayRecordingCuePoint(null, this.bpPlayer));
+		}
+
+		this.cueManagerReady = true;
+	};
+		
+	// Callbacks
+	this.onMetadataRetrieved = function(event) {
+		this.showArrows();
+	};
+		
+	this.videoStartedPlayingListener = function ()
+	{
+		// TODO
+	};
+		
+	this.recordingAbortedListener = function ()
+	{
+		// TODO
+	};
+		
+	this.recordingFinishedListener = function ()
+	{
+		// TODO
+	};
+
+}

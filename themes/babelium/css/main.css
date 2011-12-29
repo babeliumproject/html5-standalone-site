@@ -1139,7 +1139,7 @@ aside.paginationPanel
 .babeliumPlayer
 {
 	width: 500px;
-	min-height: 400px;
+	min-height: 320px;
 	padding-left: 15px;
 }
 
@@ -1149,7 +1149,6 @@ aside.paginationPanel
 
 section.exerciseInfo
 {
-	min-height: 440px;
 	margin-top: 10px;
 }
 
