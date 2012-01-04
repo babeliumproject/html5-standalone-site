@@ -23,6 +23,10 @@
 
 require_once 'ZendRestJson.php';
 
+/** DEBUG MODE **/
+error_reporting(E_ALL);
+ini_set('display_errors', '0'); // DEBUG MODE: turn to 1
+
 //Instantiate custom Zend Rest Server
 $server = new ZendRestJson();
 	

@@ -60,8 +60,12 @@
 	
 			<arg value="--js"/><arg value="commands/exercises/ExerciseSelectedCommand.js"/>
 			<arg value="--js"/><arg value="commands/exercises/GetRecordableExercisesCommand.js"/>
+			<arg value="--js"/><arg value="commands/exercises/RecordAgainCommand.js"/>
+			<arg value="--js"/><arg value="commands/exercises/RecordingAbortedCommand.js"/>
+			<arg value="--js"/><arg value="commands/exercises/SaveResponseCommand.js"/>
 			<arg value="--js"/><arg value="commands/exercises/StartRecordingCommand.js"/>
 			<arg value="--js"/><arg value="commands/exercises/ViewExerciseModuleCommand.js"/>
+			<arg value="--js"/><arg value="commands/exercises/WatchResponseCommand.js"/>
 	
 			<arg value="--js"/><arg value="commands/evaluation/ViewEvaluationModuleCommand.js"/>
 			

@@ -6,6 +6,26 @@
 {include file="util/VideoPlayerPreview.tpl"}
 			
 {if $loggedIn}
+			<article class="recordingEndOptions">
+				<label>Available actions:</label><br/>
+				<button disabled="disabled" onClick="new ExerciseEvent(ExerciseEvent.SAVE_RESPONSE).dispatch();">
+					<img src="themes/babelium/images/eo_save_response.png" width="48" height="48" />
+					<span>Save response</span>
+				</button><br/>
+				<button disabled="disabled" onClick="new ExerciseEvent(ExerciseEvent.WATCH_RESPONSE).dispatch();">
+					<img src="themes/babelium/images/eo_watch_sim.png" width="48" height="48" />
+					<span>Watch response</span>
+				</button><br/>
+				<button disabled="disabled" onClick="new ExerciseEvent(ExerciseEvent.RECORD_AGAIN).dispatch();">
+					<img src="themes/babelium/images/button_rec.png" width="48" height="48" />
+					<span>Record again</span>
+				</button><br/>
+				<button onClick="new ExerciseEvent(ExerciseEvent.RECORDING_ABORTED).dispatch();">
+					<img src="themes/babelium/images/button_abort.png" width="48" height="48" />
+					<span>Discard response</span>
+				</button>
+			</article>
+			
 			<article class="exerciseInfo aligned">	
 				<label>Choose a role:</label>
 				<select id="recRole">

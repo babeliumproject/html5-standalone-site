@@ -22,10 +22,5 @@ var StartRecordingCommand = Cairngorm.Command.extend(
 				BP.selectedExercise.title + " - Practice - Babelium Project",
 				"?module=practice&action=rec&params="+ id);
 		BP.CMS.innerExerciseView(response);
-	},
-	
-	onFault : function ()
-	{
-		alert("Error loading exercise");
 	}
 });

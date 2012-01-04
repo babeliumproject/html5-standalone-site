@@ -750,7 +750,7 @@ section#maincontent
 		max-width: 960px;
 	}
 
-	section#maincontent > section 
+	section#maincontent > section, section.exerciseInfo > header
 	{		
 		background-color: #daecf2;
 	
@@ -1150,6 +1150,8 @@ aside.paginationPanel
 section.exerciseInfo
 {
 	margin-top: 10px;
+	
+	background-color: none;
 }
 
 	section.exerciseInfo > article
@@ -1187,11 +1189,11 @@ section.exerciseInfo
 		font-size: 13px;
 	}
 				
-	section.exerciseInfo > article.exerciseInfo
+	section.exerciseInfo > article.exerciseInfo, section.exerciseInfo > article.recordingEndOptions
 	{
 		width: 335px;
 		max-width: 335px;
-		height: 150px;
+		min-height: 150px;
 		padding: 10px;
 		
 		/** Border roundered **/
@@ -1232,6 +1234,36 @@ section.exerciseInfo
 			-o-box-shadow: 2px 2px 2px #999;
 			-ms-box-shadow: 2px 2px 2px #999;
 			box-shadow: 2px 2px 2px #999;
+		}
+	
+	section.exerciseInfo > article.recordingEndOptions
+	{
+		display: none;
+	}
+	
+		section.exerciseInfo > article.recordingEndOptions > label
+		{
+			font-weight: bold;
+		}
+		
+		section.exerciseInfo > article.recordingEndOptions > button
+		{
+			margin-top: 5px;
+			font-weight: bold;
+			height: 60px;
+			width: 100%;
+			text-align: left;
+		}
+
+		section.exerciseInfo > article.recordingEndOptions > button > *
+		{
+			float: left;
+		}
+
+		section.exerciseInfo > article.recordingEndOptions > button > span
+		{
+			margin-left: 10px;
+			line-height: 45px;
 		}
 	
 	section.exerciseInfo > article.videoInfo

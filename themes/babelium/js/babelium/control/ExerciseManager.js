@@ -26,6 +26,8 @@ function ExerciseManager ()
 	
 	this.cueManager = null;
 	this.cueManagerReady = false;
+	
+	this.recordedFilename = null;
 
 	var instance = this;
 		
@@ -125,6 +127,7 @@ function ExerciseManager ()
 			this.bpPlayer.state(this.bpPlayerStates.RECORD_BOTH_STATE);
 		
 		this.showArrows();
+		this.showRecordingOptions();
 	};
 	
 	// Reset Cuepoint Manager
@@ -150,6 +153,26 @@ function ExerciseManager ()
 	this.enterFrameListener = function (event)
 	{
 		this.cueManager.monitorCuePoints(event);
+	};
+	
+	// Show recording options
+	this.showRecordingOptions = function ()
+	{
+		$("article.exerciseInfo").fadeOut("fast", function()
+		{
+			var aux = $("article.recordingEndOptions");
+			aux.find("button:lt(3)").attr("disabled", "disabled");
+			aux.fadeIn();
+		});
+	};
+	
+	// Hide recording options
+	this.hideRecordingOptions = function ()
+	{
+		$("article.recordingEndOptions").fadeOut("fast", function ()
+		{
+			$("article.exerciseInfo").fadeIn();
+		});
 	};
 		
 	/**
@@ -236,15 +259,91 @@ function ExerciseManager ()
 	{
 		// TODO
 	};
-		
+	
+	// On recording aborted by user
 	this.recordingAbortedListener = function ()
 	{
-		// TODO
+		alert("Devices not working");
+		this.recordingError();
+		this.prepareExercise();
+		this.resetCueManager();
 	};
-		
-	this.recordingFinishedListener = function ()
+	
+	// On recording finished
+	this.recordingFinishedListener = function (recFilename)
 	{
-		// TODO
+		// Store last recorded response's filename
+		this.recordedFilename = recFilename;
+
+		// Set the videoplayer to playback both the exercise and the
+		// last response.
+		this.setupRecordingCommands();
+		this.bpPlayer.videoSource(this.exerciseName);
+		this.bpPlayer.state(this.bpPlayerStates.PLAY_BOTH_STATE);
+		this.bpPlayer.secondSource(this.recordedFilename);
+
+		this.bpPlayer.seek(false);
+		this.bpPlayer.stopVideo();
+		
+		// Enable buttons
+		$("article.recordingEndOptions > button:lt(3)").removeAttr("disabled");
+	};
+	
+	// Recording error
+	this.recordingError = function()
+	{
+		this.hideArrows();
+		this.bpPlayer.unattachUserDevices();
+		this.bpPlayer.state(this.bpPlayerStates.PLAY_STATE);
+
+		this.bpPlayer.removeEventListener('onEnterFrame','bpExercises.onEnterFrameListener');
+
+		this.hideRecordingOptions();
+	};
+	
+	// Save Response
+	this.saveResponse = function ()
+	{
+		var responseThumbnail = "nothumb.png";
+		var subtitleId = this.cueManager.currentSubtitle();
+
+		var duration = this.bpPlayer.duration();
+
+		// Prepare an AJAX call to the appointed service
+		var parameters = {
+			'userId' : null,
+			'exerciseId' : instance.exerciseId,
+			'fileIdentifier' : instance.recordedFilename,
+			'isPrivate' : true,
+			'thumbnailUri' : responseThumbnail,
+			'source' : 'Red5',
+			'duration' : duration,
+			'addingDate' : null,
+			'ratingAmount' : 0,
+			'characterName' : instance.selectedRole,
+			'transcriptionId' : 0,
+			'subtitleId' : subtitleId
+		};
+
+		BP.Services.send(false, "saveResponse", parameters, this.saveResponseCallback);
+	};
+	
+	/**
+     * Service callback, use the 'instance' variable to access local scope
+     */
+	this.saveResponseCallback = function(data) {
+
+		if( data["response"] == undefined )
+		{
+			for ( var i in data )
+				alert(i + " :: " + data[i]);
+
+			return;	
+		}
+		else
+		{
+			alert("Response saved:" + data["response"]);
+		}
 	};
 
 }

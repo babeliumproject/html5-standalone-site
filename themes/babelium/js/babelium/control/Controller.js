@@ -34,5 +34,9 @@ var Controller = Cairngorm.FrontController.extend(
 		this.addCommand(ExerciseEvent.EXERCISE_SELECTED, ExerciseSelectedCommand);
 		this.addCommand(ExerciseEvent.GET_RECORDABLE_EXERCISES, GetRecordableExercisesCommand);
 		this.addCommand(ExerciseEvent.REC_START, StartRecordingCommand);
+		this.addCommand(ExerciseEvent.RECORDING_ABORTED, RecordingAbortedCommand);
+		this.addCommand(ExerciseEvent.SAVE_RESPONSE, SaveResponseCommand);
+		this.addCommand(ExerciseEvent.WATCH_RESPONSE, WatchResponseCommand);
+		this.addCommand(ExerciseEvent.RECORD_AGAIN, RecordAgainCommand);
 	}
 });
