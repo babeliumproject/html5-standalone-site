@@ -324,26 +324,26 @@ function ExerciseManager ()
 			'transcriptionId' : 0,
 			'subtitleId' : subtitleId
 		};
-
+		
 		BP.Services.send(false, "saveResponse", parameters, this.saveResponseCallback);
 	};
 	
 	/**
      * Service callback, use the 'instance' variable to access local scope
      */
-	this.saveResponseCallback = function(data) {
-
-		if( data["response"] == undefined )
-		{
+	this.saveResponseCallback = function(data)
+	{
+		if ( data == undefined || data["response"] == undefined )
+			alert("Error while saving the response. Please try again later");
+		
+		
+		if( data != undefined && data["response"] == undefined )
 			for ( var i in data )
-				alert(i + " :: " + data[i]);
-
-			return;	
-		}
+				console.log(i + " :: " + data[i]);
 		else
-		{
-			alert("Response saved:" + data["response"]);
-		}
+			alert("Response saved: " + data["response"]);
+		
+		console.log(data);
 	};
 
 }
