@@ -11,7 +11,6 @@ var WatchResponseCommand = Cairngorm.Command.extend(
 		if ( BP.selectedExercise == null )
 			return;
 
-		// TODO
-		BP.EM.bpPlayer.resumeVideo();
+		BP.EM.watchResponse();
 	}
 });

@@ -233,6 +233,17 @@ function ExerciseManager ()
 		this.cueManagerReady = true;
 	};
 		
+	// Watch response
+	this.watchResponse = function ()
+	{
+		instance.showArrows();
+		instance.setupRecordingCommands();
+		instance.bpPlayer.videoSource(instance.exerciseName);
+		instance.bpPlayer.state(instance.bpPlayerStates.PLAY_BOTH_STATE);
+		instance.bpPlayer.secondSource(instance.recordedFilename);
+		instance.bpPlayer.seek(false);
+	}
+	
 	// Setup Replay Commands
 	this.setupReplayCommands = function()
 	{
@@ -283,7 +294,7 @@ function ExerciseManager ()
 		this.bpPlayer.secondSource(this.recordedFilename);
 
 		this.bpPlayer.seek(false);
-		this.bpPlayer.stopVideo();
+		//this.bpPlayer.stopVideo();
 		
 		// Enable buttons
 		$("article.recordingEndOptions > button:lt(3)").removeAttr("disabled");
@@ -334,16 +345,29 @@ function ExerciseManager ()
 	this.saveResponseCallback = function(data)
 	{
 		if ( data == undefined || data["response"] == undefined )
+		{
 			alert("Error while saving the response. Please try again later");
+			return;
+		}
 		
-		
-		if( data != undefined && data["response"] == undefined )
-			for ( var i in data )
-				console.log(i + " :: " + data[i]);
-		else
-			alert("Response saved: " + data["response"]);
-		
-		console.log(data);
+		var resposneId = data.response;
+		BP.Services.send(false, "makePublic", responseId, this.publishResponseCallback);
 	};
 
+	/**
+     * Service callback, use the 'instance' variable to access local scope
+     */
+	this.publishResponseCallback = function(data)
+	{
+		if ( data == undefined || data["response"] == undefined 
+				|| data["response"]["creditCount"] == undefined )
+		{
+			alert("Error updating response's status");
+			return;
+		}
+		
+		var result = data["response"];
+		$("span#creditCount").text(result.creditCount);
+		alert("Your response has been published. Thanks for your collaboration."); 
+	};
 }
