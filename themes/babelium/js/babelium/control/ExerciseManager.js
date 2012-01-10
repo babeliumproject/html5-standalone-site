@@ -40,6 +40,16 @@ function ExerciseManager ()
 		this.onExerciseSelected(ex);
 	};
 	
+	// For firs-time web page load, load an exercise from content's data
+	this.loadExerciseFromContent = function (videoPlayer)
+	{
+		var container = $("section.exerciseInfo");
+		var id = container.data("id");
+		var name = container.data("name");
+		BP.selectedExercise = new ExerciseVO(id, name, null);
+		this.loadExercise(videoPlayer, BP.selectedExercise);
+	};
+	
 	// Setups videoplayer
 	this.setupVideoPlayer = function ()
 	{

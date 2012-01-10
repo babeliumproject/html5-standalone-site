@@ -173,11 +173,6 @@ function onConnectionReady(playerId)
 	
 	if ( BP.selectedExercise )	
 		BP.EM.loadExercise(bpPlayer, BP.selectedExercise);
-	else if ( BP.params() != null )
-	{
-		// Retrieve exercise from url (mostly on first load)
-		var params = BP.params().split(';');
-		BP.selectedExercise = new ExerciseVO(params[0], params[1], params[2]);
-		BP.EM.loadExercise(bpPlayer, BP.selectedExercise);
-	}
+	else if ( BP.params() != null )	
+		BP.EM.loadExerciseFromContent(bpPlayer);
 }

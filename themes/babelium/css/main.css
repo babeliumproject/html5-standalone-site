@@ -1160,9 +1160,14 @@ section.exerciseInfo
 		float: left;
 	}
 
-	section.exerciseInfo > article.exerciseInfo.centered
+	section.exerciseInfo > article.exerciseInfo.logout
 	{
 		display: table;
+		/** Background **/
+		background: -webkit-radial-gradient(40% 30%, ellipse farthest-side, #ff7070 40%, #ffe0e0 100%);
+		background: -moz-radial-gradient(40% 30%, ellipse farthest-side, #ff7070 40%, #ffe0e0 100%);
+		background: -o-radial-gradient(40% 30%, ellipse farthest-side, #ff7070 40%, #ffe0e0 100%);
+		background: -ms-radial-gradient(40% 30%, ellipse farthest-side, #ff7070 40%, #ffe0e0 100%);
 	}
 	
 	section.exerciseInfo > article.exerciseInfo.aligned > label,
@@ -1211,7 +1216,10 @@ section.exerciseInfo
 		-o-box-shadow: 2px 2px 2px #999;
 		-ms-box-shadow: 2px 2px 2px #999;
 		box-shadow: 2px 2px 2px #999;
-		
+	}
+	
+	section.exerciseInfo > article.exerciseInfo.aligned, section.exerciseInfo > article.recordingEndOptions
+	{
 		/** Background **/
 		background: -webkit-radial-gradient(40% 30%, ellipse farthest-side, rgb(226, 239, 243) 40%, white 100%);
 		background: -moz-radial-gradient(40% 30%, ellipse farthest-side, rgb(226, 239, 243) 40%, white 100%);
@@ -1219,7 +1227,7 @@ section.exerciseInfo
 		background: -ms-radial-gradient(40% 30%, ellipse farthest-side, rgb(226, 239, 243) 40%, white 100%);
 	}
 	
-		section.exerciseInfo > article.exerciseInfo.centered > *
+		section.exerciseInfo > article.exerciseInfo.logout > *
 		{
 			display: table-cell;
 			vertical-align: middle;

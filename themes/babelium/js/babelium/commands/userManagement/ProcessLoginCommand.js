@@ -30,10 +30,8 @@ var ProcessLoginCommand = Cairngorm.Command.extend(
 				// set true as data will reload motd
 				new ViewChangeEvent(ViewChangeEvent.VIEW_HOME_MODULE, true).dispatch();
 			}
-			else if ( BP.at("practice") )
-			{
-				new ExerciseEvent(ExerciseEvent.GET_RECORDABLE_EXERCISES).dispatch();
-			}
+			else 
+				new ViewChangeEvent(ViewChangeEvent.VIEW_POPSTATE, BP.state).dispatch();
 		}
 		else
 			$("li#loginhelper").html(response.content);

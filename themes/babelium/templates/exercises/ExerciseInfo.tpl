@@ -1,5 +1,5 @@
 
-		<section class="exerciseInfo">
+		<section class="exerciseInfo" data-id="{$exercise->id}" data-name="{$exercise->name}">
 		
 			<header><h1>{$exercise->title}</h1></header>
 		
@@ -49,7 +49,7 @@
 				</a>
 				
 {else}
-			<article class="exerciseInfo centered">
+			<article class="exerciseInfo logout">
 				<p>You must be logged to record an exercise</p>
 {/if}
 			</article>
