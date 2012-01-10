@@ -24,10 +24,8 @@ var SignOutCommand = Cairngorm.Command.extend(
 				// set true as data will reload motd
 				new ViewChangeEvent(ViewChangeEvent.VIEW_HOME_MODULE, true).dispatch();
 			}
-			else if ( BP.at("practice") )
-			{
-				new ViewChangeEvent(ViewChangeEvent.VIEW_EXERCISE_MODULE).dispatch();
-			}
+			else 
+				new ViewChangeEvent(ViewChangeEvent.VIEW_POPSTATE, BP.state).dispatch();
 		}
 	},
 	
