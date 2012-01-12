@@ -18,6 +18,7 @@ function ExerciseManager ()
 	this.exerciseTitle = null;
 	this.exerciseId = null;
 	this.currentExercise = null;
+	this.selectedExercise = null; // Exercise preload
 	
 	this.selectedRole = null;
 	this.selectedLocale = null;
@@ -32,12 +33,12 @@ function ExerciseManager ()
 	var instance = this;
 		
 	// Loads an exercise
-	this.loadExercise = function (videoPlayer, ex)
+	this.loadSelectedExercise = function (videoPlayer)
 	{
 		this.bpPlayer = videoPlayer;
 		this.cueManager = new cuePointManager();
 		this.setupVideoPlayer();
-		this.onExerciseSelected(ex);
+		this.onExerciseSelected(this.selectedExercise);
 	};
 	
 	// For firs-time web page load, load an exercise from content's data
@@ -46,8 +47,8 @@ function ExerciseManager ()
 		var container = $("section.exerciseInfo");
 		var id = container.data("id");
 		var name = container.data("name");
-		BP.selectedExercise = new ExerciseVO(id, name, null);
-		this.loadExercise(videoPlayer, BP.selectedExercise);
+		this.selectedExercise = new ExerciseVO(id, name, null);
+		this.loadSelectedExercise(videoPlayer);
 	};
 	
 	// Setups videoplayer

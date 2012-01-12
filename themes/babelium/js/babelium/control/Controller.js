@@ -19,7 +19,7 @@ var Controller = Cairngorm.FrontController.extend(
 		this.addCommand(ViewChangeEvent.VIEW_LOGIN_POPUP, ToggleLoginPopupCommand);
 		
 		// On popstate event
-		this.addCommand(ViewChangeEvent.VIEW_POPSTATE, ViewPopStateCommand);
+		this.addCommand(ViewChangeEvent.RELOAD_STATE, ReloadStateCommand);
 		
 		// User management
 		this.addCommand(LoginEvent.PROCESS_LOGIN, ProcessLoginCommand);

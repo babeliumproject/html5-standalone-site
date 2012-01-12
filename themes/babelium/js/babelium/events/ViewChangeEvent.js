@@ -20,4 +20,4 @@ ViewChangeEvent.VIEW_SUBTITLE_MODULE = "viewSubtitleModule";
 ViewChangeEvent.VIEW_ABOUT_MODULE = "viewAboutModule";
 ViewChangeEvent.VIEW_CONFIG_MODULE = "viewConfigModule";
 ViewChangeEvent.VIEW_LOGIN_POPUP = "viewLoginPopup";
-ViewChangeEvent.VIEW_POPSTATE = "viewPopState";
+ViewChangeEvent.RELOAD_STATE = "reloadState";

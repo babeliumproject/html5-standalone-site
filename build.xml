@@ -50,7 +50,7 @@
 			<arg value="--js"/><arg value="events/LoginEvent.js"/>
 			<arg value="--js"/><arg value="events/ViewChangeEvent.js"/>
 			
-			<arg value="--js"/><arg value="commands/navigation/ViewPopStateCommand.js"/>
+			<arg value="--js"/><arg value="commands/navigation/ReloadStateCommand.js"/>
 			<arg value="--js"/><arg value="commands/navigation/ToggleLoginPopupCommand.js"/>
 	
 			<arg value="--js"/><arg value="commands/home/ViewHomeModuleCommand.js"/>

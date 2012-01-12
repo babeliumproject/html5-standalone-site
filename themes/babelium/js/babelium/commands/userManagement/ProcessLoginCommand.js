@@ -31,7 +31,7 @@ var ProcessLoginCommand = Cairngorm.Command.extend(
 				new ViewChangeEvent(ViewChangeEvent.VIEW_HOME_MODULE, true).dispatch();
 			}
 			else 
-				new ViewChangeEvent(ViewChangeEvent.VIEW_POPSTATE, BP.state).dispatch();
+				new ViewChangeEvent(ViewChangeEvent.RELOAD_STATE, BP.state).dispatch();
 		}
 		else
 			$("li#loginhelper").html(response.content);

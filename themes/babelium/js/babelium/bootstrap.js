@@ -11,8 +11,6 @@ BP.control = new Controller();
 
 //Application state
 BP.state = {};
-BP.selectedExercise = null;
-BP.bpPlayer = null;
 
 //Push state
 BP.pushState = function ( data, title, href )
@@ -143,10 +141,11 @@ $(document).ready(function()
 		{
 			var state = event.state;
 			
-			if ( state.module == "home" && BP.at("home") )
-				state.params = "min";
+			// If old module == new module, don't reload the whole module
+			if ( state.module == BP.at() )
+				state.state = "min";
 			
-			new ViewChangeEvent(ViewChangeEvent.VIEW_POPSTATE, state).dispatch();
+			new ViewChangeEvent(ViewChangeEvent.RELOAD_STATE, state).dispatch();
 		}
 	};
 });
@@ -169,10 +168,8 @@ function onConnectionReady(playerId)
 		return;
 	}
 	
-	BP.bpPlayer = bpPlayer;
-	
-	if ( BP.selectedExercise )	
-		BP.EM.loadExercise(bpPlayer, BP.selectedExercise);
+	if ( BP.EM.selectedExercise )	
+		BP.EM.loadSelectedExercise(bpPlayer);
 	else if ( BP.params() != null )	
 		BP.EM.loadExerciseFromContent(bpPlayer);
 }

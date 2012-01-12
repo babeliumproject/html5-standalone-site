@@ -11,19 +11,19 @@ var ExerciseSelectedCommand = Cairngorm.Command.extend(
 		if ( this.data == null )
 			return;
 		
-		BP.selectedExercise = this.data.exercise;
+		BP.EM.selectedExercise = this.data.exercise;
 		
 		BP.CMS.prepareExerciseView(function ()
 		{	
-			BP.PracticeDelegate.viewExerciseByName(_this, BP.selectedExercise.name);
+			BP.PracticeDelegate.viewExerciseByName(_this, BP.EM.selectedExercise.name);
 		});
 	},
 	
 	onResult : function ( response )
 	{
-		var id = BP.selectedExercise.name;
+		var id = BP.EM.selectedExercise.name;
 		BP.pushState({module : "practice", action : "view", params : id},
-				BP.selectedExercise.title + " - Practice - Babelium Project",
+				BP.EM.selectedExercise.title + " - Practice - Babelium Project",
 				"?module=practice&action=view&params=" + id);
 		BP.CMS.innerExerciseView(response);
 	},
