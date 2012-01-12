@@ -18,7 +18,7 @@ var ViewExerciseModuleCommand = Cairngorm.Command.extend(
 	
 	onResult : function ( response )
 	{
-		BP.SM.pushState("Practice - Babelium Project", "?module=practice", {module : "practice"});
+		BP.SM.pushState("Practice - Babelium Project", {module : "practice"});
 		BP.CMS.innerMainContent(response);
 	},
 	
