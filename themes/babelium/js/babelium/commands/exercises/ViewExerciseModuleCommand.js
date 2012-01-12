@@ -8,7 +8,7 @@ var ViewExerciseModuleCommand = Cairngorm.Command.extend(
 	{
 		var _this = this;
 		
-		BP.selectedExercise = null;
+		BP.EM.selectedExercise = null;
 
 		BP.CMS.prepareMainContent("practice module", function ()
 		{
@@ -18,7 +18,7 @@ var ViewExerciseModuleCommand = Cairngorm.Command.extend(
 	
 	onResult : function ( response )
 	{
-		BP.pushState({module : "practice" }, "Practice - Babelium Project", "?module=practice");
+		BP.SM.pushState("Practice - Babelium Project", "?module=practice", {module : "practice"});
 		BP.CMS.innerMainContent(response);
 	},
 	

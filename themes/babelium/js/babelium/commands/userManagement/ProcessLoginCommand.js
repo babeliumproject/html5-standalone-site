@@ -24,14 +24,14 @@ var ProcessLoginCommand = Cairngorm.Command.extend(
 			$("ul#usernav").html(response.content);
 			BP.CMS.hideLoginPopup();
 			
-			if ( BP.at("home") )
+			if ( BP.SM.at("home") )
 			{
 				$("aside#motd").fadeOut(500, function(){$(this).remove();});
 				// set true as data will reload motd
 				new ViewChangeEvent(ViewChangeEvent.VIEW_HOME_MODULE, true).dispatch();
 			}
 			else 
-				new ViewChangeEvent(ViewChangeEvent.RELOAD_STATE, BP.state).dispatch();
+				new ViewChangeEvent(ViewChangeEvent.RELOAD_STATE, BP.SM.currentState()).dispatch();
 		}
 		else
 			$("li#loginhelper").html(response.content);

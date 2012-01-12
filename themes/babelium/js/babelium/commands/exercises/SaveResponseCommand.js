@@ -1,6 +1,6 @@
 
 /**
- * ExerciseSelectedCommand
+ * SaveResponseCommand
  */
 var SaveResponseCommand = Cairngorm.Command.extend(
 {
@@ -8,7 +8,7 @@ var SaveResponseCommand = Cairngorm.Command.extend(
 	{
 		var _this = this;
 		
-		if ( BP.selectedExercise == null )
+		if ( BP.EM.selectedExercise == null )
 			return;
 
 		BP.EM.saveResponse();

@@ -16,7 +16,7 @@ var GetRecordableExercisesCommand = Cairngorm.Command.extend(
 	
 	onResult : function ( response )
 	{
-		BP.pushState({module : "practice" }, "Practice - Babelium Project", "?module=practice");
+		BP.pushState("Practice - Babelium Project", "?module=practice", {module : "practice" });
 		BP.CMS.innerMainContent(response);
 	},
 	

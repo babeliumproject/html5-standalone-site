@@ -5,7 +5,7 @@
 
 BP.AuthDelegate = (function ()
 {
-	var _serviceID = "authMOD";
+	var _serviceID = "auth";
 
 	return {
 
@@ -15,14 +15,14 @@ BP.AuthDelegate = (function ()
 				return;
 
 			var _service = Cairngorm.ServiceLocator.getHttpService(_serviceID);
-			var params = "action=login&params="+data.toBase64();
+			var params = {action : "login", params : data.toBase64()};
 			_service.call( params, responder );
 		},
 
 		signOut : function ( responder )
 		{
 			var _service = Cairngorm.ServiceLocator.getHttpService(_serviceID);
-			var params = "action=logout";
+			var params = {action : "logout"};
 			_service.call( params, responder );
 		}
 	};

@@ -44,6 +44,7 @@
 			<arg value="--js"/><arg value="control/Controller.js"/>
 			<arg value="--js"/><arg value="control/ExerciseManager.js"/>
 			<arg value="--js"/><arg value="control/ContentManagementSystem.js"/>
+			<arg value="--js"/><arg value="control/StateManager.js"/>
 	
 			<arg value="--js"/><arg value="events/ExerciseEvent.js"/>
 			<arg value="--js"/><arg value="events/HomepageEvent.js"/>

@@ -16,7 +16,7 @@ var ViewSubtitleModuleCommand = Cairngorm.Command.extend(
 	
 	onResult : function ( response )
 	{
-		BP.pushState({module : "subtitles" }, "Subtitles - Babelium Project", "?module=subtitles");
+		BP.SM.pushState("Subtitles - Babelium Project", {module : "subtitle"});
 		BP.CMS.innerMainContent(response);
 	},
 	

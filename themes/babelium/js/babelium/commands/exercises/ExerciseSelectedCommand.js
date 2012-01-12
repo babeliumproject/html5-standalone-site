@@ -21,10 +21,8 @@ var ExerciseSelectedCommand = Cairngorm.Command.extend(
 	
 	onResult : function ( response )
 	{
-		var id = BP.EM.selectedExercise.name;
-		BP.pushState({module : "practice", action : "view", params : id},
-				BP.EM.selectedExercise.title + " - Practice - Babelium Project",
-				"?module=practice&action=view&params=" + id);
+		BP.SM.pushState(BP.EM.selectedExercise.title + " - Practice - Babelium Project",
+				{module : "practice", action : "view", params : BP.EM.selectedExercise.name});
 		BP.CMS.innerExerciseView(response);
 	},
 	

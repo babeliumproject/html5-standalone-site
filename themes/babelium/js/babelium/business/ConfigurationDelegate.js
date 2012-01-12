@@ -5,7 +5,7 @@
 
 BP.ConfigDelegate = (function ()
 {
-	var _serviceID = "confMOD";
+	var _serviceID = "config";
 	
 	return {
 		

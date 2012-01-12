@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <services>
-
-	<gateway id="API" target="api/rest.php?class=" type="http" method="get" />
-	<gateway id="MODULES" target="modules/bridge.php?module=" type="http" method="get" />
+	<gateway id="MODULES" target="modules/bridge.php?" type="http" method="post" />
 	
-	<service id="homeMOD" destination="MODULES" class="home" />
-	<service id="pracMOD" destination="MODULES" class="practice" />
-	<service id="evalMOD" destination="MODULES" class="evaluate" />
-	<service id="subsMOD" destination="MODULES" class="subtitle" />
-	<service id="confMOD" destination="MODULES" class="configure" />
-	<service id="aboutMOD" destination="MODULES" class="about" />
-	<service id="userMOD" destination="MODULES" class="user"/>
-	<service id="authMOD" destination="MODULES" class="auth"/>
+	<service id="home" destination="MODULES" class="home" />
+	<service id="practice" destination="MODULES" class="practice" />
+	<service id="evaluate" destination="MODULES" class="evaluate" />
+	<service id="subtitle" destination="MODULES" class="subtitle" />
+	<service id="config" destination="MODULES" class="config" />
+	<service id="about" destination="MODULES" class="about" />
+	<service id="user" destination="MODULES" class="user"/>
+	<service id="auth" destination="MODULES" class="auth"/>
 	
 </services>

@@ -16,9 +16,8 @@ var SignedBestVideosCommand = Cairngorm.Command.extend(
 			
 	onResult : function ( response )
 	{
-		BP.pushState({module : "home", action : "rated"}, 
-				"Home :: Best rated videos - Babelium Project", 
-				"?module=home&action=rated");
+		BP.SM.pushState("Home :: Best rated videos - Babelium Project", 
+				{module : "home", action : "rated"});
 		BP.CMS.innerMainContent(response);
 	},
 					

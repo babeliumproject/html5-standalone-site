@@ -5,7 +5,7 @@
 
 BP.UserDelegate = (function ()
 {
-	var _serviceID = "userMOD";
+	var _serviceID = "user";
 	
 	return {
 		

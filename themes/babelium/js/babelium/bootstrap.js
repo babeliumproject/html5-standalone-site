@@ -6,77 +6,10 @@
 BP.control = new Controller();
 
 /* ============================================================
- * SETUP STATE HANDLER
- * ==========================================================*/
-
-//Application state
-BP.state = {};
-
-//Push state
-BP.pushState = function ( data, title, href )
-{
-	window.history.pushState(data, title, href);
-	BP.state = data;
-};
-
-// Last visited module
-BP.at = function ( moduleName )
-{
-	if ( typeof moduleName == 'undefined' )
-		return (typeof BP.state.module == 'undefined') ? null : BP.state.module;
-	else 
-		return (typeof BP.state.module == 'undefined') ? false : BP.state.module == moduleName;
-};
-
-// Last requested action
-BP.action = function ( actionName )
-{	
-	if ( typeof actionName == 'undefined' )
-		return (typeof BP.state.action == 'undefined') ? null : BP.state.action;
-	else 
-		return (typeof BP.state.action == 'undefined') ? false : BP.state.action == actionName;
-};
-
-// Last requested action's parameters
-BP.params = function( params )
-{
-	if ( typeof actionName == 'undefined' )
-		return (typeof BP.state.params == 'undefined') ? null : BP.state.params;
-	else 
-		return (typeof BP.state.params == 'undefined') ? false : BP.state.params == params;
-};
-
-/* ============================================================
- * REGISTER SOME USEFUL FUNCTIONS FOR BP SERVICES
- * ==========================================================*/
-
-BP.getUUID = (function () 
-{
-	// http://www.ietf.org/rfc/rfc4122.txt
-	// section 4.4 (Algorithms for Creating a UUID from Truly Random or
-	// Pseudo-Random Number)
-	// http://stackoverflow.com/questions/105034/how-to-create-a-guid-uuid-in-javascript
-	return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-		var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
-		return v.toString(16);
-	}).toUpperCase();
-})();
-
-BP.getSessionID = (function () 
-{
-	// http://www.elated.com/articles/javascript-and-cookies/
-	var results = document.cookie.match('(^|;) ?' + 'PHPSESSID' + '=([^;]*)(;|$)');
-	if (results)
-		return (unescape(results[2]));
-	else
-		return null;
-})();
-
-/* ============================================================
  * BP SERVICES CALLER
  * ==========================================================*/
 
-BP.Services = new services();
+BP.Services = new ApiGateway();
 BP.Services.getCommunicationToken();
 
 BP.onCommunicationReady = function () {
@@ -120,34 +53,16 @@ $.get("themes/babelium/js/services.xml", null, function ( data, textStatus)
  * ==========================================================*/
 
 $(document).ready(function()
-{
-	// Retrieve module and action from location
-	var m = (RegExp("module=(.+?)(&|$)").exec(location.search) || [,"home"])[1];
-	var a = (RegExp("action=(.+?)(&|$)").exec(location.search) || [,undefined])[1];
-	var p = (RegExp("params=(.+?)(&|$)").exec(location.search) || [,undefined])[1];
-	BP.pushState({module: m, action: a, params: p}, null, null);	
-	
+{	
+	// Init state manager
+	BP.SM.init();
 	// Init content management system
 	BP.CMS.init();
 	
 	/**
 	 * On popstate
 	 */
-	window.onpopstate = function(event)
-	{
-		if ( typeof event.state == "undefined" || event.state == null )
-			return;
-		else
-		{
-			var state = event.state;
-			
-			// If old module == new module, don't reload the whole module
-			if ( state.module == BP.at() )
-				state.state = "min";
-			
-			new ViewChangeEvent(ViewChangeEvent.RELOAD_STATE, state).dispatch();
-		}
-	};
+	window.onpopstate = BP.SM.onPopState;
 });
 
 /* ============================================================
@@ -170,6 +85,6 @@ function onConnectionReady(playerId)
 	
 	if ( BP.EM.selectedExercise )	
 		BP.EM.loadSelectedExercise(bpPlayer);
-	else if ( BP.params() != null )	
+	else	
 		BP.EM.loadExerciseFromContent(bpPlayer);
 }

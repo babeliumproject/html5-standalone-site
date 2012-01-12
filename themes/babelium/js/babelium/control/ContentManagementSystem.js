@@ -36,9 +36,9 @@ BP.CMS = (function()
 		_initDataTables();
 		_initPaginations();
 		
-		if ( BP.at("home") && !BP.action("activity") )
+		if ( BP.SM.at("home") && !BP.SM.action("activity") )
 			_initRatings(); // Only needed at home, datatables and paginators loads ratings itselfs
-		if ( BP.at("practice") && BP.action("view") )
+		if ( BP.SM.at("practice") && BP.SM.action("view") )
 			_rating(".ratyPreview", true);
 		
 		_initiated = true;
@@ -138,7 +138,7 @@ BP.CMS = (function()
 	function _initViewStacks()
 	{
 		/** Init navigation Menus **/
-		if ( BP.at("home") && !BP.action() )
+		if ( BP.SM.at("home") && !BP.SM.action() )
 			_viewStack("#motdmessageshelper", "#motdmessages");
 	}
 	
@@ -148,7 +148,7 @@ BP.CMS = (function()
 	function _initDataTables()
 	{
 		/** Home user recent activity data tables **/
-		if ( BP.at("home") && BP.action("activity") )
+		if ( BP.SM.at("home") && BP.SM.action("activity") )
 		{
 			_dataTable("#assesmentsReceived");
 			_dataTable("#assesmentsGiven");
@@ -161,7 +161,7 @@ BP.CMS = (function()
 	function _initPaginations()
 	{
 		/** Exercises **/
-		if ( BP.at("practice") )
+		if ( BP.SM.at("practice") )
 		{
 			_pagination("section.exerciseList", ".exerciseContainer", ".exercise",
 					{title: ".exerciseTitle", description: "p.exerciseDescription"});
@@ -520,9 +520,9 @@ BP.CMS = (function()
 			if ( !_initiated )
 				return;
 			
-			if ( BP.at("home") && !BP.action("activity") )
+			if ( BP.SM.at("home") && !BP.SM.action("activity") )
 				_initRatings(); // Only needed at home, datatables and paginators loads ratings itselfs
-			if ( BP.at("practice") && BP.action("view") )
+			if ( BP.SM.at("practice") && BP.SM.action("view") )
 				_rating(".ratyPreview", true);
 		},
 

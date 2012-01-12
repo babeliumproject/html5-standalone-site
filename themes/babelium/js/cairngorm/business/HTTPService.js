@@ -8,6 +8,9 @@ Cairngorm.HTTPService = Class.extend(
 	/**
 	 * Constructor
 	 */
+	POST : "post",
+	GET : "get",
+	
 	init : function ( gateway, service )
 	{
 		this.target = gateway.target;
@@ -20,7 +23,7 @@ Cairngorm.HTTPService = Class.extend(
 		if ( params == null )
 			params = "";
 
-		if ( this.method == "get" )
+		if ( this.method == this.GET )
 		{
 			var src = this.target + this.service + "&" + params;
 
@@ -33,7 +36,27 @@ Cairngorm.HTTPService = Class.extend(
 				// The success call back.
 				success : responder.onResult,
 				// The error handler.
-				error : responder.onResult
+				error : responder.onFault
+			});
+		}
+		else if ( this.method == this.POST )
+		{
+			var src = this.target + this.service;
+
+			$.ajax(
+			{
+				// POST
+				type: "POST",
+				// Target url
+				url : src,
+				// Data
+				data : params,
+				// timeout in millis
+				timeout : 5000,
+				// The success call back.
+				success : responder.onResult,
+				// The error handler.
+				error : responder.onFault
 			});
 		}
 	}

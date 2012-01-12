@@ -1,6 +1,6 @@
 
 /**
- * ExerciseSelectedCommand
+ * RecordingAbortedCommand
  */
 var RecordingAbortedCommand = Cairngorm.Command.extend(
 {
@@ -8,11 +8,12 @@ var RecordingAbortedCommand = Cairngorm.Command.extend(
 	{
 		var _this = this;
 		
-		if ( BP.selectedExercise == null )
+		if ( BP.EM.selectedExercise == null )
 			return;
 
 		BP.EM.recordingError();
 		BP.EM.prepareExercise();
 		BP.EM.resetCueManager();
+		BP.EM.prepareCueManager();
 	}
 });

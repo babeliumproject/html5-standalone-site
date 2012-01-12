@@ -5,7 +5,7 @@
 
 BP.SubtitleDelegate = (function ()
 {
-	var _serviceID = "subsMOD";
+	var _serviceID = "subtitle";
 	
 	return {
 		

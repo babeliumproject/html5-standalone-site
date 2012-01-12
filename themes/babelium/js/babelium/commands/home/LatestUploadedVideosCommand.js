@@ -16,9 +16,8 @@ var LatestUploadedVideosCommand = Cairngorm.Command.extend(
 		
 	onResult : function ( response )
 	{
-		BP.pushState({module : "home", action : "uploaded"}, 
-				"Home :: Latest uploaded videos - Babelium Project",
-				"?module=home&action=uploaded");
+		BP.SM.pushState("Home :: Latest uploaded videos - Babelium Project",
+				{module : "home", action : "uploaded"});
 		BP.CMS.innerMainContent(response);
 	},
 			

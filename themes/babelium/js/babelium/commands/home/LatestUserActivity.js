@@ -16,9 +16,8 @@ var LatestUserActivityCommand = Cairngorm.Command.extend(
 			
 	onResult : function ( response )
 	{
-		BP.pushState({module : "home", action : "activity"}, 
-				"Home :: Best rated videos - Babelium Project", 
-				"?module=home&action=activity");
+		BP.SM.pushState("Home :: Best rated videos - Babelium Project", 
+				{module : "home", action : "activity"});
 		BP.CMS.innerMainContent(response);
 	},
 					

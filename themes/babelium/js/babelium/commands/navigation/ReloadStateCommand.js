@@ -9,24 +9,26 @@ var ReloadStateCommand = Cairngorm.Command.extend(
 	{
 		var _this = this;
 		var module = this.data.module;
+		
+		if ( module == null || module == undefined )
+			return;
+		
 		var action = (typeof this.data.action == 'undefined') ? "" : this.data.action;
 		var params = (typeof this.data.params == 'undefined') ? "" : this.data.params;
 		var state = (typeof this.data.state == 'undefined') ? "" : this.data.state;
 		var src = "action=" + action + "&params=" + params + "&state=" + state;
-		var httpService = new Cairngorm.HTTPService({target: "modules/bridge.php?module=", method: "get"}, module);
+		
+		// Find service
+		var httpService = Cairngorm.ServiceLocator.getHttpService(module);
 		
 		BP.CMS.prepareMainContent(module, function ()
 		{
 			httpService.call(src, _this);
-			BP.state = _this.data;
 		}, module == "home");
 	},
 	
 	onResult : function ( response )
 	{
-		if ( response == undefined || response.title == undefined || response.content == undefined )
-			return;
-
 		BP.CMS.innerMainContent(response);
 	},
 	

@@ -5,7 +5,7 @@
 
 BP.EvaluationDelegate = (function ()
 {
-	var _serviceID = "evalMOD";
+	var _serviceID = "evaluate";
 	
 	return {
 		

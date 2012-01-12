@@ -16,7 +16,7 @@ var ViewHomeModuleCommand = Cairngorm.Command.extend(
 	
 	onResult : function ( response )
 	{
-		BP.pushState({module : "home"}, "Home - Babelium Project", "?module=home");
+		BP.SM.pushState("Home - Babelium Project", {module : "home"});
 		BP.CMS.innerMainContent(response);
 	},
 	

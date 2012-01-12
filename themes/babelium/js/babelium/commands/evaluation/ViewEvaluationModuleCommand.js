@@ -16,7 +16,7 @@ var ViewEvaluationModuleCommand = Cairngorm.Command.extend(
 	
 	onResult : function ( response )
 	{
-		BP.pushState({module : "evaluation" }, "Evaluation - Babelium Project", "?module=evaluation");
+		BP.SM.pushState("Evaluation - Babelium Project", {module : "evaluation"});
 		BP.CMS.innerMainContent(response);
 	},
 	

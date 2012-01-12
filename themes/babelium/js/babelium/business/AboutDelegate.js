@@ -6,7 +6,7 @@
 
 BP.AboutDelegate = (function ()
 {
-	var _serviceID = "aboutMOD";
+	var _serviceID = "about";
 	
 	return {
 		

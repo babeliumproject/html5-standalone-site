@@ -17,7 +17,7 @@ var ViewAboutModuleCommand = Cairngorm.Command.extend(
 	onResult : function ( response )
 	{
 
-		BP.pushState({module : "about" }, "About - Babelium Project", "?module=about");
+		BP.SM.pushState("About - Babelium Project", {module : "about"});
 		BP.CMS.innerMainContent(response);
 	},
 	

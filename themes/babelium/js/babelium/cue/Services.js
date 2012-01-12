@@ -1,5 +1,5 @@
 
-function services()
+function ApiGateway()
 {
 	this.protocol = "http://";
 	this.host = "babelium/html5/api/";
@@ -31,7 +31,7 @@ function services()
 
 		this.token = this.generateToken(method);
 
-		data.header = {"token": this.token, "session": BP.getSessionID, "uuid": BP.getUUID};
+		data.header = {"token": this.token, "session": this.getSessionID, "uuid": this.getUUID};
 
 		// Fix for Internet Explorer 'No Transport' error. This error is apparently caused by an cross-domain request attempt.
 		// With the following statetement we force jQuery to support cross-origin resource sharing by default. Solution found at:
@@ -64,8 +64,8 @@ function services()
 		
 		var data = {};
 		data.method = method;
-		data.parameters = {"secretKey": MD5(BP.getSessionID)};
-		data.header = {"session": BP.getSessionID, "uuid": BP.getUUID};
+		data.parameters = {"secretKey": MD5(this.getSessionID)};
+		data.header = {"session": this.getSessionID, "uuid": this.getUUID};
 		
 	    $.post(qs, data, BP.Services.onCommunicationTokenSuccess, "json").error(function(error){
 	    	instance.onServiceError(error);
@@ -106,4 +106,26 @@ function services()
 
 		return s;
 	};
+	
+	this.getUUID = (function () 
+	{
+		// http://www.ietf.org/rfc/rfc4122.txt
+		// section 4.4 (Algorithms for Creating a UUID from Truly Random or
+		// Pseudo-Random Number)
+		// http://stackoverflow.com/questions/105034/how-to-create-a-guid-uuid-in-javascript
+		return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+			var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+			return v.toString(16);
+		}).toUpperCase();
+	})();
+
+	this.getSessionID = (function () 
+	{
+		// http://www.elated.com/articles/javascript-and-cookies/
+		var results = document.cookie.match('(^|;) ?' + 'PHPSESSID' + '=([^;]*)(;|$)');
+		if (results)
+			return (unescape(results[2]));
+		else
+			return null;
+	})();
 }
