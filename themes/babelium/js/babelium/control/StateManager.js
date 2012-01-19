@@ -7,6 +7,7 @@ BP.SM = (function()
 {
 	// Private interface
 	var _state = {};
+	var _historySupport = true;
 	
 	// Public interface
 	return {
@@ -14,11 +15,17 @@ BP.SM = (function()
 		// Init
 		init : function ()
 		{
+			if ( typeof window.history == 'undefined' || typeof window.history.pushState != 'function' )
+			{
+				console.warn("Disabling state handle");
+				_historySupport = false;
+			}
+		
 			// Retrieve first state from url location
 			var m = (RegExp("module=(.+?)(&|$)").exec(location.search) || [,"home"])[1];
 			var a = (RegExp("action=(.+?)(&|$)").exec(location.search) || [,undefined])[1];
 			var p = (RegExp("params=(.+?)(&|$)").exec(location.search) || [,undefined])[1];
-			this.pushState(null, {module: m, action: a, params: p});
+			this.pushState(null, {module: m, action: a, params: p});	
 		},
 		
 		// Push new state
@@ -36,7 +43,9 @@ BP.SM = (function()
 				}
 			}
 			
-			window.history.pushState(data, title, href);
+			if ( _historySupport )
+				window.history.pushState(data, title, href);
+
 			_state = data;
 		},
 		
@@ -53,10 +62,11 @@ BP.SM = (function()
 				return;
 			else
 			{
+				var lastModule = BP.SM.at();
 				_state = event.state;
 				
 				// If old module == new module, don't reload the whole module
-				if ( _state.module == BP.at() )
+				if ( _state.module == lastModule )
 					_state.state = "min";
 					
 				new ViewChangeEvent(ViewChangeEvent.RELOAD_STATE, _state).dispatch();
