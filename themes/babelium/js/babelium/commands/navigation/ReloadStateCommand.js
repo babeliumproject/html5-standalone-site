@@ -34,6 +34,7 @@ var ReloadStateCommand = Cairngorm.Command.extend(
 	
 	onFault : function ()
 	{
+		BP.CMS.abortLoading();
 		alert("Error loading last module");
 	}
 });

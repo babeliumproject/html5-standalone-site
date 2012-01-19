@@ -23,6 +23,7 @@ var SignedBestVideosCommand = Cairngorm.Command.extend(
 					
 	onFault : function ()
 	{
+		BP.CMS.abortLoading();
 		alert("Error retrieving best rated videos");
 	}
 });

@@ -22,6 +22,7 @@ var ViewEvaluationModuleCommand = Cairngorm.Command.extend(
 	
 	onFault : function ()
 	{
+		BP.CMS.abortLoading();
 		alert("Error loading evaluation module");
 	}
 });

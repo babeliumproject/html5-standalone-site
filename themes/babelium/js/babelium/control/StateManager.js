@@ -62,14 +62,13 @@ BP.SM = (function()
 				return;
 			else
 			{
-				var lastModule = BP.SM.at();
-				_state = event.state;
+				var state = event.state;
 				
 				// If old module == new module, don't reload the whole module
-				if ( _state.module == lastModule )
-					_state.state = "min";
+				if ( state.module == "home" )
+					state.state = "min";
 					
-				new ViewChangeEvent(ViewChangeEvent.RELOAD_STATE, _state).dispatch();
+				new ViewChangeEvent(ViewChangeEvent.RELOAD_STATE, state).dispatch();
 			}
 		},
 		

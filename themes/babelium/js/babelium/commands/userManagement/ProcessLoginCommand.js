@@ -39,6 +39,7 @@ var ProcessLoginCommand = Cairngorm.Command.extend(
 	
 	onFault : function ()
 	{
+		BP.CMS.abortLoading();
 		alert("Error trying to connect to the login server");
 	}
 });

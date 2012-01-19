@@ -415,13 +415,13 @@ BP.CMS = (function()
 				// Hide motd if visible
 				if ( motd.length > 0 && !hideHeader )
 				{
-					motd.fadeOut(500, function(){motd.remove();});
-					header.slideDown(500);
+					motd.fadeOut("fast", function(){motd.remove();});
+					header.slideDown();
 				}
 				
 				// We are loading home = motd messages instead usual header
 				if ( hideHeader )
-					header.slideUp(500);
+					header.slideUp();
 				
 				/**
 				 * Hide content
@@ -457,7 +457,7 @@ BP.CMS = (function()
 			var top =  _maincontent.offset().top;
 			_loader.css("top", top + _maincontent.find("header").outerHeight());
 			_loader.find("p").text("Retrieving exercise information");
-			_loader.slideDown(500);
+			_loader.slideDown();
 			
 			// Animate scrolling 
 			$("html, body").animate({scrollTop: top}, "slow", function()
@@ -572,14 +572,14 @@ BP.CMS = (function()
 					$("section.exerciseInfo").remove();
 					content.insertAfter("aside#loader").fadeIn();
 					_this.reloadRatings();
-					_loader.slideUp(500);
+					_loader.slideUp();
 				});
 			}
 			else
 			{
 				content.insertAfter("aside#loader").fadeIn();
 				_this.reloadRatings();
-				_loader.slideUp(500);
+				_loader.slideUp();
 			}
 			
 			_loading = false;
@@ -616,7 +616,6 @@ BP.CMS = (function()
 			var popup = $("aside#popup");
 			
 			popup.fadeOut("fast", function(){document.getElementById("loginForm").reset();});
-			//$("div#logo").animate({top: '35px'}, 500);
 		},
 		
 		/**
@@ -630,7 +629,18 @@ BP.CMS = (function()
 			var popup = $("aside#popup");
 			
 			popup.fadeIn();
-			//$("div#logo").animate({top: '65px'}, 500);
+		},
+		
+		/**
+		 * Abort content loading
+		 */
+		abortLoading : function ()
+		{
+			if ( _loading )
+			{
+				_loader.slideUp();
+				_loading = false;
+			}
 		}
 		
 	};

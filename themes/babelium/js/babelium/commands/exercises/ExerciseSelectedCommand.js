@@ -28,6 +28,7 @@ var ExerciseSelectedCommand = Cairngorm.Command.extend(
 	
 	onFault : function ()
 	{
+		BP.CMS.abortLoading();
 		alert("Error loading exercise");
 	}
 });

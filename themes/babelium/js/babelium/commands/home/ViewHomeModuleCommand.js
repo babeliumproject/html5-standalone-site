@@ -22,6 +22,7 @@ var ViewHomeModuleCommand = Cairngorm.Command.extend(
 	
 	onFault : function ()
 	{
+		BP.CMS.abortLoading();
 		alert("Error loading home module");
 	}
 });

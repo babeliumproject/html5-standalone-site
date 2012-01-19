@@ -22,6 +22,7 @@ var GetRecordableExercisesCommand = Cairngorm.Command.extend(
 	
 	onFault : function ()
 	{
+		BP.CMS.abortLoading();
 		alert("Error loading practice module");
 	}
 });

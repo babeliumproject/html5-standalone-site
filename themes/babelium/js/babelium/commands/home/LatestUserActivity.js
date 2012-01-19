@@ -23,6 +23,7 @@ var LatestUserActivityCommand = Cairngorm.Command.extend(
 					
 	onFault : function ()
 	{
+		BP.CMS.abortLoading();
 		alert("Error retrieving latest user activity");
 	}
 });

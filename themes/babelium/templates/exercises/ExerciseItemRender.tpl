@@ -32,7 +32,7 @@
 						</div>
 						
 						<p class="exerciseDescription">
-							{$exercise->description|truncate:160:" [..]"}
+							{$exercise->description|truncate:140:" [..]"}
 						</p>
 						
 						<p class="username">

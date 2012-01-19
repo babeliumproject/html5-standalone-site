@@ -22,6 +22,7 @@ var ViewSubtitleModuleCommand = Cairngorm.Command.extend(
 	
 	onFault : function ()
 	{
+		BP.CMS.abortLoading();
 		alert("Error loading subtitle module");
 	}
 });

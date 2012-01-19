@@ -23,6 +23,7 @@ var ViewAboutModuleCommand = Cairngorm.Command.extend(
 	
 	onFault : function ()
 	{
+		BP.CMS.abortLoading();
 		alert("Error loading about module");
 	}
 });

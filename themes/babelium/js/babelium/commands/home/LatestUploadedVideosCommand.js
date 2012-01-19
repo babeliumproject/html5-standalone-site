@@ -23,6 +23,7 @@ var LatestUploadedVideosCommand = Cairngorm.Command.extend(
 			
 	onFault : function ()
 	{
+		BP.CMS.abortLoading();
 		alert("Error retrieving latest videos");
 	}
 });
