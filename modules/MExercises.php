@@ -1,30 +1,25 @@
 <?php
 
-require_once(dirname(__FILE__) . "/../util/interfaces/iModule.php");
-require_once(dirname(__FILE__) . "/../config/Config.php");
-require_once(dirname(__FILE__) . "/../core/WidgetLoader.php");
-require_once(dirname(__FILE__) . "/../core/SessionManager.php");
-require_once(dirname(__FILE__) . "/../util/Convert.php");
+require_once(dirname(__FILE__) . "/Module.php");
 
 // API
 require_once(dirname(__FILE__) . "/../api/services/Exercise.php");
 
-class MExercises implements IModule
+class MExercises extends Module
 {	
 	public static function load($args)
 	{
+		parent::load($args);
+		
 		$ex = new Exercise();
-		$action = isset($args[1]) ? $args[1] : "";
-		$params = isset($args[2]) ? $args[2] : "";
-		$state = isset($args[3]) ? $args[3] : "";
 		$content = "";
-		$loggedIn = SessionManager::getInstance()->isLoggedIn();
+		$loggedIn = self::$sessionManager->isLoggedIn();
 		
 		// Obtain video information
-		if ( $action == "view" )
+		if ( self::$action == "view" )
 		{
 			// params should be video id or name as long as name is still unique
-			$response = $ex->getExerciseByName($params);
+			$response = $ex->getExerciseByName(self::$params);
 			
 			if ( isset($response) )
 				$content = WidgetLoader::loadWidget("ExerciseInfo", $response, $loggedIn);
@@ -34,7 +29,7 @@ class MExercises implements IModule
 		 * Obtain video list
 		 * if state == min then return only video information
 		 */
-		if ( $state != "min" )
+		if ( self::$state != "min" )
 		{
 			if ( $loggedIn )
 			{ // Logged In
@@ -52,3 +47,5 @@ class MExercises implements IModule
 	}
 	
 }
+
+?>

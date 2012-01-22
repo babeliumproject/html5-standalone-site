@@ -1,9 +1,6 @@
 <?php
 
-require_once(dirname(__FILE__) . "/../util/interfaces/iModule.php");
-require_once(dirname(__FILE__) . "/../config/Config.php");
-require_once(dirname(__FILE__) . "/../core/WidgetLoader.php");
-require_once(dirname(__FILE__) . "/../core/SessionManager.php");
+require_once(dirname(__FILE__) . "/Module.php");
 require_once(dirname(__FILE__) . "/../util/Convert.php");
 
 require_once("Zend/Json.php");
@@ -11,7 +8,7 @@ require_once("Zend/Json.php");
 // API
 require_once(dirname(__FILE__) . "/../api/services/Auth.php");
 
-class MAuth implements IModule
+class MAuth extends Module
 {	
 	/**
 	 * Load module
@@ -21,21 +18,18 @@ class MAuth implements IModule
 	 */
 	public static function load($args)
 	{
-		$action = "";
-		
-		if ( isset($args[1]) )
-			$action = $args[1];
-		
+		parent::load($args);
+
 		/**
 		 * Process Login
 		 */
-		if ( $action == "login" && isset($args[2]) )
+		if ( self::$action == "login" && isset(self::$params) )
 		{
-			$loggedIn = self::processLogin($args[2]);
+			$loggedIn = self::processLogin(self::$params);
 
 			if ( $loggedIn === true )
 			{
-				return WidgetLoader::loadWidget("LoggedIn", $_SESSION["user-data"]);
+				return WidgetLoader::loadWidget("LoggedIn", self::$sessionManager->getUserData());
 			}
 			else
 				return $loggedIn;
@@ -43,9 +37,9 @@ class MAuth implements IModule
 		/**
 		 * Process Logout
 		 */
-		else if ( $action == "logout" )
+		else if ( self::$action == "logout" )
 		{
-			if ( isset($_SESSION["logged"]) && $_SESSION["logged"] == true )
+			if ( self::$sessionManager->getVar("logged") == true )
 			{
 				self::doLogout();
 				return WidgetLoader::loadWidget("LoggedOut");
@@ -61,18 +55,6 @@ class MAuth implements IModule
 	 */
 	public function processLogin($user)
 	{
-		$cfg = Config::getInstance();
-
-		/*$client = new Zend_Http_Client();
-		$client->setUri($cfg->api_bridge . "?class=Auth&method=processLogin&user=" . $user);
-		$client->setConfig(array(
-			"maxredirects" => 0,
-			"timeout"      => 30));
-			
-		$phpObj = Zend_Json::decode($client->request()->getBody());
-		
-		$response = $phpObj["Auth"]["processLogin"];*/
-		
 		$auth = new Auth();
 		$response = $auth->processLogin(Convert::array_to_object(Zend_Json::decode(base64_decode($user))));
 		

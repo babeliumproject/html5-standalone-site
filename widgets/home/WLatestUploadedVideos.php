@@ -1,7 +1,6 @@
 <?php
 
-require_once(dirname(__FILE__) . "/../../util/interfaces/iWidget.php");
-require_once(dirname(__FILE__) . "/../../config/Config.php");
+require_once(dirname(__FILE__) . "/../Widget.php");
 
 // Utils
 require_once(dirname(__FILE__) . "/../../util/view/LevelCorrespondence.php");
@@ -12,24 +11,24 @@ require_once(dirname(__FILE__) . "/../../util/view/TimeFormatter.php");
 // API
 require_once(dirname(__FILE__) . "/../../api/services/Home.php");
 
-class WLatestUploadedVideos implements IWidget
+class WLatestUploadedVideos extends Widget
 {	
 	public static function load($args)
 	{
-		$cfg = Config::getInstance();
+		parent::load($args);
 		
 		$home = new Home();
 		$response = $home->latestAvailableVideos();
 		
 		// Prepare template
-		$cfg->smarty->assign("exercises", $response);
-		$cfg->smarty->assign("cfg", $cfg);
-		$cfg->smarty->assign("locale", new LocaleFlagResource());
-		$cfg->smarty->assign("level", new LevelCorrespondence());
-		$cfg->smarty->assign("license", new License());
-		$cfg->smarty->assign("time", new TimeFormatter());
+		self::assign("exercises", $response);
+		self::assign("cfg", self::$config);
+		self::assign("locale", new LocaleFlagResource());
+		self::assign("level", new LevelCorrespondence());
+		self::assign("license", new License());
+		self::assign("time", new TimeFormatter());
 		
-		return $cfg->smarty->fetch("home/LatestUploadedVideos.tpl");
+		return self::fetch("home/LatestUploadedVideos.tpl");
 	}
 }
 

@@ -1,20 +1,19 @@
 <?php
 
-require_once(dirname(__FILE__) . "/../../util/interfaces/iWidget.php");
-require_once(dirname(__FILE__) . "/../../config/Config.php");
+require_once(dirname(__FILE__) . "/../Widget.php");
 
-class WNav implements IWidget
+class WNav extends Widget
 {	
 	public static function load($args)
 	{
-		$cfg = Config::getInstance();
-		
-		$cfg->smarty->assign("user", $_SESSION['user-data']);
-		$cfg->smarty->assign("isLoggedIn", $_SESSION['logged']);
-		$cfg->smarty->assign("moduleTitle", $args[1]);
-		$cfg->smarty->assign("sectionTitle", $args[2]);
-		$cfg->smarty->assign("hideHeader", $args[3]);
-		return $cfg->smarty->fetch("main/Navigation.tpl");
+		parent::load($args);
+			
+		self::assign("user", self::$sessionManager->getUserData());
+		self::assign("isLoggedIn", self::$sessionManager->isLoggedIn());
+		self::assign("moduleTitle", $args[1]);
+		self::assign("sectionTitle", $args[2]);
+		self::assign("hideHeader", $args[3]);
+		return self::fetch("main/Navigation.tpl");
 	}
 }
 

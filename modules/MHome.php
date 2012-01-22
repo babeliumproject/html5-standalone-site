@@ -1,30 +1,26 @@
 <?php
 
-require_once(dirname(__FILE__) . "/../util/interfaces/iModule.php");
-require_once(dirname(__FILE__) . "/../config/Config.php");
-require_once(dirname(__FILE__) . "/../core/WidgetLoader.php");
-require_once(dirname(__FILE__) . "/../core/SessionManager.php");
+require_once(dirname(__FILE__) . "/Module.php");
 
-class MHome implements IModule
+class MHome extends Module
 {	
 	public static function load($args)
 	{
-		$action = isset($args[1]) ? $args[1] : "";
-		$params = isset($args[2]) ? $args[2] : "";
-		$state = isset($args[3]) ? $args[3] : "";
+		parent::load($args);
+
 		$content = "";
 
-		if ( SessionManager::getInstance()->isLoggedIn() )
+		if ( self::$sessionManager->isLoggedIn() )
 		{ // Logged In
 			
 			// Load MOTD
-			if ( $state != "min" )
+			if ( self::$state != "min" )
 				$content = WidgetLoader::loadWidget("HomeSigned");
 			
 			// Load content
-			if ( $action == "rated" )
+			if ( self::$action == "rated" )
 				$content = $content . WidgetLoader::loadWidget("BestRatedVideos");
-			else if ( $action == "activity" )
+			else if ( self::$action == "activity" )
 				$content = $content . WidgetLoader::loadWidget("LatestActivity");
 			else
 				$content = $content . WidgetLoader::loadWidget("LatestUploadedVideos");
@@ -33,7 +29,7 @@ class MHome implements IModule
 		{ // Logged Out
 
 			// Load MOTD
-			if ( $state != "min" )
+			if ( self::$state != "min" )
 				$content = WidgetLoader::loadWidget("HomeUnsigned");
 				
 			$content = $content . WidgetLoader::loadWidget("StepByStep");

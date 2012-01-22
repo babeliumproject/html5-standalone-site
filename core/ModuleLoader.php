@@ -8,6 +8,7 @@ require_once(dirname(__FILE__) . "/../config/Config.php");
  */
 require_once(dirname(__FILE__) . "/../modules/M404.php");
 require_once(dirname(__FILE__) . "/../modules/MAuth.php");
+require_once(dirname(__FILE__) . "/../modules/MEvaluation.php");
 require_once(dirname(__FILE__) . "/../modules/MExercises.php");
 require_once(dirname(__FILE__) . "/../modules/MHome.php");
 
@@ -21,12 +22,13 @@ final class ModuleLoader
 	
 	/* AVAILABLE MODULES */
 	private static $_module = array
-			(
-				"404" => "M404",
-				"home" => "MHome",
-				"auth" => "MAuth",
-				"practice" => "MExercises"
-			);
+	(
+		"404" => "M404",
+		"home" => "MHome",
+		"auth" => "MAuth",
+		"practice" => "MExercises",
+		"evaluate" => "MEvaluation"
+	);
 	
 	/* Constructor */
 	private function __construct()

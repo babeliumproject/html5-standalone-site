@@ -19,14 +19,13 @@ $cfg->logger->info("Initiating index.php");
 $module = (isset($_GET["module"]))? $_GET["module"] : "home";
 $action = (isset($_GET["action"]))? $_GET["action"] : "";
 $params = (isset($_GET["params"]))? $_GET["params"] : "";
-$state = (isset($_GET["state"]))? $_GET["state"] : "";
 
 // Load header
 echo WidgetLoader::loadWidget("Head");
-echo WidgetLoader::loadWidget("Nav", $module, $action, $module == home);
+echo WidgetLoader::loadWidget("Nav", ucwords($module), $action, $module == "home");
 
 // Load module
-echo ModuleLoader::loadModule($module, $action, $params, $state);
+echo ModuleLoader::loadModule($module, $action, $params);
 
 // Load footer
 echo WidgetLoader::loadWidget("Footer");

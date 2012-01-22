@@ -22,7 +22,7 @@ $state = isset($p["state"]) ? $p["state"] : NULL;
 
 $response = array(
 	"content" => ModuleLoader::loadModule($moduleName, $action, $params, $state),
-	"title" => $moduleName
+	"title" => ucwords($moduleName)
 );
 
 echo Zend_Json::encode($response);

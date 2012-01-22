@@ -1,7 +1,7 @@
 <?php
 
-require_once(dirname(__FILE__) . "/../util/interfaces/iWidget.php");
-require_once(dirname(__FILE__) . "/../config/Config.php");
+require_once(dirname(__FILE__) . "/Widget.php");
+
 require_once("Zend/Http/Client.php");
 require_once("Zend/Json.php");
 
@@ -10,23 +10,22 @@ require_once(dirname(__FILE__) . "/../util/view/LevelCorrespondence.php");
 require_once(dirname(__FILE__) . "/../util/view/LocaleFlagResource.php");
 require_once(dirname(__FILE__) . "/../util/view/License.php");
 
-class WExerciseList implements IWidget
+class WExerciseList extends Widget
 {	
 	public static function load($args)
 	{
-		$cfg = Config::getInstance();
+		parent::load($args);
 		
-		$widget = $args[0];
-		$phpObj = $args[1];
+		$params = $args[1];
 		
 		// Prepare template
-		$cfg->smarty->assign("exercises", $phpObj);
-		$cfg->smarty->assign("locale", new LocaleFlagResource());
-		$cfg->smarty->assign("level", new LevelCorrespondence());
-		$cfg->smarty->assign("license", new License());
+		self::assign("exercises", $params);
+		self::assign("locale", new LocaleFlagResource());
+		self::assign("level", new LevelCorrespondence());
+		self::assign("license", new License());
 		
 		
-		return $cfg->smarty->fetch($widget.".tpl");
+		return self::fetch("ExerciseList.tpl");
 	}
 }
 

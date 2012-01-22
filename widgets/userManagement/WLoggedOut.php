@@ -1,14 +1,14 @@
 <?php
 
-require_once(dirname(__FILE__) . "/../../util/interfaces/iWidget.php");
-require_once(dirname(__FILE__) . "/../../config/Config.php");
+require_once(dirname(__FILE__) . "/../Widget.php");
 
-class WLoggedOut implements IWidget
+class WLoggedOut extends Widget
 {	
 	public static function load($args)
 	{
-		$cfg = Config::getInstance();
-		return $cfg->smarty->fetch("userManagement/UserLoggedOutNav.tpl");
+		parent::load($args);
+		
+		return self::fetch("userManagement/UserLoggedOutNav.tpl");
 	}
 	
 }

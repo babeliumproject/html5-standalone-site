@@ -1,7 +1,6 @@
 <?php
 
-require_once(dirname(__FILE__) . "/../../util/interfaces/iWidget.php");
-require_once(dirname(__FILE__) . "/../../config/Config.php");
+require_once(dirname(__FILE__) . "/../Widget.php");
 
 // Utils
 require_once(dirname(__FILE__) . "/../../util/view/TimeFormatter.php");
@@ -9,23 +8,23 @@ require_once(dirname(__FILE__) . "/../../util/view/TimeFormatter.php");
 // API
 require_once(dirname(__FILE__) . "/../../api/services/Home.php");
 
-class WLatestUserActivity implements IWidget
+class WLatestUserActivity extends Widget
 {	
 	public static function load($args)
 	{
-		$cfg = Config::getInstance();
+		parent::load($args);
 		
 		$home = new Home();
 		$received = $home->usersLatestReceivedAssessments();
 		$given = $home->usersLatestGivenAssessments();
 		
 		// Prepare template
-		$cfg->smarty->assign("received", $received);
-		$cfg->smarty->assign("given", $given);
-		$cfg->smarty->assign("cfg", $cfg);
-		$cfg->smarty->assign("time", new TimeFormatter());
+		self::assign("received", $received);
+		self::assign("given", $given);
+		self::assign("cfg", self::$config);
+		self::assign("time", new TimeFormatter());
 		
-		return $cfg->smarty->fetch("home/LatestUserActivity.tpl");
+		return self::fetch("home/LatestUserActivity.tpl");
 	}
 }
 

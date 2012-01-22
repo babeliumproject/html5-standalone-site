@@ -6,6 +6,8 @@ require_once(dirname(__FILE__) . "/../config/Config.php");
 /**
  * Widgets
  */
+require_once(dirname(__FILE__) . "/../widgets/evaluation/WEvaluationTabBar.php");
+
 require_once(dirname(__FILE__) . "/../widgets/exercises/WVideoList.php");
 require_once(dirname(__FILE__) . "/../widgets/exercises/WExerciseInfo.php");
 
@@ -24,6 +26,7 @@ require_once(dirname(__FILE__) . "/../widgets/userManagement/WLoggedIn.php");
 require_once(dirname(__FILE__) . "/../widgets/userManagement/WLoggedOut.php");
 
 require_once(dirname(__FILE__) . "/../widgets/W404.php");
+require_once(dirname(__FILE__) . "/../widgets/WUnauthorized.php");
 
 /**
  * Widget loader
@@ -49,7 +52,9 @@ final class WidgetLoader
 		"LoggedOut" => "WLoggedOut",
 		"Nav" => "WNav",
 		"StepByStep" => "WStepByStep",
-		"VideoList" => "WVideoList"
+		"VideoList" => "WVideoList",
+		"Unauthorized" => "WUnauthorized",
+		"EvaluationTabBar" => "WEvaluationTabBar"
 	);
 	
 	/* Constructor */

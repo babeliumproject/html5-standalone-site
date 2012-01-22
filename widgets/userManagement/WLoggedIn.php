@@ -1,15 +1,15 @@
 <?php
 
-require_once(dirname(__FILE__) . "/../../util/interfaces/iWidget.php");
-require_once(dirname(__FILE__) . "/../../config/Config.php");
+require_once(dirname(__FILE__) . "/../Widget.php");
 
-class WLoggedIn implements IWidget
+class WLoggedIn extends Widget
 {	
 	public static function load($args)
 	{
-		$cfg = Config::getInstance();
-		$cfg->smarty->assign("user", $args[1]); // user data
-		return $cfg->smarty->fetch("userManagement/UserLoggedInNav.tpl");
+		parent::load($args);
+		
+		self::assign("user", $args[1]); // user data
+		return self::fetch("userManagement/UserLoggedInNav.tpl");
 	}
 	
 }

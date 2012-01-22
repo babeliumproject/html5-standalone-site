@@ -114,6 +114,11 @@ class Config implements ISingleton
 	public $webRootPath = "/var/www/babelia";
 	
 	
+	public $defaultLanguage = "en_US";
+	
+	// Evaluation module
+	public $restrictedEvaluation = false;
+	
 	/*
 	 * CONSTS
 	 */
