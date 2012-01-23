@@ -432,12 +432,20 @@ BP.CMS = (function()
 				{
 					$("#maincontent > section").remove();
 					
+					if ( $("aside#tabBarContainer").length > 0 )
+						$("aside#tabBarContainer").remove();
+					
 					// Call to callback funcion after animation finished
 					callback();
 				});
 			}
 			else
+			{
+				if ( $("aside#tabBarContainer").length > 0 )
+					$("aside#tabBarContainer").remove();
+
 				callback();
+			}
 				
 		},
 		

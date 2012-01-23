@@ -1319,6 +1319,60 @@ section.exerciseInfo
 
 /** END OF EXERCISE INFO **/
 
+/** TAB BAR CONTAINER **/
+
+aside#tabBarContainer
+{
+	width: 100%;
+}
+
+	aside#tabBarContainer > ul > li
+	{
+		padding: 7px 15px 5px 15px; 
+		margin-right: 3px;
+
+		font-weight: bold;
+		
+		border-bottom: 1px solid #38babc;
+		border-left: 1px solid #38babc;
+		border-right: 1px solid #38babc;
+	
+		background-color: white;
+
+		background: -webkit-gradient(linear, 0 0, 0 100%, from(white), to(#E2EFF3));
+		background: -moz-linear-gradient(top, white, #E2EFF3);
+		background: -o-linear-gradient(top, white, #E2EFF3);
+		background: -ms-linear-gradient(top, white, #E2EFF3);	
+	
+		/** rounded borders **/
+		-moz-border-bottom-left-radius: 6px; 
+		-webkit-border-bottom-left-radius: 6px;
+		-o-border-bottom-left-radius: 6px;
+		-ms-border-bottom-left-radius: 6px;
+		border-bottom-left-radius:6px;
+		
+		-moz-border-bottom-right-radius: 6px; 
+		-webkit-border-bottom-right-radius: 6px;
+		-o-border-bottom-right-radius: 6px;
+		-ms-border-bottom-right-radius: 6px;
+		border-bottom-right-radius:6px;  
+	}
+	
+	aside#tabBarContainer > ul > li:hover
+	{
+		cursor: pointer;
+	
+		background: -webkit-gradient(linear, 0 0, 0 100%, from(white), to(#86BCCE));
+		background: -moz-linear-gradient(top, white, #86BCCE);
+		background: -o-linear-gradient(top, white, #86BCCE);
+		background: -ms-linear-gradient(top, white, #86BCCE);
+	
+		text-decoration: none;
+		text-shadow: 1px 1px 1px rgba(0,0,0,.2);
+	}
+
+/** END OF TAB BAR CONTAINER **/
+
 /** FOOTER **/
 
 footer
