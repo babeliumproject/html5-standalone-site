@@ -9,6 +9,7 @@ class WNav extends Widget
 		parent::load($args);
 			
 		self::assign("user", self::$sessionManager->getUserData());
+		self::assign("webLocale", self::$sessionManager->getWebLanguage());
 		self::assign("isLoggedIn", self::$sessionManager->isLoggedIn());
 		self::assign("moduleTitle", $args[1]);
 		self::assign("sectionTitle", $args[2]);
