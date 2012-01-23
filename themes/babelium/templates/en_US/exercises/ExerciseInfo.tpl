@@ -3,7 +3,7 @@
 		
 			<header><h1>{$exercise->title}</h1></header>
 		
-{include file="util/VideoPlayerPreview.tpl"}
+{include file="$webLocale/util/VideoPlayerPreview.tpl"}
 			
 {if $loggedIn}
 			<article class="recordingEndOptions">

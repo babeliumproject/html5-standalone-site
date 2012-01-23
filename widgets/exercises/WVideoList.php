@@ -19,6 +19,7 @@ class WVideoList extends Widget
 		// Prepare template
 		self::assign("exercises", $phpObj);
 		self::assign("cfg", self::$config);
+		self::assign("webLocale", self::$sessionManager->getWebLanguage());
 		self::assign("locale", new LocaleFlagResource());
 		self::assign("level", new LevelCorrespondence());
 		self::assign("license", new License());

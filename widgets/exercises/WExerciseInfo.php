@@ -29,6 +29,7 @@ class WExerciseInfo extends Widget
 		
 		// Prepare template
 		self::assign("exercise", $exercise);
+		self::assign("webLocale", self::$sessionManager->getWebLanguage());
 		self::assign("roles", $roles);
 		self::assign("locales", $locales);
 		self::assign("loggedIn", $loggedIn);
