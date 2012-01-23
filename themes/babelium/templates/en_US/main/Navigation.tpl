@@ -27,7 +27,7 @@
 			</ul>
 		</nav>
 		
-{include file="userManagement/LoginForm.tpl"}
+{include file="$webLocale/userManagement/LoginForm.tpl"}
 		
 		<!-- logo -->
 		<div id="logo"><img src="themes/babelium/images/flan_dullv2.png" alt="Bablium Project" width="174" height="156" /></div>
