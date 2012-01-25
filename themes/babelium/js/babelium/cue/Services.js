@@ -2,7 +2,7 @@
 function ApiGateway()
 {
 	this.protocol = "http://";
-	this.host = "babelium/html5/api/";
+	this.host = "babeliumhtml5/api/";
 	this.endpoint = "rest.php";
 	this.lastRandomizer = "";
 	this.statToken = "myMusicFightsAgainstTheSystemThatTeachesToLiveAndDie"; //Bob Marley's Quote

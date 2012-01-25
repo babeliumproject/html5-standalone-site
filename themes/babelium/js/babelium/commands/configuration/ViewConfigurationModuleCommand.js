@@ -10,13 +10,13 @@ var ViewConfigModuleCommand = Cairngorm.Command.extend(
 		
 		BP.CMS.prepareMainContent("config module", function ()
 		{
-			BP.ConfigDelegate.viewConfigModule(_this);
+			BP.ConfigurationDelegate.viewConfigModule(_this);
 		});
 	},
 	
 	onResult : function ( response )
 	{
-		BP.SM.pushState("Configuration - Babelium Project", {module : "config" });
+		BP.SM.pushState("Configure - Babelium Project", {module : "config" });
 		BP.CMS.innerMainContent(response);
 	},
 	

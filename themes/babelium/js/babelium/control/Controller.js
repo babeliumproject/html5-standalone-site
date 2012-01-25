@@ -39,6 +39,10 @@ var Controller = Cairngorm.FrontController.extend(
 		this.addCommand(ExerciseEvent.WATCH_RESPONSE, WatchResponseCommand);
 		this.addCommand(ExerciseEvent.RECORD_AGAIN, RecordAgainCommand);
 		
+		// Configuration module
+		this.addCommand(ConfigurationEvent.VIEW_MIC_TESTER, ViewMicTesterCommand);
+		this.addCommand(ConfigurationEvent.VIEW_WEBCAM_TESTER, ViewWebcamTesterCommand);
+		
 		// Evaluation module
 		this.addCommand(EvaluationEvent.VIEW_PENDING_ASSESMENTS, ViewPendingAssesmentsCommand);
 		this.addCommand(EvaluationEvent.VIEW_CURRENTLY_ASSESSED_TO_USER, ViewCurrentlyAssessedToUserCommand);

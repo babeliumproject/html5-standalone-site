@@ -18,6 +18,15 @@
 		</copy>
 	</target>
 	
+	<target name="LH_permissionsandfolders" description="Folders and permissions in the deploy dir">
+		<mkdir dir="${local.project.path}/log"/>
+		<touch file="${local.project.path}/log/Babelium.log"/>
+		<chmod perm="755" file="${local.project.path}/log/Babelium.log"/>
+		
+		<mkdir dir="${local.project.path}/themes/babelium/templates_c"/> <!-- Not sure if it's necessary, but Smarty's default configuration asks for it -->
+		<chmod perm="777" dir="${local.project.path}/themes/babelium/templates_c"/>
+	</target>
+	
 	<target name="LH_compilecairngorm" description="Compile CairngormJS MVC Framework">
 		<java jar="util/closure/compiler.jar" dir="${cairngorm.DIR}" fork="true">
 			<!-- <arg value="\-\-compilation_level"/><arg value="ADVANCED_OPTIMIZATIONS"/> -->
@@ -43,9 +52,11 @@
 	
 			<arg value="--js"/><arg value="control/Controller.js"/>
 			<arg value="--js"/><arg value="control/ExerciseManager.js"/>
+			<arg value="--js"/><arg value="control/ConfigurationManager.js"/>
 			<arg value="--js"/><arg value="control/ContentManagementSystem.js"/>
 			<arg value="--js"/><arg value="control/StateManager.js"/>
 	
+			<arg value="--js"/><arg value="events/ConfigurationEvent.js"/>
 			<arg value="--js"/><arg value="events/EvaluationEvent.js"/>
 			<arg value="--js"/><arg value="events/ExerciseEvent.js"/>
 			<arg value="--js"/><arg value="events/HomepageEvent.js"/>
@@ -77,6 +88,8 @@
 			<arg value="--js"/><arg value="commands/subtitles/ViewSubtitleModuleCommand.js"/>
 			
 			<arg value="--js"/><arg value="commands/configuration/ViewConfigurationModuleCommand.js"/>
+			<arg value="--js"/><arg value="commands/configuration/ViewMicTesterCommand.js"/>
+			<arg value="--js"/><arg value="commands/configuration/ViewWebcamTesterCommand.js"/>
 	
 			<arg value="--js"/><arg value="commands/main/ViewAboutModuleCommand.js"/>
 	

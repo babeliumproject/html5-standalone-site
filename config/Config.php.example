@@ -239,7 +239,7 @@ class Config implements ISingleton
 		{
 			$this->filePath = $this->webRootPath . $this->filePath;
 			$this->imagePath = $this->webRootPath . $this->imagePath;
-			$this->posterPath = $this->webRootPath . $this->posterPath
+			$this->posterPath = $this->webRootPath . $this->posterPath;
 			$this->templatePath = $this->webRootPath . $this->templatePath;
 			$this->indexPath = $this->webRootPath . $this->indexPath;
 		}

@@ -5,20 +5,23 @@
 
 BP.control = new Controller();
 
-/* ============================================================
- * BP SERVICES CALLER
- * ==========================================================*/
+/*
+ * ============================================================ BP SERVICES
+ * CALLER ==========================================================
+ */
 
 BP.Services = new ApiGateway();
 BP.Services.getCommunicationToken();
 
 BP.onCommunicationReady = function () {
 	BP.EM = new ExerciseManager();
+	BP.CM = new ConfigurationManager();
 }
 
-/* ============================================================
- * LOAD SERVICES FROM A XML FILE
- * ==========================================================*/
+/*
+ * ============================================================ LOAD SERVICES
+ * FROM A XML FILE ==========================================================
+ */
 
 $.get("themes/babelium/js/services.xml", null, function ( data, textStatus)
 {
@@ -48,9 +51,11 @@ $.get("themes/babelium/js/services.xml", null, function ( data, textStatus)
 });
 
 
-/* ============================================================
- * INIT BABELIUM's CONTENT MANAGEMENT SYSTEM AND INITIAL STATUS
- * ==========================================================*/
+/*
+ * ============================================================ INIT BABELIUM's
+ * CONTENT MANAGEMENT SYSTEM AND INITIAL STATUS
+ * ==========================================================
+ */
 
 $(document).ready(function()
 {	
@@ -65,26 +70,36 @@ $(document).ready(function()
 	window.onpopstate = BP.SM.onPopState;
 });
 
-/* ============================================================
- * VIDEOPLAYER'S ONREADY CALLBACK
- * ==========================================================*/
+/*
+ * ==========================================================
+ * SWF COMPONENT'S RED5 CONNECTION CALLBACK
+ * ==========================================================
+ */
 
-function onConnectionReady(playerId)
+function onConnectionReady(compId)
 {
-	var bpPlayer = null;
+	var swfComponent = null;
 	
 	if (navigator.appName.indexOf("Microsoft") != -1){
-		bpPlayer = window[playerId];
+		swfComponent = window[compId];
 	} else { 
-		bpPlayer = document[playerId];
+		swfComponent = document[compId];
 	}
-	if (!bpPlayer) {
-		alert("There was a problem while loading the video player.");
+	if (!swfComponent) {
+		alert("There was a problem while loading the SWF component.");
 		return;
 	}
 	
-	if ( BP.EM.selectedExercise )	
-		BP.EM.loadSelectedExercise(bpPlayer);
-	else	
-		BP.EM.loadExerciseFromContent(bpPlayer);
+	if(compId == 'babeliumPlayer'){
+		if ( BP.EM.selectedExercise )	
+			BP.EM.loadSelectedExercise(swfComponent);
+		else	
+			BP.EM.loadExerciseFromContent(swfComponent);
+	} 
+	if(compId == 'babeliumMicTester'){
+		BP.CM.setupComponent(swfComponent, 'mic');
+	}
+	if(compId == 'babeliumWebcamTester'){
+		BP.CM.setupComponent(swfComponent, 'webcam');
+	}
 }
