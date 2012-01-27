@@ -12,6 +12,7 @@ require_once(dirname(__FILE__) . "/../modules/MConfig.php");
 require_once(dirname(__FILE__) . "/../modules/MEvaluation.php");
 require_once(dirname(__FILE__) . "/../modules/MExercises.php");
 require_once(dirname(__FILE__) . "/../modules/MHome.php");
+require_once(dirname(__FILE__) . "/../modules/MRegister.php");
 
 /**
  * Module loader
@@ -29,7 +30,8 @@ final class ModuleLoader
 		"auth" => "MAuth",
 		"config" => "MConfig",
 		"practice" => "MExercises",
-		"evaluate" => "MEvaluation"
+		"evaluate" => "MEvaluation",
+		"register" => "MRegister"
 	);
 	
 	/* Constructor */

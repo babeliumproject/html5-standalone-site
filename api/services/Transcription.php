@@ -48,44 +48,41 @@ class Transcription {
 	}
 
 	public function getResponseTranscriptions($responseId) {
-		$valueObject = new stdClass();
-
-		$sql = "SELECT T.id AS transID, R.id AS responseID, R.fk_exercise_id AS exerciseID, T.adding_date AS transAddDate, T.status AS status, T.transcription AS transcription, T.transcription_date AS transDate, T.system AS system 
+		$sql = "SELECT T.id AS responseTranscriptionId, 
+					   R.id AS responseId, 
+					   R.fk_exercise_id AS exerciseId, 
+					   T.adding_date AS responseTranscriptionAddingDate, 
+					   T.status AS responseTranscriptionStatus, 
+					   T.transcription AS responseTranscription, 
+					   T.transcription_date AS responseTranscriptionDate, 
+					   T.system AS responseTranscriptionSystem 
 				FROM transcription AS T INNER JOIN response AS R ON T.id=R.fk_transcription_id 
 				WHERE ( R.id = %d ) ";
-		$result = $this->conn->_execute($sql, $responseId);
+		$resultResp = $this->conn->_singleSelect($sql, $responseId);
+		if(!$result){
+			return null;
+		}
 
-		$row = $this->conn->_nextRow($result);
-		if ($row) {
-			$valueObject->responseTranscriptionID = $row[0];
-			$valueObject->responseID = $row[1];
-			$valueObject->exerciseID = $row[2];
-			$valueObject->responseTranscriptionAddingDate = $row[3];
-			$valueObject->responseTranscriptionStatus = $row[4];
-			$valueObject->responseTranscription = $row[5];
-			$valueObject->responseTranscriptionDate = $row[6];
-			$valueObject->responseTranscriptionSystem = $row[7];
-		} else
-		return null;
-
-		$sql = "SELECT T.id AS transID, E.id AS exerciseID, T.adding_date AS transAddDate, T.status AS status, T.transcription AS transcription, T.transcription_date AS transDate, T.system AS system 
+		$sql = "SELECT T.id AS exerciseTranscriptionId, 
+							E.id AS exerciseId, 
+							T.adding_date AS exerciseTranscriptionAddingDate, 
+							T.status AS exerciseTranscriptionStatus, 
+							T.transcription AS exerciseTranscription, 
+							T.transcription_date AS exerciseTranscriptionDate, 
+							T.system AS system as exerciseTranscriptionSystem 
 				FROM transcription AS T INNER JOIN exercise AS E ON T.id=E.fk_transcription_id 
 				WHERE (E.id = %d)";
-		$result = $this->conn->_execute($sql, $valueObject->exerciseID);
+		$resultEx = $this->conn->_singleSelect($sql, $resultResp->exerciseId);
+		
+		if($resultEx){
+			foreach($resultEx as $key=>$value){
+				$resultResp->$key = $value;
+			}
+		} else {
+			return null;
+		}
 
-		$row = $this->conn->_nextRow($result);
-		if ($row) {
-			$valueObject->exerciseTranscriptionID = $row[0];
-			$valueObject->exerciseID = $row[1];
-			$valueObject->exerciseTranscriptionAddingDate = $row[2];
-			$valueObject->exerciseTranscriptionStatus = $row[3];
-			$valueObject->exerciseTranscription = $row[4];
-			$valueObject->exerciseTranscriptionDate = $row[5];
-			$valueObject->exerciseTranscriptionSystem = $row[6];
-		} else
-		return null;
-
-		return $valueObject;
+		return $resultResp;
 	}
 
 	public function enableTranscriptionToExercise($exerciseId, $transcriptionSystem) {
@@ -96,29 +93,27 @@ class Transcription {
 				
 			//Check if user is admin
 			$sql = "SELECT isAdmin FROM users WHERE id = %d";
-			$result = $this->conn->_execute($sql, $_SESSION['uid']);
-			$row = $this->conn->_nextRow($result);
-			if ($row[0] <= 0)
-			return "only admin users can enable transcriptions to exercises";
+			$result = $this->conn->_singleSelect($sql, $_SESSION['uid']);
+			if ($result->isAdmin <= 0)
+				return "only admin users can enable transcriptions to exercises";
 				
 			$sql = "SELECT * FROM transcription AS T INNER JOIN exercise AS E ON T.id=E.fk_transcription_id WHERE E.id = %d";
-			$result = $this->conn->_execute($sql, $exerciseId);
-			$row = $this->conn->_nextRow($result);
-			if ($row == null) {
+			$result = $this->conn->_singleSelect($sql, $exerciseId);
+			if (!$result) {
 				$insert = "INSERT INTO transcription (id, adding_date, status, transcription, transcription_date, system) VALUES (null, now(), 'pending' , null, null, '%s')";
 				$i = $this->conn->_insert($insert, strtolower($transcriptionSystem));
 				if ($i > 0) {
 					$update = "UPDATE exercise SET fk_transcription_id = LAST_INSERT_ID() WHERE id = %d";
-					if ($this->conn->_execute($update, $exerciseId) > 0)
-					return $i;
+					if ($this->conn->_update($update, $exerciseId) > 0)
+						return $i;
 					else
-					return "error";
+						return "error";
 				} else
-				return -1;
+					return -1;
 			} else
-			return "transcription already exists";
+				return "transcription already exists";
 		} else
-		return "wrong data";
+			return "wrong data";
 	}
 
 	public function enableTranscriptionToResponse($responseId, $transcriptionSystem) {
@@ -128,14 +123,13 @@ class Transcription {
 			return "transcription not supported for this video";
 
 			$sql = "SELECT * FROM transcription AS T INNER JOIN response AS R ON T.id=R.fk_transcription_id WHERE R.id = %d";
-			$result = $this->conn->_execute($sql, $responseId);
-			$row = $this->conn->_nextRow($result);
-			if ($row == null) {
+			$result = $this->conn->_singleSelect($sql, $responseId);
+			if (!$result) {
 				$insert = "INSERT INTO transcription (id, adding_date, status, transcription, transcription_date, system) VALUES (null, now(), 'pending' , null, null, '%s')";
 				$i = $this->conn->_insert($insert, strtolower($transcriptionSystem));
 				if ($i > 0) {
 					$update = "UPDATE response SET fk_transcription_id = LAST_INSERT_ID() WHERE id = %d";
-					if ($this->conn->_execute($update, $responseId) > 0)
+					if ($this->conn->_update($update, $responseId) > 0)
 					return $i;
 					else
 					return "error";
@@ -151,12 +145,11 @@ class Transcription {
 	public function checkAutoevaluationSupportResponse($responseId, $transcriptionSystem) {
 		if ($responseId > 0 && $transcriptionSystem != null) {
 			$sql = "SELECT prefValue FROM preferences WHERE prefName='%s.max_duration'";
-			$result = $this->conn->_execute($sql, strtolower($transcriptionSystem));
-			$row = $this->conn->_nextRow($result);
-			if ($row)
-			$maxDuration = $row[0];
+			$result = $this->conn->_singleSelect($sql, strtolower($transcriptionSystem));
+			if ($result)
+				$maxDuration = $result->prefValue;
 			else
-			$maxDuration = 0;
+				$maxDuration = 0;
 
 			// if
 			// original video has a transcription
@@ -166,41 +159,28 @@ class Transcription {
 			//  return true
 			// else return false;
 			$sql = "SELECT R.id
-			           FROM 
-			                  response AS R 
-			                     INNER JOIN exercise AS E ON R.fk_exercise_id=E.id  
-			                     INNER JOIN preferences AS P ON SUBSTRING_INDEX(E.language, '_', 1)=P.prefValue 
-			        WHERE 
-			           R.id=%d 
-			             AND 
-			           P.prefName = '%s.language' 
-			             AND 
-			           E.fk_transcription_id IS NOT NULL 
-			             AND 
-			             R.fk_transcription_id IS NULL";
+			        FROM response AS R 
+			             INNER JOIN exercise AS E ON R.fk_exercise_id=E.id  
+			             INNER JOIN preferences AS P ON SUBSTRING_INDEX(E.language, '_', 1)=P.prefValue 
+			        WHERE R.id=%d AND P.prefName = '%s.language' AND E.fk_transcription_id IS NOT NULL AND R.fk_transcription_id IS NULL";
 				
 			if ($maxDuration > 0)
-			$sql = $sql . " AND R.duration<=%s";
+				$sql = $sql . " AND R.duration<=%s";
 				
-			$result = $this->conn->_execute($sql, $responseId, strtolower($transcriptionSystem), $maxDuration);
-			$row = $this->conn->_nextRow($result);
-			if ($row)
-			return true;
-			else
-			return false;
+			$result = $this->conn->_singleSelect($sql, $responseId, strtolower($transcriptionSystem), $maxDuration);
+			return $result ? true : false;
 		} else
-		return false;
+			return false;
 	}
 
 	public function checkAutoevaluationSupportExercise($exerciseId, $transcriptionSystem) {
 		if ($exerciseId > 0 && $transcriptionSystem != null) {
 			$sql = "SELECT prefValue FROM preferences WHERE prefName='%s.max_duration'";
-			$result = $this->conn->_execute($sql, strtolower($transcriptionSystem));
-			$row = $this->conn->_nextRow($result);
-			if ($row)
-			$maxDuration = $row[0];
+			$result = $this->conn->_singleSelect($sql, strtolower($transcriptionSystem));
+			if ($result)
+				$maxDuration = $result->prefValue;
 			else
-			$maxDuration = 0;
+				$maxDuration = 0;
 
 			// if
 			// original video doesn't have a transcription
@@ -217,16 +197,13 @@ class Transcription {
 						E.fk_transcription_id IS NULL";
 				
 			if ($maxDuration > 0)
-			$sql = $sql . " AND E.duration<=%d";
+				$sql = $sql . " AND E.duration<=%d";
 				
-			$result = $this->conn->_execute($sql, $exerciseId, strtolower($transcriptionSystem), $maxDuration);
-			$row = $this->conn->_nextRow($result);
-			if ($row)
-			return true;
-			else
-			return false;
+			$result = $this->conn->_singleSelect($sql, $exerciseId, strtolower($transcriptionSystem), $maxDuration);
+			
+			return $result ? true : false;
 		} else
-		return false;
+			return false;
 	}
 
 }

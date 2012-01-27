@@ -45,8 +45,11 @@ class UserVideoHistory{
 		}
 	}
 
-	public function exerciseWatched($videoHistoryData){
+	public function exerciseWatched($videoHistoryData = null){
 
+		if(!$videoHistoryData)
+			return false;
+		
 		if($sessionId = $this->_currentSessionData($_SESSION['uid'])){
 
 			$sql = "INSERT INTO user_videohistory (fk_user_id, fk_user_session_id, fk_exercise_id, subtitles_are_used, fk_subtitle_id)
@@ -57,7 +60,11 @@ class UserVideoHistory{
 		}
 	}
 
-	public function exerciseAttemptResponse($videoHistoryData){
+	public function exerciseAttemptResponse($videoHistoryData = null){
+		
+		if(!$videoHistoryData)
+			return false;
+		
 		if($sessionId = $this->_currentSessionData($_SESSION['uid'])){
 			$sql = "INSERT INTO user_videohistory (fk_user_id, fk_user_session_id, fk_exercise_id, response_attempt, subtitles_are_used, fk_subtitle_id, fk_exercise_role_id)
 					VALUES ('%d', '%d', '%d', 1, '%d', '%d', '%d')";
@@ -68,7 +75,11 @@ class UserVideoHistory{
 		}
 	}
 
-	public function exerciseSaveResponse($videoHistoryData){
+	public function exerciseSaveResponse($videoHistoryData = null){
+		
+		if(!$videoHistoryData)
+			return false;
+		
 		if($sessionId = $this->_currentSessionData()){
 			$sql = "INSERT INTO user_videohistory (fk_user_id, fk_user_session_id, fk_exercise_id, fk_response_id, subtitles_are_used, fk_subtitle_id, fk_exercise_role_id)
 					VALUES ('%d', '%d', '%d', '%d', '%d', '%d', '%d')";
@@ -85,10 +96,9 @@ class UserVideoHistory{
 		$sessionId = session_id();
 
 		$sql = "SELECT id, session_id FROM user_session WHERE ( session_id = '%s' AND fk_user_id = '%d' AND closed = 0 )";
-		$result = $this->conn->_execute ( $sql, $sessionId, $_SESSION['uid'] );
-		$row = $this->conn->_nextRow($result);
+		$row = $this->conn->_singleSelect($sql, $sessionId, $_SESSION['uid']);
 		if($row){
-			return $row[0];
+			return $row->id;
 		} else {
 			return false;
 		}

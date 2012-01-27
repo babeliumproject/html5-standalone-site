@@ -28,6 +28,7 @@ require_once(dirname(__FILE__) . "/../widgets/main/WFooter.php");
 
 require_once(dirname(__FILE__) . "/../widgets/userManagement/WLoggedIn.php");
 require_once(dirname(__FILE__) . "/../widgets/userManagement/WLoggedOut.php");
+require_once(dirname(__FILE__) . "/../widgets/userManagement/WRegister.php");
 
 require_once(dirname(__FILE__) . "/../widgets/W404.php");
 require_once(dirname(__FILE__) . "/../widgets/WUnauthorized.php");
@@ -61,7 +62,8 @@ final class WidgetLoader
 		"EvaluationTabBar" => "WEvaluationTabBar",
 		"ConfigurationTabBar" => "WConfigurationTabBar",
 		"MicTester" => "WMicTester",
-		"WebcamTester" => "WWebcamTester"
+		"WebcamTester" => "WWebcamTester",
+		"Register" => "WRegister"
 	);
 	
 	/* Constructor */

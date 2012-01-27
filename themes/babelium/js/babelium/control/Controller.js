@@ -16,6 +16,7 @@ var Controller = Cairngorm.FrontController.extend(
 		this.addCommand(ViewChangeEvent.VIEW_SUBTITLE_MODULE, ViewSubtitleModuleCommand);
 		this.addCommand(ViewChangeEvent.VIEW_ABOUT_MODULE, ViewAboutModuleCommand);
 		this.addCommand(ViewChangeEvent.VIEW_CONFIG_MODULE, ViewConfigModuleCommand);
+		this.addCommand(ViewChangeEvent.VIEW_REGISTER_MODULE, ViewRegisterModuleCommand);
 		this.addCommand(ViewChangeEvent.VIEW_LOGIN_POPUP, ToggleLoginPopupCommand);
 		
 		// On popstate event
@@ -47,5 +48,9 @@ var Controller = Cairngorm.FrontController.extend(
 		this.addCommand(EvaluationEvent.VIEW_PENDING_ASSESMENTS, ViewPendingAssesmentsCommand);
 		this.addCommand(EvaluationEvent.VIEW_CURRENTLY_ASSESSED_TO_USER, ViewCurrentlyAssessedToUserCommand);
 		this.addCommand(EvaluationEvent.VIEW_CURRENTLY_ASSESSED_BY_USER, ViewCurrentlyAssessedByUserCommand);
+		
+		//Register module
+		this.addCommand(RegisterEvent.REGISTER_USER, RegisterUserCommand);
+		this.addCommand(RegisterEvent.ACTIVATE_USER, ActivateUserCommand)
 	}
 });

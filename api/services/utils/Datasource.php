@@ -132,7 +132,7 @@ class Datasource
 	 * @return mixed $row
 	 * 		Returns an array of strings that corresponds to the fetched row or NULL if there are no more rows in resultset. 
 	 */
-	public function _nextRow ($result)
+	private function _nextRow ($result)
 	{
 		$row = mysqli_fetch_array($result);
 		return $row;
@@ -146,7 +146,7 @@ class Datasource
 	 * @return mixed $row
 	 * 		Returns an associative array with the data of the next row of the resultSet or NULL if there are no more rows in resultset. 
 	 */
-	public function _nextRowAssoc($result){
+	private function _nextRowAssoc($result){
 		$row = mysqli_fetch_assoc($result);
 		return $row;
 	}
@@ -159,13 +159,13 @@ class Datasource
 	 * @return mixed $row
 	 * 		Returns an object with the data of the next row of the resultSet or NULL if there are no more rows in resultset. 
 	 */
-	public function _nextRowObject($result){
+	private function _nextRowObject($result){
 		$row = mysqli_fetch_object($result);
 		return $row;
 	}
 	
 	/**
-	 * Perform a SQL Insert operation against the database
+	 * Perform a SQL INSERT operation against the database
 	 * 
 	 * @return mixed $row
 	 * 		Return the last id of the inserted data or false when no data was inserted at all
@@ -185,12 +185,53 @@ class Datasource
 	}
 	
 	/**
-	 * Perform a SQL Select operation against the database
-	 * @return mixed $result
-	 * 		Returns an array of objects if the query had more than one row, an object if the query had only one row
-	 *		and false if the query had no results at all.
+	 * Perform a SQL UPDATE operation against the database
+	 * 
+	 * @return int $affectedRows
+	 * 		Returns the number of rows affected by the update operation
 	 */
-	public function _select(){
+	public function _update(){
+		$this->_execute( func_get_args() );
+		$affectedRows =  $this->_affectedRows();
+		return $affectedRows;
+	}
+	
+	/**
+	 * Perform a SQL DELETE operation against the database
+	 * 
+	 * @return int $affectedRows
+	 * 		Returns the number of rows affected by the update operation
+	 */
+	public function _delete(){
+		$this->_execute( func_get_args() );
+		$affectedRows =  $this->_affectedRows();
+		return $affectedRows;
+	}
+	
+	/**
+	 * Perform a SQL SELECT operation whose result is expected to have a single row
+	 * @return mixed $result
+	 * 		Returns an object if the query was sucessful, and false if the query had no results at all.
+	 */
+	public function _singleSelect(){
+		$result = $this->_execute ( func_get_args() );
+		$count = mysqli_num_rows($result);
+		$row = $this->_nextRowObject($result);
+		//Check that the result is defined and has only one row
+		if($row && is_object($row) && $count == 1){
+			$result = $row;	
+		} else {
+			$result = false;
+		}
+		return $result;
+	}
+	
+	/**
+	 * Perform a SQL SELECT operation whose result is expected to have one or more rows
+	 * @return mixed $result
+	 * 		Returns an array of objects if the query was successful, and false if the query had no results at all.
+	 */
+	public function _multipleSelect(){
 		$rowList = array();
 		$result = $this->_execute ( func_get_args() );
 		while($row = $this->_nextRowObject($result)){
@@ -200,9 +241,6 @@ class Datasource
 		}
 		if(!$rowList || count($rowList) == 0){
 			$result = false;
-		} 
-		elseif (count($rowList) == 1){
-			$result = $rowList[0];
 		} else {
 			$result = $rowList;
 		}

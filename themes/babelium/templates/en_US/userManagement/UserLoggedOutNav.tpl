@@ -3,4 +3,4 @@
 				<li><a href="#" class="blue">Help</a></li>
 				<li><a href="#" class="blue">Blog</a></li>
 				<li><a href="javascript:new ViewChangeEvent(ViewChangeEvent.VIEW_LOGIN_POPUP).dispatch();" class="yellow">Login</a></li>
-				<li><a href="#" class="yellow">Register</a></li>
+				<li><a href="javascript:new ViewChangeEvent(ViewChangeEvent.VIEW_REGISTER_MODULE).dispatch();" class="yellow">Register</a></li>

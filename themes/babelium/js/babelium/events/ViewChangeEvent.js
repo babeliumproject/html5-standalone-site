@@ -19,5 +19,6 @@ ViewChangeEvent.VIEW_EVALUATION_MODULE = "viewEvaluationModule";
 ViewChangeEvent.VIEW_SUBTITLE_MODULE = "viewSubtitleModule";
 ViewChangeEvent.VIEW_ABOUT_MODULE = "viewAboutModule";
 ViewChangeEvent.VIEW_CONFIG_MODULE = "viewConfigModule";
+ViewChangeEvent.VIEW_REGISTER_MODULE = "viewRegisterModule";
 ViewChangeEvent.VIEW_LOGIN_POPUP = "viewLoginPopup";
 ViewChangeEvent.RELOAD_STATE = "reloadState";

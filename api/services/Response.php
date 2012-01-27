@@ -62,7 +62,11 @@ class Response {
 		}
 	}
 
-	public function saveResponse($data){
+	public function saveResponse($data = null){
+		
+		if(!$data)
+			return false;
+		
 		set_time_limit(0);
 		$this->_getResourceDirectories();
 		$thumbnail = 'nothumb.png';
@@ -90,15 +94,18 @@ class Response {
 		return $r;
 	}
 
-	public function makePublic($responseId)
+	public function makePublic($responseId = 0)
 	{
+		if(!$responseId)
+			return false;
+		
 		$result = 0;
 		
 		$this->conn->_startTransaction();
 		
 		$sql = "UPDATE response SET is_private = 0 WHERE (id = '%d' ) ";
 
-		$update = $this->conn->_execute ( $sql, $responseId );
+		$update = $this->conn->_update ( $sql, $responseId );
 		if(!$update){
 			$this->conn->_failedTransaction();
 			throw new Exception("Response publication failed");
@@ -132,20 +139,18 @@ class Response {
 		$sql = "UPDATE (users u JOIN preferences p)
 			SET u.creditCount=u.creditCount-p.prefValue 
 			WHERE (u.ID=%d AND p.prefName='evaluationRequestCredits') ";
-		return $this->conn->_execute ( $sql, $_SESSION['uid'] );
+		return $this->conn->_update ( $sql, $_SESSION['uid'] );
 	}
 
 	private function _addEvalRequestToCreditHistory($responseId){
 		$sql = "SELECT prefValue FROM preferences WHERE ( prefName='evaluationRequestCredits' )";
-		$result = $this->conn->_execute ( $sql );
-		$row = $this->conn->_nextRow($result);
+		$row = $this->conn->_singleSelect ( $sql );
 		if($row){
-			$changeAmount = $row[0];
+			$changeAmount = $row->prefValue;
 			$sql = "SELECT fk_exercise_id FROM response WHERE (id='%d')";
-			$result = $this->conn->_execute($sql, $responseId);
-			$row = $this->conn->_nextRow($result);
+			$row = $this->conn->_singleSelect($sql, $responseId);
 			if($row){
-				$exerciseId = $row[0];
+				$exerciseId = $row->fk_exercise_id;
 				$sql = "INSERT INTO credithistory (fk_user_id, fk_exercise_id, fk_response_id, changeDate, changeType, changeAmount) ";
 				$sql = $sql . "VALUES ('%d', '%d', '%d', NOW(), '%s', '%d') ";
 				return $this->conn->_insert($sql, $_SESSION['uid'], $exerciseId, $responseId, 'eval_request', $changeAmount);
@@ -159,42 +164,26 @@ class Response {
 
 	private function _getUserInfo(){
 
-		$sql = "SELECT name, creditCount, joiningDate, isAdmin FROM users WHERE (id = %d) ";
+		$sql = "SELECT name, 
+					   creditCount, 
+					   joiningDate, 
+					   isAdmin 
+				FROM users WHERE (id = %d) ";
 
-		return $this->_singleQuery($sql, $_SESSION['uid']);
-	}
-
-	private function _singleQuery(){
-		$valueObject = new stdClass();
-		$result = $this->conn->_execute(func_get_args());
-
-		$row = $this->conn->_nextRow($result);
-		if ($row)
-		{
-			$valueObject->name = $row[0];
-			$valueObject->creditCount = $row[1];
-			$valueObject->joiningDate = $row[2];
-			$valueObject->isAdmin = $row[3]==1;
-		}
-		else
-		{
-			return false;
-		}
-		return $valueObject;
+		return $this->conn->_singleSelect($sql, $_SESSION['uid']);
 	}
 
 	private function _getResourceDirectories(){
-		$sql = "SELECT prefValue FROM preferences
+		$sql = "SELECT prefValue 
+				FROM preferences
 				WHERE (prefName='exerciseFolder' OR prefName='responseFolder' OR prefName='evaluationFolder') 
 				ORDER BY prefName";
-		$result = $this->conn->_execute($sql);
-
-		$row = $this->conn->_nextRow($result);
-		$this->evaluationFolder = $row ? $row[0] : '';
-		$row = $this->conn->_nextRow($result);
-		$this->exerciseFolder = $row ? $row[0] : '';
-		$row = $this->conn->_nextRow($result);
-		$this->responseFolder = $row ? $row[0] : '';
+		$result = $this->conn->_multipleSelect($sql);
+		if($result){
+			$this->evaluationFolder = $result[0] ? $result[0]->prefValue : '';
+			$this->exerciseFolder = $result[1] ? $result[1]->prefValue : '';
+			$this->responseFolder = $result[2] ? $result[2]->prefValue : '';
+		}
 	}
 
 }
