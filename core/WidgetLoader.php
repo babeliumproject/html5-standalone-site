@@ -7,6 +7,7 @@ require_once(dirname(__FILE__) . "/../config/Config.php");
  * Widgets
  */
 require_once(dirname(__FILE__) . "/../widgets/evaluation/WEvaluationTabBar.php");
+require_once(dirname(__FILE__) . "/../widgets/evaluation/WEvaluationDataTable.php");
 
 require_once(dirname(__FILE__) . "/../widgets/exercises/WVideoList.php");
 require_once(dirname(__FILE__) . "/../widgets/exercises/WExerciseInfo.php");
@@ -54,7 +55,8 @@ final class WidgetLoader
 		"StepByStep" => "WStepByStep",
 		"VideoList" => "WVideoList",
 		"Unauthorized" => "WUnauthorized",
-		"EvaluationTabBar" => "WEvaluationTabBar"
+		"EvaluationTabBar" => "WEvaluationTabBar",
+		"EvaluationDataTable" => "WEvaluationDataTable"
 	);
 	
 	/* Constructor */
