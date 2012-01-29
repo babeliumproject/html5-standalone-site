@@ -873,14 +873,14 @@ section.exerciseList
 {
 }
 
-	div.exerciseContainer
+	div.exerciseContainer, div.assesmentsContainer
 	{
 		width: 100%;
 		margin: 0px;
 		padding: 0 0 0 10px;
 	}
 	
-	div.exerciseContainer > article
+	div.exerciseContainer > article, div.assesmentsContainer > article
 	{
 		width: 49%;
 		min-width: 460px;
@@ -892,7 +892,7 @@ section.exerciseList
 		margin: 1px;
 	}
 	
-	div.exerciseContainer > article:hover
+	div.exerciseContainer > article:hover, div.assesmentsContainer > article:hover
 	{
 		background-color: #cedbef;
 		border: 1px solid #86bcce;
@@ -913,7 +913,7 @@ section.exerciseList
 		box-shadow: 2px 2px 4px #666;
 	}
 	
-		div.exerciseContainer > article > *
+		div.exerciseContainer > article > *, article.evaluationItem > div > *
 		{
 			display: inline-block;
 		}
@@ -924,7 +924,7 @@ section.exerciseList
 			height: 100%;
 		}
 		
-			div.exerciseContainer > article > div > h1
+			div.exerciseContainer > article > div > h1, article.evaluationItem > header > h1
 			{
 				padding-bottom: 3px;
 				margin-bottom: 3px;
@@ -1372,6 +1372,25 @@ aside#tabBarContainer
 	}
 
 /** END OF TAB BAR CONTAINER **/
+
+/** EVALUATION ITEM RENDER **/
+
+article.evaluationItem > header > h1
+{
+	width: 80%;
+}
+
+article.evaluationItem > div > *, article.evaluationItem > header > h1 > *
+{
+	padding: 3px;
+}
+
+div.evaluationItemInfo > *
+{
+	margin-bot: 3px;	
+}
+
+/** END OF EVALUATION ITEM RENDER **/
 
 /** FOOTER **/
 
