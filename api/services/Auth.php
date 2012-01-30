@@ -2,9 +2,9 @@
 
 /**
  * Babelium Project open source collaborative second language oral practice - http://www.babeliumproject.com
- * 
+ *
  * Copyright (c) 2011 GHyM and by respective authors (see below).
- * 
+ *
  * This file is part of Babelium Project.
  *
  * Babelium Project is free software: you can redistribute it and/or modify
@@ -28,7 +28,7 @@ require_once 'utils/SessionHandler.php';
 
 /**
  * Allows the user to authenticate on the Babelium system
- * 
+ *
  * @author Babelium Team
  *
  */
@@ -54,11 +54,14 @@ class Auth{
 	/**
 	 *
 	 */
-	public function getCommunicationToken($secretKey){
+	public function getCommunicationToken($secretKey = 0){
+		if(!$secretKey)
+			return FALSE;
+			
 		//Check if the request if made via HTTPS or not
 		//TODO
 
-		$length = 13;		
+		$length = 13;
 
 		if(session_id() != "" && md5(session_id()) == $secretKey){
 			$commToken = $this->_generateRandomCommunicationToken($length);
@@ -69,26 +72,26 @@ class Auth{
 		}
 	}
 
-	 private function _generateRandomCommunicationToken($length){
-                $token = '';
-                $i = 0;
-                while ($i < $length){
-                        $token = $token . dechex(floor((rand(0,1000000) * 16)/1000000));
-                        $i++;
-                }
-                return $token;
-        }
+	private function _generateRandomCommunicationToken($length){
+		$token = '';
+		$i = 0;
+		while ($i < $length){
+			$token = $token . dechex(floor((rand(0,1000000) * 16)/1000000));
+			$i++;
+		}
+		return $token;
+	}
 
 
 	/**
 	 * Checks the provided authentication data and logs the user in the system if everything is ok
-	 * 
+	 *
 	 * @param stdClass $user
 	 * 		An object with the following properties: (name, pass)
 	 * @return mixed $result
 	 * 		Returns the current user data. Or an error message when wrong login data is provided
 	 */
-	public function processLogin($user){
+	public function processLogin($user = null){
 		if($user != null && is_object($user)){
 			//Check if the given username exists
 			if($this->getUserInfo($user->name)==false){
@@ -96,12 +99,12 @@ class Auth{
 			} else {
 				//Check whether the user is active or not
 				$sql = "SELECT id FROM users WHERE (name = '%s' AND active = 0)";
-				$result = $this->conn->_select($sql, $user->name);
+				$result = $this->conn->_singleSelect($sql, $user->name);
 				if ( $result )
 				return "inactive_user";
 				//Check if the user provided correct authentication data
 				$sql = "SELECT id, name, realName, realSurname, email, creditCount, joiningDate, isAdmin FROM users WHERE (name='%s' AND password='%s') ";
-				$result = $this->conn->_select($sql, $user->name, $user->pass);
+				$result = $this->conn->_singleSelect($sql, $user->name, $user->pass);
 				if($result){
 					$userId = $result->id;
 					$userLanguages = $this->_getUserLanguages($userId);
@@ -136,7 +139,7 @@ class Auth{
 
 	/**
 	 * Checks if the session data is set for this user
-	 * 
+	 *
 	 * @return boolean $isuserLogged
 	 * 		Returns whether the user is logged or not based on the session data
 	 */
@@ -155,7 +158,7 @@ class Auth{
 
 	/**
 	 * Retrieves the data for the given user name
-	 * 
+	 *
 	 * @param string $username
 	 * @return mixed $result
 	 * 		Returns an object with the user data or false when no user with that username is found in the database.
@@ -168,7 +171,7 @@ class Auth{
 
 		$sql = "SELECT id, name, realName, realSurname, email, creditCount FROM users WHERE (name = '%s') ";
 
-		return $this->conn->_select($sql, $username);
+		return $this->conn->_singleSelect($sql, $username);
 	}
 
 	/**
@@ -190,26 +193,32 @@ class Auth{
 
 	/**
 	 * Sends again the account activation email if the provided user is valid and not active.
-	 * 
+	 *
 	 * @param stdClass $user
 	 * 		An object with the following properties: (name, email)
 	 * @return string $mailSent
 	 * 		Returns a string telling whether the mail sending operation went well or not
 	 */
-	public function resendActivationEmail($user){
+	public function resendActivationEmail($user = null){
+		if(!$user)
+			return null;
+		
 		if($this->getUserInfo($user->name)==false){
 			return "wrong_user";
 		} else {
 			$sql = "SELECT id, activation_hash FROM users WHERE (name= '%s' AND email= '%s' AND active = 0 AND activation_hash <> '')";
-			$inactiveUserExists = $this->conn->_select($sql, $user->name, $user->email);
+			$inactiveUserExists = $this->conn->_singleSelect($sql, $user->name, $user->email);
 			if ($inactiveUserExists){
+				$usersFirstMotherTongue = 'en_US';
 				$userId = $inactiveUserExists->id;
-				$activationHash = $inactiveUserExists->hash;
+				$activationHash = $inactiveUserExists->activation_hash;
 				$userLanguages = $this->_getUserLanguages($userId);
-				foreach($userLanguages as $lang){
-					if($lang->level == 7){
-						$usersFirstMotherTongue = $lang->language;
-						break;
+				if($userLanguages){
+					foreach($userLanguages as $lang){
+						if($lang->level == 7){
+							$usersFirstMotherTongue = $lang->language;
+							break;
+						}
 					}
 				}
 				// Submit activation email
@@ -224,7 +233,8 @@ class Auth{
 						'ACTIVATION_LINK' => 'http://'.$_SERVER['HTTP_HOST'].'/Main.html#/activation/activate/hash='.$activationHash.'&user='.$user->name,
 						'SIGNATURE' => 'The Babelium Project Team');
 
-				if ( !$mail->makeTemplate("mail_activation", $args, $usersFirstMotherTongue) ) return null;
+				if ( !$mail->makeTemplate("mail_activation", $args, $usersFirstMotherTongue) )
+					return null;
 
 				return $mail->send($mail->txtContent, $subject, $mail->htmlContent);
 			} else {
@@ -235,7 +245,7 @@ class Auth{
 
 	/**
 	 * Initializes a session for this user.
-	 * 
+	 *
 	 * @param stdClass $userData
 	 * 		An object with the following properties: (id, name, realName, realSurname, email, creditCount, joiningDate, isAdmin, userLanguages[])
 	 * @return int $result
@@ -252,7 +262,7 @@ class Auth{
 
 	/**
 	 * Stores current user's data in the session variable
-	 * 
+	 *
 	 * @param stdClass $userData
 	 * 		An object with the following properties: (id, name, realName, realSurname, email, creditCount, joiningDate, isAdmin, userLanguages[])
 	 */
@@ -291,9 +301,12 @@ class Auth{
 	 * 		Returns an array of languages or null when nothing found
 	 */
 	private function _getUserLanguages($userId){
-		$sql = "SELECT language, level, positives_to_next_level, purpose
+		$sql = "SELECT language,
+					   level, 
+					   positives_to_next_level as positivesToNextLevel, 
+					   purpose
 				FROM user_languages WHERE (fk_user_id='%d')";
-		return $this->conn->_select($sql, $userId);
+		return $this->conn->_multipleSelect($sql, $userId);
 	}
 
 }

@@ -47,26 +47,13 @@ class Preference {
 
 	public function getAppPreferences(){
 		$sql = "SELECT * FROM preferences";
-
-		$searchResults = $this->_listQuery($sql);
-
-		return $searchResults;
-	}
-
-	private function _listQuery($sql){
-		$searchResults = array();
 		$preferenceData = array();
-		$result = $this->conn->_execute($sql);
-
-		while ($row = $this->conn->_nextRow($result))
-		{
-			$temp = new stdClass();
-			$temp->prefName = $row[1];
-			$temp->prefValue = $row[2];
-			$preferenceData[$row[1]] = $row[2];
-			array_push($searchResults, $temp);
+		$searchResults = $this->conn->_multipleSelect($sql);
+		foreach($searchResults as $searchResult){
+			$preferenceData[$searchResult->prefName] = $searchResult->prefValue;
 		}
 		$_SESSION['preferenceData'] = $preferenceData;
+
 		return $searchResults;
 	}
 }

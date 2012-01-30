@@ -133,16 +133,16 @@ class Search {
 	public function setTagToDB($search){
 		if ($search!=''){
 			$sql = "SELECT amount FROM tagcloud WHERE tag='%s'";
-			$result = $this->conn->_execute ($sql, $search);
-			if ($row = $this->conn->_nextRow ($result)){
+			$result = $this->conn->_singleSelect ($sql, $search);
+			if ($result){
 				//The tag already exists, so updating the quantity
-				$newAmount= 1 + $row[0];
+				$newAmount = 1 + $result->amount;
 				$sql = "UPDATE tagcloud SET amount = ". $newAmount . " WHERE tag='%s'";
-				$result = $this->conn->_execute ($sql, $search);
+				$result = $this->conn->_update ($sql, $search);
 			}else{
 				//Insert the tag
 				$sql = "INSERT INTO tagcloud (tag, amount) VALUES ('%s', 0)";
-				$result = $this->conn->_execute ($sql, $search);
+				$result = $this->conn->_insert ($sql, $search);
 			}
 		}
 		return $result;

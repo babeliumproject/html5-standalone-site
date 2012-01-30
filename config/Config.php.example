@@ -223,6 +223,8 @@ class Config implements ISingleton
 
 		$this->api_bridge = $this->server_url . $this->api_bridge;
 		$this->module_bridge = $this->server_url . $this->module_bridge;
+		$this->thumbnail_url = $this->server_url . $this->imagePath;
+		$this->poster_url = $this->server_url. $this->posterPath;
 
 		/**
 		 * Path config

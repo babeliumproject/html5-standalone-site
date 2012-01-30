@@ -10,7 +10,7 @@
 	</target>
 	
 	<target name="LH_deploylocal" description="Copy deployed app to local webserver">
-		<copy preservelastmodified="yes" todir="${local.project.path}/">
+		<copy preservelastmodified="no" todir="${local.project.path}/">
 			<fileset dir="${BASE_DIR}" includes="**/*">
 				<exclude name="**/js/cairngorm/**"/>
 				<exclude name="**/js/babelium/**"/>
@@ -61,6 +61,7 @@
 			<arg value="--js"/><arg value="events/ExerciseEvent.js"/>
 			<arg value="--js"/><arg value="events/HomepageEvent.js"/>
 			<arg value="--js"/><arg value="events/LoginEvent.js"/>
+			<arg value="--js"/><arg value="events/RegisterEvent.js"/>
 			<arg value="--js"/><arg value="events/ViewChangeEvent.js"/>
 			
 			<arg value="--js"/><arg value="commands/navigation/ReloadStateCommand.js"/>
@@ -95,6 +96,9 @@
 	
 			<arg value="--js"/><arg value="commands/userManagement/ProcessLoginCommand.js"/>
 			<arg value="--js"/><arg value="commands/userManagement/SignOutCommand.js"/>
+			<arg value="--js"/><arg value="commands/userManagement/ViewRegisterModuleCommand.js"/>
+			<arg value="--js"/><arg value="commands/userManagement/RegisterUserCommand.js"/>
+			<arg value="--js"/><arg value="commands/userManagement/ActivateUserCommand.js"/>
 			
 			<arg value="--js"/><arg value="commands/cue/OnPlaybackCuePoint.js"/>
 			<arg value="--js"/><arg value="commands/cue/OnRecordingOtherRoleCuePoint.js"/>
@@ -114,9 +118,11 @@
 			<arg value="--js"/><arg value="business/AboutDelegate.js"/>
 			<arg value="--js"/><arg value="business/UserDelegate.js"/>
 			<arg value="--js"/><arg value="business/AuthDelegate.js"/>
+			<arg value="--js"/><arg value="business/RegisterDelegate.js"/>
 			
 			<arg value="--js"/><arg value="vo/LoginVO.js"/>
 			<arg value="--js"/><arg value="vo/ExerciseVO.js"/>
+			<arg value="--js"/><arg value="vo/NewUserVO.js"/>
 
 			<arg value="--js"/><arg value="bootstrap.js"/>
 			<arg value="--js_output_file"/><arg value="${babeliumjs.OUTPUT_DIR}/babelium.js"/>
