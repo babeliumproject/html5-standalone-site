@@ -2,8 +2,13 @@
 <header>
 	<h1>Register</h1>
 </header>
+{if $errors}
+<div class="registerError">
+	<strong>ERROR</strong>:{$errors}
+</div>
+{/if}
 <div class="registerForm">
-<form onsubmit="new RegisterEvent(RegisterEvent.REGISTER_USER, new NewUserVO(this.username.value, this.email.value, Sha1.hash(this.password.value, true), this.realName.value, this.realSurname.value, '')).dispatch(); return false;">
+<form onsubmit="new RegisterEvent(RegisterEvent.REGISTER_USER, new NewUserVO(this.username.value, Sha1.hash(this.password.value, true), this.realName.value, this.realSurname.value, this.email.value, '')).dispatch(); return false;">
 		<fieldset>
 		<legend>Kontuaren datuak</legend>
 		Erabiltzaile izena: <input type="text" name="username" required>
@@ -30,4 +35,5 @@
 		<input class="bigBlueButton" type="reset" value="Datuak ezabatu">
 </form>
 </div>
+
 </section>

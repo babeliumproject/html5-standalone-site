@@ -16,7 +16,6 @@ var ViewRegisterModuleCommand = Cairngorm.Command.extend(
 	
 	onResult : function ( response )
 	{
-
 		BP.SM.pushState("Register - Babelium Project", {module : "register"});
 		BP.CMS.innerMainContent(response);
 	},

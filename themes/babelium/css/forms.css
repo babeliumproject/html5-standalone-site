@@ -158,6 +158,20 @@ input[type=submit].bigBlueButton:hover, input[type=reset].bigBlueButton:hover, s
 	background: -ms-linear-gradient(top, #ffffff, #ffffff);
 }
 
+.registerError{
+	color:#000000;
+	background-color: #FFEBE8;
+    border-color: #CC0000;
+    margin: 0 0 16px 8px;
+    padding: 12px;
+    
+	/*width:400px;*/
+	/*display:none;*/
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;	
+}
+
+
 .registerForm{
 	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 	font-weight: 300;

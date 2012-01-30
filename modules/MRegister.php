@@ -21,11 +21,12 @@ class MRegister extends Module
 			if ( self::$action == "newUser" && isset(self::$params) )
 			{
 				$response = self::registerUser(self::$params);
-				if(is_object($response)){
-					//Successful registration, returns the user data
+				if(is_numeric($response)){
+					$content = "success";
 				} else {
-					//There was a problem while registering, for now echo this content
-					$content = $response;
+					//Register errors found, notice the user
+					//$response contains an error string that should be i18n later on
+					$content = WidgetLoader::loadWidget("Register",$response);
 				}
 			}
 			elseif ( self::$action == "activate" && isset(self::$params))
@@ -50,8 +51,8 @@ class MRegister extends Module
 	
 	private function registerUser($data){
 		$reg = new Register();
+		//print_r(Convert::array_to_object(Zend_Json::decode(base64_decode($data))));
 		$response = $reg->newUser(Convert::array_to_object(Zend_Json::decode(base64_decode($data))));
-		
 		return $response;
 	}
 	
