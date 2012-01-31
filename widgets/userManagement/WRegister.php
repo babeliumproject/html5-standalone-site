@@ -8,10 +8,11 @@ class WRegister extends Widget
 	{
 		parent::load($args);
 		
+		$errors = null;
 		if(isset($args[1])){
 			$errors = $args[1];
-			self::assign("errors", $errors);
 		}
+		self::assign("errors", $errors);
 		
 		return self::fetch("userManagement/RegisterForm.tpl");
 	}

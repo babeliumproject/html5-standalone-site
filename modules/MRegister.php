@@ -1,6 +1,9 @@
 <?php
 
 require_once(dirname(__FILE__) . "/Module.php");
+require_once(dirname(__FILE__) . "/../util/Convert.php");
+
+require_once("Zend/Json.php");
 
 // Require service classes
 require_once(dirname(__FILE__) . "/../api/services/Register.php");
@@ -13,7 +16,6 @@ class MRegister extends Module
 		
 		// HTML content that will be returned
 		$content = "";
-		
 		$loggedIn = self::$sessionManager->isLoggedIn();
 		
 		//Is the user is already logged in don't let him register
@@ -50,9 +52,9 @@ class MRegister extends Module
 	}
 	
 	private function registerUser($data){
-		$reg = new Register();
-		//print_r(Convert::array_to_object(Zend_Json::decode(base64_decode($data))));
-		$response = $reg->newUser(Convert::array_to_object(Zend_Json::decode(base64_decode($data))));
+		$register = new Register();
+		$user = Convert::array_to_object(Zend_Json::decode(base64_decode($data)));
+		$response = $register->newUser($user);
 		return $response;
 	}
 	

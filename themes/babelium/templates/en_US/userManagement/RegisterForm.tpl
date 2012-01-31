@@ -4,7 +4,7 @@
 </header>
 {if $errors}
 <div class="registerError">
-	<strong>ERROR</strong>:{$errors}
+	<strong>ERROR</strong>: {$errors}
 </div>
 {/if}
 <div class="registerForm">

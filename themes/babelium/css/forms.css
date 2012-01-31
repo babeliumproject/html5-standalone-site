@@ -162,11 +162,12 @@ input[type=submit].bigBlueButton:hover, input[type=reset].bigBlueButton:hover, s
 	color:#000000;
 	background-color: #FFEBE8;
     border-color: #CC0000;
-    margin: 0 0 16px 8px;
+    border-width: 1px;
+    border-style: solid;
+    margin: 0 0 16px 16px;
     padding: 12px;
     
-	/*width:400px;*/
-	/*display:none;*/
+	width:600px;
 	-moz-border-radius:5px;
 	-webkit-border-radius:5px;	
 }

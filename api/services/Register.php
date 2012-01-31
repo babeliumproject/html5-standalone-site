@@ -51,12 +51,12 @@ class Register{
 	public function newUser($user = null)
 	{
 		if(!$user)
-			return 'Error';
+			return 'error_no_parameters';
 		$validator = new EmailAddressValidator();
 		if(!$validator->check_email_address($user->email)){
 			return 'wrong_email';
 		} else {
-			$initialCredits = $this->_getInitialCreditsQuery($sql);
+			$initialCredits = $this->_getInitialCreditsQuery();
 			$hash = $this->_createRegistrationHash();
 			
 			$insert = "INSERT INTO users (name, password, email, realName, realSurname, creditCount, activation_hash)";
@@ -65,44 +65,49 @@ class Register{
 			$realName = $user->realName? $user->realName : "unknown";
 			$realSurname = $user->realSurname? $user->realSurname : "unknown";
 
-			$result = $this->_insert ( $user, $insert, $user->name, $user->pass, $user->email,$realName, $realSurname, $initialCredits, $hash );
-			if ( $result != false )
+			$result = $this->_create ($insert, $user->name, $user->pass, $user->email,$realName, $realSurname, $initialCredits, $hash);
+			if ($result)
 			{
 				//Add the languages selected by the user
+				$motherTongueLocale = 'en_US';
 				$languages = $user->languages;
-				if (count($languages) > 0)
+				if ($languages && is_array($languages) && count($languages) > 0){
 					$this->addUserLanguages($languages, $result->id);
-
-				//We get the first mother tongue as message locale
-				$motherTongueLocale = $languages[0]->language;
-
+					//We get the first mother tongue as message locale
+					$motherTongueLocale = $languages[0]->language;
+				}
 
 				// Submit activation email
 				$mail = new Mailer($user->name);
 
 				$subject = 'Babelium Project: Account Activation';
 
+				$params = new stdClass();
+				$params->name = $user->name;
+				$params->activationHash = $hash;
+				$activation_link = 'http://'.$_SERVER['HTTP_HOST'].'/?module=register&action=activate&params='.base64_encode(json_encode($params));
+				
 				$args = array(
 						'PROJECT_NAME' => 'Babelium Project',
 						'USERNAME' => $user->name,
-						'PROJECT_SITE' => 'http://'.$_SERVER['HTTP_HOST'].'/Main.html#',
-						'ACTIVATION_LINK' => 'http://'.$_SERVER['HTTP_HOST'].'/Main.html#/activation/activate/hash='.$hash.'&user='.$user->name,
+						'PROJECT_SITE' => 'http://'.$_SERVER['HTTP_HOST'],
+						'ACTIVATION_LINK' => $activation_link,
 						'SIGNATURE' => 'The Babelium Project Team');
 
 				if ( !$mail->makeTemplate("mail_activation", $args, $motherTongueLocale) ) 
-					return null;
+					return false;
 
-				$mail->send($mail->txtContent, $subject, $mail->htmlContent);
+				$mail = $mail->send($mail->txtContent, $subject, $mail->htmlContent);
 
 				return $result;
 			}
-			return "User or email already exists";
+			return "user_email_already_registered";
 		}
 	}
 
 	//The parameter should be an array of UserLanguageVO
 	private function addUserLanguages($languages, $userId) {
-		$positivesToNextLevel = $this->_getPositivesToNextLevel($sql);
+		$positivesToNextLevel = $this->_getPositivesToNextLevel();
 
 		$params = array();
 
@@ -142,32 +147,17 @@ class Register{
 	}
 
 
-	private function _create() {
-		$data = func_get_args();
-		$user = array_shift($data); // remove User VO
+	private function _create($insert, $userName, $userPass, $userEmail, $userRealName, $userRealSurname, $userInitialCredits, $userHash) {
 
 		// Check user with same name or same email
 		$sql = "SELECT ID FROM users WHERE (name='%s' OR email = '%s' ) ";
-		$result = $this->conn->_singleSelect($sql, $user->name, $user->email);
+		$result = $this->conn->_singleSelect($sql, $userName, $userEmail);
 		if ($result)
 			return false;
 
-		$userId = $this->conn->_insert( $data );
+		$result = $this->conn->_insert( $insert, $userName, $userPass, $userEmail, $userRealName, $userRealSurname, $userInitialCredits, $userHash );
 
-		if ($userId) {
-			$sql = "SELECT ID as id, 
-						   name, 
-						   email, 
-						   password, 
-						   creditCount 
-					FROM users WHERE (ID= '%d' ) ";
-
-		
-			$result = $this->conn->_singleSelect($sql, $userId);
-			return $result;
-		} else {
-			return false;
-		}
+		return $result;
 	}
 
 	private function _createRegistrationHash()

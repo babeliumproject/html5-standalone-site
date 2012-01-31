@@ -29,13 +29,13 @@ require_once 'EmailAddressValidator.php';
 
 /**
  * This class performs mail sending duties
- *
+ * 
  * @author Babelium Team
  *
  */
 class Mailer
 {
-
+	
 	private $_conn;
 	private $_settings;
 	private $_userMail;
@@ -66,23 +66,21 @@ class Mailer
 	private function _getUserInfo($username)
 	{
 		if (!$username)
-		return false;
+			return false;
 
 		$aux = "name";
 		if ( Mailer::checkEmail($username) )
-		$aux = "email";
+			$aux = "email";
 
 		$sql = "SELECT name, email FROM users WHERE (".$aux." = '%s') ";
-		$result = $this->_conn->_execute($sql, $username);
-		$row = $this->_conn->_nextRow($result);
-
-		if ($row)
+		$result = $this->_conn->_singleSelect($sql, $username);
+		if ($result)
 		{
-			$this->_userRealName = $row[0];
-			$this->_userMail = $row[1];
+			$this->_userRealName = $result->name;
+			$this->_userMail = $result->email;
 		}
 		else
-		return false;
+			return false;
 
 		return true;
 	}
@@ -90,7 +88,7 @@ class Mailer
 	public function send($body, $subject, $htmlBody = null)
 	{
 		if ( !$this->_validUser )
-		return false;
+			return false;
 
 		// SMTP Server config
 		$config = array('auth' => 'login',
@@ -99,18 +97,18 @@ class Mailer
 						'ssl' => $this->_settings->smtp_server_ssl,
 						'port' => $this->_settings->smtp_server_port
 		);
-
+ 
 		$transport = new Zend_Mail_Transport_Smtp($this->_settings->smtp_server_host, $config);
 
 
 		$mail = new Zend_Mail('UTF-8');
 		$mail->setBodyText(utf8_decode($body));
 		if ( $htmlBody != null )
-		$mail->setBodyHtml($htmlBody);
+			$mail->setBodyHtml($htmlBody);
 		$mail->setFrom($this->_settings->smtp_mail_setFromMail, $this->_settings->smtp_mail_setFromName);
 		$mail->addTo($this->_userMail, $this->_userRealName);
 		$mail->setSubject($subject);
-
+		
 		try {
 			$mail->send($transport);
 		} catch (Exception $e) {
@@ -126,13 +124,13 @@ class Mailer
 		$reg = "/^[^0-9][a-zA-Z0-9_-]+([.][a-zA-Z0-9_-]+)*[@][a-zA-Z0-9_-]+([.][a-zA-Z0-9_-]+)*[.][a-zA-Z]{2,4}$/";
 		return preg_match($reg, $email);
 	}
-
+	
 	public static function checkEmailWithValidator($email)
 	{
 		$validator = new EmailAddressValidator();
 		return $validator->check_email_address($email);
 	}
-
+	
 	public function makeTemplate($templateFile, $templateArgs, $language)
 	{
 		$this->_tplFile = $this->_tplDir . $language . "/" . $templateFile;
@@ -142,7 +140,7 @@ class Mailer
 
 		$this->_keys = array();
 		$this->_values = array();
-
+		
 		while ( list($tmp1,$tmp2) = each($templateArgs) )
 		{
 			array_push($this->_keys, "/{" . $tmp1 . "}/");
@@ -157,7 +155,7 @@ class Mailer
 		$this->_template = fread($fd, filesize($txtFile));
 		fclose($fd);
 		$this->txtContent = preg_replace($this->_keys, $this->_values, $this->_template);
-
+		
 
 		// html content
 		if ( !$fd = fopen($htmlFile, "r") ) return false;
@@ -167,7 +165,6 @@ class Mailer
 
 		return true;
 	}
-
 }
 
 ?>
