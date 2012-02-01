@@ -92,12 +92,12 @@ class Datasource
 	/**
 	 * Analyzes the parameters of the caller and decides which way to handle them in the database query.
 	 */
-	public function _execute()
-	{
-		if ( is_array(func_get_arg(0)) )
-			return $this->_vexecute(func_get_arg(0)); // Gets an array of parameters
+	private function _execute($params)
+	{	
+		if ( is_array($params[0]) )
+			return $this->_vexecute($params[0]); // Gets an array of parameters
 		else
-			return $this->_vexecute(func_get_args()); // Gets separate parameters
+			return $this->_vexecute($params); // Gets separate parameters
 	}
 
 	/**
@@ -108,7 +108,7 @@ class Datasource
 	 * @return mixed $result
 	 * 		The resultset containing the query results
 	 */
-	public function _vexecute($params)
+	private function _vexecute($params)
 	{
 		$query = array_shift($params);
 
@@ -116,7 +116,6 @@ class Datasource
 		$params[$i] = mysqli_real_escape_string($this->dbLink, $params[$i]);
 
 		$query = vsprintf($query, $params);
-
 		$result = mysqli_query($this->dbLink, $query);
 		if(!$result)
 			$this->_checkErrors($query);
@@ -173,8 +172,11 @@ class Datasource
 	public function _insert (){
 		$this->_execute ( func_get_args() );
 
+		//Execute expects an array of some kind because func_get_args() wraps the parameters in an array each time it is called
 		$sql = "SELECT last_insert_id()";
-		$result = $this->_execute ( $sql );
+		$params = array();
+		$params[] = $sql;
+		$result = $this->_execute ( $params );
 
 		$row = $this->_nextRow ( $result );
 		if ($row) {
@@ -267,7 +269,7 @@ class Datasource
 		$errno = mysqli_connect_errno();
 		if($errno){
 			error_log("Database connection error #".$errno.": ".mysqli_connect_error()."\n",3,"/tmp/db_error.log");
-			throw new Exception("Database connection error.\n");
+			throw new Exception("Database connection error\n");
 		} else {
 			return;
 		}
@@ -293,7 +295,7 @@ class Datasource
 			error_log("Database error #" .$errno. " (".$sqlstate."): ".$error."\n",3,"/tmp/db_error.log");
 			if($sql != "")
 				error_log("Caused by the following SQL command: ".$sql."\n",3,"/tmp/db_error.log");
-			throw new Exception("Database operation error.\n");
+			throw new Exception("Database operation error\n");
 		}
 		else
 		{
