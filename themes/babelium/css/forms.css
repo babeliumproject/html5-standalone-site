@@ -158,7 +158,7 @@ input[type=submit].bigBlueButton:hover, input[type=reset].bigBlueButton:hover, s
 	background: -ms-linear-gradient(top, #ffffff, #ffffff);
 }
 
-.registerError{
+#registerError{
 	color:#000000;
 	background-color: #FFEBE8;
     border-color: #CC0000;
@@ -173,20 +173,20 @@ input[type=submit].bigBlueButton:hover, input[type=reset].bigBlueButton:hover, s
 }
 
 
-.registerForm{
+#registerForm{
 	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 	font-weight: 300;
 	color: #797977;
 }
 
-.registerForm fieldset{
+#registerForm fieldset{
 		margin: 8px;
 		padding: 8px;
 		border-style: solid;
 		border-width: 1px;
 		border-color: #268caa;
 }
-.registerForm select{
+#registerForm select{
 		border-style: solid;
 		border-color: #97d8d2;
 		border-width: 1px;

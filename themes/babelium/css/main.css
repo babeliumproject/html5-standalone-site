@@ -770,6 +770,10 @@ section#maincontent
 		
 		margin-top: 20px;
 	}
+	
+	section#maincontent > section > div.sameMargin{
+		padding: 20px;
+	}
 
 	section#maincontent > header
 	{

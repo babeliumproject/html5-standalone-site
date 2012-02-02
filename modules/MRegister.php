@@ -24,7 +24,7 @@ class MRegister extends Module
 			{
 				$response = self::registerUser(self::$params);
 				if(is_numeric($response)){
-					$content = "success";
+					$content = WidgetLoader::loadWidget("Register",false, $response);
 				} else {
 					//Register errors found, notice the user
 					//$response contains an error string that should be i18n later on
@@ -33,7 +33,10 @@ class MRegister extends Module
 			}
 			elseif ( self::$action == "activate" && isset(self::$params))
 			{
-				$response = self::registerUser(self::$params);
+				$response = self::activateUser(self::$params);
+				//if($response)
+				//	self::$sessionManager->setVar("web-language",$response);
+					
 				//If $response is null the template should report the error and otherways inform of the success and redirect to home
 				$content = WidgetLoader::loadWidget("Activate", $response);
 			}
@@ -42,7 +45,7 @@ class MRegister extends Module
 				$content = WidgetLoader::loadWidget("Register");
 			}
 		} else {
-			// Return false or something to tell the client that it's already loggedIn and shouldn't be here
+			$content = WidgetLoader::loadWidget("404");
 		}
 	
 		
