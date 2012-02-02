@@ -194,7 +194,7 @@ input[type=submit].bigBlueButton:hover, input[type=reset].bigBlueButton:hover, s
 		margin:4px;
 		background-color: white;
 }
-.registerForm input{
+#registerForm input[type=text], #registerForm input[type=password]{
 		border-style: solid;
 		border-color: #97d8d2;
 		border-width: 1px;

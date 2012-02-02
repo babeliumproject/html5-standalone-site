@@ -1,7 +1,7 @@
 				
 				<article class="exercise" data-id="{$exercise->id}" data-title="{$exercise->title}" data-name="{$exercise->name}">
 	  				<figure class="thumbnail">
-						<img src="{$cfg->imagePath}/{$exercise->name}/default.jpg" alt="{$cfg->title}" width="120" height="90" align="left" />
+						<img src="{$cfg->thumbnail_url}/{$exercise->name}/default.jpg" alt="{$exercise->title}" width="120" height="90" align="left" />
 						<figcaption>{$time->format($exercise->duration)}</figcaption>
 					</figure>
 					
@@ -32,7 +32,7 @@
 						</div>
 						
 						<p class="exerciseDescription">
-							{$exercise->description|truncate:160:" [..]"}
+							{$exercise->description|truncate:140:" [..]"}
 						</p>
 						
 						<p class="username">

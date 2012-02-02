@@ -20,17 +20,17 @@
 			<!-- right aligned box -->
 			<ul id="usernav" class="HBox vcenter">
 {if $isLoggedIn and isset($user) }
-	{include file="userManagement/UserLoggedInNav.tpl"}
+	{include file="$webLocale/userManagement/UserLoggedInNav.tpl"}
 {else}
-	{include file="userManagement/UserLoggedOutNav.tpl"}
+	{include file="$webLocale/userManagement/UserLoggedOutNav.tpl"}
 {/if}
 			</ul>
 		</nav>
 		
-{include file="userManagement/LoginForm.tpl"}
+{include file="$webLocale/userManagement/LoginForm.tpl"}
 		
 		<!-- logo -->
-		<div id="logo"><img src="themes/babelium/images/flan_dullv2.png" alt="Mintzabel" width="174" height="156" /></div>
+		<div id="logo"><img src="themes/babelium/images/flan_dullv2.png" alt="Bablium Project" width="174" height="156" /></div>
 		
 		<!-- main navigation -->
 		<nav id="mainnav" class="HBox vcenter">
