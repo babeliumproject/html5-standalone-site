@@ -72,7 +72,7 @@
 						<td>
 							<figure class="thumbnail">
 								<figcaption>{$time->format($r->exerciseDuration)}</figcaption>
-								<img src="{$cfg->imagePath}/{$r->exerciseName}/{$r->exerciseThumbnailUri}" width="96" height="72" border="0" alt="{$r->exerciseTitle}" />
+								<img src="{$cfg->thumbnail_url}/{$r->exerciseName}/{$r->exerciseThumbnailUri}" width="96" height="72" border="0" alt="{$r->exerciseTitle}" />
 							</td>
 						<td style="vertical-align: middle !important;">{$r->responseUserName}</td>
 						<td style="vertical-align: middle !important;">{$r->addingDate}</td>
