@@ -1,7 +1,6 @@
 <?php
 
 require_once(dirname(__FILE__) . "/../util/interfaces/iModule.php");
-require_once(dirname(__FILE__) . "/../config/Config.php");
 
 /**
  * Available modules

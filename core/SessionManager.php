@@ -12,7 +12,6 @@ require_once("Zend/Session.php");
 class SessionManager implements ISingleton
 {
 	protected static $_instance;
-	public $namespace = null;
 
 	/* Private constructor */
 	private function __construct() 

@@ -2,6 +2,7 @@
 
 // Project includes
 require_once(dirname(__FILE__) . "/../util/interfaces/iSingleton.php");
+require_once(dirname(__FILE__) . "/../util/Smarty/function.i18n.php");
 require_once(dirname(__FILE__) . "/../core/WidgetLoader.php");
 require_once(dirname(__FILE__) . "/../core/ModuleLoader.php");
 
@@ -255,5 +256,7 @@ class Config implements ISingleton
 		$this->smarty->setCompileDir(dirname(__FILE__) . "/../themes/".$this->theme."/templates_c");
 		$this->smarty->setCacheDir(dirname(__FILE__) . "/../themes/".$this->theme."/cache");
 		$this->smarty->setConfigDir(dirname(__FILE__) . "/../themes/".$this->theme."/configs");
+		
+		$this->smarty->registerPlugin("function", "i18n", "smarty_function_i18n");
 	}
 }
