@@ -25,7 +25,7 @@ class Widget implements IWidget
 	
 	protected static function fetch($tplName)
 	{
-		return self::$smarty->fetch(self::$sessionManager->getWebLanguage() . "/" . $tplName);
+		return self::$smarty->fetch($tplName);
 	}
 }
 

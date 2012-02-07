@@ -112,6 +112,15 @@ class SessionManager implements ISingleton
 	}
 	
 	/**
+	 * Set Web language
+	 */
+	public function setWebLanguage($locale)
+	{
+		if ( in_array($locale, array("en_US", "es_ES", "eu_ES", "fr_FR")) )
+			$this->setVar("web-language", $locale);
+	}
+	
+	/**
 	 * For now, we disable the IP check. Many ISPs have load-balance based dynamic IPs
 	 * so it could be a bother for the user.
 	 * 
