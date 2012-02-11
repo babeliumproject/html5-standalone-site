@@ -8,14 +8,14 @@
 			<ul id="localenav" class="HBox vcenter">
 				<li>{i18n name="MESSAGE_CHOOSE_LOCALE"}:</li>
 				<li>
-					<select id="localebox" name="localebox">
-						<option value="eu_ES" data-icon="themes/babelium/images/flags/flag_basque_country.png">
+					<select id="localebox" name="localebox" onChange="new LocaleEvent(LocaleEvent.CHANGE, this.value).dispatch();">
+						<option value="eu_ES" data-icon="themes/babelium/images/flags/flag_basque_country.png" {if SessionManager::getInstance()->getWebLanguage() == "eu_ES"}selected{/if}>
 							{i18n name="LOCALE_EU_ES"}
 						</option>
-						<option value="en_US" data-icon="themes/babelium/images/flags/flag_united_states.png" selected="true">
+						<option value="en_US" data-icon="themes/babelium/images/flags/flag_united_states.png" {if SessionManager::getInstance()->getWebLanguage() == "en_US"}selected{/if}>
 							{i18n name="LOCALE_EN_US"}
 						</option>
-						<option value="es_ES" data-icon="themes/babelium/images/flags/flag_spain.png">
+						<option value="es_ES" data-icon="themes/babelium/images/flags/flag_spain.png" {if SessionManager::getInstance()->getWebLanguage() == "es_ES"}selected{/if}>
 							{i18n name="LOCALE_ES_ES"}
 						</option>
 					</select>

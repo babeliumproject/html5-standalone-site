@@ -1,6 +1,6 @@
 
 <!-- Pending Assesments -->
-		<section class="VBox">
+		<section class="evaluationItemList VBox">
 			<header>
 				<h1>
 {if empty($action) || $action == "pending"}

@@ -60,6 +60,7 @@
 			<arg value="--js"/><arg value="events/EvaluationEvent.js"/>
 			<arg value="--js"/><arg value="events/ExerciseEvent.js"/>
 			<arg value="--js"/><arg value="events/HomepageEvent.js"/>
+			<arg value="--js"/><arg value="events/LocaleEvent.js"/>
 			<arg value="--js"/><arg value="events/LoginEvent.js"/>
 			<arg value="--js"/><arg value="events/RegisterEvent.js"/>
 			<arg value="--js"/><arg value="events/ViewChangeEvent.js"/>
@@ -92,6 +93,7 @@
 			<arg value="--js"/><arg value="commands/configuration/ViewMicTesterCommand.js"/>
 			<arg value="--js"/><arg value="commands/configuration/ViewWebcamTesterCommand.js"/>
 	
+			<arg value="--js"/><arg value="commands/main/LocaleChangedCommand.js"/>
 			<arg value="--js"/><arg value="commands/main/ViewAboutModuleCommand.js"/>
 	
 			<arg value="--js"/><arg value="commands/userManagement/ProcessLoginCommand.js"/>

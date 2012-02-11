@@ -51,6 +51,9 @@ var Controller = Cairngorm.FrontController.extend(
 		
 		//Register module
 		this.addCommand(RegisterEvent.REGISTER_USER, RegisterUserCommand);
-		this.addCommand(RegisterEvent.ACTIVATE_USER, ActivateUserCommand)
+		this.addCommand(RegisterEvent.ACTIVATE_USER, ActivateUserCommand);
+		
+		// Locale Event
+		this.addCommand(LocaleEvent.CHANGE, LocaleChangedCommand);
 	}
 });

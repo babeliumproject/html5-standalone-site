@@ -27,6 +27,8 @@ class SessionManager implements ISingleton
 		    session_regenerate_id();
 		    $_SESSION['initiated'] = true;
 		} 
+		
+		self::setWebLanguage($_GET["locale"]);
 	}
 
 	/* Returns an unique instance */

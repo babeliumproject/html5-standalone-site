@@ -21,8 +21,6 @@ $module = (isset($_GET["module"]))? $_GET["module"] : "home";
 $action = (isset($_GET["action"]))? $_GET["action"] : "";
 $params = (isset($_GET["params"]))? $_GET["params"] : "";
 
-$session->setWebLanguage($_GET["localebox"]);
-
 // Load header
 echo WidgetLoader::loadWidget("Head");
 echo WidgetLoader::loadWidget("Nav", ucwords($module), $action, $module == "home");

@@ -113,6 +113,7 @@ BP.CMS = (function()
 				selectBox.html($(this).html()+arrow);
 				dropDown.slideUp();
 				select.val(option.val());
+				select.change();
 			});
 		});
 		
@@ -165,6 +166,11 @@ BP.CMS = (function()
 		{
 			_pagination("section.exerciseList", ".exerciseContainer", ".exercise",
 					{title: ".exerciseTitle", description: "p.exerciseDescription"});
+		}
+		else if ( BP.SM.at("evaluate") )
+		{
+			_pagination("section.evaluationItemList", ".assesmentsContainer", ".evaluationItem",
+					{title: ".evaluationTitle", description: ".evaluationTitle"});
 		}
 	}
 	
