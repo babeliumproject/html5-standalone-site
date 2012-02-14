@@ -8,7 +8,7 @@ var ViewAboutModuleCommand = Cairngorm.Command.extend(
 	{
 		var _this = this;
 		
-		BP.CMS.prepareMainContent("about", function ()
+		BP.CMS.prepareMainContent("{{$LOADING_ABOUT_MODULE}}", function ()
 		{
 			BP.AboutDelegate.viewAboutModule(_this);
 		});
@@ -17,13 +17,13 @@ var ViewAboutModuleCommand = Cairngorm.Command.extend(
 	onResult : function ( response )
 	{
 
-		BP.SM.pushState("About - Babelium Project", {module : "about"});
+		BP.SM.pushState("{{$TITLE_ABOUT_MODULE}}", {module : "about"});
 		BP.CMS.innerMainContent(response);
 	},
 	
 	onFault : function ()
 	{
 		BP.CMS.abortLoading();
-		alert("Error loading about module");
+		alert("{{$ERROR_LOADING_ABOUT_MODULE}}");
 	}
 });

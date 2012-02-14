@@ -21,7 +21,7 @@ var ExerciseSelectedCommand = Cairngorm.Command.extend(
 	
 	onResult : function ( response )
 	{
-		BP.SM.pushState(BP.EM.selectedExercise.title + " - Practice - Babelium Project",
+		BP.SM.pushState(BP.EM.selectedExercise.title + "{{$TITLE_SELECTED_EXERCISE}}",
 				{module : "practice", action : "view", params : BP.EM.selectedExercise.name});
 		BP.CMS.innerExerciseView(response);
 	},
@@ -29,6 +29,6 @@ var ExerciseSelectedCommand = Cairngorm.Command.extend(
 	onFault : function ()
 	{
 		BP.CMS.abortLoading();
-		alert("Error loading exercise");
+		alert("{{$ERROR_LOADING_SELECTED_EXERCISE}}");
 	}
 });

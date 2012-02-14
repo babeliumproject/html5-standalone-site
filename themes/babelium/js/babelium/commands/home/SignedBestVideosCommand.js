@@ -8,7 +8,7 @@ var SignedBestVideosCommand = Cairngorm.Command.extend(
 	{
 		var _this = this;
 		
-		BP.CMS.prepareMainContent("best videos", function ()
+		BP.CMS.prepareMainContent("{{$LOADING_BEST_VIDEOS}}", function ()
 		{
 			BP.HomeDelegate.topScoreMostViewedVideos(_this);
 		}, true);
@@ -16,7 +16,7 @@ var SignedBestVideosCommand = Cairngorm.Command.extend(
 			
 	onResult : function ( response )
 	{
-		BP.SM.pushState("Home :: Best rated videos - Babelium Project", 
+		BP.SM.pushState("{{$TITLE_BEST_VIDEOS}}", 
 				{module : "home", action : "rated"});
 		BP.CMS.innerMainContent(response);
 	},
@@ -24,6 +24,6 @@ var SignedBestVideosCommand = Cairngorm.Command.extend(
 	onFault : function ()
 	{
 		BP.CMS.abortLoading();
-		alert("Error retrieving best rated videos");
+		alert("{{$ERROR_LOADING_BEST_VIDEOS}}");
 	}
 });

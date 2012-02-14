@@ -8,7 +8,7 @@ var LatestUploadedVideosCommand = Cairngorm.Command.extend(
 	{
 		var _this = this;
 		
-		BP.CMS.prepareMainContent("latest videos", function ()
+		BP.CMS.prepareMainContent("{{$LOADING_LATEST_UPLOADED_VIDEOS}}", function ()
 		{
 			BP.HomeDelegate.latestAvailableVideos(_this);
 		}, true);
@@ -16,7 +16,7 @@ var LatestUploadedVideosCommand = Cairngorm.Command.extend(
 		
 	onResult : function ( response )
 	{
-		BP.SM.pushState("Home :: Latest uploaded videos - Babelium Project",
+		BP.SM.pushState("{{$TITLE_LATEST_UPLOADED_VIDEOS}}",
 				{module : "home", action : "uploaded"});
 		BP.CMS.innerMainContent(response);
 	},
@@ -24,6 +24,6 @@ var LatestUploadedVideosCommand = Cairngorm.Command.extend(
 	onFault : function ()
 	{
 		BP.CMS.abortLoading();
-		alert("Error retrieving latest videos");
+		alert("{{$ERROR_LOADING_LATEST_UPLOADED_VIDEOS}}");
 	}
 });

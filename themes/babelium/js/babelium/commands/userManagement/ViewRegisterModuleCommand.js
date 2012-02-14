@@ -8,7 +8,7 @@ var ViewRegisterModuleCommand = Cairngorm.Command.extend(
 	{
 		var _this = this;
 		
-		BP.CMS.prepareMainContent("register", function ()
+		BP.CMS.prepareMainContent("{{$LOADING_REGISTER_FORM}}", function ()
 		{
 			BP.RegisterDelegate.viewRegisterModule(_this);
 		});
@@ -16,13 +16,13 @@ var ViewRegisterModuleCommand = Cairngorm.Command.extend(
 	
 	onResult : function ( response )
 	{
-		BP.SM.pushState("Register - Babelium Project", {module : "register"});
+		BP.SM.pushState("{{$TITLE_REGISTER_FORM}}", {module : "register"});
 		BP.CMS.innerMainContent(response);
 	},
 	
 	onFault : function ()
 	{
 		BP.CMS.abortLoading();
-		alert("Error loading register module");
+		alert("{{$ERROR_LOADING_REGISTER_FORM}}");
 	}
 });

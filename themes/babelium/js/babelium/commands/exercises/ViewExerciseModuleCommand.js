@@ -10,7 +10,7 @@ var ViewExerciseModuleCommand = Cairngorm.Command.extend(
 		
 		BP.EM.selectedExercise = null;
 
-		BP.CMS.prepareMainContent("practice module", function ()
+		BP.CMS.prepareMainContent("{{$LOADING_EXERCISE_MODULE}}", function ()
 		{
 			BP.PracticeDelegate.viewPracticeModule(_this);
 		});
@@ -18,13 +18,13 @@ var ViewExerciseModuleCommand = Cairngorm.Command.extend(
 	
 	onResult : function ( response )
 	{
-		BP.SM.pushState("Practice - Babelium Project", {module : "practice"});
+		BP.SM.pushState("{{$TITLE_EXERCISE_MODULE}}", {module : "practice"});
 		BP.CMS.innerMainContent(response);
 	},
 	
 	onFault : function ()
 	{
 		BP.CMS.abortLoading();
-		alert("Error loading practice module");
+		alert("{{$ERROR_LOADING_EXERCISE_MODULE}}");
 	}
 });

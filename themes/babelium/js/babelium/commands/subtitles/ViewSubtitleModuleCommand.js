@@ -8,7 +8,7 @@ var ViewSubtitleModuleCommand = Cairngorm.Command.extend(
 	{
 		var _this = this;
 		
-		BP.CMS.prepareMainContent("subtitle module", function ()
+		BP.CMS.prepareMainContent("{{$LOADING_SUBTITLE_MODULE}}", function ()
 		{
 			BP.SubtitleDelegate.viewSubtitleModule(_this);
 		});
@@ -16,13 +16,13 @@ var ViewSubtitleModuleCommand = Cairngorm.Command.extend(
 	
 	onResult : function ( response )
 	{
-		BP.SM.pushState("Subtitles - Babelium Project", {module : "subtitle"});
+		BP.SM.pushState("{{$TITLE_SUBTITLE_MODULE}}", {module : "subtitle"});
 		BP.CMS.innerMainContent(response);
 	},
 	
 	onFault : function ()
 	{
 		BP.CMS.abortLoading();
-		alert("Error loading subtitle module");
+		alert("{{$ERROR_LOADING_SUBTITLE_MODULE}}");
 	}
 });

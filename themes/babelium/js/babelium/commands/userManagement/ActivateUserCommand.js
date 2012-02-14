@@ -18,6 +18,6 @@ var ActivateUserCommand = Cairngorm.Command.extend(
 	
 	onFault : function ()
 	{
-		alert("Error while trying to activate the user's account");
+		alert("{{$ERROR_ACTIVATING_ACCOUNT}}");
 	}
 });

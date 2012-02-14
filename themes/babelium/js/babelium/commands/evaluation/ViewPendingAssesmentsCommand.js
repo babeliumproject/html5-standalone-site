@@ -8,7 +8,7 @@ var ViewPendingAssesmentsCommand = Cairngorm.Command.extend(
 	{
 		var _this = this;
 		
-		BP.CMS.prepareMainContent("pending assesments", function ()
+		BP.CMS.prepareMainContent("{{$LOADING_ASSESMENTS_PENDING}}", function ()
 		{
 			BP.EvaluationDelegate.viewPendingAssesments(_this);
 		});
@@ -16,7 +16,7 @@ var ViewPendingAssesmentsCommand = Cairngorm.Command.extend(
 	
 	onResult : function ( response )
 	{
-		BP.SM.pushState("Evaluate :: Pending Assesments - Babelium Project",
+		BP.SM.pushState("{{$TITLE_ASSESMENTS_PENDING}}",
 							{module : "evaluate", action : "pending"});
 		BP.CMS.innerMainContent(response);
 	},
@@ -24,6 +24,6 @@ var ViewPendingAssesmentsCommand = Cairngorm.Command.extend(
 	onFault : function ()
 	{
 		BP.CMS.abortLoading();
-		alert("Error loading pending assesments");
+		alert("{{$ERROR_LOADING_EVALUATION}}");
 	}
 });

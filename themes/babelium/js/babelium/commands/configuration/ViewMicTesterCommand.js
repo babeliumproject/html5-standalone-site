@@ -8,7 +8,7 @@ var ViewMicTesterCommand = Cairngorm.Command.extend(
 	{
 		var _this = this;
 		
-		BP.CMS.prepareMainContent("mic tester", function ()
+		BP.CMS.prepareMainContent("{{$LOADING_MIC_TEST}}", function ()
 		{
 			BP.ConfigurationDelegate.viewMicTester(_this);
 		});
@@ -16,7 +16,7 @@ var ViewMicTesterCommand = Cairngorm.Command.extend(
 	
 	onResult : function ( response )
 	{
-		BP.SM.pushState("Configure :: Mic Tester - Babelium Project",
+		BP.SM.pushState("{{$TITLE_MIC_TEST}}",
 							{module : "config", action : "mic"});
 		BP.CMS.innerMainContent(response);
 	},
@@ -24,6 +24,6 @@ var ViewMicTesterCommand = Cairngorm.Command.extend(
 	onFault : function ()
 	{
 		BP.CMS.abortLoading();
-		alert("Error loading pending assesments");
+		alert("{{$ERROR_LOADING_MIC_TEST}}");
 	}
 });

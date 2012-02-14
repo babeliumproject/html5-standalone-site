@@ -1,0 +1,92 @@
+
+//
+// CONFIG MODULE
+//
+LOADING_CONFIG_MODULE=config module
+LOADING_MIC_TEST=mic tester
+LOADING_WEBCAM_TEST=webcam tester
+
+TITLE_CONFIG_MODULE=Configure - Babelium Project
+TITLE_MIC_TEST=Configure :: Mic Tester - Babelium Project
+TITLE_WEBCAM_TEST=Configure :: Webcam Tester - Babelium Project
+
+ERROR_LOADING_CONFIG_MODULE=Error loading config module
+ERROR_LOADING_MIC_TEST=Error loading microphone test
+ERROR_LOADING_WEBCAM_TEST=Error loading webcam test
+
+//
+// EVALUATION MODULE
+//
+LOADING_ASSESMENTS_BYUSER=assessed by user
+LOADING_ASSESMENTS_TOUSER=assessed to user
+LOADING_ASSESMENTS_PENDING=pending assesments
+LOADING_EVALUATION_MODULE=evaluation module
+
+TITLE_ASSESMENTS_BYUSER=Evaluate :: Assessed by user - Babelium Project
+TITLE_ASSESMENTS_TOUSER=Evaluate :: Assessed to user - Babelium Project
+TITLE_ASSESMENTS_PENDING=Evaluate :: Pending Assesments - Babelium Project
+TITLE_EVALUATION_MODULE=Evaluate - Babelium Project
+
+ERROR_LOADING_ASSESMETS_BYUSER=Error loading assessed by user
+ERROR_LOADING_ASSESMETS_TOUSER=Error loading assessed to user
+ERROR_LOADING_ASSESMETS_PENDING=Error loading pending assesments
+ERROR_LOADING_EVALUATION_MODULE=Error loading evaluation module
+
+//
+// EXERCISE MODULE
+//
+LOADING_EXERCISE_MODULE=practice module
+
+TITLE_EXERCISE_MODULE=Practice - Babelium Project
+TITLE_SELECTED_EXERCISE= - Practice - Babelium Project
+
+ERROR_LOADING_EXERCISE_MODULE=Error loading practice module
+ERROR_LOADING_SELECTED_EXERCISE=Error loading exercise
+
+//
+// HOME
+//
+LOADING_HOME_MODULE=home
+LOADING_LATEST_UPLOADED_VIDEOS=latest videos
+LOADING_USER_ACTIVITY=latest activity
+LOADING_BEST_VIDEOS=best videos
+
+TITLE_HOME_MODULE=Home - Babelium Project
+TITLE_LATEST_UPLOADED_VIDEOS=Home :: Latest uploaded videos - Babelium Project
+TITLE_USER_ACTIVITY=Home :: Latest user activty - Babelium Project
+TITLE_BEST_VIDEOS=Home :: Best rated videos - Babelium Project
+
+ERROR_LOADING_HOME_MODULE=Error loading home module
+ERROR_LOADING_LATEST_UPLOADED_VIDEOS=Error retrieving latest videos
+ERROR_LOADING_USER_ACTIVITY=Error retrieving latest user activity
+ERROR_LOADING_BEST_VIDEOS=Error retrieving best rated videos
+
+//
+// ABOUT
+//
+LOADING_ABOUT_MODULE=about
+TITLE_ABOUT_MODULE=About - Babelium Project
+ERROR_LOADING_ABOUT_MODULE=Error loading about module
+
+//
+// SUBTITLE
+//
+LOADING_SUBTITLE_MODULE=subtitle module
+TITLE_SUBTITLE_MODULE=Subtitles - Babelium Project
+ERROR_LOADING_SUBTITLE_MODULE=Error loading subtitle module
+
+//
+// USER MANAGEMENT
+//
+ERROR_ACTIVATING_ACCOUNT=Error while trying to activate the user's account
+ERROR_LOGIN=Error trying to connect to the login server
+ERROR_REGISTERING_USER=Error while trying to register the user
+ERROR_LOADING_REGISTER_FORM=Error loading register module
+
+LOADING_REGISTER_FORM=register
+TITLE_REGISTER_FORM=Register - Babelium Project
+
+//
+// OTHERS
+//
+ERROR_LOADING_LAST_MODULE=Error loading last module

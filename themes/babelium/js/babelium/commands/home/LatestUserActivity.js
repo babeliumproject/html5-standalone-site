@@ -8,7 +8,7 @@ var LatestUserActivityCommand = Cairngorm.Command.extend(
 	{
 		var _this = this;
 		
-		BP.CMS.prepareMainContent("latest activity", function ()
+		BP.CMS.prepareMainContent("{{$LOADING_USER_ACTIVITY}}", function ()
 		{
 			BP.HomeDelegate.latestUserActivity(_this);
 		}, true);
@@ -16,7 +16,7 @@ var LatestUserActivityCommand = Cairngorm.Command.extend(
 			
 	onResult : function ( response )
 	{
-		BP.SM.pushState("Home :: Best rated videos - Babelium Project", 
+		BP.SM.pushState("{{$TITLE_USER_ACTIVITY}}", 
 				{module : "home", action : "activity"});
 		BP.CMS.innerMainContent(response);
 	},
@@ -24,6 +24,6 @@ var LatestUserActivityCommand = Cairngorm.Command.extend(
 	onFault : function ()
 	{
 		BP.CMS.abortLoading();
-		alert("Error retrieving latest user activity");
+		alert("{{$ERROR_LOADING_USER_ACTIVITY}}");
 	}
 });

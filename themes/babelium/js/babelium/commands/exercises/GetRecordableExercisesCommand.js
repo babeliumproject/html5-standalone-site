@@ -8,7 +8,7 @@ var GetRecordableExercisesCommand = Cairngorm.Command.extend(
 	{
 		var _this = this;
 		
-		BP.CMS.prepareMainContent("practice module", function ()
+		BP.CMS.prepareMainContent("{{$LOADING_EXERCISE_MODULE}}", function ()
 		{
 			BP.PracticeDelegate.getRecordableExercises(_this);
 		});
@@ -16,13 +16,13 @@ var GetRecordableExercisesCommand = Cairngorm.Command.extend(
 	
 	onResult : function ( response )
 	{
-		BP.pushState("Practice - Babelium Project", "?module=practice", {module : "practice" });
+		BP.pushState("{{$TITLE_EXERCISE_MODULE}}", "?module=practice", {module : "practice" });
 		BP.CMS.innerMainContent(response);
 	},
 	
 	onFault : function ()
 	{
 		BP.CMS.abortLoading();
-		alert("Error loading practice module");
+		alert("{{$ERROR_LOADING_EXERCISE_MODULE}}");
 	}
 });

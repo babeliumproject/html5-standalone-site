@@ -8,7 +8,7 @@ var ViewEvaluationModuleCommand = Cairngorm.Command.extend(
 	{
 		var _this = this;
 		
-		BP.CMS.prepareMainContent("evaluation module", function ()
+		BP.CMS.prepareMainContent("{{$LOADING_EVALUATION_MODULE}}", function ()
 		{
 			BP.EvaluationDelegate.viewEvaluationModule(_this);
 		});
@@ -16,13 +16,13 @@ var ViewEvaluationModuleCommand = Cairngorm.Command.extend(
 	
 	onResult : function ( response )
 	{
-		BP.SM.pushState("Evaluate - Babelium Project", {module : "evaluate"});
+		BP.SM.pushState("{{$TITLE_EVALUATION_MODULE}}", {module : "evaluate"});
 		BP.CMS.innerMainContent(response);
 	},
 	
 	onFault : function ()
 	{
 		BP.CMS.abortLoading();
-		alert("Error loading evaluation module");
+		alert("{{$ERROR_LOADING_EVALUATION_MODULE}}");
 	}
 });

@@ -8,7 +8,7 @@ var ViewHomeModuleCommand = Cairngorm.Command.extend(
 	{
 		var _this = this;
 		
-		BP.CMS.prepareMainContent("home", function ()
+		BP.CMS.prepareMainContent("{{$LOADING_HOME_MODULE}}", function ()
 		{
 			BP.HomeDelegate.viewHomeModule(_this, _this.data === true);
 		}, true);
@@ -16,13 +16,13 @@ var ViewHomeModuleCommand = Cairngorm.Command.extend(
 	
 	onResult : function ( response )
 	{
-		BP.SM.pushState("Home - Babelium Project", {module : "home"});
+		BP.SM.pushState("{{$TITLE_HOME_MODULE}}", {module : "home"});
 		BP.CMS.innerMainContent(response);
 	},
 	
 	onFault : function ()
 	{
 		BP.CMS.abortLoading();
-		alert("Error loading home module");
+		alert("{{$ERROR_LOADING_HOME_MODULE}}");
 	}
 });

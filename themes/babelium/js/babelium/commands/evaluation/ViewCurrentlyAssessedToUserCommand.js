@@ -8,7 +8,7 @@ var ViewCurrentlyAssessedToUserCommand = Cairngorm.Command.extend(
 	{
 		var _this = this;
 		
-		BP.CMS.prepareMainContent("assessed to user", function ()
+		BP.CMS.prepareMainContent("{{$LOADING_ASSESMENTS_TOUSER}}", function ()
 		{
 			BP.EvaluationDelegate.viewAssessedToUser(_this);
 		});
@@ -16,7 +16,7 @@ var ViewCurrentlyAssessedToUserCommand = Cairngorm.Command.extend(
 	
 	onResult : function ( response )
 	{
-		BP.SM.pushState("Evaluate :: Assessed to user - Babelium Project",
+		BP.SM.pushState("{{$TITLE_ASSESMENTS_TOUSER}}",
 							{module : "evaluate", action : "touser"});
 		BP.CMS.innerMainContent(response);
 	},
@@ -24,6 +24,6 @@ var ViewCurrentlyAssessedToUserCommand = Cairngorm.Command.extend(
 	onFault : function ()
 	{
 		BP.CMS.abortLoading();
-		alert("Error loading assessed to user");
+		alert("{{$ERROR_LOADING_ASSESMETS_TOUSER}}");
 	}
 });

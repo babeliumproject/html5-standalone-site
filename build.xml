@@ -127,7 +127,7 @@
 			<arg value="--js"/><arg value="vo/NewUserVO.js"/>
 
 			<arg value="--js"/><arg value="bootstrap.js"/>
-			<arg value="--js_output_file"/><arg value="${babeliumjs.OUTPUT_DIR}/babelium.js"/>
+			<arg value="--js_output_file"/><arg value="${babeliumjs.OUTPUT_DIR}/babeliumjs.tpl"/>
 		</java>
 	</target>
 
