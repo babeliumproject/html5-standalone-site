@@ -17,9 +17,12 @@ class MEvaluation extends Module
 		if ( !$loggedIn )
 			return WidgetLoader::loadWidget("Unauthorized");
 			
-		$content = WidgetLoader::loadWidget("EvaluationTabBar",
+		if ( self::$state != "min" )
+			$content = WidgetLoader::loadWidget("EvaluationTabBar",
 							self::$config->restrictedEvaluation,
 							self::$sessionManager->getUserData()->isAdmin);
+		else
+			$content = "";
 		
 		/**
 		 * SWITCH ACTION
@@ -33,17 +36,45 @@ class MEvaluation extends Module
 		{
 			$evaluation = new Evaluation();
 			$response = $evaluation->getResponsesAssessedByCurrentUser();
+			
+			// Check for selected assesment
+			if ( !empty(self::$params) )
+			{
+				// Assesments done by user
+				foreach ( $response as $assesment )
+				{
+					if ( $assesment->responseId == self::$params )
+					{
+						$content .= WidgetLoader::loadWidget("AssessedByUser", $assesment);
+						break;
+					}
+				}
+			}
 		}
 		else
 		{
 			$evaluation = new Evaluation();
 			$response = $evaluation->getResponsesWaitingAssessment();
+			
+			// Check for selected assesment
+			if ( !empty(self::$params) )
+			{
+				// Assesments done by user
+				foreach ( $response as $assesment )
+				{
+					if ( $assesment->responseId == self::$params )
+					{
+						$content .= WidgetLoader::loadWidget("WaitingForEvaluation", $assesment);
+						break;
+					}
+				}
+			}
 		}
 		
 		/**
-		 * IF ANY, SHOW ASSESMENTS
+		 * IF ANY, SHOW ASSESMENT LIST
 		 */
-		if ( isset($response) )
+		if ( isset($response) && self::$state != "min" )
 			$content .= WidgetLoader::loadWidget("EvaluationDataTable", $response, self::$action);
 		
 		return $content;

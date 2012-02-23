@@ -16,3 +16,7 @@ var EvaluationEvent = Cairngorm.Event.extend(
 EvaluationEvent.VIEW_PENDING_ASSESMENTS = "viewPendingAssesments";
 EvaluationEvent.VIEW_CURRENTLY_ASSESSED_TO_USER = "viewAssessedToUser";
 EvaluationEvent.VIEW_CURRENTLY_ASSESSED_BY_USER = "viewAssessedByUser";
+
+EvaluationEvent.VIEW_EVALUATION_ASSESMENT = "viewEvaluationAsesment";
+EvaluationEvent.VIEW_REVISION_ASSESMENT = "viewRevisionAssesment";
+EvaluationEvent.VIEW_ASSESSED_ASSESMENT = "viewAssessedAssesment";

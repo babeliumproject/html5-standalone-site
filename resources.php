@@ -5,7 +5,7 @@ require_once("core/SessionManager.php");
 require_once("util/Smarty/function.i18n.php"); // Required to avoid error
 
 if ( $_SERVER["QUERY_STRING"] != "babeliumjs" )
-	die("No resource required");
+	die("Error: resource required");
 
 /** Init session and config **/
 $cfg = Config::getInstance();
@@ -34,6 +34,6 @@ foreach ( $localeFile as $line )
 		
 header("Content-type: text/javascript\n\n");
 
-$smarty->display("Scripts/babeliumjs.tpl");
+$smarty->display("scripts/babeliumjs.tpl");
 
 ?>

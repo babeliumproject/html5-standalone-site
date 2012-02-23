@@ -38,7 +38,7 @@ BP.CMS = (function()
 		
 		if ( BP.SM.at("home") && !BP.SM.action("activity") )
 			_initRatings(); // Only needed at home, datatables and paginators loads ratings itselfs
-		if ( BP.SM.at("practice") && BP.SM.action("view") )
+		if ( (BP.SM.at("practice") && BP.SM.action("view")) || (BP.SM.at("evaluate") && BP.SM.params() != null) )
 			_rating(".ratyPreview", true);
 		
 		_initiated = true;
@@ -460,17 +460,20 @@ BP.CMS = (function()
 		 * @param location : target module name, just for a loading message
 		 * @param callback : callback function
 		 */
-		prepareExerciseView : function ( callback )
+		prepareExerciseView : function ( callback, title )
 		{
 			if ( _loading || !_initiated )
 				return;
 			
 			_loading = true;
 			
+			if ( typeof title == "undefined" )
+				title = "exercise";
+			
 			// Display loading message
 			var top =  _maincontent.offset().top;
 			_loader.css("top", top + _maincontent.find("header").outerHeight());
-			_loader.find("p").text("Retrieving exercise information");
+			_loader.find("p").text("Retrieving " + title + " information");
 			_loader.slideDown();
 			
 			// Animate scrolling 
@@ -536,7 +539,7 @@ BP.CMS = (function()
 			
 			if ( BP.SM.at("home") && !BP.SM.action("activity") )
 				_initRatings(); // Only needed at home, datatables and paginators loads ratings itselfs
-			if ( BP.SM.at("practice") && BP.SM.action("view") )
+			if ( (BP.SM.at("practice") && BP.SM.action("view")) || BP.SM.at("evaluate") )
 				_rating(".ratyPreview", true);
 		},
 
@@ -568,10 +571,23 @@ BP.CMS = (function()
 		 * Inner and display new exercise
 		 * @param data : JSON object with {title, content}
 		 */
-		innerExerciseView : function ( data )
+		innerExerciseView : function ( data, evaluation )
 		{
 			if ( !_loading )
 				return;
+			
+			var insertAfter = "", container = "";
+			
+			if ( typeof evaluation == "undefined" )
+			{
+				container = "section.exerciseInfo";
+				insertAfter = "aside#loader";
+			}
+			else
+			{
+				container = "section.evaluationDetails";
+				insertAfter = "aside#tabBarContainer";
+			}
 			
 			var _this = this;
 			
@@ -579,19 +595,19 @@ BP.CMS = (function()
 			var content = $(data.content).hide();
 			
 			// Slide up current exercise and remove it on animation end
-			if ( $("section.exerciseInfo").length > 0 )
+			if ( $(container).length > 0 )
 			{
-				$("section.exerciseInfo").fadeOut("fast", function()
+				$(container).fadeOut("fast", function()
 				{
-					$("section.exerciseInfo").remove();
-					content.insertAfter("aside#loader").fadeIn();
+					$(container).remove();
+					content.insertAfter(insertAfter).fadeIn();
 					_this.reloadRatings();
 					_loader.slideUp();
 				});
 			}
 			else
 			{
-				content.insertAfter("aside#loader").fadeIn();
+				content.insertAfter(insertAfter).fadeIn();
 				_this.reloadRatings();
 				_loader.slideUp();
 			}

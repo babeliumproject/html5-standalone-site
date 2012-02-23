@@ -25,9 +25,32 @@ function smarty_function_i18n($params, &$smarty)
 	foreach ( $localeFile as $line )
 	{
 		list($name, $value) = explode("=", $line, 2);
+		
 		if ( $name == $params["name"] )
-		{
+		{	
+			/**
+			 * Parse value
+			 * change {0} by smarty variable param0
+			 */
+			$endpos = 0;
+			
+			$pos = strrpos($value, "{");
+			
+			while ( $pos !== false )
+			{
+				$endpos = strrpos($value, "}", $pos);
+
+				if ( $endpos !== false )
+				{
+					$num = intval(substr($value, $pos+1, $endpos - $pos -1));
+					$value = substr($value, 0, $pos) . $params["param".$num] . substr($value, $endpos + 1, strlen($value) - $endpos - 1);
+				}
+
+				$pos = strrpos($value, "{", $pos+1);
+			}
+			
 			$ret = $value;
+			
 			break;
 		}
 	}

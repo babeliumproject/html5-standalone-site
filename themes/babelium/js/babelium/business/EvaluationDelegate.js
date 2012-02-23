@@ -31,6 +31,24 @@ BP.EvaluationDelegate = (function ()
 		{
 			var _service = Cairngorm.ServiceLocator.getHttpService(_serviceID);
 			_service.call( {action : "byuser"}, responder );
+		},
+		
+		viewAssessedAssesment : function ( responder, responseId )
+		{
+			if ( typeof responseId == "undefined" )
+				return;
+			
+			var _service = Cairngorm.ServiceLocator.getHttpService(_serviceID);
+			_service.call( {action : "byuser", params : responseId, state : "min"}, responder );
+		},
+		
+		viewEvaluationAssesment : function ( responder, responseId )
+		{
+			if ( typeof responseId == "undefined" )
+				return;
+			
+			var _service = Cairngorm.ServiceLocator.getHttpService(_serviceID);
+			_service.call( {action : "pending", params : responseId, state : "min"}, responder );
 		}
 	};
 

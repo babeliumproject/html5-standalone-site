@@ -1396,6 +1396,83 @@ div.evaluationItemInfo > *
 
 /** END OF EVALUATION ITEM RENDER **/
 
+/** ASSESMENTS **/
+
+section.evaluationDetails
+{
+	min-height: 500px;
+}
+
+	section.evaluationDetails > article, div.evaluationContainer
+	{
+		margin-top: 10px;
+		float: left;
+	}
+	
+		div.evaluationContainer
+		{
+			width: 335px;
+			margin-left: 30px;
+		}
+	
+			div.evaluationContainer > article
+			{
+				width: 100%;
+				float: left;
+				background-color: #eaeff3;
+				
+				border: 1px solid #afbec9;
+				
+				-moz-border-radius: 6px; 
+				-webkit-border-radius: 6px;
+				-o-border-radius: 6px;
+				-ms-border-radius: 6px;
+				border-radius:6px;
+			
+				margin-bottom: 10px;
+				padding: 10px;
+			}
+			
+				article.evaluationRating > h3
+				{
+					color: #268caa;
+				}
+			
+				article.evaluationRating > span
+				{
+					line-height: 20px;
+				}
+			
+				div.evaluationContainer > article > div:first-child
+				{
+					width: 40%;
+					float: left;
+				}
+				
+				div.evaluationContainer > article > div:last-child
+				{
+					width: 60%;
+					float: left;
+				}
+				
+					div.evaluationRatingLabels > p
+					{
+						padding-right: 20px;
+						font-weight: bold;
+						line-height: 26px;
+						text-align: right;
+					}
+				
+				article.evaluationComments > textarea
+				{
+					margin: 10px;
+					padding: 5px;
+					width: 300px;
+					height: 50px;
+				}
+
+/** END OF ASSESMENTS **/
+
 /** FOOTER **/
 
 footer

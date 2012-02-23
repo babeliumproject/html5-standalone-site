@@ -1,0 +1,41 @@
+
+
+		<section class="evaluationDetails">
+			<header>
+				<h1>{$data->exerciseTitle}</h1>
+			</header>
+
+{include file="util/VideoPlayerPreview.tpl"}
+
+			<div class="evaluationContainer">
+				<article class="evaluationRating">
+					<h3>{i18n name="MESSAGE_RATE_THE_USERS_RESPONSE"}</h3>
+				</article>
+				<article class="evaluationRating">
+					<div class="evaluationRatingLabels">
+						<p>{i18n name="LABEL_INTONATION_SCORE"}</p>
+						<p>{i18n name="LABEL_FLUENCY_SCORE"}</p>
+						<p>{i18n name="LABEL_RHYTHM_SCORE"}</p>
+						<p>{i18n name="LABEL_SPONTANEITY_SCORE"}</p>
+						<p>{i18n name="LABEL_OVERALL_SCORE"}</p>
+					</div>
+					<div>
+						<p class="ratyPreview"></p>
+						<p class="ratyPreview"></p>
+						<p class="ratyPreview"></p>
+						<p class="ratyPreview"></p>
+						<p class="ratyPreview"></p>
+					</div>
+				</article>
+				<article class="evaluationComments">
+					{i18n name="MESSAGE_OPTIONAL_EVALUATION_DATA"}
+					<textarea id="responseComment"></textarea>
+				</article>
+				<article class="evaluationSubmit">
+					<button class="bigBlueButton">{i18n name="LABEL_SEND_EVALUATION"}</button>
+					<button class="cancel">{i18n name="LABEL_RESET_EVALUATION"}</button>
+				</article>
+			</div>
+
+		</section>
+	

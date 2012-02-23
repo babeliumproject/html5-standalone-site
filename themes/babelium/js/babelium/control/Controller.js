@@ -48,6 +48,8 @@ var Controller = Cairngorm.FrontController.extend(
 		this.addCommand(EvaluationEvent.VIEW_PENDING_ASSESMENTS, ViewPendingAssesmentsCommand);
 		this.addCommand(EvaluationEvent.VIEW_CURRENTLY_ASSESSED_TO_USER, ViewCurrentlyAssessedToUserCommand);
 		this.addCommand(EvaluationEvent.VIEW_CURRENTLY_ASSESSED_BY_USER, ViewCurrentlyAssessedByUserCommand);
+		this.addCommand(EvaluationEvent.VIEW_ASSESSED_ASSESMENT, ViewAssessedAssesmentCommand);
+		this.addCommand(EvaluationEvent.VIEW_EVALUATION_ASSESMENT, ViewEvaluationAssesmentCommand);
 		
 		//Register module
 		this.addCommand(RegisterEvent.REGISTER_USER, RegisterUserCommand);

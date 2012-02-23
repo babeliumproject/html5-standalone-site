@@ -86,6 +86,8 @@
 			<arg value="--js"/><arg value="commands/evaluation/ViewPendingAssesmentsCommand.js"/>
 			<arg value="--js"/><arg value="commands/evaluation/ViewCurrentlyAssessedToUserCommand.js"/>
 			<arg value="--js"/><arg value="commands/evaluation/ViewCurrentlyAssessedByUserCommand.js"/>
+			<arg value="--js"/><arg value="commands/evaluation/ViewAssessedAssesmentCommand.js"/>
+			<arg value="--js"/><arg value="commands/evaluation/ViewEvaluationAssesmentCommand.js"/>
 			
 			<arg value="--js"/><arg value="commands/subtitles/ViewSubtitleModuleCommand.js"/>
 			
