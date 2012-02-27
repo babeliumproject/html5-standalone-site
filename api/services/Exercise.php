@@ -34,10 +34,10 @@ require_once 'utils/VideoProcessor.php';
  */
 class Exercise {
 
-
 	private $filePath;
 	private $imagePath;
 	private $red5Path;
+	private $posterPath;
 
 	private $evaluationFolder = '';
 	private $exerciseFolder = '';
@@ -56,6 +56,7 @@ class Exercise {
 			$settings = Config::getInstance();
 			$this->filePath = $settings->filePath;
 			$this->imagePath = $settings->imagePath;
+			$this->posterPath = $settings->posterPath;
 			$this->red5Path = $settings->red5Path;
 			$this->mediaHelper = new VideoProcessor();
 			$this->conn = new Datasource ( $settings->host, $settings->db_name, $settings->db_username, $settings->db_password );
@@ -71,17 +72,23 @@ class Exercise {
 			$verifySession = new SessionHandler(true);
 
 			if(!$exercise)
-			return false;
+				return false;
 
 			$exerciseLevel = new stdClass();
 			$exerciseLevel->userId = $_SESSION['uid'];
 			$exerciseLevel->suggestedLevel = $exercise->avgDifficulty;
 
-			$sql = "INSERT INTO exercise (name, title, description, tags, language, source, fk_user_id, adding_date, duration, license, reference) ";
-			$sql .= "VALUES ('%s', '%s', '%s', '%s', '%s', 'Red5', '%d', now(), '%d', '%s', '%s') ";
-
-			$lastExerciseId = $this->conn->_insert( $sql, $exercise->name, $exercise->title, $exercise->description, $exercise->tags,
-			$exercise->language, $_SESSION['uid'], $exercise->duration, $exercise->license, $exercise->reference );
+			if(isset($exercise->status) && $exercise->status == 'evaluation-video'){
+				$sql = "INSERT INTO exercise (name, title, description, tags, language, source, fk_user_id, adding_date, duration, license, reference, status) ";
+				$sql .= "VALUES ('%s', '%s', '%s', '%s', '%s', 'Red5', '%d', now(), '%d', '%s', '%s', '%s') ";
+				$lastExerciseId = $this->conn->_insert( $sql, $exercise->name, $exercise->title, $exercise->description, $exercise->tags,
+				$exercise->language, $_SESSION['uid'], $exercise->duration, $exercise->license, $exercise->reference, 'UnprocessedNoPractice' );
+			} else {
+				$sql = "INSERT INTO exercise (name, title, description, tags, language, source, fk_user_id, adding_date, duration, license, reference) ";
+				$sql .= "VALUES ('%s', '%s', '%s', '%s', '%s', 'Red5', '%d', now(), '%d', '%s', '%s') ";
+				$lastExerciseId = $this->conn->_insert( $sql, $exercise->name, $exercise->title, $exercise->description, $exercise->tags,
+				$exercise->language, $_SESSION['uid'], $exercise->duration, $exercise->license, $exercise->reference );
+			}
 			if($lastExerciseId){
 				$exerciseLevel->exerciseId = $lastExerciseId;
 				if($this->addExerciseLevel($exerciseLevel))
@@ -99,9 +106,9 @@ class Exercise {
 		try {
 
 			$verifySession = new SessionHandler(true);
-				
+			
 			if(!$exercise)
-			return false;
+				return false;
 
 			$result = 0;
 
@@ -110,11 +117,11 @@ class Exercise {
 
 
 			$videoPath = $this->red5Path .'/'. $this->exerciseFolder .'/'. $exercise->name . '.flv';
-			$imagePath = $this->imagePath .'/'. $exercise->name . '.jpg';
+			$destPath = $this->red5Path . '/' . $this->responseFolder . '/' . $exercise->name . '.flv';
 
 			$mediaData = $this->mediaHelper->retrieveMediaInfo($videoPath);
 			$duration = $mediaData->duration;
-			$this->mediaHelper->takeRandomSnapshot($videoPath, $imagePath);
+			$this->mediaHelper->takeFolderedRandomSnapshots($videoPath, $this->imagePath, $this->posterPath);
 
 			$exerciseLevel = new stdClass();
 			$exerciseLevel->userId = $_SESSION['uid'];
@@ -126,7 +133,7 @@ class Exercise {
 			$sql .= "VALUES ('%s', '%s', '%s', '%s', '%s', 'Red5', '%d', now(), 'Available', '%s', '%d', '%s', '%s') ";
 
 			$lastExerciseId = $this->conn->_insert( $sql, $exercise->name, $exercise->title, $exercise->description, $exercise->tags,
-			$exercise->language, $_SESSION['uid'], $exercise->name.'.jpg', $duration, $exercise->license, $exercise->reference );
+			$exercise->language, $_SESSION['uid'], 'default.jpg', $duration, $exercise->license, $exercise->reference );
 
 			if(!$lastExerciseId){
 				$this->conn->_failedTransaction();
@@ -140,24 +147,46 @@ class Exercise {
 				throw new Exception ("Exercise level save failed.");
 			}
 
-			//Update the user's credit count
-			$creditUpdate = $this->_addCreditsForUploading();
-			if(!$creditUpdate){
-				$this->conn->_failedTransaction();
-				throw new Exception("Credit addition failed");
-			}
+			if(isset($exercise->status) && $exercise->status == 'evaluation-video'){
 
-			//Update the credit history
-			$creditHistoryInsert = $this->_addUploadingToCreditHistory($lastExerciseId);
-			if(!$creditHistoryInsert){
-				$this->conn->_failedTransaction();
-				throw new Exception("Credit history update failed");
-			}
+				$sql = "UPDATE exercise SET name = NULL, thumbnail_uri='nothumb.png' WHERE ( id=%d )";
+				$update = $this->conn->_update($sql,$lastExerciseId);
+				if(!$update){
+					$this->conn->_failedTransaction();
+					throw new Exception("Couldn't update no-practice exercise. Changes rollbacked.");
+				}
+				$sql = "INSERT INTO response (fk_user_id, fk_exercise_id, file_identifier, is_private, thumbnail_uri, source, duration, adding_date, rating_amount, character_name, fk_transcription_id, fk_subtitle_id)
+						VALUES (%d, %d, '%s', false, 'default.jpg', 'Red5', %d, NOW(), 0, 'None', NULL, NULL)";
+				$lastResponseId = $this->conn->_insert($sql,$_SESSION['uid'],$lastExerciseId,$exercise->name,$duration);
+				if(!$lastResponseId){
+					$this->conn->_failedTransaction();
+					throw new Exception("Couldn't insert no-practice response. Changes rollbacked.");
+				}
+				
+				//Move the file from exercises folder to the response folder
+				$renameResult = @rename($videoPath, $destPath);
+				if(!$renameResult){
+					$this->conn->_failedTransaction();
+					throw new Exception("Couldn't move transcoded file. Changes rollbacked.");
+				}
+			}else{
 
-			if($lastExerciseId && $insertLevel && $creditUpdate && $creditHistoryInsert){
-				$this->conn->_endTransaction();
-				$result = $this->_getUserInfo();
+				//Update the user's credit count
+				$creditUpdate = $this->_addCreditsForUploading();
+				if(!$creditUpdate){
+					$this->conn->_failedTransaction();
+					throw new Exception("Credit addition failed");
+				}
+				//Update the credit history
+				$creditHistoryInsert = $this->_addUploadingToCreditHistory($lastExerciseId);
+				if(!$creditHistoryInsert){
+					$this->conn->_failedTransaction();
+					throw new Exception("Credit history update failed");
+				}
 			}
+			
+			$this->conn->_endTransaction();
+			$result = $this->_getUserInfo();
 
 			return $result;
 
@@ -185,7 +214,7 @@ class Exercise {
 		if($result){
 			$sql = "INSERT INTO credithistory (fk_user_id, fk_exercise_id, changeDate, changeType, changeAmount) ";
 			$sql = $sql . "VALUES ('%d', '%d', NOW(), '%s', '%d') ";
-			return $this->conn->_insert($sql, $_SESSION['uid'], $exerciseId, 'exercise_upload', $row[0]);
+			return $this->conn->_insert($sql, $_SESSION['uid'], $exerciseId, 'exercise_upload', $result->prefValue);
 		} else {
 			return false;
 		}
@@ -199,7 +228,7 @@ class Exercise {
 	}
 
 	private function _getResourceDirectories(){
-		$sql = "SELECT prefValue
+		$sql = "SELECT prefValue 
 				FROM preferences
 				WHERE (prefName='exerciseFolder' OR prefName='responseFolder' OR prefName='evaluationFolder') 
 				ORDER BY prefName";
@@ -212,7 +241,7 @@ class Exercise {
 	}
 
 	public function getExercises(){
-		$sql = "SELECT e.id,
+		$sql = "SELECT e.id, 
 					   e.title, 
 					   e.description, 
 					   e.language, 
@@ -318,7 +347,7 @@ class Exercise {
 		try {
 			$verifySession = new SessionHandler(true);
 
-			$sql = "SELECT e.id,
+			$sql = "SELECT e.id, 
 						   e.title, 
 						   e.description, 
 						   e.language, 
@@ -338,13 +367,13 @@ class Exercise {
 	 				 	 LEFT OUTER JOIN exercise_score s ON e.id=s.fk_exercise_id
        				 	 LEFT OUTER JOIN exercise_level l ON e.id=l.fk_exercise_id
        				 	 LEFT OUTER JOIN subtitle a ON e.id=a.fk_exercise_id
-       			 	 	 WHERE (e.status = 'Available' AND a.complete = 0)
+       			 	 	 WHERE (e.status = 'Available' AND a.complete IS NULL OR a.complete=0)
 				 	GROUP BY e.id
 				 	ORDER BY e.adding_date DESC";
 
 			$searchResults = $this->conn->_multipleSelect($sql);
 			foreach($searchResults as $searchResult){
-				$searchResult->avgRating = $this->getExerciseAvgBayesianScore($temp->id)->avgRating;
+				$searchResult->avgRating = $this->getExerciseAvgBayesianScore($searchResult->id)->avgRating;
 			}
 
 			//Filter searchResults to include only the "evaluate" languages of the user
@@ -356,8 +385,7 @@ class Exercise {
 	}
 
 	public function getRecordableExercises(){
-
-		$sql = "SELECT e.id,
+		$sql = "SELECT e.id, 
 			       e.title, 
 			       e.description, 
 			       e.language, 
@@ -380,7 +408,7 @@ class Exercise {
        			 WHERE e.status = 'Available' AND t.complete = 1
 				 GROUP BY e.id
 				 ORDER BY e.adding_date DESC, e.language DESC";
-
+		
 		$searchResults = $this->conn->_multipleSelect($sql);
 		foreach($searchResults as $searchResult){
 			$searchResult->avgRating = $this->getExerciseAvgBayesianScore($searchResult->id)->avgRating;
@@ -398,9 +426,9 @@ class Exercise {
 
 	public function filterByLanguage($searchList, $languagePurpose){
 		if(count($_SESSION['user-languages']) < 1)
-		return $searchList;
+			return $searchList;
 		if($languagePurpose != 'evaluate' && $languagePurpose != 'practice')
-		return $searchList;
+			return $searchList;
 
 		$filteredList = array();
 		foreach ($searchList as $listItem){
@@ -419,7 +447,7 @@ class Exercise {
 
 	public function getExerciseLocales($exerciseId=0) {
 		if(!$exerciseId)
-		return false;
+			return false;
 
 		$sql = "SELECT DISTINCT language as locale FROM subtitle
 				WHERE fk_exercise_id = %d";
@@ -434,7 +462,7 @@ class Exercise {
 			$verifySession = new SessionHandler(true);
 
 			if(!$report)
-			return false;
+				return false;
 
 			$result = $this->userReportedExercise($report);
 
@@ -464,9 +492,9 @@ class Exercise {
 	public function addExerciseScore($score = null){
 		try {
 			$verifySession = new SessionHandler(true);
-				
+			
 			if(!$score)
-			return false;
+				return false;
 
 			$result = $this->userRatedExercise($score);
 			if (!$result){
@@ -497,10 +525,10 @@ class Exercise {
 	public function userRatedExercise($score = null){
 		try {
 			$verifySession = new SessionHandler(true);
-
+	
 			if(!$score)
-			return false;
-				
+				return false;
+			
 			$sql = "SELECT *
 		        	FROM exercise_score 
 		        	WHERE ( fk_exercise_id='%d' AND fk_user_id='%d' AND CURDATE() <= suggestion_date )";
@@ -518,8 +546,8 @@ class Exercise {
 		try {
 			$verifySession = new SessionHandler(true);
 			if(!$report)
-			return false;
-
+				return false;
+				
 			$sql = "SELECT *
 				FROM exercise_report 
 				WHERE ( fk_exercise_id='%d' AND fk_user_id='%d' )";
@@ -531,7 +559,7 @@ class Exercise {
 
 	private function getExerciseAvgScore($exerciseId){
 
-		$sql = "SELECT e.id,
+		$sql = "SELECT e.id, 
 					   avg (suggested_score) as avgRating, 
 					   count(suggested_score) as ratingCount
 				FROM exercise e LEFT OUTER JOIN exercise_score s ON e.id=s.fk_exercise_id    
@@ -546,18 +574,18 @@ class Exercise {
 	 */
 	public function getExerciseAvgBayesianScore($exerciseId = 0){
 		if(!$exerciseId)
-		return false;
-
-
+			return false;
+		
+		
 		if(!isset($this->exerciseMinRatingCount)){
 			$sql = "SELECT prefValue FROM preferences WHERE (prefName = 'minVideoRatingCount')";
 
 			$result = $this->conn->_singleSelect($sql);
 
 			if($result)
-			$this->exerciseMinRatingCount = $result->prefValue;
+				$this->exerciseMinRatingCount = $result->prefValue;
 			else
-			$this->exerciseMinRatingCount = 0;
+				$this->exerciseMinRatingCount = 0;
 		}
 
 		if(!isset($this->exerciseGlobalAvgRating)){
@@ -573,7 +601,7 @@ class Exercise {
 		if ($exerciseRatingCount == 0) $exerciseRatingCount = 1;
 
 		$exerciseBayesianAvg = ($exerciseAvgRating*($exerciseRatingCount/($exerciseRatingCount + $this->exerciseMinRatingCount))) +
-		($this->exerciseGlobalAvgRating*($this->exerciseMinRatingCount/($exerciseRatingCount + $this->exerciseMinRatingCount)));
+							   ($this->exerciseGlobalAvgRating*($this->exerciseMinRatingCount/($exerciseRatingCount + $this->exerciseMinRatingCount)));
 
 		$exerciseRatingData->avgRating = $exerciseBayesianAvg;
 
@@ -586,9 +614,6 @@ class Exercise {
 
 		return ($result = $this->conn->_singleSelect($sql)) ? $result->globalAvgScore : 0;
 	}
-
-
-
 
 
 }

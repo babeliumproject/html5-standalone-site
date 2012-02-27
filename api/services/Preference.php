@@ -46,7 +46,7 @@ class Preference {
 	}
 
 	public function getAppPreferences(){
-		$sql = "SELECT * FROM preferences";
+		$sql = "SELECT DISTINCT(prefName), prefValue FROM preferences";
 		$preferenceData = array();
 		$searchResults = $this->conn->_multipleSelect($sql);
 		foreach($searchResults as $searchResult){

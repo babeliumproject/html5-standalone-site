@@ -127,10 +127,12 @@ class Subtitle {
 			$searchResults = $this->conn->_multipleSelect ( $sql, $subtitleId );
 		}
 
+		$recastedResults = $searchResults; //this is a dummy assignment for cross-compatibility
 		//Store the last retrieved subtitle lines to check if there are changes when saving the subtitles.
-		$_SESSION['unmodified-subtitles'] = $searchResults;
+		if($recastedResults)
+			$_SESSION['unmodified-subtitles'] = $recastedResults;
 
-		return $searchResults;
+		return $recastedResults;
 	}
 	
 
@@ -182,9 +184,9 @@ class Subtitle {
 		$this->conn->_startTransaction();
 
 		//Insert the new subtitle on the database
-		$s_sql = "INSERT INTO subtitle (fk_exercise_id, fk_user_id, language, adding_date) ";
-		$s_sql .= "VALUES ('%d', '%d', '%s', NOW() ) ";
-		$subtitleId = $this->conn->_insert($s_sql, $subtitles->exerciseId, $_SESSION['uid'], $subtitles->language );
+		$s_sql = "INSERT INTO subtitle (fk_exercise_id, fk_user_id, language, adding_date, complete) ";
+		$s_sql .= "VALUES (%d, %d, '%s', NOW(), %d ) ";
+		$subtitleId = $this->conn->_insert($s_sql, $subtitles->exerciseId, $_SESSION['uid'], $subtitles->language, $subtitles->complete );
 		if(!$subtitleId){
 			$this->conn->_failedTransaction();
 			throw new Exception("Subtitle save failed");
@@ -193,7 +195,7 @@ class Subtitle {
 		//Insert the new exercise_roles
 		$er_sql = "INSERT INTO exercise_role (fk_exercise_id, fk_user_id, character_name) VALUES ";
 		$params = array();
-			
+		$distinctRoles = array();	
 		foreach($subtitleLines as $line){
 			if(count($distinctRoles)==0){
 				$distinctRoles[] = $line->exerciseRoleName;
@@ -211,7 +213,7 @@ class Subtitle {
 		// put sql query and all params in one array
 		$merge = array_merge((array)$er_sql, $params);
 		$lastRoleId = $this->conn->_insert($merge);
-		if(!lastRoleId){
+		if(!$lastRoleId){
 			$this->conn->_failedTransaction();
 			throw new Exception("Subtitle save failed");
 		}
@@ -236,7 +238,7 @@ class Subtitle {
 		$sl_sql = substr($sl_sql,0,-1);
 		// put sql query and all params in one array
 		$merge = array_merge((array)$sl_sql, $params);
-		$lastSubtitleLineId = $this->_vcreate($merge);
+		$lastSubtitleLineId = $this->conn->_insert($merge);
 		if(!$lastSubtitleLineId){
 			$this->conn->_failedTransaction();
 			throw new Exception("Subtitle save failed");
@@ -251,7 +253,7 @@ class Subtitle {
 
 		//Update the credit history
 		$creditHistoryInsert = $this->_addSubtitlingToCreditHistory($exerciseId);
-		if(!creditHistoryInsert){
+		if(!$creditHistoryInsert){
 			$this->conn->_failedTransaction();
 			throw new Exception("Credit history update failed");
 		}
@@ -267,11 +269,13 @@ class Subtitle {
 	}
 
 	private function _getUserRoles($exerciseId, $userId){
-		$sql = "SELECT MAX(id),fk_exercise_id, character_name
+		$sql = "SELECT MAX(id) as id,
+					   fk_exercise_id as exerciseId, 
+					   character_name as characterName
 		    	FROM exercise_role WHERE (fk_exercise_id = %d AND fk_user_id= %d) 
 		    	GROUP BY exercise_role.character_name ";
 
-		$searchResults = $this->_listRolesQuery ( $sql, $exerciseId, $userId );
+		$searchResults = $this->conn->_multipleSelect ( $sql, $exerciseId, $userId );
 
 		return $searchResults;
 	}
@@ -343,7 +347,7 @@ class Subtitle {
 				$errorMessage.="The text on the line " . ($i + 1) . " is empty.\n";
 			if ($i > 0)
 			{
-				if ($subtitleCollection[($i-1)]->hideTime >= $subtitleCollection[$i]->showTime)
+				if ($subtitleCollection[($i-1)]->hideTime + 0.2 >= $subtitleCollection[$i]->showTime)
 					$errorMessage.="The subtitle on the line " . $i . " overlaps with the next subtitle.\n";
 			}
 		}

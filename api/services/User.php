@@ -54,7 +54,7 @@ class User {
 					   creditCount 
 				FROM users AS U WHERE U.active = 1 ORDER BY creditCount DESC LIMIT 10";
 
-		$searchResults = $this->conn->_multipleQuery($sql);
+		$searchResults = $this->conn->_multipleSelect($sql);
 
 		return $searchResults;
 	}
@@ -65,6 +65,8 @@ class User {
 			$verifySession = new SessionHandler(true);
 
 			$sessionId = session_id();
+			if(empty($sessionId))
+				throw new Exception("Error. Session not set.");
 
 			//Check that there's not another active session for this user
 			$sql = "SELECT * FROM user_session WHERE ( session_id = '%s' AND fk_user_id = '%d' AND closed = 0 )";
@@ -79,7 +81,7 @@ class User {
 		}
 	}
 
-	public function changePass($oldpass = 0, $newpass = 0)
+	public function changePass($oldpass = null, $newpass = null)
 	{
 		try {
 			$verifySession = new SessionHandler(true);
@@ -124,7 +126,7 @@ class User {
 
 			if(!$result){
 				$this->conn->_failedTransaction();
-				throw new Exception("Language modify failed");
+				throw new Exception("Language modification failed");
 			}
 
 			//Insert the new languages
@@ -227,7 +229,7 @@ class User {
 			$exercise = new Exercise();
 			foreach($searchResults as $searchResult){
 				$searchResult->isSubtitled = $searchResult->isSubtitled ? true : false;
-				$searchResult->avgRating = $exercise->getExerciseAvgBayesianScore($temp->id)->avgRating;
+				$searchResult->avgRating = $exercise->getExerciseAvgBayesianScore($searchResult->id)->avgRating;
 			}
 			
 			return $searchResults;

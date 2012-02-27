@@ -92,7 +92,7 @@ class Auth{
 	 * 		Returns the current user data. Or an error message when wrong login data is provided
 	 */
 	public function processLogin($user = null){
-		if($user != null && is_object($user)){
+		if($user && is_object($user)){
 			//Check if the given username exists
 			if($this->getUserInfo($user->name)==false){
 				return "wrong_user";
@@ -106,28 +106,23 @@ class Auth{
 				$sql = "SELECT id, name, realName, realSurname, email, creditCount, joiningDate, isAdmin FROM users WHERE (name='%s' AND password='%s') ";
 				$result = $this->conn->_singleSelect($sql, $user->name, $user->pass);
 				if($result){
-					$userId = $result->id;
-					$userLanguages = $this->_getUserLanguages($userId);
+					$userLanguages = $this->_getUserLanguages($result->id);
 					$result->userLanguages = $userLanguages;
-					$this->_startUserSession($result);
+					
+					$userData = $result; //It is a dummy assignation but there's a difference here between APIs
+					
+					$this->_startUserSession($userData);
 
-					$filteredResult = new stdClass();
-					$filteredResult->name = $result->name;
-					$filteredResult->realName = $result->realName;
-					$filteredResult->realSurname = $result->realSurname;
-					$filteredResult->email = $result->email;
-					$filteredResult->creditCount = $result->creditCount;
-					$filteredResult->joiningDate = $result->joiningDate;
-					$filteredResult->isAdmin = $result->isAdmin;
-					$filteredResult->userLanguages = $userLanguages;
+					//Don't send back the user's id
+					$userData->id = null;
 
-					return $filteredResult;
+					return $userData;
 				} else {
 					return "wrong_password";
 				}
 			}
 		} else {
-			if( $this->checkSessionLogin() && isset($_SESSION['user-data']) && !empty($_SESSION['user-data']) ){
+			if( $this->checkSessionLogin() && isset($_SESSION['user-data']) && !empty($_SESSION['user-data']) && is_object($_SESSION['user-data']) ){
 				$loggedUser = $_SESSION['user-data'];
 				$loggedUser->id = 0;
 				return $loggedUser;

@@ -58,7 +58,7 @@ class Register{
 		} else {
 			$initialCredits = $this->_getInitialCreditsQuery();
 			$hash = $this->_createRegistrationHash();
-				
+
 			try{
 				$this->conn->_startTransaction();
 					
@@ -104,7 +104,7 @@ class Register{
 						'SIGNATURE' => 'The Babelium Project Team');
 
 					if ( !$mail->makeTemplate("mail_activation", $args, $motherTongueLocale) )
-					return false;
+						return false;
 
 					$mail = $mail->send($mail->txtContent, $subject, $mail->htmlContent);
 
@@ -142,7 +142,7 @@ class Register{
 	public function activate($user = null){
 
 		if(!$user)
-		return false;
+			return false;
 
 		$sql = "SELECT language
 				FROM users AS u INNER JOIN user_languages AS ul ON u.id = ul.fk_user_id 

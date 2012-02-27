@@ -37,6 +37,7 @@ class Response {
 	private $conn;
 	private $filePath;
 	private $imagePath;
+	private $posterPath;
 	private $red5Path;
 
 	private $evaluationFolder = '';

@@ -302,6 +302,44 @@ class Datasource
 			return;
 		}
 	}
+	
+	public function multipleRecast($className, $objects){
+		if(!$objects)
+			return false;
+		$recasted = array();
+		foreach($objects as $object){
+			$recasted[] = $this->recast($className, $object);
+		}
+		return $recasted;
+	}
+
+	/**
+	 * recast stdClass object to an object with type
+	 *
+	 * @param string $className
+	 * @param stdClass $object
+	 * @throws InvalidArgumentException
+	 * @return mixed new, typed object
+	 * see also: http://stackoverflow.com/a/8946599
+	 */
+	public function recast($className, &$object)
+	{
+		if (!is_object($object))
+			return false;
+		if (!class_exists($className))
+			throw new InvalidArgumentException(sprintf('Inexistant class %s.', $className));
+
+		$new = new $className();
+
+		foreach($object as $property => &$value)
+		{
+			$new->$property = &$value;
+			unset($object->$property);
+		}
+		unset($value);
+		$object = (unset) $object;
+		return $new;
+	}	
 }
 
 ?>

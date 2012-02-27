@@ -64,7 +64,7 @@ class Credit {
 				FROM (((credithistory c INNER JOIN users u ON c.fk_user_id=u.id) INNER JOIN exercise e ON e.id=c.fk_exercise_id) LEFT OUTER JOIN response r on r.id=c.fk_response_id) 
 				WHERE (c.fk_user_id = %d AND CURDATE() <= c.changeDate ) ORDER BY changeDate DESC ";
 		
-		return $this->_listQuery ( $sql, $_SESSION['uid'] );
+		return $this->conn->_multipleSelect ( $sql, $_SESSION['uid'] );
 	}
 	
 	/**
@@ -80,7 +80,7 @@ class Credit {
 		return $this->conn->_multipleSelect ( $sql, $_SESSION['uid'] );
 	}
 	
-/**
+	/**
 	 * Retrieves current user's credit activity of the last month
 	 * @return array $results
 	 * 		An array of objects with the credit data or null if no credit data was found
@@ -102,10 +102,9 @@ class Credit {
 		$sql = "SELECT c.changeDate, c.changeType, c.changeAmount, c.fk_exercise_id as videoExerciseId, e.name as videoExerciseName, c.fk_response_id as videoResponseId, r.file_identifier as videoResponseName 
 				FROM (((credithistory c INNER JOIN users u ON c.fk_user_id=u.id) INNER JOIN exercise e ON e.id=c.fk_exercise_id) LEFT OUTER JOIN response r on r.id=c.fk_response_id) 
 				WHERE (c.fk_user_id = %d ) ORDER BY changeDate DESC ";
-		
+
 		return $this->conn->_multipleSelect ( $sql, $_SESSION['uid'] );
-	}
-	
+	}	
 }
 
 ?>

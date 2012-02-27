@@ -59,7 +59,7 @@ class Transcription {
 				FROM transcription AS T INNER JOIN response AS R ON T.id=R.fk_transcription_id 
 				WHERE ( R.id = %d ) ";
 		$resultResp = $this->conn->_singleSelect($sql, $responseId);
-		if(!$result){
+		if(!$resultResp){
 			return null;
 		}
 

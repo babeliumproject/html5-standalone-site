@@ -126,7 +126,9 @@ class Home{
 
 		$searchResults = $this->conn->_multipleSelect ( $sql, $_SESSION['uid'] );
 
-		return $this->sliceResultsByNumber($searchResults,5);
+		$slicedResults = $this->sliceResultsByNumber($searchResults,5);
+
+		return $slicedResults;
 	}
 
 

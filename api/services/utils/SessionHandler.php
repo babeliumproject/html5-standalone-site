@@ -43,7 +43,7 @@ class SessionHandler{
 	public function SessionHandler($restrictedArea = false){
 		if(session_id() == ''){
 			session_start();
-			$_SESSION['initiated'] = true;	
+			$_SESSION['initiated'] = true;
 		}
 		$this->avoidSessionFixation();
 		
