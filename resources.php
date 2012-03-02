@@ -26,10 +26,12 @@ $smarty->right_delimiter = "}}";
 
 foreach ( $localeFile as $line )
 {
-	list($name, $value) = explode("=", $line, 2);
-	
-	if ( !empty($name) && !empty($value) )
-		$smarty->assign($name, trim($value));
+	$line = trim($line);
+	if(!empty($line) && ( strpos($line,'//') !=0 || strpos($line,'//') === FALSE ) ){
+		list($name, $value) = explode("=", $line, 2);
+		if ( !empty($name) && !empty($value) )
+			$smarty->assign($name, trim($value));
+	}
 }
 		
 header("Content-type: text/javascript\n\n");

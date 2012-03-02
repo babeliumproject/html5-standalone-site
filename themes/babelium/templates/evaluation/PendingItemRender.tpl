@@ -9,8 +9,8 @@
 					</header>
 				
 					<div class="evaluationItemInfo">
-						<img src="{$cfg->imagePath}/{$evaluation->exerciseName}/default.jpg" alt="{$evaluation->exerciseTitle}" width="120" height="90" align="left" />
-						<img src="{$cfg->imagePath}/{$evaluation->responseFileIdentifier}/default.jpg" alt="{$evaluation->exerciseTitle}" width="120" height="90" align="left" />
+						<img src="{$cfg->thumbnail_url}/{$evaluation->exerciseName}/default.jpg" alt="{$evaluation->exerciseTitle}" width="120" height="90" align="left" />
+						<img src="{$cfg->thumbnail_url}/{$evaluation->responseFileIdentifier}/default.jpg" alt="{$evaluation->exerciseTitle}" width="120" height="90" align="left" />
 						
 						<div>
 							<p class="username">

@@ -24,6 +24,6 @@ var ViewPendingAssesmentsCommand = Cairngorm.Command.extend(
 	onFault : function ()
 	{
 		BP.CMS.abortLoading();
-		alert("{{$ERROR_LOADING_EVALUATION}}");
+		alert("{{$ERROR_LOADING_ASSESMETS_PENDING}}");
 	}
 });
