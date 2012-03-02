@@ -46,7 +46,7 @@ class Response {
 	
 	private $mediaHelper;
 
-	public function Response() {
+	public function __construct() {
 		try {
 			$verifySession = new SessionHandler(true);
 			$settings = Config::getInstance();

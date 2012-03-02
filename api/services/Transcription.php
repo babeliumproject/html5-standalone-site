@@ -36,7 +36,7 @@ class Transcription {
 
 	private $conn;
 
-	public function Transcription() {
+	public function __construct() {
 		try {
 			$verifySession = new SessionHandler(true);
 

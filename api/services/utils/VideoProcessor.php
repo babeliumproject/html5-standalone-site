@@ -50,7 +50,7 @@ class VideoProcessor{
 
 	private $conn;
 
-	public function VideoProcessor(){
+	public function __construct(){
 		$settings = Config::getInstance();
 
 		$this->uploadsPath = $settings->filePath;

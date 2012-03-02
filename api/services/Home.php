@@ -38,7 +38,7 @@ class Home{
 
 	private $conn;
 
-	public function Home(){
+	public function __construct(){
 		try {
 			$verifySession = new SessionHandler();
 			$settings = Config::getInstance();
