@@ -20,7 +20,7 @@ BP.RegisterDelegate = (function ()
 				return;
 			
 			var _service = Cairngorm.ServiceLocator.getHttpService(_serviceID);
-			var params = {action : "newUser", params : user.toBase64()};
+			var params = {action : "register", params : user.toBase64()};
 			_service.call( params, responder );
 			
 		}

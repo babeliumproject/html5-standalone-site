@@ -20,7 +20,7 @@ class MRegister extends Module
 		
 		//Is the user is already logged in don't let him register
 		if(!$loggedIn){
-			if ( self::$action == "newUser" && isset(self::$params) )
+			if ( self::$action == "register" && isset(self::$params) )
 			{
 				$response = self::registerUser(self::$params);
 				if(is_numeric($response)){
@@ -80,7 +80,7 @@ class MRegister extends Module
 		$user->languages = $languages;
 		//
 	
-		$response = $register->newUser($user);
+		$response = $register->register($user);
 		return $response;
 	}
 	
