@@ -224,11 +224,6 @@ class Config implements ISingleton
 		if ( !isset($this->server_url) )
 			$this->server_url = "http://" . $_SERVER['SERVER_NAME'];
 
-		$this->api_bridge = $this->server_url . $this->api_bridge;
-		$this->module_bridge = $this->server_url . $this->module_bridge;
-		$this->thumbnail_url = $this->server_url . $this->imagePath;
-		$this->poster_url = $this->server_url. $this->posterPath;
-
 		/**
 		 * Path config
 		 */
@@ -248,6 +243,11 @@ class Config implements ISingleton
 			$this->templatePath = $this->webRootPath . $this->templatePath;
 			$this->indexPath = $this->webRootPath . $this->indexPath;
 		}
+		
+		$this->api_bridge = $this->server_url . $this->api_bridge;
+		$this->module_bridge = $this->server_url . $this->module_bridge;
+		$this->thumbnail_url = $this->imagePath;
+		$this->poster_url = $this->posterPath;
 		
 		/*
 		 * Template engine
