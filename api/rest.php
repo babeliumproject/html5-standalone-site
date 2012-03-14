@@ -21,6 +21,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+require_once("../config/Config.php");
+require_once("../core/SessionManager.php");
+require_once("../util/Smarty/function.i18n.php");
+
 require_once 'ZendRestJson.php';
 
 /** DEBUG MODE **/

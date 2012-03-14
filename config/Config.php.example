@@ -58,6 +58,8 @@ class Config implements ISingleton
 	//Server path to store uploaded files
 	public $filePath = "/resources/uploads";
 	public $imagePath = "/resources/images/thumbs";
+	public $thumbnail_url;
+	public $poster_url;
 	public $red5Path = '/opt/red5/dist/webapps/oflaDemo/streams';
 		
 	//Youtube authentication data
