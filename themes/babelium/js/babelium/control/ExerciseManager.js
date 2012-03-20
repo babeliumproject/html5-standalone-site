@@ -18,7 +18,9 @@ function ExerciseManager ()
 	this.exerciseTitle = null;
 	this.exerciseId = null;
 	this.currentExercise = null;
+	this.currentResponse = null;
 	this.selectedExercise = null; // Exercise preload
+	this.selectedResponse = null;
 	
 	this.selectedRole = null;
 	this.selectedLocale = null;
@@ -38,7 +40,16 @@ function ExerciseManager ()
 		this.bpPlayer = videoPlayer;
 		this.cueManager = new cuePointManager();
 		this.setupVideoPlayer();
-		this.onExerciseSelected(this.selectedExercise);
+		this.onExerciseSelected();
+	};
+	
+	// Loads a response
+	this.loadSelectedResponse = function (videoPlayer)
+	{
+		this.bpPlayer = videoPlayer;
+		this.cueManager = new cuePointManager();
+		this.setupVideoPlayer();
+		this.onResponseSelected();
 	};
 	
 	// For firs-time web page load, load an exercise from content's data
@@ -49,6 +60,17 @@ function ExerciseManager ()
 		var name = container.data("name");
 		this.selectedExercise = new ExerciseVO(id, name, null);
 		this.loadSelectedExercise(videoPlayer);
+	};
+	
+	// For firs-time web page load, load an exercise from content's data
+	this.loadResponseFromContent = function (videoPlayer)
+	{
+		var container = $("section.evaluationDetails");
+		var id = container.data("id");
+		var name = container.data("name");
+		this.selectedExercise = new ExerciseVO(id, name, null);
+		this.selectedResponse = {"responseName" : container.data("responsename"), "characterName" : container.data("charname"),"responseId" : container.data("responseid"), "subtitleId" : container.data("subtitleid")};
+		this.loadSelectedResponse(videoPlayer);
 	};
 	
 	// Setups videoplayer
@@ -62,9 +84,9 @@ function ExerciseManager ()
 	this.onExerciseSelected = function (exercise)
 	{
 		// Store selected exercise's information
-		this.exerciseName = exercise.name;
-		this.exerciseTitle = exercise.title;
-		this.exerciseId = exercise.id;
+		this.exerciseName = this.selectedExercise.name;
+		this.exerciseTitle = this.selectedExercise.title;
+		this.exerciseId = this.selectedExercise.id;
 
 		this.currentExercise = exercise;
 		
@@ -73,6 +95,23 @@ function ExerciseManager ()
 		this.prepareExercise();
 		this.resetCueManager();
 		this.prepareCueManager();
+	};
+	
+	// On response selected
+	this.onResponseSelected = function()
+	{
+		// Store selected exercise's information
+		this.exerciseName = this.selectedExercise.name;
+		this.exerciseTitle = this.selectedExercise.title;
+		this.exerciseId = this.selectedExercise.id;
+		this.responseName = this.selectedResponse.responseName;
+		
+		this.currentExercise = this.selectedExercise;
+		this.currentResponse = this.selectedResponse;
+		this.cueManagerReady = false;
+
+		this.resetCueManager();
+		this.prepareCueManagerEvaluation();
 	};
 	
 	// Prepare exercise
@@ -159,6 +198,15 @@ function ExerciseManager ()
 		this.bpPlayer.removeEventListener("onEnterFrame", "BP.EM.enterFrameListener");
 		this.bpPlayer.addEventListener("onEnterFrame", "BP.EM.enterFrameListener");
 	};
+	
+	// Prepare Cuepoint Manager for Evaluation
+	this.prepareCueManagerEvaluation = function()
+	{
+		this.cueManager.addEventListener("onSubtitlesRetrieved", instance.onSubtitlesRetrieved);
+		this.cueManager.setCuesFromSubtitleUsingId(this.currentResponse.subtitleId);
+		this.bpPlayer.removeEventListener('onEnterFrame', 'BP.EM.enterFrameListener');
+		this.bpPlayer.addEventListener('onEnterFrame', 'BP.EM.enterFrameListener');
+	};
 		
 	// Enter frame listener
 	this.enterFrameListener = function (event)
@@ -196,9 +244,9 @@ function ExerciseManager ()
 		else
 		{
 			instance.bpPlayer.state(instance.bpPlayerStates.PLAY_BOTH_STATE);
-			instance.bpPlayer.videoSource(instance.currentResponse.name);
-			instance.bpPlayer.secondSource(instance.currentResponse.file_identifier);
-			instance.selectedRole = instance.currentResponse.character_name;
+			instance.bpPlayer.videoSource(instance.exerciseName);
+			instance.bpPlayer.secondSource(instance.responseName);
+			instance.selectedRole = instance.currentResponse.characterName;
 			instance.setupRecordingCommands();
 			instance.bpPlayer.addEventListener("onMetadataRetrieved", "BP.EM.onMetadataRetrieved");
 		}
@@ -226,7 +274,7 @@ function ExerciseManager ()
 	this.setupRecordingCommands = function()
 	{
 		var auxList = this.cueManager.getCuelist();
-
+		
 		if ( auxList.length <= 0 )
 			return;
 
@@ -273,7 +321,8 @@ function ExerciseManager ()
 	};
 		
 	// Callbacks
-	this.onMetadataRetrieved = function(event) {
+	this.onMetadataRetrieved = function(event) 
+	{
 		this.showArrows();
 	};
 		

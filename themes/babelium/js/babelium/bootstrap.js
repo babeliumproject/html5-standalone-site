@@ -6,27 +6,38 @@
 BP.control = new Controller();
 
 /*
- * ============================================================ BP SERVICES
- * CALLER ==========================================================
+ * ============================================================
+ * BP SERVICES CALLER
+ * ==========================================================
  */
 
+// Try to connect to babeliums API
 BP.Services = new ApiGateway();
 BP.Services.getCommunicationToken();
 
-BP.onCommunicationReady = function () {
+// On communication with API successfully stabilized
+BP.onCommunicationReady = function ()
+{
 	BP.EM = new ExerciseManager();
 	BP.CM = new ConfigurationManager();
 }
 
 /*
- * ============================================================ LOAD SERVICES
- * FROM A XML FILE ==========================================================
+ * ============================================================ 
+ * LOAD SERVICES FROM A XML FILE
+ * ==========================================================
  */
 
+/**
+ * Tag types:
+ * <gateway id="{ID}" target="{URL}" type="{HTTP}" method="{get|post}"> 
+ * <service id="{ID}" destination="{gatewayId}" class="{target module}" />
+ */
 $.get("themes/babelium/js/services.xml", null, function ( data, textStatus)
 {
 	var _httpGateways = {};
 	
+	// Find and store gateways in hashmap
 	$(data).find("gateway").each(function()
 	{
 		var p = $(this);
@@ -35,14 +46,17 @@ $.get("themes/babelium/js/services.xml", null, function ( data, textStatus)
 			_httpGateways[p.attr("id")] = {target: p.attr("target"), method: p.attr("method")};
 	});
 	
+	// Find and create services for each entry
 	$(data).find("service").each(function ()
 	{
-		var p = $(this), g = _httpGateways[p.attr("destination")];
+		var p = $(this); // XML item
+		var g = _httpGateways[p.attr("destination")]; // Checks if gateway exists
 		
+		// return if destination is not valid
 		if ( g == null )
 			return;
 		
-		// Create HTTP Service: gateway + target
+		// Create HTTP Service: gateway + target module
 		var hs = new Cairngorm.HTTPService(g, p.attr("class"));
 		
 		// Register HTTP Service: id + http service object
@@ -52,8 +66,8 @@ $.get("themes/babelium/js/services.xml", null, function ( data, textStatus)
 
 
 /*
- * ============================================================ INIT BABELIUM's
- * CONTENT MANAGEMENT SYSTEM AND INITIAL STATUS
+ * ============================================================
+ * INIT BABELIUM's CONTENT MANAGEMENT SYSTEM AND INITIAL STATUS
  * ==========================================================
  */
 
@@ -90,16 +104,23 @@ function onConnectionReady(compId)
 		return;
 	}
 	
-	if(compId == 'babeliumPlayer'){
-		if ( BP.EM.selectedExercise )	
-			BP.EM.loadSelectedExercise(swfComponent);
-		else	
-			BP.EM.loadExerciseFromContent(swfComponent);
+	if (compId == 'babeliumPlayer')
+	{
+		if ( BP.SM.at("practice") )
+		{
+			if ( BP.EM.selectedExercise )	
+				BP.EM.loadSelectedExercise(swfComponent);
+			else	
+				BP.EM.loadExerciseFromContent(swfComponent);
+		}
+		else if ( BP.SM.at("evaluate") )
+		{
+			BP.EM.loadResponseFromContent(swfComponent);
+		}
+			
 	} 
-	if(compId == 'babeliumMicTester'){
+	else if (compId == 'babeliumMicTester')
 		BP.CM.setupComponent(swfComponent, 'mic');
-	}
-	if(compId == 'babeliumWebcamTester'){
+	else if (compId == 'babeliumWebcamTester')
 		BP.CM.setupComponent(swfComponent, 'webcam');
-	}
 }

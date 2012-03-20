@@ -1,5 +1,5 @@
 				
-				<article class="evaluationItem" data-responseId="{$evaluation->responseId}">
+				<article class="evaluationItem">
 					<header>
 						<h1 class="evaluationTitle HBox vcenter">
 							<img src="{$locale->getFlagResource($evaluation->exerciseLanguage)}" width="16" height="16" alt="flag"/> 

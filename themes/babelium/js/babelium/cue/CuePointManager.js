@@ -113,8 +113,8 @@ function cuePointManager() {
 	};
 
 	this.setCuesFromSubtitleUsingId = function (subtitleId) {
-		/*var parameters = {"subtitleId": subtitleId};
-		BP.Services.send(false, 'getSubtitleLinesUsingId', parameters, instance.subtitlesRetrievedCallback);*/	
+		var parameters = {"subtitleId": subtitleId};
+		BP.Services.send(false, 'getSubtitleLinesUsingId', parameters, instance.subtitlesRetrievedCallback);	
 	};
 	
 	this.subtitlesRetrievedCallback = function (data) {

@@ -8,6 +8,9 @@ var ViewAssessedAssesmentCommand = Cairngorm.Command.extend(
 	{
 		var _this = this;
 		
+		BP.EM.selectedExercise = this.data.evaluation;
+		BP.EM.selectedResponse = this.data.responseId;
+		
 		BP.CMS.prepareExerciseView(function ()
 		{
 			BP.EvaluationDelegate.viewAssessedAssesment(_this, _this.data.responseId);
