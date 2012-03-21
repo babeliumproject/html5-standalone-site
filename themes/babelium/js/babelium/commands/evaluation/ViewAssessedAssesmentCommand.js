@@ -10,6 +10,9 @@ var ViewAssessedAssesmentCommand = Cairngorm.Command.extend(
 		
 		BP.EM.selectedExercise = this.data.evaluation;
 		BP.EM.selectedResponse = this.data.responseId;
+
+		BP.SM.pushState("{{$TITLE_ASSESMENTS_BYUSER}}",
+							{module : "evaluate", action : "byuser", params : this.data.responseId});
 		
 		BP.CMS.prepareExerciseView(function ()
 		{
@@ -19,8 +22,6 @@ var ViewAssessedAssesmentCommand = Cairngorm.Command.extend(
 	
 	onResult : function ( response )
 	{
-		BP.SM.pushState("{{$TITLE_ASSESMENTS_BYUSER}}",
-							{module : "evaluate", action : "byuser"});
 		BP.CMS.innerExerciseView(response, true); // true = evaluation module
 	},
 	
