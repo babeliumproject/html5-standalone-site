@@ -30,7 +30,7 @@ class MEvaluation extends Module
 		if ( self::$action == "touser" )
 		{
 			$evaluation = new Evaluation();
-			$response = $evaluation->getResponsesAssessedToCurrentUser();
+			$response = $evaluation->getResponsesAssessedToCurrentUser()->data;
 		}
 		else if	( self::$action == "byuser" )
 		{

@@ -1,5 +1,5 @@
 				
-				<article class="evaluationItem">
+				<article class="evaluationItem" onClick="new EvaluationEvent(EvaluationEvent.VIEW_REVISION_ASSESMENT, null, {$evaluation->responseId}).dispatch();">
 					<header>
 						<h1 class="evaluationTitle HBox vcenter">
 							<img src="{$locale->getFlagResource($evaluation->exerciseLanguage)}" width="16" height="16" alt="flag"/> 
@@ -14,7 +14,11 @@
 						
 						<div>
 							<p class="assesmentsDate">
-								Last assesments date: {$evaluation->addingDate}
+								Last assesments date:
+							</p>
+							
+							<p style="text-align: right;">
+								{$evaluation->addingDate}
 							</p>
 								
 							<p>
