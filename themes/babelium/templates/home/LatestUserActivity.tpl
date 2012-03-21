@@ -61,7 +61,7 @@
 						<th>{i18n name="SELECTEDCHAR"}</th>
 						<th>{i18n name="LABEL_INTONATION_SCORE"}</th>
 						<th>{i18n name="LABEL_FLUENCY_SCORE"}</th>
-						<th>{i18n name=""LABEL_RHYTHM_SCORE}</th>
+						<th>{i18n name="LABEL_RHYTHM_SCORE"}</th>
 						<th>{i18n name="LABEL_SPONTANEITY_SCORE"}</th>
 						<th>{i18n name="LABEL_OVERALL_SCORE"}</th>
 					</tr>
