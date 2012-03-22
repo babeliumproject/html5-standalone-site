@@ -87,7 +87,8 @@ function ExerciseManager ()
 		this.exerciseName = this.selectedExercise.name;
 		this.exerciseTitle = this.selectedExercise.title;
 		this.exerciseId = this.selectedExercise.id;
-
+		this.currentResponse = null;
+		
 		this.currentExercise = exercise;
 		
 		this.cueManagerReady = false;
