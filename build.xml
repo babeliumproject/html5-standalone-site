@@ -55,6 +55,7 @@
 			<arg value="--js"/><arg value="control/ConfigurationManager.js"/>
 			<arg value="--js"/><arg value="control/ContentManagementSystem.js"/>
 			<arg value="--js"/><arg value="control/StateManager.js"/>
+			<arg value="--js"/><arg value="control/Services.js"/>
 	
 			<arg value="--js"/><arg value="events/ConfigurationEvent.js"/>
 			<arg value="--js"/><arg value="events/EvaluationEvent.js"/>
@@ -87,6 +88,7 @@
 			<arg value="--js"/><arg value="commands/evaluation/ViewCurrentlyAssessedToUserCommand.js"/>
 			<arg value="--js"/><arg value="commands/evaluation/ViewCurrentlyAssessedByUserCommand.js"/>
 			<arg value="--js"/><arg value="commands/evaluation/ViewAssessedAssesmentCommand.js"/>
+			<arg value="--js"/><arg value="commands/evaluation/ViewRevisedAssesmentCommand.js"/>
 			<arg value="--js"/><arg value="commands/evaluation/ViewEvaluationAssesmentCommand.js"/>
 			
 			<arg value="--js"/><arg value="commands/subtitles/ViewSubtitleModuleCommand.js"/>
@@ -112,7 +114,6 @@
 			
 			<arg value="--js"/><arg value="cue/CueObject.js"/>
 			<arg value="--js"/><arg value="cue/CuePointManager.js"/>
-			<arg value="--js"/><arg value="cue/Services.js"/>
 			
 			<arg value="--js"/><arg value="business/HomepageDelegate.js"/>
 			<arg value="--js"/><arg value="business/ExerciseDelegate.js"/>

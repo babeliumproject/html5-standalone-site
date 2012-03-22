@@ -1415,7 +1415,7 @@ section.evaluationDetails
 			margin-left: 30px;
 		}
 	
-			div.evaluationContainer > article
+			div.evaluationContainer > article, article.evaluationUsers
 			{
 				width: 100%;
 				float: left;
@@ -1431,6 +1431,12 @@ section.evaluationDetails
 			
 				margin-bottom: 10px;
 				padding: 10px;
+			}
+			
+			article.evaluationUsers
+			{
+				width: 335px;
+				margin-left: 30px;
 			}
 			
 				article.evaluationUser > h3

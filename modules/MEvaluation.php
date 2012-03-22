@@ -54,10 +54,10 @@ class MEvaluation extends Module
 				foreach ( $details as $comment )
 					array_push($userNames, $comment->userName);
 				
-				if ( !isset($index) || $index >= count($response) || $index < 0 )
-					$index = 0;
+				/*if ( !isset($index) || $index >= count($response) || $index < 0 )
+					$index = 0;*/
 				
-				$content .= WidgetLoader::loadWidget("AssessedToUser", $details[$index], $assesmentVO, $userNames);
+				$content .= WidgetLoader::loadWidget("AssessedToUser", $details, $assesmentVO, $userNames);
 			}
 		}
 		else if	( self::$action == "byuser" )

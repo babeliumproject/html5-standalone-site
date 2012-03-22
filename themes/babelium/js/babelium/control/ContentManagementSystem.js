@@ -141,6 +141,8 @@ BP.CMS = (function()
 		/** Init navigation Menus **/
 		if ( BP.SM.at("home") && !BP.SM.action() )
 			_viewStack("#motdmessageshelper", "#motdmessages");
+		else if ( BP.SM.at("evaluate") && BP.SM.action("touser") && BP.SM.params() != null )
+			_viewStack("#evaluationUserNames", "#userEvaluationsContainer");
 	}
 	
 	/**
@@ -602,6 +604,7 @@ BP.CMS = (function()
 					$(container).remove();
 					content.insertAfter(insertAfter).fadeIn();
 					_this.reloadRatings();
+					_this.reloadViewStacks();
 					_loader.slideUp();
 				});
 			}
@@ -609,6 +612,7 @@ BP.CMS = (function()
 			{
 				content.insertAfter(insertAfter).fadeIn();
 				_this.reloadRatings();
+				_this.reloadViewStacks();
 				_loader.slideUp();
 			}
 			
