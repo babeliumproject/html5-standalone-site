@@ -1433,12 +1433,12 @@ section.evaluationDetails
 				padding: 10px;
 			}
 			
-				article.evaluationRating > h3
+				article.evaluationUser > h3
 				{
 					color: #268caa;
 				}
 			
-				article.evaluationRating > span
+				article.evaluationUser > span
 				{
 					line-height: 20px;
 				}
@@ -1469,6 +1469,24 @@ section.evaluationDetails
 					padding: 5px;
 					width: 300px;
 					height: 50px;
+				}
+				
+				article.evaluationUsers > ul > li 
+				{
+					padding-left: 5px;
+					padding-right: 5px;
+					border-right: 1px solid #cccccc;
+				}
+				
+				article.evaluationUsers > ul > li:first-child
+				{
+					padding-left: 0px;
+				}
+				
+				article.evaluationUsers > ul > li:last-child
+				{
+					padding-right: 0px;
+					border-right: 0;
 				}
 
 /** END OF ASSESMENTS **/

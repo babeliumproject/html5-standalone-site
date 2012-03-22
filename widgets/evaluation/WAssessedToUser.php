@@ -2,7 +2,7 @@
 
 require_once(dirname(__FILE__) . "/../Widget.php");
 
-class WAssessedByUser extends Widget
+class WAssessedToUser extends Widget
 {	
 	public static function load($args)
 	{
@@ -10,8 +10,9 @@ class WAssessedByUser extends Widget
 		
 		// Prepare template
 		self::assign("data", $args[1]);
-		
-		return self::fetch("evaluation/DetailsAssessedByUser.tpl");
+		self::assign("evaluation", $args[2]);
+		self::assign("userNames", $args[3]);
+		return self::fetch("evaluation/DetailsAssessedToUser.tpl");
 	}
 }
 

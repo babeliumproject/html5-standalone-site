@@ -31,6 +31,34 @@ class MEvaluation extends Module
 		{
 			$evaluation = new Evaluation();
 			$response = $evaluation->getResponsesAssessedToCurrentUser()->data;
+			
+			if ( !empty(self::$params) )
+			{
+				$assesmentVO;
+				
+				list($responseId, $index) = explode(";", self::$params);
+				
+				// Assesments done by user
+				foreach ( $response as $assesment )
+				{
+					if ( $assesment->responseId == $responseId )
+					{
+						$assesmentVO = $assesment;
+						break;
+					}
+				}
+				
+				$details = $evaluation->detailsOfAssessedResponse(self::$params);
+				$userNames = array();
+				
+				foreach ( $details as $comment )
+					array_push($userNames, $comment->userName);
+				
+				if ( !isset($index) || $index >= count($response) || $index < 0 )
+					$index = 0;
+				
+				$content .= WidgetLoader::loadWidget("AssessedToUser", $details[$index], $assesmentVO, $userNames);
+			}
 		}
 		else if	( self::$action == "byuser" )
 		{

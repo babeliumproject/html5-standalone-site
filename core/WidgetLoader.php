@@ -9,6 +9,7 @@ require_once(dirname(__FILE__) . "/../widgets/config/WConfigurationTabBar.php");
 require_once(dirname(__FILE__) . "/../widgets/config/WMicTester.php");
 require_once(dirname(__FILE__) . "/../widgets/config/WWebcamTester.php");
 
+require_once(dirname(__FILE__) . "/../widgets/evaluation/WAssessedToUser.php");
 require_once(dirname(__FILE__) . "/../widgets/evaluation/WAssessedByUser.php");
 require_once(dirname(__FILE__) . "/../widgets/evaluation/WEvaluationTabBar.php");
 require_once(dirname(__FILE__) . "/../widgets/evaluation/WEvaluationDataTable.php");
@@ -69,6 +70,7 @@ final class WidgetLoader
 		"WebcamTester" => "WWebcamTester",
 		"Register" => "WRegister",
 		"Activate" => "WActivate",
+		"AssessedToUser" => "WAssessedToUser",
 		"AssessedByUser" => "WAssessedByUser",
 		"WaitingForEvaluation" => "WWaitingForEvaluation"
 	);
