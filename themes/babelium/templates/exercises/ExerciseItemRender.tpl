@@ -40,7 +40,7 @@
 						</p>
 						
 						<p>
-							etiquetas: {foreach from=$exercises->tag item=tag} {$tag} {/foreach}
+							etiquetas: {foreach from=$exercise->tags item=tag} {$tag} {/foreach}
 						</p>
 						
 						<p>
