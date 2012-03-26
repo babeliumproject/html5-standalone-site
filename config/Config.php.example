@@ -2,7 +2,6 @@
 
 // Project includes
 require_once(dirname(__FILE__) . "/../util/interfaces/iSingleton.php");
-require_once(dirname(__FILE__) . "/../util/Smarty/function.i18n.php");
 require_once(dirname(__FILE__) . "/../core/WidgetLoader.php");
 require_once(dirname(__FILE__) . "/../core/ModuleLoader.php");
 
@@ -44,6 +43,8 @@ class Config implements ISingleton
 	public $server_url;
 	public $api_bridge = "/api/rest.php";
 	public $module_bridge = "/modules/bridge.php";
+	public $thumbnail_url;
+	public $poster_url;
 	public $service_path = "/services/";
 	
 	
@@ -58,8 +59,6 @@ class Config implements ISingleton
 	//Server path to store uploaded files
 	public $filePath = "/resources/uploads";
 	public $imagePath = "/resources/images/thumbs";
-	public $thumbnail_url;
-	public $poster_url;
 	public $red5Path = '/opt/red5/dist/webapps/oflaDemo/streams';
 		
 	//Youtube authentication data
@@ -116,11 +115,12 @@ class Config implements ISingleton
 	 */ 
 	public $webRootPath = "/var/www/babelia";
 	
-	
+		
 	public $defaultLanguage = "en_US";
 	
 	// Evaluation module
 	public $restrictedEvaluation = false;
+	
 	
 	/*
 	 * CONSTS
