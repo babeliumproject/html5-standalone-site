@@ -90,6 +90,8 @@
 			<arg value="--js"/><arg value="commands/evaluation/ViewAssessedAssesmentCommand.js"/>
 			<arg value="--js"/><arg value="commands/evaluation/ViewRevisedAssesmentCommand.js"/>
 			<arg value="--js"/><arg value="commands/evaluation/ViewEvaluationAssesmentCommand.js"/>
+			<arg value="--js"/><arg value="commands/evaluation/SendEvaluationDataCommand.js"/>
+			<arg value="--js"/><arg value="commands/evaluation/ResetEvaluationFormDataCommand.js"/>
 			
 			<arg value="--js"/><arg value="commands/subtitles/ViewSubtitleModuleCommand.js"/>
 			

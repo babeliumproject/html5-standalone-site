@@ -9,7 +9,7 @@
 
 			<div class="evaluationContainer">
 				<article class="evaluationRating">
-					<h3>{i18n name="MESSAGE_RATE_THE_USERS_RESPONSE"}</h3>
+					<h3>{i18n name="MESSAGE_RATE_THE_USERS_RESPONSE" param0=$data->responseUserName}</h3>
 				</article>
 				<article class="evaluationRating">
 					<div class="evaluationRatingLabels">
@@ -20,20 +20,20 @@
 						<p>{i18n name="LABEL_OVERALL_SCORE"}</p>
 					</div>
 					<div>
-						<p class="ratyPreview"></p>
-						<p class="ratyPreview"></p>
-						<p class="ratyPreview"></p>
-						<p class="ratyPreview"></p>
-						<p class="ratyPreview"></p>
+						<p id="intonationEval" class="ratyPreview"></p>
+						<p id="fluencyEval" class="ratyPreview"></p>
+						<p id="rhythmEval" class="ratyPreview"></p>
+						<p id="spontaneityEval" class="ratyPreview"></p>
+						<p id="overallEval" class="ratyPreview"></p>
 					</div>
 				</article>
 				<article class="evaluationComments">
 					{i18n name="MESSAGE_OPTIONAL_EVALUATION_DATA"}
-					<textarea id="responseComment"></textarea>
+					<textarea id="responseCommentEval"></textarea>
 				</article>
 				<article class="evaluationSubmit">
-					<button class="bigBlueButton">{i18n name="LABEL_SEND_EVALUATION"}</button>
-					<button class="cancel">{i18n name="LABEL_RESET_EVALUATION"}</button>
+					<button class="bigBlueButton" onClick="new EvaluationEvent(EvaluationEvent.SEND_EVALUATION_FORM_DATA).dispatch();">{i18n name="LABEL_SEND_EVALUATION"}</button>
+					<button class="cancel" onClick="new EvaluationEvent(EvaluationEvent.RESET_EVALUATION_FORM_DATA).dispatch();">{i18n name="LABEL_RESET_EVALUATION"}</button>
 				</article>
 			</div>
 

@@ -69,7 +69,7 @@ function ExerciseManager ()
 		var id = container.data("id");
 		var name = container.data("name");
 		this.selectedExercise = new ExerciseVO(id, name, null);
-		this.selectedResponse = {"responseName" : container.data("responsename"), "characterName" : container.data("charname"),"responseId" : container.data("responseid"), "subtitleId" : container.data("subtitleid")};
+		this.selectedResponse = {"responseName" : container.data("responsename"), "characterName" : container.data("charname"), "responseId" : container.data("responseid"), "subtitleId" : container.data("subtitleid")};
 		this.loadSelectedResponse(videoPlayer);
 	};
 	
@@ -411,7 +411,7 @@ function ExerciseManager ()
 			return;
 		}
 		
-		var resposneId = data.response;
+		var responseId = data["response"]["responseId"];
 		BP.Services.send(false, "makePublic", responseId, this.publishResponseCallback);
 	};
 
@@ -429,6 +429,19 @@ function ExerciseManager ()
 		
 		var result = data["response"];
 		$("span#creditCount").text(result.creditCount);
-		alert("Your response has been published. Thanks for your collaboration."); 
+		alert("Your response has been published. Thanks for your collaboration.");
+		new ViewChangeEvent(ViewChangeEvent.VIEW_HOME_MODULE).dispatch();
+	};
+	
+	/**
+	 * Save evaluation
+	 */
+	this.saveEvaluation = function (evaluation, callback)
+	{
+		if ( !evaluation || !this.currentResponse )
+			return;
+		
+		evaluation.responseId = this.currentResponse.responseId;
+		BP.Services.send(false, "addAssessment", evaluation, callback);
 	};
 }

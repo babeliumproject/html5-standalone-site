@@ -53,8 +53,7 @@ function ApiGateway()
 				withCredentials: true
 			},
 			crossDomain: true
-			
-			});
+		});
 
 	};
 
@@ -83,11 +82,12 @@ function ApiGateway()
 		//Do sth with this data;
 	};
 
-	this.onServiceError = function(xhr, status, errorThrown){
+	this.onServiceError = function(xhr, status, errorThrown)
+	{
 		//Display an error message noticing the user that the request to the server was not successful.
 		var errorObj = jQuery.parseJSON(xhr.responseText);
 		console.log(errorObj);
-		//console.log("Request error: ".errorObj.response.message);
+		console.log("Request error: " + errorThrown);
 	};
 	
 	this.createRandomSalt = function(){

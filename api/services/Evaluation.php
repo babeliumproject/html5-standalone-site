@@ -318,11 +318,11 @@ class Evaluation {
 		$sql = "INSERT INTO evaluation (fk_response_id, fk_user_id, score_overall, score_intonation, score_fluency, score_rhythm, score_spontaneity, comment, adding_date) VALUES (";
 		$sql = $sql . "'%d', ";
 		$sql = $sql . "'%d', ";
-		$sql = $sql . "'%d', ";
-		$sql = $sql . "'%d', ";
-		$sql = $sql . "'%d', ";
-		$sql = $sql . "'%d', ";
-		$sql = $sql . "'%d', ";
+		$sql = $sql . "'%f', ";
+		$sql = $sql . "'%f', ";
+		$sql = $sql . "'%f', ";
+		$sql = $sql . "'%f', ";
+		$sql = $sql . "'%f', ";
 		$sql = $sql . "'%s', NOW() )";
 
 		$evaluationId = $this->conn->_insert ( $sql, $evalData->responseId, $_SESSION['uid'], $evalData->overallScore,
