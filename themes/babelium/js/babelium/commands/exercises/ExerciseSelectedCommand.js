@@ -13,17 +13,31 @@ var ExerciseSelectedCommand = Cairngorm.Command.extend(
 		
 		BP.EM.selectedExercise = this.data.exercise;
 		
-		BP.CMS.prepareExerciseView(function ()
-		{	
-			BP.PracticeDelegate.viewExerciseByName(_this, BP.EM.selectedExercise.name);
-		});
+		if ( BP.SM.at("home") )
+		{
+			BP.CMS.prepareMainContent("{{$LOADING_EXERCISE_MODULE}}", function ()
+			{
+				BP.PracticeDelegate.viewExerciseByName(_this, BP.EM.selectedExercise.name, false);
+			});
+		}
+		else
+		{
+			BP.CMS.prepareExerciseView(function ()
+			{	
+				BP.PracticeDelegate.viewExerciseByName(_this, BP.EM.selectedExercise.name, true);
+			});
+		}
 	},
 	
 	onResult : function ( response )
 	{
+		if ( BP.SM.at("home") )
+			BP.CMS.innerMainContent(response);
+		else
+			BP.CMS.innerExerciseView(response);
+		
 		BP.SM.pushState(BP.EM.selectedExercise.title + "{{$TITLE_SELECTED_EXERCISE}}",
 				{module : "practice", action : "view", params : BP.EM.selectedExercise.name});
-		BP.CMS.innerExerciseView(response);
 	},
 	
 	onFault : function ()
