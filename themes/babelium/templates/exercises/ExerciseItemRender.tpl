@@ -1,5 +1,5 @@
 				
-				<article class="exercise" data-id="{$exercise->id}" data-title="{$exercise->title}" data-name="{$exercise->name}">
+				<article class="exercise" onClick='new ExerciseEvent(ExerciseEvent.EXERCISE_SELECTED, new ExerciseVO({$exercise->id}, "{$exercise->name}", "{$exercise->title}")).dispatch();' data-id="{$exercise->id}" data-title="{$exercise->title}" data-name="{$exercise->name}">
 	  				<figure class="thumbnail">
 						<img src="{$cfg->thumbnail_url}/{$exercise->name}/default.jpg" alt="{$exercise->title}" width="120" height="90" align="left" />
 						<figcaption>{$time->format($exercise->duration)}</figcaption>

@@ -271,7 +271,7 @@ BP.CMS = (function()
 	{
 		_initRatings();
 		
-		var videoContainer = $("#exerciseVideoContainer");
+		/*var videoContainer = $("#exerciseVideoContainer");
 		
 		if ( videoContainer.length == 0 )
 			return;
@@ -285,7 +285,7 @@ BP.CMS = (function()
 						new ExerciseVO(_this.data("id"), _this.data("name"), _this.data("title"))
 					).dispatch();
 			});
-		});
+		});*/
 	}
 	
 	/**
