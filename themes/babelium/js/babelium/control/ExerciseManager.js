@@ -123,8 +123,8 @@ function ExerciseManager ()
 
 		// Prepare new video in VideoPlayer
 		this.bpPlayer.stopVideo();
-		this.bpPlayer.state(this.bpPlayerStates.PLAY_STATE);
-		this.bpPlayer.videoSource(this.exerciseName);
+		this.bpPlayer.setState(this.bpPlayerStates.PLAY_STATE);
+		this.bpPlayer.exerciseSource(this.exerciseName);
 	};
 		
 	// Reset component
@@ -135,8 +135,8 @@ function ExerciseManager ()
 		
 		this.bpPlayer.endVideo(); // Stop video
 		this.bpPlayer.setSubtitle(""); // Clear subtitles if any
-		this.bpPlayer.videoSource(""); // Reset video source
-		this.bpPlayer.state(this.bpPlayerStates.PLAY_STATE); //Reset the player window to display only the exercise
+		this.bpPlayer.exerciseSource(""); // Reset video source
+		this.bpPlayer.setState(this.bpPlayerStates.PLAY_STATE); //Reset the player window to display only the exercise
 	};
 	
 	// Show arrows
@@ -173,9 +173,9 @@ function ExerciseManager ()
 		
 		// Recording method
 		if ( $("input[name=recordingMethod]:checked").val() == "micOnly" )
-			this.bpPlayer.state(this.bpPlayerStates.RECORD_MIC_STATE);
+			this.bpPlayer.setState(this.bpPlayerStates.RECORD_MIC_STATE);
 		else
-			this.bpPlayer.state(this.bpPlayerStates.RECORD_BOTH_STATE);
+			this.bpPlayer.setState(this.bpPlayerStates.RECORD_BOTH_STATE);
 		
 		this.showArrows();
 		this.showRecordingOptions();
@@ -244,8 +244,8 @@ function ExerciseManager ()
 			instance.setupPlayCommands();
 		else
 		{
-			instance.bpPlayer.state(instance.bpPlayerStates.PLAY_BOTH_STATE);
-			instance.bpPlayer.videoSource(instance.exerciseName);
+			instance.bpPlayer.setState(instance.bpPlayerStates.PLAY_BOTH_STATE);
+			instance.bpPlayer.exerciseSource(instance.exerciseName);
 			instance.bpPlayer.secondSource(instance.responseName);
 			instance.selectedRole = instance.currentResponse.characterName;
 			instance.setupRecordingCommands();
@@ -298,8 +298,8 @@ function ExerciseManager ()
 	{
 		instance.showArrows();
 		instance.setupRecordingCommands();
-		instance.bpPlayer.videoSource(instance.exerciseName);
-		instance.bpPlayer.state(instance.bpPlayerStates.PLAY_BOTH_STATE);
+		instance.bpPlayer.exerciseSource(instance.exerciseName);
+		instance.bpPlayer.setState(instance.bpPlayerStates.PLAY_BOTH_STATE);
 		instance.bpPlayer.secondSource(instance.recordedFilename);
 		instance.bpPlayer.seek(false);
 	}
@@ -350,8 +350,8 @@ function ExerciseManager ()
 		// Set the videoplayer to playback both the exercise and the
 		// last response.
 		this.setupRecordingCommands();
-		this.bpPlayer.videoSource(this.exerciseName);
-		this.bpPlayer.state(this.bpPlayerStates.PLAY_BOTH_STATE);
+		this.bpPlayer.exerciseSource(this.exerciseName);
+		this.bpPlayer.setState(this.bpPlayerStates.PLAY_BOTH_STATE);
 		this.bpPlayer.secondSource(this.recordedFilename);
 
 		this.bpPlayer.seek(false);
@@ -366,7 +366,7 @@ function ExerciseManager ()
 	{
 		this.hideArrows();
 		this.bpPlayer.unattachUserDevices();
-		this.bpPlayer.state(this.bpPlayerStates.PLAY_STATE);
+		this.bpPlayer.setState(this.bpPlayerStates.PLAY_STATE);
 
 		this.bpPlayer.removeEventListener('onEnterFrame','bpExercises.onEnterFrameListener');
 
