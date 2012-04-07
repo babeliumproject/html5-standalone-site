@@ -9,7 +9,7 @@
 	<![endif]-->
 
 	<!-- CSS -->
-	<link rel="stylesheet" type="text/css" media="screen" href="themes/babelium/css/main.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="resources.php?css" />
 	
 	<!-- JQuery -->
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>

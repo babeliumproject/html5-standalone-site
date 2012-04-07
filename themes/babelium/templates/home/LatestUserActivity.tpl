@@ -1,6 +1,6 @@
 
 <!-- Assesments received -->
-		<section class="exerciseList">
+		<section>
 			<header>
 				<h1>{i18n name="USER_LATEST_RECEIVED_ASSESSMENTS"}</h1>
 			</header>
@@ -27,7 +27,7 @@
 							<figure class="thumbnail">
 								<figcaption>{$time->format($r->exerciseDuration)}</figcaption>
 								<img src="{$cfg->thumbnail_url}/{$r->exerciseName}/{$r->exerciseThumbnailUri}" width="96" height="72" border="0" alt="{$r->exerciseTitle}" />
-							<figure>
+							</figure>
 						</td>
 						<td style="vertical-align: middle !important;">{$r->responseUserName}</td>
 						<td style="vertical-align: middle !important;">{$r->addingDate}</td>
@@ -47,7 +47,7 @@
 		
 		
 <!-- Assesments done -->
-		<section class="exerciseList">
+		<section>
 			<header>
 				<h1>{i18n name="USER_LATEST_DONE_ASSESSMENTS"}</h1>
 			</header>
@@ -73,7 +73,8 @@
 							<figure class="thumbnail">
 								<figcaption>{$time->format($r->exerciseDuration)}</figcaption>
 								<img src="{$cfg->thumbnail_url}/{$r->exerciseName}/{$r->exerciseThumbnailUri}" width="96" height="72" border="0" alt="{$r->exerciseTitle}" />
-							</td>
+							</figure>
+						</td>
 						<td style="vertical-align: middle !important;">{$r->responseUserName}</td>
 						<td style="vertical-align: middle !important;">{$r->addingDate}</td>
 						<td style="vertical-align: middle !important;">{$r->responseCharacterName}</td>

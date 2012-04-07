@@ -2,7 +2,7 @@
 function ApiGateway()
 {
 	this.protocol = "http://";
-	this.host = "babelium/html5/api/";
+	this.host = "localhost/api/";
 	this.endpoint = "rest.php";
 	this.lastRandomizer = "";
 	this.statToken = "myMusicFightsAgainstTheSystemThatTeachesToLiveAndDie"; //Bob Marley's Quote
@@ -86,8 +86,8 @@ function ApiGateway()
 	{
 		//Display an error message noticing the user that the request to the server was not successful.
 		var errorObj = jQuery.parseJSON(xhr.responseText);
-		console.log(errorObj);
-		console.log("Request error: " + errorThrown);
+		//console.log(errorObj);
+		//console.log("Request error: " + errorThrown);
 	};
 	
 	this.createRandomSalt = function(){
