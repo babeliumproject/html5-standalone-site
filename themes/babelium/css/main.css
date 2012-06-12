@@ -83,7 +83,7 @@ nav#topnav
 	border-bottom: 1px solid #38babc;
 	
 	/** Default background **/
-	background-image: url(../images/rainbow_bgr.png);
+	background-image: url(themes/babelium/images/rainbow_bgr.png);
 	
 	/**css3 gradients **/
 	background: -webkit-gradient(linear, 0 0, 0 100%, from(white), to(#E2EFF3));
@@ -126,7 +126,7 @@ aside#popup
 	border-bottom: 1px solid #38babc;
 	
 	/** Default background **/
-	background-image: url(../images/rainbow_bgr.png);
+	background-image: url(themes/babelium/images/rainbow_bgr.png);
 }
 
 	aside#popup > div
@@ -292,7 +292,7 @@ nav#mainnav
 	height: 118px;
 	
 	/** Default background **/
-	background-image: url(../images/rainbow_bgr.png);
+	background-image: url(themes/babelium/images/rainbow_bgr.png);
 	font-size: 18px;
 }
 
@@ -303,7 +303,7 @@ nav#mainnav
 			min-height: 50px;
 			line-height: 50px;
 			
-			background: url(../images/separator.png) no-repeat center right;
+			background: url(themes/babelium/images/separator.png) no-repeat center right;
 		}
 		
 		nav#mainnav > ul > li:last-child
@@ -437,7 +437,7 @@ div#searchnav > *
 
 aside#motd
 {
-	background: url(../images/pattern2.png);
+	background: url(themes/babelium/images/pattern2.png);
 	
 	border-left: 1px solid #38babc;
 	border-right: 1px solid #38babc;
@@ -780,7 +780,7 @@ section#maincontent
 
 		padding-top: 15px;
 		
-		background: url(../images/pattern2.png);
+		background: url(themes/babelium/images/pattern2.png);
 		
 		border-left: 1px solid #38babc;
 		border-right: 1px solid #38babc;
@@ -1084,7 +1084,7 @@ aside.paginationPanel
 		width: 145px;
 		height: 16px;
 		overflow: hidden;
-		background: #ffffff url(../images/arrow-down.png) no-repeat top right;
+		background: #ffffff url(themes/babelium/images/arrow-down.png) no-repeat top right;
 		border: 1px solid #cccccc;
 		padding: 0px 0px 0px 5px;
 		cursor: pointer;
@@ -1512,7 +1512,7 @@ footer
 	{
 		height: 30px;
 		
-		background: url(../images/pattern2.png);
+		background: url(themes/babelium/images/pattern2.png);
 	}
 	
 	footer > ul.HBox
