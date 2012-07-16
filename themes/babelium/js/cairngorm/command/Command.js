@@ -16,5 +16,9 @@ Cairngorm.Command = Class.extend(
 	/**
 	 * Execute an action
 	 */
-	execute : function () {}
+	execute : function () {},
+
+	onResult : function () {},
+
+	onFault : function () {}
 });

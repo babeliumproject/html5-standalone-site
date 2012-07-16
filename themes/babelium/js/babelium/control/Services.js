@@ -2,7 +2,7 @@
 function ApiGateway()
 {
 	this.protocol = "http://";
-	this.host = "localhost/api/";
+	this.host = "localhost/";
 	this.endpoint = "rest.php";
 	this.lastRandomizer = "";
 	this.statToken = "myMusicFightsAgainstTheSystemThatTeachesToLiveAndDie"; //Bob Marley's Quote
