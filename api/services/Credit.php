@@ -23,7 +23,7 @@
 
 require_once(dirname(__FILE__) . "/../../config/Config.php");
 require_once 'utils/Datasource.php';
-require_once 'utils/SessionHandler.php';
+require_once 'utils/SessionValidation.php';
 
 /**
  * This service should be available only to valid and authenticated users.
@@ -45,7 +45,7 @@ class Credit {
 	public function __construct() {
 
 		try {
-			$verifySession = new SessionHandler(true);
+			$verifySession = new SessionValidation(true);
 			$settings = Config::getInstance();
 			$this->conn = new Datasource ( $settings->host, $settings->db_name, $settings->db_username, $settings->db_password );
 		} catch (Exception $e) {

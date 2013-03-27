@@ -23,7 +23,7 @@
 
 require_once(dirname(__FILE__) . "/../../config/Config.php");
 require_once 'utils/Datasource.php';
-require_once 'utils/SessionHandler.php';
+require_once 'utils/SessionValidation.php';
 require_once 'utils/VideoProcessor.php';
 
 /**
@@ -48,7 +48,7 @@ class Response {
 
 	public function __construct() {
 		try {
-			$verifySession = new SessionHandler(true);
+			$verifySession = new SessionValidation(true);
 			$settings = Config::getInstance();
 			$this->filePath = $settings->filePath;
 			$this->imagePath = $settings->imagePath;

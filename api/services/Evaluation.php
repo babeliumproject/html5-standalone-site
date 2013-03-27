@@ -24,7 +24,7 @@
 require_once(dirname(__FILE__) . "/../../config/Config.php");
 require_once 'utils/Datasource.php';
 require_once 'utils/Mailer.php';
-require_once 'utils/SessionHandler.php';
+require_once 'utils/SessionValidation.php';
 require_once 'utils/VideoProcessor.php';
 
 /**
@@ -55,7 +55,7 @@ class Evaluation {
 	 */
 	public function __construct(){
 		try {
-			$verifySession = new SessionHandler(true);
+			$verifySession = new SessionValidation(true);
 			$settings = Config::getInstance();
 			$this->imagePath = $settings->imagePath;
 			$this->posterPath = $settings->posterPath;

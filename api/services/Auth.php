@@ -24,7 +24,7 @@
 require_once(dirname(__FILE__) . "/../../config/Config.php");
 require_once 'utils/Datasource.php';
 require_once 'utils/Mailer.php';
-require_once 'utils/SessionHandler.php';
+require_once 'utils/SessionValidation.php';
 
 /**
  * Allows the user to authenticate on the Babelium system
@@ -43,7 +43,7 @@ class Auth{
 	 */
 	public function __construct(){
 		try {
-			$verifySession = new SessionHandler();
+			$verifySession = new SessionValidation();
 			$settings = Config::getInstance();
 			$this->conn = new DataSource($settings->host, $settings->db_name, $settings->db_username, $settings->db_password);
 		} catch (Exception $e) {
@@ -178,7 +178,7 @@ class Auth{
 	 */
 	public function doLogout(){
 		try {
-			$verifySession = new SessionHandler(true);
+			$verifySession = new SessionValidation(true);
 			$this->_resetSessionData();
 			return true;
 		} catch (Exception $e) {

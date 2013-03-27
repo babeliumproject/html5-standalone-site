@@ -23,7 +23,7 @@
 
 require_once(dirname(__FILE__) . "/../../config/Config.php");
 require_once 'utils/Datasource.php';
-require_once 'utils/SessionHandler.php';
+require_once 'utils/SessionValidation.php';
 
 require_once 'Zend/Search/Lucene.php';
 
@@ -45,7 +45,7 @@ class Search {
 
 	public function __construct() {
 		try {
-			$verifySession = new SessionHandler();
+			$verifySession = new SessionValidation();
 			$settings = Config::getInstance();
 			$this->indexPath = $settings->indexPath;
 			$this->conn = new Datasource ($settings->host, $settings->db_name, $settings->db_username, $settings->db_password );

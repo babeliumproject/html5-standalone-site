@@ -25,7 +25,7 @@ require_once(dirname(__FILE__) . "/../../config/Config.php");
 require_once 'utils/Datasource.php';
 require_once 'utils/EmailAddressValidator.php';
 require_once 'utils/Mailer.php';
-require_once 'utils/SessionHandler.php';
+require_once 'utils/SessionValidation.php';
 
 /**
  * This class performs signup and user activation operations
@@ -40,7 +40,7 @@ class Register{
 
 	public function __construct(){
 		try{
-			$verifySession = new SessionHandler();
+			$verifySession = new SessionValidation();
 			$this->settings = Config::getInstance();
 			$this->conn = new Datasource($this->settings->host, $this->settings->db_name, $this->settings->db_username, $this->settings->db_password);
 		} catch (Exception $e){
